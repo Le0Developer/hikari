@@ -1,0 +1,2569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.impl.buckets API documentation</title>
+<meta name="description" content="Rate-limit extensions for RESTful bucketed endpoints …">
+<meta property="og:title" content="hikari.impl.buckets module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.impl -- Basic implementations of application components …" href="index.html"
+>impl</a></li>
+<li class="breadcrumb-item active"><a href="#">buckets</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Rate-limit extensions for RESTful bucketed endpoints.</p>
+<p>Provides implementations for the complex rate limiting mechanisms that Discord
+requires for rate limit handling that conforms to the passed bucket headers
+correctly.</p>
+<p>This was initially a bit of a headache for me to understand, personally, since
+there is a lot of "implicit detail" that is easy to miss from the documentation.</p>
+<p>In an attempt to make this somewhat understandable by anyone else, I have tried
+to document the theory of how this is handled here.</p>
+<h2 id="what-is-the-theory-behind-this-implementation">What is the theory behind this implementation?</h2>
+<p>In this module, we refer to a <code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code> as a definition
+of a route with specific major parameter values included (e.g.
+<code>POST /channels/123/messages</code>), and a <code><a href='../internal/routes.html#hikari.internal.routes.Route'>Route</a></code> as a
+definition of a route without specific parameter values included (e.g.
+<code>POST /channels/{channel}/messages</code>). We can compile a
+<code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code> from a <code><a href='../internal/routes.html#hikari.internal.routes.Route'>Route</a></code>
+by providing the corresponding parameters as kwargs, as you may already know.</p>
+<p>In this module, a "bucket" is an internal data structure that tracks and
+enforces the rate limit state for a specific <code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code>,
+and can manage delaying tasks in the event that we begin to get rate limited.
+It also supports providing in-order execution of queued tasks.</p>
+<p>Discord allocates types of buckets to routes. If you are making a request and
+there is a valid rate limit on the route you hit, you should receive an
+<code>X-RateLimit-Bucket</code> header from the server in your response. This is a hash
+that identifies a route based on internal criteria that does not include major
+parameters. This <code>X-RateLimitBucket</code> is known in this module as an "bucket hash".</p>
+<p>This means that generally, the route <code>POST /channels/123/messages</code> and
+<code>POST /channels/456/messages</code> will usually sit in the same bucket, but
+<code>GET /channels/123/messages/789</code> and <code>PATCH /channels/123/messages/789</code> will
+usually not share the same bucket. Discord may or may not change this at any
+time, so hard coding this logic is not a useful thing to be doing.</p>
+<p>Rate limits, on the other hand, apply to a bucket and are specific to the major
+parameters of the compiled route. This means that <code>POST /channels/123/messages</code>
+and <code>POST /channels/456/messages</code> do not share the same real bucket, despite
+Discord providing the same bucket hash. A real bucket hash is the <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code> hash of
+the bucket that Discord sends us in a response concatenated to the corresponding
+major parameters. This is used for quick bucket indexing internally in this
+module.</p>
+<p>One issue that occurs from this is that we cannot effectively hash a
+<code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code> that has not yet been hit, meaning that
+until we receive a response from this endpoint, we have no idea what our rate
+limits could be, nor the bucket that they sit in. This is usually not
+problematic, as the first request to an endpoint should never be rate limited
+unless you are hitting it from elsewhere in the same time window outside your
+hikari.applications. To manage this situation, unknown endpoints are allocated to
+a special unlimited bucket until they have an initial bucket hash code allocated
+from a response. Once this happens, the route is reallocated a dedicated bucket.
+Unknown buckets have a hardcoded initial hash code internally.</p>
+<h2 id="initially-acquiring-time-on-a-bucket">Initially Acquiring Time On A Bucket</h2>
+<p>Each time you <code>BaseRateLimiter.acquire()</code> a request timeslice for a given
+<code><a href='../internal/routes.html#hikari.internal.routes.Route'>Route</a></code>, several things happen. The first is that we
+attempt to find the existing bucket for that route, if there is one, or get an
+unknown bucket otherwise. This is done by creating a real bucket hash from the
+compiled route. The initial hash is calculated using a lookup table that maps
+<code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code> objects to their corresponding initial hash
+codes, or to the unknown bucket hash code if not yet known. This initial hash is
+processed by the <code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code> to provide the real bucket
+hash we need to get the route's bucket object internally.</p>
+<p>The <code>BaseRateLimiter.acquire()</code> method will take the bucket and acquire a new
+timeslice on it. This takes the form of a <code><a href='https://docs.python.org/3/library/asyncio-future.html#asyncio.Future'>Future</a></code> which should be
+awaited by the caller and will complete once the caller is allowed to make a
+request. Most of the time, this is done instantly, but if the bucket has an
+active rate limit preventing requests being sent, then the future will be paused
+until the rate limit is over. This may be longer than the rate limit period if
+you have queued a large number of requests during this limit, as it is
+first-come-first-served.</p>
+<p>Acquiring a rate limited bucket will start a bucket-wide task (if not already
+running) that will wait until the rate limit has completed before allowing more
+futures to complete. This is done while observing the rate limits again, so can
+easily begin to re-ratelimit itself if needed. Once the task is complete, it
+tidies itself up and disposes of itself. This task will complete once the queue
+becomes empty.</p>
+<p>The result of <code><a href='#hikari.impl.buckets.RESTBucketManager.acquire'>acquire</a>()</code> is a tuple of a <code><a href='https://docs.python.org/3/library/asyncio-future.html#asyncio.Future'>Future</a></code> to
+await on which completes when you are allowed to proceed with making a request,
+and a real bucket hash which should be stored temporarily. This will be
+explained in the next section.</p>
+<h2 id="handling-the-rate-limit-headers-of-a-response">Handling The Rate Limit Headers Of A Response</h2>
+<p>Once you have received your response, you are expected to extract the values of
+the vital rate limit headers manually and parse them to the correct data types.
+These headers are:</p>
+<ul>
+<li><code>X-RateLimit-Limit</code>:
+an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> describing the max requests in the bucket from empty to
+being rate limited.</li>
+<li><code>X-RateLimit-Remaining</code>:
+an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> describing the remaining number of requests before rate
+limiting occurs in the current window.</li>
+<li><code>X-RateLimit-Bucket</code>:
+a <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code> containing the initial bucket hash.</li>
+<li><code>X-RateLimit-Reset-After</code>:
+a <code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code> containing the number of seconds when the current rate
+limit bucket will reset with decimal millisecond precision.</li>
+</ul>
+<p>Each of the above values should be passed to the <code>update_rate_limits</code> method to
+ensure that the bucket you acquired time from is correctly updated should
+Discord decide to alter their ratelimits on the fly without warning (including
+timings and the bucket).</p>
+<p>This method will manage creating new buckets as needed and resetting vital
+information in each bucket you use.</p>
+<h2 id="tidying-up">Tidying Up</h2>
+<p>To prevent unused buckets cluttering up memory, each <code><a href='#hikari.impl.buckets.RESTBucketManager'>RESTBucketManager</a></code>
+instance spins up a <code><a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.Task'>Task</a></code> that periodically locks the bucket list
+(not threadsafe, only using the concept of asyncio not yielding in regular
+functions) and disposes of any clearly stale buckets that are no longer needed.
+These will be recreated again in the future if they are needed.</p>
+<p>When shutting down an application, one must remember to <code>close()</code> the
+<code><a href='#hikari.impl.buckets.RESTBucketManager'>RESTBucketManager</a></code> that has been used. This will ensure the garbage collection
+task is stopped, and will also ensure any remaining futures in any bucket queues
+have an <code><a href='https://docs.python.org/3/library/asyncio-exceptions.html#asyncio.CancelledError'>CancelledError</a></code> set on them to prevent deadlocking ratelimited
+calls that may be waiting to be unlocked.</p>
+<h2 id="body-field-specific-rate-limiting">Body-field-specific rate limiting</h2>
+<p>As of the start of June, 2020, Discord appears to be enforcing another layer
+of rate limiting logic to their HTTP APIs which is field-specific. This means
+that special rate limits will also exist on some endpoints that limit based
+on what attributes you send in a JSON or form data payload.</p>
+<p>No information is sent in headers about these specific limits. You will only
+be made aware that they exist once you get ratelimited. In the 429 ratelimited
+response, you will have the <code>"<a href='https://docs.python.org/3/reference/simple_stmts.html#global'>global</a>"</code> attribute set to <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>, and a
+<code>"reset_after"</code> attribute that differs entirely to the <code>X-RateLimit-Reset-After</code>
+header. Thus, it is important to not assume the value in the 429 response
+for the reset time is the same as the one in the bucket headers. Hikari's
+<code><a href='../api/rest.html#hikari.api.rest.RESTClient'>RESTClient</a></code> implementation specifically uses the value furthest
+in the future when working out which bucket to adhere to.</p>
+<p>It is worth remembering that there is an API limit to the number of 401s,
+403s, and 429s you receive, which is around 10,000 per 15 minutes. Passing this
+limit results in a soft ban of your account.</p>
+<p>At the time of writing, the only example of this appears to be on the
+<code>PATCH /channels/{channel_id}</code> endpoint. This has a limit of two changes per
+10 minutes. More details about how this is implemented have yet to be
+released or documented&hellip;</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="UNKNOWN_HASH -- The hash used for an unknown bucket that has not yet been resolved." href="#hikari.impl.buckets.UNKNOWN_HASH"
+>UNKNOWN_HASH</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RESTBucket -- Represents a rate limit for an HTTP endpoint …" href="#hikari.impl.buckets.RESTBucket"
+>RESTBucket</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="acquire -- Acquire time on this rate limiter …" href="#hikari.impl.buckets.RESTBucket.acquire"
+>acquire</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="close -- Close the rate limiter, and shut down any pending tasks …" href="rate_limits.html#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="drip -- Decrement the remaining count for this bucket …" href="#hikari.impl.buckets.RESTBucket.drip"
+>drip</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="get_time_until_reset -- Determine how long until the current rate limit is reset …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset"
+>get_time_until_reset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="rate_limits.html#hikari.impl.rate_limits.BurstRateLimiter.is_empty"
+>is_empty</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_rate_limited -- Determine if we are under a rate limit at the given time …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited"
+>is_rate_limited</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_unknown -- Return `builtins.True` if the bucket represents an `UNKNOWN` bucket." href="#hikari.impl.buckets.RESTBucket.is_unknown"
+>is_unknown</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="limit -- The maximum number of `WindowedBurstRateLimiter.acquire`'s allowed in
+this time window." href="rate_limits.html#hikari.impl.buckets.RESTBucket.limit"
+>limit</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="rate_limits.html#hikari.impl.buckets.RESTBucket.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="period -- How long the window lasts for from the start in seconds." href="rate_limits.html#hikari.impl.buckets.RESTBucket.period"
+>period</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="rate_limits.html#hikari.impl.buckets.RESTBucket.queue"
+>queue</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="remaining -- The number of `WindowedBurstRateLimiter.acquire`'s left in this window
+before you will get rate limited." href="rate_limits.html#hikari.impl.buckets.RESTBucket.remaining"
+>remaining</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="reset_at -- The `time.monotonic_timestamp` that the limit window ends at." href="rate_limits.html#hikari.impl.buckets.RESTBucket.reset_at"
+>reset_at</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="resolve -- Resolve an unknown bucket …" href="#hikari.impl.buckets.RESTBucket.resolve"
+>resolve</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="throttle -- Perform the throttling rate limiter logic …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle"
+>throttle</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="rate_limits.html#hikari.impl.buckets.RESTBucket.throttle_task"
+>throttle_task</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="update_rate_limit -- Update the rate limit information …" href="#hikari.impl.buckets.RESTBucket.update_rate_limit"
+>update_rate_limit</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RESTBucketManager -- The main rate limiter implementation for HTTP clients …" href="#hikari.impl.buckets.RESTBucketManager"
+>RESTBucketManager</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="acquire -- Acquire a bucket for the given route …" href="#hikari.impl.buckets.RESTBucketManager.acquire"
+>acquire</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="close -- Close the garbage collector and kill any tasks waiting on ratelimits …" href="#hikari.impl.buckets.RESTBucketManager.close"
+>close</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="closed_event -- An internal event that is set when the object is shut down." href="#hikari.impl.buckets.RESTBucketManager.closed_event"
+>closed_event</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="do_gc_pass -- Perform a single garbage collection pass …" href="#hikari.impl.buckets.RESTBucketManager.do_gc_pass"
+>do_gc_pass</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="gc -- The garbage collector loop …" href="#hikari.impl.buckets.RESTBucketManager.gc"
+>gc</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="gc_task -- The internal garbage collector task." href="#hikari.impl.buckets.RESTBucketManager.gc_task"
+>gc_task</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_started -- Return `builtins.True` if the rate limiter GC task is started." href="#hikari.impl.buckets.RESTBucketManager.is_started"
+>is_started</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="max_rate_limit -- The max number of seconds to backoff for when rate limited …" href="#hikari.impl.buckets.RESTBucketManager.max_rate_limit"
+>max_rate_limit</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="real_hashes_to_buckets -- Maps full bucket hashes (`X-RateLimit-Bucket` appended with a hash of
+major parameters used in that compiled route) to their corresponding rate
+limiters." href="#hikari.impl.buckets.RESTBucketManager.real_hashes_to_buckets"
+>real_hashes_to_buckets</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="routes_to_hashes -- Maps routes to their `X-RateLimit-Bucket` header being used." href="#hikari.impl.buckets.RESTBucketManager.routes_to_hashes"
+>routes_to_hashes</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="start -- Start this ratelimiter up …" href="#hikari.impl.buckets.RESTBucketManager.start"
+>start</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="update_rate_limits -- Update the rate limits for a bucket using info from a response …" href="#hikari.impl.buckets.RESTBucketManager.update_rate_limits"
+>update_rate_limits</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L1-L638" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Rate-limit extensions for RESTful bucketed endpoints.
+
+Provides implementations for the complex rate limiting mechanisms that Discord
+requires for rate limit handling that conforms to the passed bucket headers
+correctly.
+
+This was initially a bit of a headache for me to understand, personally, since
+there is a lot of &#34;implicit detail&#34; that is easy to miss from the documentation.
+
+In an attempt to make this somewhat understandable by anyone else, I have tried
+to document the theory of how this is handled here.
+
+What is the theory behind this implementation?
+----------------------------------------------
+
+In this module, we refer to a `hikari.internal.routes.CompiledRoute` as a definition
+of a route with specific major parameter values included (e.g.
+`POST /channels/123/messages`), and a `hikari.internal.routes.Route` as a
+definition of a route without specific parameter values included (e.g.
+`POST /channels/{channel}/messages`). We can compile a
+`hikari.internal.routes.CompiledRoute` from a `hikari.internal.routes.Route`
+by providing the corresponding parameters as kwargs, as you may already know.
+
+In this module, a &#34;bucket&#34; is an internal data structure that tracks and
+enforces the rate limit state for a specific `hikari.internal.routes.CompiledRoute`,
+and can manage delaying tasks in the event that we begin to get rate limited.
+It also supports providing in-order execution of queued tasks.
+
+Discord allocates types of buckets to routes. If you are making a request and
+there is a valid rate limit on the route you hit, you should receive an
+`X-RateLimit-Bucket` header from the server in your response. This is a hash
+that identifies a route based on internal criteria that does not include major
+parameters. This `X-RateLimitBucket` is known in this module as an &#34;bucket hash&#34;.
+
+This means that generally, the route `POST /channels/123/messages` and
+`POST /channels/456/messages` will usually sit in the same bucket, but
+`GET /channels/123/messages/789` and `PATCH /channels/123/messages/789` will
+usually not share the same bucket. Discord may or may not change this at any
+time, so hard coding this logic is not a useful thing to be doing.
+
+Rate limits, on the other hand, apply to a bucket and are specific to the major
+parameters of the compiled route. This means that `POST /channels/123/messages`
+and `POST /channels/456/messages` do not share the same real bucket, despite
+Discord providing the same bucket hash. A real bucket hash is the `builtins.str` hash of
+the bucket that Discord sends us in a response concatenated to the corresponding
+major parameters. This is used for quick bucket indexing internally in this
+module.
+
+One issue that occurs from this is that we cannot effectively hash a
+`hikari.internal.routes.CompiledRoute` that has not yet been hit, meaning that
+until we receive a response from this endpoint, we have no idea what our rate
+limits could be, nor the bucket that they sit in. This is usually not
+problematic, as the first request to an endpoint should never be rate limited
+unless you are hitting it from elsewhere in the same time window outside your
+hikari.applications. To manage this situation, unknown endpoints are allocated to
+a special unlimited bucket until they have an initial bucket hash code allocated
+from a response. Once this happens, the route is reallocated a dedicated bucket.
+Unknown buckets have a hardcoded initial hash code internally.
+
+Initially acquiring time on a bucket
+------------------------------------
+
+Each time you `BaseRateLimiter.acquire()` a request timeslice for a given
+`hikari.internal.routes.Route`, several things happen. The first is that we
+attempt to find the existing bucket for that route, if there is one, or get an
+unknown bucket otherwise. This is done by creating a real bucket hash from the
+compiled route. The initial hash is calculated using a lookup table that maps
+`hikari.internal.routes.CompiledRoute` objects to their corresponding initial hash
+codes, or to the unknown bucket hash code if not yet known. This initial hash is
+processed by the `hikari.internal.routes.CompiledRoute` to provide the real bucket
+hash we need to get the route&#39;s bucket object internally.
+
+The `BaseRateLimiter.acquire()` method will take the bucket and acquire a new
+timeslice on it. This takes the form of a `asyncio.Future` which should be
+awaited by the caller and will complete once the caller is allowed to make a
+request. Most of the time, this is done instantly, but if the bucket has an
+active rate limit preventing requests being sent, then the future will be paused
+until the rate limit is over. This may be longer than the rate limit period if
+you have queued a large number of requests during this limit, as it is
+first-come-first-served.
+
+Acquiring a rate limited bucket will start a bucket-wide task (if not already
+running) that will wait until the rate limit has completed before allowing more
+futures to complete. This is done while observing the rate limits again, so can
+easily begin to re-ratelimit itself if needed. Once the task is complete, it
+tidies itself up and disposes of itself. This task will complete once the queue
+becomes empty.
+
+The result of `RESTBucketManager.acquire()` is a tuple of a `asyncio.Future` to
+await on which completes when you are allowed to proceed with making a request,
+and a real bucket hash which should be stored temporarily. This will be
+explained in the next section.
+
+Handling the rate limit headers of a response
+---------------------------------------------
+
+Once you have received your response, you are expected to extract the values of
+the vital rate limit headers manually and parse them to the correct data types.
+These headers are:
+
+* `X-RateLimit-Limit`:
+    an `builtins.int` describing the max requests in the bucket from empty to
+    being rate limited.
+* `X-RateLimit-Remaining`:
+    an `builtins.int` describing the remaining number of requests before rate
+    limiting occurs in the current window.
+* `X-RateLimit-Bucket`:
+    a `builtins.str` containing the initial bucket hash.
+* `X-RateLimit-Reset-After`:
+    a `builtins.float` containing the number of seconds when the current rate
+    limit bucket will reset with decimal millisecond precision.
+
+Each of the above values should be passed to the `update_rate_limits` method to
+ensure that the bucket you acquired time from is correctly updated should
+Discord decide to alter their ratelimits on the fly without warning (including
+timings and the bucket).
+
+This method will manage creating new buckets as needed and resetting vital
+information in each bucket you use.
+
+Tidying up
+----------
+
+To prevent unused buckets cluttering up memory, each `RESTBucketManager`
+instance spins up a `asyncio.Task` that periodically locks the bucket list
+(not threadsafe, only using the concept of asyncio not yielding in regular
+functions) and disposes of any clearly stale buckets that are no longer needed.
+These will be recreated again in the future if they are needed.
+
+When shutting down an application, one must remember to `close()` the
+`RESTBucketManager` that has been used. This will ensure the garbage collection
+task is stopped, and will also ensure any remaining futures in any bucket queues
+have an `asyncio.CancelledError` set on them to prevent deadlocking ratelimited
+calls that may be waiting to be unlocked.
+
+Body-field-specific rate limiting
+---------------------------------
+
+As of the start of June, 2020, Discord appears to be enforcing another layer
+of rate limiting logic to their HTTP APIs which is field-specific. This means
+that special rate limits will also exist on some endpoints that limit based
+on what attributes you send in a JSON or form data payload.
+
+No information is sent in headers about these specific limits. You will only
+be made aware that they exist once you get ratelimited. In the 429 ratelimited
+response, you will have the `&#34;global&#34;` attribute set to `builtins.False`, and a
+`&#34;reset_after&#34;` attribute that differs entirely to the `X-RateLimit-Reset-After`
+header. Thus, it is important to not assume the value in the 429 response
+for the reset time is the same as the one in the bucket headers. Hikari&#39;s
+`hikari.api.rest.RESTClient` implementation specifically uses the value furthest
+in the future when working out which bucket to adhere to.
+
+It is worth remembering that there is an API limit to the number of 401s,
+403s, and 429s you receive, which is around 10,000 per 15 minutes. Passing this
+limit results in a soft ban of your account.
+
+At the time of writing, the only example of this appears to be on the
+`PATCH /channels/{channel_id}` endpoint. This has a limit of two changes per
+10 minutes. More details about how this is implemented have yet to be
+released or documented...
+&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;UNKNOWN_HASH&#34;, &#34;RESTBucket&#34;, &#34;RESTBucketManager&#34;]
+
+import asyncio
+import logging
+import typing
+
+from hikari import errors
+from hikari.impl import rate_limits
+from hikari.internal import routes
+from hikari.internal import time
+from hikari.internal import ux
+
+if typing.TYPE_CHECKING:
+    import types
+
+UNKNOWN_HASH: typing.Final[str] = &#34;UNKNOWN&#34;
+&#34;&#34;&#34;The hash used for an unknown bucket that has not yet been resolved.&#34;&#34;&#34;
+
+_LOGGER: typing.Final[logging.Logger] = logging.getLogger(&#34;hikari.ratelimits&#34;)
+
+
+class RESTBucket(rate_limits.WindowedBurstRateLimiter):
+    &#34;&#34;&#34;Represents a rate limit for an HTTP endpoint.
+
+    Component to represent an active rate limit bucket on a specific HTTP route
+    with a specific major parameter combo.
+
+    This is somewhat similar to the `WindowedBurstRateLimiter` in how it
+    works.
+
+    This algorithm will use fixed-period time windows that have a given limit
+    (capacity). Each time a task requests processing time, it will drip another
+    unit into the bucket. Once the bucket has reached its limit, nothing can
+    drip and new tasks will be queued until the time window finishes.
+
+    Once the time window finishes, the bucket will empty, returning the current
+    capacity to zero, and tasks that are queued will start being able to drip
+    again.
+
+    Additional logic is provided by the `RESTBucket.update_rate_limit` call
+    which allows dynamically changing the enforced rate limits at any time.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_compiled_route&#34;, &#34;_max_rate_limit&#34;, &#34;_lock&#34;)
+
+    def __init__(self, name: str, compiled_route: routes.CompiledRoute, max_rate_limit: float) -&gt; None:
+        super().__init__(name, 1, 1)
+        self._compiled_route = compiled_route
+        self._max_rate_limit = max_rate_limit
+        self._lock = asyncio.Lock()
+
+    async def __aenter__(self) -&gt; None:
+        await self.acquire()
+
+    async def __aexit__(
+        self,
+        exc_type: typing.Optional[typing.Type[BaseException]],
+        exc: typing.Optional[BaseException],
+        exc_tb: typing.Optional[types.TracebackType],
+    ) -&gt; None:
+        self._lock.release()
+
+    @property
+    def is_unknown(self) -&gt; bool:
+        &#34;&#34;&#34;Return `builtins.True` if the bucket represents an `UNKNOWN` bucket.&#34;&#34;&#34;
+        return self.name.startswith(UNKNOWN_HASH)
+
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        !!! note
+            You should afterwards invoke `RESTBucket.update_rate_limit` to
+            update any rate limit information you are made aware of.
+
+        Raises
+        ------
+        hikari.errors.RateLimitTooLongError
+            If the rate limit is longer than `max_rate_limit`.
+        &#34;&#34;&#34;
+        await self._lock.acquire()
+
+        if self.is_unknown:
+            return
+
+        now = time.monotonic()
+        retry_after = self.reset_at - now
+
+        if self.is_rate_limited(now) and retry_after &gt; self._max_rate_limit:
+            raise errors.RateLimitTooLongError(
+                route=self._compiled_route,
+                retry_after=retry_after,
+                max_retry_after=self._max_rate_limit,
+                reset_at=self.reset_at,
+                limit=self.limit,
+                period=self.period,
+            )
+
+        await super().acquire()
+
+    def update_rate_limit(self, remaining: int, limit: int, reset_at: float) -&gt; None:
+        &#34;&#34;&#34;Update the rate limit information.
+
+        Parameters
+        ----------
+        remaining : builtins.int
+            The calls remaining in this time window.
+        limit : builtins.int
+            The total calls allowed in this time window.
+        reset_at : builtins.float
+            The epoch at which to reset the limit.
+
+        !!! note
+            The `reset_at` epoch is expected to be a `time.monotonic_timestamp`
+            monotonic epoch, rather than a `time.time` date-based epoch.
+        &#34;&#34;&#34;
+        self.remaining = remaining
+        self.limit = limit
+        self.reset_at = reset_at
+        self.period = max(0.0, self.reset_at - time.monotonic())
+
+    def drip(self) -&gt; None:
+        &#34;&#34;&#34;Decrement the remaining count for this bucket.
+
+        !!! note
+            If the bucket is marked as `RESTBucket.is_unknown`, then this will
+            not do anything. `Unknown` buckets have infinite rate limits.
+        &#34;&#34;&#34;
+        # We don&#39;t drip unknown buckets: we cannot rate limit them as we don&#39;t know their real bucket hash or
+        # the current rate limit values Discord put on them...
+        if not self.is_unknown:
+            self.remaining -= 1
+
+    def resolve(self, real_bucket_hash: str) -&gt; None:
+        &#34;&#34;&#34;Resolve an unknown bucket.
+
+        Parameters
+        ----------
+        real_bucket_hash: builtins.str
+            The real bucket hash for this bucket.
+
+        Raises
+        ------
+        builtins.RuntimeError
+            If the hash of the bucket is already known.
+        &#34;&#34;&#34;
+        if not self.is_unknown:
+            raise RuntimeError(&#34;Cannot resolve known bucket&#34;)
+
+        self.name = real_bucket_hash
+
+
+def _create_unknown_hash(route: routes.CompiledRoute) -&gt; str:
+    return UNKNOWN_HASH + routes.HASH_SEPARATOR + str(hash(route))
+
+
+class RESTBucketManager:
+    &#34;&#34;&#34;The main rate limiter implementation for HTTP clients.
+
+    This is designed to provide bucketed rate limiting for Discord HTTP
+    endpoints that respects the `X-RateLimit-Bucket` rate limit header. To do
+    this, it makes the assumption that any limit can change at any time.
+
+    Parameters
+    ----------
+    max_rate_limit : builtins.float
+        The max number of seconds to backoff for when rate limited. Anything
+        greater than this will instead raise an error.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (
+        &#34;routes_to_hashes&#34;,
+        &#34;real_hashes_to_buckets&#34;,
+        &#34;closed_event&#34;,
+        &#34;gc_task&#34;,
+        &#34;max_rate_limit&#34;,
+    )
+
+    routes_to_hashes: typing.Final[typing.MutableMapping[routes.Route, str]]
+    &#34;&#34;&#34;Maps routes to their `X-RateLimit-Bucket` header being used.&#34;&#34;&#34;
+
+    real_hashes_to_buckets: typing.Final[typing.MutableMapping[str, RESTBucket]]
+    &#34;&#34;&#34;Maps full bucket hashes (`X-RateLimit-Bucket` appended with a hash of
+    major parameters used in that compiled route) to their corresponding rate
+    limiters.
+    &#34;&#34;&#34;
+
+    closed_event: typing.Final[asyncio.Event]
+    &#34;&#34;&#34;An internal event that is set when the object is shut down.&#34;&#34;&#34;
+
+    gc_task: typing.Optional[asyncio.Task[None]]
+    &#34;&#34;&#34;The internal garbage collector task.&#34;&#34;&#34;
+
+    max_rate_limit: float
+    &#34;&#34;&#34;The max number of seconds to backoff for when rate limited.
+
+    Anything greater than this will instead raise an error.
+    &#34;&#34;&#34;
+
+    def __init__(self, max_rate_limit: float) -&gt; None:
+        self.routes_to_hashes = {}
+        self.real_hashes_to_buckets = {}
+        self.closed_event: asyncio.Event = asyncio.Event()
+        self.gc_task: typing.Optional[asyncio.Task[None]] = None
+        self.max_rate_limit = max_rate_limit
+
+    def __enter__(self) -&gt; RESTBucketManager:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: typing.Optional[typing.Type[Exception]],
+        exc_val: typing.Optional[Exception],
+        exc_tb: typing.Optional[types.TracebackType],
+    ) -&gt; None:
+        self.close()
+
+    def __del__(self) -&gt; None:
+        self.close()
+
+    def start(self, poll_period: float = 20.0, expire_after: float = 10.0) -&gt; None:
+        &#34;&#34;&#34;Start this ratelimiter up.
+
+        This spins up internal garbage collection logic in the background to
+        keep memory usage to an optimal level as old routes and bucket hashes
+        get discarded and replaced.
+
+        Parameters
+        ----------
+        poll_period : builtins.float
+            Period to poll the garbage collector at in seconds. Defaults
+            to `20` seconds.
+        expire_after : builtins.float
+            Time after which the last `reset_at` was hit for a bucket to
+            remove it. Higher values will retain unneeded ratelimit info for
+            longer, but may produce more effective rate-limiting logic as a
+            result. Using `0` will make the bucket get garbage collected as soon
+            as the rate limit has reset. Defaults to `10` seconds.
+        &#34;&#34;&#34;
+        if not self.gc_task:
+            self.gc_task = asyncio.create_task(self.gc(poll_period, expire_after))
+
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;Close the garbage collector and kill any tasks waiting on ratelimits.
+
+        Once this has been called, this object is considered to be effectively
+        dead. To reuse it, one should create a new instance.
+        &#34;&#34;&#34;
+        self.closed_event.set()
+        for bucket in self.real_hashes_to_buckets.values():
+            bucket.close()
+        self.real_hashes_to_buckets.clear()
+        self.routes_to_hashes.clear()
+
+        if self.gc_task is not None:
+            self.gc_task.cancel()
+            self.gc_task = None
+
+    # Ignore docstring not starting in an imperative mood
+    async def gc(self, poll_period: float, expire_after: float) -&gt; None:
+        &#34;&#34;&#34;The garbage collector loop.
+
+        This is designed to run in the background and manage removing unused
+        route references from the rate-limiter collection to save memory.
+
+        This will run forever until `RESTBucketManager.closed_event` is set.
+        This will invoke `RESTBucketManager.do_gc_pass` periodically.
+
+        Parameters
+        ----------
+        poll_period : builtins.float
+            The period to poll at.
+        expire_after : builtins.float
+            Time after which the last `reset_at` was hit for a bucket to
+            remove it. Higher values will retain unneeded ratelimit info for
+            longer, but may produce more effective ratelimiting logic as a
+            result. Using `0` will make the bucket get garbage collected as soon
+            as the rate limit has reset.
+
+        !!! warning
+            You generally have no need to invoke this directly. Use
+            `RESTBucketManager.start` and `RESTBucketManager.close` to control
+            this instead.
+        &#34;&#34;&#34;  # noqa: D401 - Imperative mood
+        # Prevent filling memory increasingly until we run out by removing dead buckets every 20s
+        # Allocations are somewhat cheap if we only do them every so-many seconds, after all.
+        _LOGGER.log(ux.TRACE, &#34;rate limit garbage collector started&#34;)
+        while not self.closed_event.is_set():
+            try:
+                await asyncio.wait_for(self.closed_event.wait(), timeout=poll_period)
+            except asyncio.TimeoutError:
+                _LOGGER.log(ux.TRACE, &#34;performing rate limit garbage collection pass&#34;)
+                self.do_gc_pass(expire_after)
+        self.gc_task = None
+
+    def do_gc_pass(self, expire_after: float) -&gt; None:
+        &#34;&#34;&#34;Perform a single garbage collection pass.
+
+        This will assess any routes stored in the internal mappings of this
+        object and remove any that are deemed to be inactive or dead in order
+        to save memory.
+
+        If the removed routes are used again in the future, they will be
+        re-cached automatically.
+
+        Parameters
+        ----------
+        expire_after : builtins.float
+            Time after which the last `reset_at` was hit for a bucket to\
+            remove it. Defaults to `reset_at` + 20 seconds. Higher values will
+            retain unneeded ratelimit info for longer, but may produce more
+            effective ratelimiting logic as a result.
+
+        !!! warning
+            You generally have no need to invoke this directly. Use
+            `RESTBucketManager.start` and `RESTBucketManager.close` to control
+            this instead.
+        &#34;&#34;&#34;
+        buckets_to_purge = []
+
+        now = time.monotonic()
+
+        # We have three main states that a bucket can be in:
+        # 1. active - the bucket is active and is not at risk of deallocation
+        # 2. survival - the bucket is inactive but is still fresh enough to be kept alive.
+        # 3. death - the bucket has been inactive for too long.
+        active = 0
+
+        # Discover and purge
+        bucket_pairs = self.real_hashes_to_buckets.items()
+
+        for full_hash, bucket in bucket_pairs:
+            if bucket.is_empty and bucket.reset_at + expire_after &lt; now:
+                # If it is still running a throttle and is in memory, it will remain in memory
+                # but we will not know about it.
+                buckets_to_purge.append(full_hash)
+
+            if bucket.reset_at &gt;= now:
+                active += 1
+
+        dead = len(buckets_to_purge)
+        total = len(bucket_pairs)
+        survival = total - active - dead
+
+        for full_hash in buckets_to_purge:
+            self.real_hashes_to_buckets[full_hash].close()
+            del self.real_hashes_to_buckets[full_hash]
+
+        _LOGGER.log(ux.TRACE, &#34;purged %s stale buckets, %s remain in survival, %s active&#34;, dead, survival, active)
+
+    def acquire(self, compiled_route: routes.CompiledRoute) -&gt; typing.AsyncContextManager[None]:
+        &#34;&#34;&#34;Acquire a bucket for the given route.
+
+        Parameters
+        ----------
+        compiled_route : hikari.internal.routes.CompiledRoute
+            The route to get the bucket for.
+
+        Returns
+        -------
+        typing.AsyncContextManager[builtins.None]
+            A context manager to enter while doing the request.
+
+        !!! note
+            You MUST keep the context manager acquired during the whole of the
+            request. From making the request until calling `update_rate_limits`.
+        &#34;&#34;&#34;
+        template = compiled_route.route
+
+        try:
+            bucket_hash = self.routes_to_hashes[template]
+            real_bucket_hash = compiled_route.create_real_bucket_hash(bucket_hash)
+        except KeyError:
+            real_bucket_hash = _create_unknown_hash(compiled_route)
+
+        try:
+            bucket = self.real_hashes_to_buckets[real_bucket_hash]
+            _LOGGER.debug(&#34;%s is being mapped to existing bucket %s&#34;, compiled_route, real_bucket_hash)
+        except KeyError:
+            _LOGGER.debug(&#34;%s is being mapped to new bucket %s&#34;, compiled_route, real_bucket_hash)
+            bucket = RESTBucket(real_bucket_hash, compiled_route, self.max_rate_limit)
+            self.real_hashes_to_buckets[real_bucket_hash] = bucket
+
+        return bucket
+
+    def update_rate_limits(
+        self,
+        compiled_route: routes.CompiledRoute,
+        bucket_header: str,
+        remaining_header: int,
+        limit_header: int,
+        reset_after: float,
+    ) -&gt; None:
+        &#34;&#34;&#34;Update the rate limits for a bucket using info from a response.
+
+        Parameters
+        ----------
+        compiled_route : hikari.internal.routes.CompiledRoute
+            The compiled route to get the bucket for.
+        bucket_header : typing.Optional[builtins.str]
+            The `X-RateLimit-Bucket` header that was provided in the response.
+        remaining_header : builtins.int
+            The `X-RateLimit-Remaining` header cast to an `builtins.int`.
+        limit_header : builtins.int
+            The `X-RateLimit-Limit` header cast to an `builtins.int`.
+        reset_after : builtins.float
+            The `X-RateLimit-Reset-After` header cast to a `builtins.float`.
+        &#34;&#34;&#34;
+        self.routes_to_hashes[compiled_route.route] = bucket_header
+        real_bucket_hash = compiled_route.create_real_bucket_hash(bucket_header)
+
+        if bucket := self.real_hashes_to_buckets.get(real_bucket_hash):
+            _LOGGER.debug(
+                &#34;updating %s with bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                compiled_route,
+                real_bucket_hash,
+                reset_after,
+                limit_header,
+                remaining_header,
+            )
+        else:
+            unknown_bucket_hash = _create_unknown_hash(compiled_route)
+
+            if bucket := self.real_hashes_to_buckets.pop(unknown_bucket_hash, None):
+                bucket.resolve(real_bucket_hash)
+                _LOGGER.debug(
+                    &#34;remapping %s with existing bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                    compiled_route,
+                    unknown_bucket_hash,
+                    reset_after,
+                    limit_header,
+                    remaining_header,
+                )
+            else:
+                _LOGGER.debug(
+                    &#34;remapping %s with new bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                    compiled_route,
+                    real_bucket_hash,
+                    reset_after,
+                    limit_header,
+                    remaining_header,
+                )
+                bucket = RESTBucket(real_bucket_hash, compiled_route, self.max_rate_limit)
+
+            self.real_hashes_to_buckets[real_bucket_hash] = bucket
+
+        reset_at_monotonic = time.monotonic() + reset_after
+        bucket.update_rate_limit(remaining_header, limit_header, reset_at_monotonic)
+
+    @property
+    def is_started(self) -&gt; bool:
+        &#34;&#34;&#34;Return `builtins.True` if the rate limiter GC task is started.&#34;&#34;&#34;
+        return self.gc_task is not None</code></pre>
+</details>
+</div>
+</div>
+<h2 id="variables-heading">Variables and Type Hints</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.impl.buckets.UNKNOWN_HASH" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="UNKNOWN_HASH -- The hash used for an unknown bucket that has not yet been resolved." href="#hikari.impl.buckets.UNKNOWN_HASH"  >UNKNOWN_HASH</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Final'>Final</a>[<a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>]</code></pre>
+</dt>
+<dd><p>The hash used for an unknown bucket that has not yet been resolved.</p></dd>
+</div>
+</dl>
+</section>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.impl.buckets.RESTBucket" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RESTBucket -- Represents a rate limit for an HTTP endpoint …" href="#hikari.impl.buckets.RESTBucket"
+>RESTBucket</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.buckets.RESTBucket" class="hljs python"><abbr title='A standard Python type.'>class</abbr> RESTBucket (
+    name: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    compiled_route: <a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>routes.CompiledRoute</a>,
+    max_rate_limit: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+): ...</code></pre>
+<p>Represents a rate limit for an HTTP endpoint.</p>
+<p>Component to represent an active rate limit bucket on a specific HTTP route
+with a specific major parameter combo.</p>
+<p>This is somewhat similar to the <code>WindowedBurstRateLimiter</code> in how it
+works.</p>
+<p>This algorithm will use fixed-period time windows that have a given limit
+(capacity). Each time a task requests processing time, it will drip another
+unit into the bucket. Once the bucket has reached its limit, nothing can
+drip and new tasks will be queued until the time window finishes.</p>
+<p>Once the time window finishes, the bucket will empty, returning the current
+capacity to zero, and tasks that are queued will start being able to drip
+again.</p>
+<p>Additional logic is provided by the <code><a href='#hikari.impl.buckets.RESTBucket.update_rate_limit'>update_rate_limit</a></code> call
+which allows dynamically changing the enforced rate limits at any time.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L208-L335" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class RESTBucket(rate_limits.WindowedBurstRateLimiter):
+    &#34;&#34;&#34;Represents a rate limit for an HTTP endpoint.
+
+    Component to represent an active rate limit bucket on a specific HTTP route
+    with a specific major parameter combo.
+
+    This is somewhat similar to the `WindowedBurstRateLimiter` in how it
+    works.
+
+    This algorithm will use fixed-period time windows that have a given limit
+    (capacity). Each time a task requests processing time, it will drip another
+    unit into the bucket. Once the bucket has reached its limit, nothing can
+    drip and new tasks will be queued until the time window finishes.
+
+    Once the time window finishes, the bucket will empty, returning the current
+    capacity to zero, and tasks that are queued will start being able to drip
+    again.
+
+    Additional logic is provided by the `RESTBucket.update_rate_limit` call
+    which allows dynamically changing the enforced rate limits at any time.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_compiled_route&#34;, &#34;_max_rate_limit&#34;, &#34;_lock&#34;)
+
+    def __init__(self, name: str, compiled_route: routes.CompiledRoute, max_rate_limit: float) -&gt; None:
+        super().__init__(name, 1, 1)
+        self._compiled_route = compiled_route
+        self._max_rate_limit = max_rate_limit
+        self._lock = asyncio.Lock()
+
+    async def __aenter__(self) -&gt; None:
+        await self.acquire()
+
+    async def __aexit__(
+        self,
+        exc_type: typing.Optional[typing.Type[BaseException]],
+        exc: typing.Optional[BaseException],
+        exc_tb: typing.Optional[types.TracebackType],
+    ) -&gt; None:
+        self._lock.release()
+
+    @property
+    def is_unknown(self) -&gt; bool:
+        &#34;&#34;&#34;Return `builtins.True` if the bucket represents an `UNKNOWN` bucket.&#34;&#34;&#34;
+        return self.name.startswith(UNKNOWN_HASH)
+
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        !!! note
+            You should afterwards invoke `RESTBucket.update_rate_limit` to
+            update any rate limit information you are made aware of.
+
+        Raises
+        ------
+        hikari.errors.RateLimitTooLongError
+            If the rate limit is longer than `max_rate_limit`.
+        &#34;&#34;&#34;
+        await self._lock.acquire()
+
+        if self.is_unknown:
+            return
+
+        now = time.monotonic()
+        retry_after = self.reset_at - now
+
+        if self.is_rate_limited(now) and retry_after &gt; self._max_rate_limit:
+            raise errors.RateLimitTooLongError(
+                route=self._compiled_route,
+                retry_after=retry_after,
+                max_retry_after=self._max_rate_limit,
+                reset_at=self.reset_at,
+                limit=self.limit,
+                period=self.period,
+            )
+
+        await super().acquire()
+
+    def update_rate_limit(self, remaining: int, limit: int, reset_at: float) -&gt; None:
+        &#34;&#34;&#34;Update the rate limit information.
+
+        Parameters
+        ----------
+        remaining : builtins.int
+            The calls remaining in this time window.
+        limit : builtins.int
+            The total calls allowed in this time window.
+        reset_at : builtins.float
+            The epoch at which to reset the limit.
+
+        !!! note
+            The `reset_at` epoch is expected to be a `time.monotonic_timestamp`
+            monotonic epoch, rather than a `time.time` date-based epoch.
+        &#34;&#34;&#34;
+        self.remaining = remaining
+        self.limit = limit
+        self.reset_at = reset_at
+        self.period = max(0.0, self.reset_at - time.monotonic())
+
+    def drip(self) -&gt; None:
+        &#34;&#34;&#34;Decrement the remaining count for this bucket.
+
+        !!! note
+            If the bucket is marked as `RESTBucket.is_unknown`, then this will
+            not do anything. `Unknown` buckets have infinite rate limits.
+        &#34;&#34;&#34;
+        # We don&#39;t drip unknown buckets: we cannot rate limit them as we don&#39;t know their real bucket hash or
+        # the current rate limit values Discord put on them...
+        if not self.is_unknown:
+            self.remaining -= 1
+
+    def resolve(self, real_bucket_hash: str) -&gt; None:
+        &#34;&#34;&#34;Resolve an unknown bucket.
+
+        Parameters
+        ----------
+        real_bucket_hash: builtins.str
+            The real bucket hash for this bucket.
+
+        Raises
+        ------
+        builtins.RuntimeError
+            If the hash of the bucket is already known.
+        &#34;&#34;&#34;
+        if not self.is_unknown:
+            raise RuntimeError(&#34;Cannot resolve known bucket&#34;)
+
+        self.name = real_bucket_hash</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RESTBucket -- Represents a rate limit for an HTTP endpoint …" href="#hikari.impl.buckets.RESTBucket"
+>RESTBucket</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></dt>
+<dd class="nested"><p>Windowed burst rate limiter …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="rate_limits.html#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></dt>
+<dd class="nested"><p>Base implementation for a burst-based rate limiter …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="rate_limits.html#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a></dt>
+<dd class="nested"><p>Base for any asyncio-based rate limiter being used.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.buckets.RESTBucket.is_empty" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="rate_limits.html#hikari.impl.rate_limits.BurstRateLimiter.is_empty"  >is_empty</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if no futures are on the queue being rate limited.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.is_unknown" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_unknown -- Return `builtins.True` if the bucket represents an `UNKNOWN` bucket." href="#hikari.impl.buckets.RESTBucket.is_unknown"  >is_unknown</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if the bucket represents an <code>UNKNOWN</code> bucket.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.limit" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="limit -- The maximum number of `WindowedBurstRateLimiter.acquire`'s allowed in
+this time window." href="rate_limits.html#hikari.impl.buckets.RESTBucket.limit"  >limit</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>The maximum number of <code>WindowedBurstRateLimiter.acquire</code>'s allowed in
+this time window.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="rate_limits.html#hikari.impl.buckets.RESTBucket.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The name of the rate limiter.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.period" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="period -- How long the window lasts for from the start in seconds." href="rate_limits.html#hikari.impl.buckets.RESTBucket.period"  >period</a> : <a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></pre>
+</dt>
+<dd><p>How long the window lasts for from the start in seconds.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.queue" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="rate_limits.html#hikari.impl.buckets.RESTBucket.queue"  >queue</a> : <a href='https://docs.python.org/3/library/typing.html#typing.List'>List</a>[<a href='https://docs.python.org/3/library/asyncio-future.html#asyncio.Future'>Future</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The queue of any futures under a rate limit.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.remaining" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="remaining -- The number of `WindowedBurstRateLimiter.acquire`'s left in this window
+before you will get rate limited." href="rate_limits.html#hikari.impl.buckets.RESTBucket.remaining"  >remaining</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>The number of <code>WindowedBurstRateLimiter.acquire</code>'s left in this window
+before you will get rate limited.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.reset_at" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="reset_at -- The `time.monotonic_timestamp` that the limit window ends at." href="rate_limits.html#hikari.impl.buckets.RESTBucket.reset_at"  >reset_at</a> : <a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></pre>
+</dt>
+<dd><p>The <code>time.monotonic_timestamp</code> that the limit window ends at.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucket.throttle_task" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="rate_limits.html#hikari.impl.buckets.RESTBucket.throttle_task"  >throttle_task</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.Task'>Task</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The throttling task, or <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code> if it is not running.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.buckets.RESTBucket.acquire" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="acquire" href="#hikari.impl.buckets.RESTBucket.acquire" id="hikari.impl.buckets.RESTBucket.acquire">acquire</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Acquire time on this rate limiter.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>You should afterwards invoke <code><a href='#hikari.impl.buckets.RESTBucket.update_rate_limit'>update_rate_limit</a></code> to
+update any rate limit information you are made aware of.</p>
+</div>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='../errors.html#hikari.errors.RateLimitTooLongError'>RateLimitTooLongError</a></code></dt>
+<dd>If the rate limit is longer than <code>max_rate_limit</code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L254-L284" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def acquire(self) -&gt; None:
+    &#34;&#34;&#34;Acquire time on this rate limiter.
+
+    !!! note
+        You should afterwards invoke `RESTBucket.update_rate_limit` to
+        update any rate limit information you are made aware of.
+
+    Raises
+    ------
+    hikari.errors.RateLimitTooLongError
+        If the rate limit is longer than `max_rate_limit`.
+    &#34;&#34;&#34;
+    await self._lock.acquire()
+
+    if self.is_unknown:
+        return
+
+    now = time.monotonic()
+    retry_after = self.reset_at - now
+
+    if self.is_rate_limited(now) and retry_after &gt; self._max_rate_limit:
+        raise errors.RateLimitTooLongError(
+            route=self._compiled_route,
+            retry_after=retry_after,
+            max_retry_after=self._max_rate_limit,
+            reset_at=self.reset_at,
+            limit=self.limit,
+            period=self.period,
+        )
+
+    await super().acquire()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="close" href="rate_limits.html#hikari.impl.rate_limits.BurstRateLimiter.close" id="hikari.impl.buckets.RESTBucket.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></code>.<code><a title="close -- Close the rate limiter, and shut down any pending tasks …" href="rate_limits.html#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a></code>
+</p>
+<p>Close the rate limiter, and shut down any pending tasks.</p>
+<p>Once this is invoked, you should not reuse this object.</p>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.drip" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="drip" href="#hikari.impl.buckets.RESTBucket.drip" id="hikari.impl.buckets.RESTBucket.drip">drip</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Decrement the remaining count for this bucket.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>If the bucket is marked as <code><a href='#hikari.impl.buckets.RESTBucket.is_unknown'>is_unknown</a></code>, then this will
+not do anything. <code>Unknown</code> buckets have infinite rate limits.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L307-L317" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def drip(self) -&gt; None:
+    &#34;&#34;&#34;Decrement the remaining count for this bucket.
+
+    !!! note
+        If the bucket is marked as `RESTBucket.is_unknown`, then this will
+        not do anything. `Unknown` buckets have infinite rate limits.
+    &#34;&#34;&#34;
+    # We don&#39;t drip unknown buckets: we cannot rate limit them as we don&#39;t know their real bucket hash or
+    # the current rate limit values Discord put on them...
+    if not self.is_unknown:
+        self.remaining -= 1</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.get_time_until_reset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="get_time_until_reset" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset" id="hikari.impl.buckets.RESTBucket.get_time_until_reset">get_time_until_reset</a>(
+    now: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/functions.html#float'>float</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></code>.<code><a title="get_time_until_reset -- Determine how long until the current rate limit is reset …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset"
+>get_time_until_reset</a></code>
+</p>
+<p>Determine how long until the current rate limit is reset.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>now</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The monotonic <code>time.monotonic_timestamp</code> timestamp.</dd>
+</dl>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Invoking this method will update the internal state if we were
+previously rate limited, but at the given time are no longer under
+that limit. This makes it imperative that you only pass the current
+timestamp to this function, and not past or future timestamps. The
+effects of doing the latter are undefined behaviour.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The time left to sleep before the rate limit is reset. If no rate limit
+is in effect, then this will return <code>0.0</code> instead.</dd>
+</dl>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.is_rate_limited" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_rate_limited" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited" id="hikari.impl.buckets.RESTBucket.is_rate_limited">is_rate_limited</a>(
+    now: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></code>.<code><a title="is_rate_limited -- Determine if we are under a rate limit at the given time …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited"
+>is_rate_limited</a></code>
+</p>
+<p>Determine if we are under a rate limit at the given time.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>now</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The monotonic <code>time.monotonic_timestamp</code> timestamp.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if we are being rate limited, or <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code> if
+we are not.</dd>
+</dl>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Invoking this method will update the internal state if we were
+previously rate limited, but at the given time are no longer under
+that limit. This makes it imperative that you only pass the current
+timestamp to this function, and not past or future timestamps. The
+effects of doing the latter are undefined behaviour.</p>
+</div>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.resolve" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="resolve" href="#hikari.impl.buckets.RESTBucket.resolve" id="hikari.impl.buckets.RESTBucket.resolve">resolve</a>(
+    real_bucket_hash: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Resolve an unknown bucket.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>real_bucket_hash</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The real bucket hash for this bucket.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#RuntimeError'>RuntimeError</a></code></dt>
+<dd>If the hash of the bucket is already known.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L319-L335" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def resolve(self, real_bucket_hash: str) -&gt; None:
+    &#34;&#34;&#34;Resolve an unknown bucket.
+
+    Parameters
+    ----------
+    real_bucket_hash: builtins.str
+        The real bucket hash for this bucket.
+
+    Raises
+    ------
+    builtins.RuntimeError
+        If the hash of the bucket is already known.
+    &#34;&#34;&#34;
+    if not self.is_unknown:
+        raise RuntimeError(&#34;Cannot resolve known bucket&#34;)
+
+    self.name = real_bucket_hash</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.throttle" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="throttle" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle" id="hikari.impl.buckets.RESTBucket.throttle">throttle</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></code>.<code><a title="throttle -- Perform the throttling rate limiter logic …" href="rate_limits.html#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle"
+>throttle</a></code>
+</p>
+<p>Perform the throttling rate limiter logic.</p>
+<p>Iterates repeatedly while the queue is not empty, adhering to any
+rate limits that occur in the mean time.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>You should usually not need to invoke this directly, but if you do,
+ensure to call it using <code><a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.create_task'>create_task</a></code>, and store the
+task immediately in <code>throttle_task</code>.</p>
+<p>When this coroutine function completes, it will set the
+<code>throttle_task</code> to <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>. This means you can check if throttling
+is occurring by checking if <code>throttle_task</code> is not <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>.</p>
+</div>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucket.update_rate_limit" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="update_rate_limit" href="#hikari.impl.buckets.RESTBucket.update_rate_limit" id="hikari.impl.buckets.RESTBucket.update_rate_limit">update_rate_limit</a>(
+    remaining: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    limit: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    reset_at: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Update the rate limit information.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>remaining</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The calls remaining in this time window.</dd>
+<dt><strong><code>limit</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The total calls allowed in this time window.</dd>
+<dt><strong><code>reset_at</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The epoch at which to reset the limit.</dd>
+</dl>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>The <code>reset_at</code> epoch is expected to be a <code>time.monotonic_timestamp</code>
+monotonic epoch, rather than a <code><a href='https://docs.python.org/3/library/time.html#time.time'>time.time</a></code> date-based epoch.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L286-L305" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def update_rate_limit(self, remaining: int, limit: int, reset_at: float) -&gt; None:
+    &#34;&#34;&#34;Update the rate limit information.
+
+    Parameters
+    ----------
+    remaining : builtins.int
+        The calls remaining in this time window.
+    limit : builtins.int
+        The total calls allowed in this time window.
+    reset_at : builtins.float
+        The epoch at which to reset the limit.
+
+    !!! note
+        The `reset_at` epoch is expected to be a `time.monotonic_timestamp`
+        monotonic epoch, rather than a `time.time` date-based epoch.
+    &#34;&#34;&#34;
+    self.remaining = remaining
+    self.limit = limit
+    self.reset_at = reset_at
+    self.period = max(0.0, self.reset_at - time.monotonic())</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucketManager" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RESTBucketManager -- The main rate limiter implementation for HTTP clients …" href="#hikari.impl.buckets.RESTBucketManager"
+>RESTBucketManager</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.buckets.RESTBucketManager" class="hljs python"><abbr title='A standard Python type.'>class</abbr> RESTBucketManager (
+    max_rate_limit: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+): ...</code></pre>
+<p>The main rate limiter implementation for HTTP clients.</p>
+<p>This is designed to provide bucketed rate limiting for Discord HTTP
+endpoints that respects the <code>X-RateLimit-Bucket</code> rate limit header. To do
+this, it makes the assumption that any limit can change at any time.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>max_rate_limit</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The max number of seconds to backoff for when rate limited. Anything
+greater than this will instead raise an error.</dd>
+</dl>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L342-L638" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class RESTBucketManager:
+    &#34;&#34;&#34;The main rate limiter implementation for HTTP clients.
+
+    This is designed to provide bucketed rate limiting for Discord HTTP
+    endpoints that respects the `X-RateLimit-Bucket` rate limit header. To do
+    this, it makes the assumption that any limit can change at any time.
+
+    Parameters
+    ----------
+    max_rate_limit : builtins.float
+        The max number of seconds to backoff for when rate limited. Anything
+        greater than this will instead raise an error.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (
+        &#34;routes_to_hashes&#34;,
+        &#34;real_hashes_to_buckets&#34;,
+        &#34;closed_event&#34;,
+        &#34;gc_task&#34;,
+        &#34;max_rate_limit&#34;,
+    )
+
+    routes_to_hashes: typing.Final[typing.MutableMapping[routes.Route, str]]
+    &#34;&#34;&#34;Maps routes to their `X-RateLimit-Bucket` header being used.&#34;&#34;&#34;
+
+    real_hashes_to_buckets: typing.Final[typing.MutableMapping[str, RESTBucket]]
+    &#34;&#34;&#34;Maps full bucket hashes (`X-RateLimit-Bucket` appended with a hash of
+    major parameters used in that compiled route) to their corresponding rate
+    limiters.
+    &#34;&#34;&#34;
+
+    closed_event: typing.Final[asyncio.Event]
+    &#34;&#34;&#34;An internal event that is set when the object is shut down.&#34;&#34;&#34;
+
+    gc_task: typing.Optional[asyncio.Task[None]]
+    &#34;&#34;&#34;The internal garbage collector task.&#34;&#34;&#34;
+
+    max_rate_limit: float
+    &#34;&#34;&#34;The max number of seconds to backoff for when rate limited.
+
+    Anything greater than this will instead raise an error.
+    &#34;&#34;&#34;
+
+    def __init__(self, max_rate_limit: float) -&gt; None:
+        self.routes_to_hashes = {}
+        self.real_hashes_to_buckets = {}
+        self.closed_event: asyncio.Event = asyncio.Event()
+        self.gc_task: typing.Optional[asyncio.Task[None]] = None
+        self.max_rate_limit = max_rate_limit
+
+    def __enter__(self) -&gt; RESTBucketManager:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: typing.Optional[typing.Type[Exception]],
+        exc_val: typing.Optional[Exception],
+        exc_tb: typing.Optional[types.TracebackType],
+    ) -&gt; None:
+        self.close()
+
+    def __del__(self) -&gt; None:
+        self.close()
+
+    def start(self, poll_period: float = 20.0, expire_after: float = 10.0) -&gt; None:
+        &#34;&#34;&#34;Start this ratelimiter up.
+
+        This spins up internal garbage collection logic in the background to
+        keep memory usage to an optimal level as old routes and bucket hashes
+        get discarded and replaced.
+
+        Parameters
+        ----------
+        poll_period : builtins.float
+            Period to poll the garbage collector at in seconds. Defaults
+            to `20` seconds.
+        expire_after : builtins.float
+            Time after which the last `reset_at` was hit for a bucket to
+            remove it. Higher values will retain unneeded ratelimit info for
+            longer, but may produce more effective rate-limiting logic as a
+            result. Using `0` will make the bucket get garbage collected as soon
+            as the rate limit has reset. Defaults to `10` seconds.
+        &#34;&#34;&#34;
+        if not self.gc_task:
+            self.gc_task = asyncio.create_task(self.gc(poll_period, expire_after))
+
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;Close the garbage collector and kill any tasks waiting on ratelimits.
+
+        Once this has been called, this object is considered to be effectively
+        dead. To reuse it, one should create a new instance.
+        &#34;&#34;&#34;
+        self.closed_event.set()
+        for bucket in self.real_hashes_to_buckets.values():
+            bucket.close()
+        self.real_hashes_to_buckets.clear()
+        self.routes_to_hashes.clear()
+
+        if self.gc_task is not None:
+            self.gc_task.cancel()
+            self.gc_task = None
+
+    # Ignore docstring not starting in an imperative mood
+    async def gc(self, poll_period: float, expire_after: float) -&gt; None:
+        &#34;&#34;&#34;The garbage collector loop.
+
+        This is designed to run in the background and manage removing unused
+        route references from the rate-limiter collection to save memory.
+
+        This will run forever until `RESTBucketManager.closed_event` is set.
+        This will invoke `RESTBucketManager.do_gc_pass` periodically.
+
+        Parameters
+        ----------
+        poll_period : builtins.float
+            The period to poll at.
+        expire_after : builtins.float
+            Time after which the last `reset_at` was hit for a bucket to
+            remove it. Higher values will retain unneeded ratelimit info for
+            longer, but may produce more effective ratelimiting logic as a
+            result. Using `0` will make the bucket get garbage collected as soon
+            as the rate limit has reset.
+
+        !!! warning
+            You generally have no need to invoke this directly. Use
+            `RESTBucketManager.start` and `RESTBucketManager.close` to control
+            this instead.
+        &#34;&#34;&#34;  # noqa: D401 - Imperative mood
+        # Prevent filling memory increasingly until we run out by removing dead buckets every 20s
+        # Allocations are somewhat cheap if we only do them every so-many seconds, after all.
+        _LOGGER.log(ux.TRACE, &#34;rate limit garbage collector started&#34;)
+        while not self.closed_event.is_set():
+            try:
+                await asyncio.wait_for(self.closed_event.wait(), timeout=poll_period)
+            except asyncio.TimeoutError:
+                _LOGGER.log(ux.TRACE, &#34;performing rate limit garbage collection pass&#34;)
+                self.do_gc_pass(expire_after)
+        self.gc_task = None
+
+    def do_gc_pass(self, expire_after: float) -&gt; None:
+        &#34;&#34;&#34;Perform a single garbage collection pass.
+
+        This will assess any routes stored in the internal mappings of this
+        object and remove any that are deemed to be inactive or dead in order
+        to save memory.
+
+        If the removed routes are used again in the future, they will be
+        re-cached automatically.
+
+        Parameters
+        ----------
+        expire_after : builtins.float
+            Time after which the last `reset_at` was hit for a bucket to\
+            remove it. Defaults to `reset_at` + 20 seconds. Higher values will
+            retain unneeded ratelimit info for longer, but may produce more
+            effective ratelimiting logic as a result.
+
+        !!! warning
+            You generally have no need to invoke this directly. Use
+            `RESTBucketManager.start` and `RESTBucketManager.close` to control
+            this instead.
+        &#34;&#34;&#34;
+        buckets_to_purge = []
+
+        now = time.monotonic()
+
+        # We have three main states that a bucket can be in:
+        # 1. active - the bucket is active and is not at risk of deallocation
+        # 2. survival - the bucket is inactive but is still fresh enough to be kept alive.
+        # 3. death - the bucket has been inactive for too long.
+        active = 0
+
+        # Discover and purge
+        bucket_pairs = self.real_hashes_to_buckets.items()
+
+        for full_hash, bucket in bucket_pairs:
+            if bucket.is_empty and bucket.reset_at + expire_after &lt; now:
+                # If it is still running a throttle and is in memory, it will remain in memory
+                # but we will not know about it.
+                buckets_to_purge.append(full_hash)
+
+            if bucket.reset_at &gt;= now:
+                active += 1
+
+        dead = len(buckets_to_purge)
+        total = len(bucket_pairs)
+        survival = total - active - dead
+
+        for full_hash in buckets_to_purge:
+            self.real_hashes_to_buckets[full_hash].close()
+            del self.real_hashes_to_buckets[full_hash]
+
+        _LOGGER.log(ux.TRACE, &#34;purged %s stale buckets, %s remain in survival, %s active&#34;, dead, survival, active)
+
+    def acquire(self, compiled_route: routes.CompiledRoute) -&gt; typing.AsyncContextManager[None]:
+        &#34;&#34;&#34;Acquire a bucket for the given route.
+
+        Parameters
+        ----------
+        compiled_route : hikari.internal.routes.CompiledRoute
+            The route to get the bucket for.
+
+        Returns
+        -------
+        typing.AsyncContextManager[builtins.None]
+            A context manager to enter while doing the request.
+
+        !!! note
+            You MUST keep the context manager acquired during the whole of the
+            request. From making the request until calling `update_rate_limits`.
+        &#34;&#34;&#34;
+        template = compiled_route.route
+
+        try:
+            bucket_hash = self.routes_to_hashes[template]
+            real_bucket_hash = compiled_route.create_real_bucket_hash(bucket_hash)
+        except KeyError:
+            real_bucket_hash = _create_unknown_hash(compiled_route)
+
+        try:
+            bucket = self.real_hashes_to_buckets[real_bucket_hash]
+            _LOGGER.debug(&#34;%s is being mapped to existing bucket %s&#34;, compiled_route, real_bucket_hash)
+        except KeyError:
+            _LOGGER.debug(&#34;%s is being mapped to new bucket %s&#34;, compiled_route, real_bucket_hash)
+            bucket = RESTBucket(real_bucket_hash, compiled_route, self.max_rate_limit)
+            self.real_hashes_to_buckets[real_bucket_hash] = bucket
+
+        return bucket
+
+    def update_rate_limits(
+        self,
+        compiled_route: routes.CompiledRoute,
+        bucket_header: str,
+        remaining_header: int,
+        limit_header: int,
+        reset_after: float,
+    ) -&gt; None:
+        &#34;&#34;&#34;Update the rate limits for a bucket using info from a response.
+
+        Parameters
+        ----------
+        compiled_route : hikari.internal.routes.CompiledRoute
+            The compiled route to get the bucket for.
+        bucket_header : typing.Optional[builtins.str]
+            The `X-RateLimit-Bucket` header that was provided in the response.
+        remaining_header : builtins.int
+            The `X-RateLimit-Remaining` header cast to an `builtins.int`.
+        limit_header : builtins.int
+            The `X-RateLimit-Limit` header cast to an `builtins.int`.
+        reset_after : builtins.float
+            The `X-RateLimit-Reset-After` header cast to a `builtins.float`.
+        &#34;&#34;&#34;
+        self.routes_to_hashes[compiled_route.route] = bucket_header
+        real_bucket_hash = compiled_route.create_real_bucket_hash(bucket_header)
+
+        if bucket := self.real_hashes_to_buckets.get(real_bucket_hash):
+            _LOGGER.debug(
+                &#34;updating %s with bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                compiled_route,
+                real_bucket_hash,
+                reset_after,
+                limit_header,
+                remaining_header,
+            )
+        else:
+            unknown_bucket_hash = _create_unknown_hash(compiled_route)
+
+            if bucket := self.real_hashes_to_buckets.pop(unknown_bucket_hash, None):
+                bucket.resolve(real_bucket_hash)
+                _LOGGER.debug(
+                    &#34;remapping %s with existing bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                    compiled_route,
+                    unknown_bucket_hash,
+                    reset_after,
+                    limit_header,
+                    remaining_header,
+                )
+            else:
+                _LOGGER.debug(
+                    &#34;remapping %s with new bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                    compiled_route,
+                    real_bucket_hash,
+                    reset_after,
+                    limit_header,
+                    remaining_header,
+                )
+                bucket = RESTBucket(real_bucket_hash, compiled_route, self.max_rate_limit)
+
+            self.real_hashes_to_buckets[real_bucket_hash] = bucket
+
+        reset_at_monotonic = time.monotonic() + reset_after
+        bucket.update_rate_limit(remaining_header, limit_header, reset_at_monotonic)
+
+    @property
+    def is_started(self) -&gt; bool:
+        &#34;&#34;&#34;Return `builtins.True` if the rate limiter GC task is started.&#34;&#34;&#34;
+        return self.gc_task is not None</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.buckets.RESTBucketManager.closed_event" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="closed_event -- An internal event that is set when the object is shut down." href="#hikari.impl.buckets.RESTBucketManager.closed_event"  >closed_event</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Final'>Final</a>[<a href='https://docs.python.org/3/library/asyncio-sync.html#asyncio.Event'>Event</a>]</code></pre>
+</dt>
+<dd><p>An internal event that is set when the object is shut down.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucketManager.gc_task" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="gc_task -- The internal garbage collector task." href="#hikari.impl.buckets.RESTBucketManager.gc_task"  >gc_task</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.Task'>Task</a>[<a href='https://docs.python.org/3/library/constants.html#None'>None</a>]]</code></pre>
+</dt>
+<dd><p>The internal garbage collector task.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucketManager.is_started" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_started -- Return `builtins.True` if the rate limiter GC task is started." href="#hikari.impl.buckets.RESTBucketManager.is_started"  >is_started</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if the rate limiter GC task is started.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucketManager.max_rate_limit" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="max_rate_limit -- The max number of seconds to backoff for when rate limited …" href="#hikari.impl.buckets.RESTBucketManager.max_rate_limit"  >max_rate_limit</a> : <a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></pre>
+</dt>
+<dd><p>The max number of seconds to backoff for when rate limited.</p>
+<p>Anything greater than this will instead raise an error.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucketManager.real_hashes_to_buckets" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="real_hashes_to_buckets -- Maps full bucket hashes (`X-RateLimit-Bucket` appended with a hash of
+major parameters used in that compiled route) to their corresponding rate
+limiters." href="#hikari.impl.buckets.RESTBucketManager.real_hashes_to_buckets"  >real_hashes_to_buckets</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Final'>Final</a>[<a href='https://docs.python.org/3/library/typing.html#typing.MutableMapping'>MutableMapping</a>[<a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>, <a href='#hikari.impl.buckets.RESTBucket'>RESTBucket</a>]]</code></pre>
+</dt>
+<dd><p>Maps full bucket hashes (<code>X-RateLimit-Bucket</code> appended with a hash of
+major parameters used in that compiled route) to their corresponding rate
+limiters.</p></dd>
+</div>
+<div id="hikari.impl.buckets.RESTBucketManager.routes_to_hashes" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="routes_to_hashes -- Maps routes to their `X-RateLimit-Bucket` header being used." href="#hikari.impl.buckets.RESTBucketManager.routes_to_hashes"  >routes_to_hashes</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Final'>Final</a>[<a href='https://docs.python.org/3/library/typing.html#typing.MutableMapping'>MutableMapping</a>[<a href='../internal/routes.html#hikari.internal.routes.Route'>routes.Route</a>, <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>]]</code></pre>
+</dt>
+<dd><p>Maps routes to their <code>X-RateLimit-Bucket</code> header being used.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.buckets.RESTBucketManager.acquire" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="acquire" href="#hikari.impl.buckets.RESTBucketManager.acquire" id="hikari.impl.buckets.RESTBucketManager.acquire">acquire</a>(
+    compiled_route: <a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>routes.CompiledRoute</a>,
+) -> AbstractAsyncContextManager[<a href='https://docs.python.org/3/library/constants.html#None'>None</a>]: ...</code></pre>
+</dt>
+<dd>
+<p>Acquire a bucket for the given route.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>compiled_route</code></strong> :&ensp;<code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code></dt>
+<dd>The route to get the bucket for.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/typing.html#typing.AsyncContextManager'>AsyncContextManager</a>[<a href='https://docs.python.org/3/library/constants.html#None'>None</a>]</code></dt>
+<dd>A context manager to enter while doing the request.</dd>
+</dl>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>You MUST keep the context manager acquired during the whole of the
+request. From making the request until calling <code>update_rate_limits</code>.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L536-L569" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def acquire(self, compiled_route: routes.CompiledRoute) -&gt; typing.AsyncContextManager[None]:
+    &#34;&#34;&#34;Acquire a bucket for the given route.
+
+    Parameters
+    ----------
+    compiled_route : hikari.internal.routes.CompiledRoute
+        The route to get the bucket for.
+
+    Returns
+    -------
+    typing.AsyncContextManager[builtins.None]
+        A context manager to enter while doing the request.
+
+    !!! note
+        You MUST keep the context manager acquired during the whole of the
+        request. From making the request until calling `update_rate_limits`.
+    &#34;&#34;&#34;
+    template = compiled_route.route
+
+    try:
+        bucket_hash = self.routes_to_hashes[template]
+        real_bucket_hash = compiled_route.create_real_bucket_hash(bucket_hash)
+    except KeyError:
+        real_bucket_hash = _create_unknown_hash(compiled_route)
+
+    try:
+        bucket = self.real_hashes_to_buckets[real_bucket_hash]
+        _LOGGER.debug(&#34;%s is being mapped to existing bucket %s&#34;, compiled_route, real_bucket_hash)
+    except KeyError:
+        _LOGGER.debug(&#34;%s is being mapped to new bucket %s&#34;, compiled_route, real_bucket_hash)
+        bucket = RESTBucket(real_bucket_hash, compiled_route, self.max_rate_limit)
+        self.real_hashes_to_buckets[real_bucket_hash] = bucket
+
+    return bucket</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucketManager.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="close" href="#hikari.impl.buckets.RESTBucketManager.close" id="hikari.impl.buckets.RESTBucketManager.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Close the garbage collector and kill any tasks waiting on ratelimits.</p>
+<p>Once this has been called, this object is considered to be effectively
+dead. To reuse it, one should create a new instance.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L428-L442" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def close(self) -&gt; None:
+    &#34;&#34;&#34;Close the garbage collector and kill any tasks waiting on ratelimits.
+
+    Once this has been called, this object is considered to be effectively
+    dead. To reuse it, one should create a new instance.
+    &#34;&#34;&#34;
+    self.closed_event.set()
+    for bucket in self.real_hashes_to_buckets.values():
+        bucket.close()
+    self.real_hashes_to_buckets.clear()
+    self.routes_to_hashes.clear()
+
+    if self.gc_task is not None:
+        self.gc_task.cancel()
+        self.gc_task = None</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucketManager.do_gc_pass" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="do_gc_pass" href="#hikari.impl.buckets.RESTBucketManager.do_gc_pass" id="hikari.impl.buckets.RESTBucketManager.do_gc_pass">do_gc_pass</a>(
+    expire_after: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Perform a single garbage collection pass.</p>
+<p>This will assess any routes stored in the internal mappings of this
+object and remove any that are deemed to be inactive or dead in order
+to save memory.</p>
+<p>If the removed routes are used again in the future, they will be
+re-cached automatically.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>expire_after</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Time after which the last <code>reset_at</code> was hit for a bucket to
+remove it. Defaults to <code>reset_at</code> + 20 seconds. Higher values will
+retain unneeded ratelimit info for longer, but may produce more
+effective ratelimiting logic as a result.</dd>
+</dl>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>You generally have no need to invoke this directly. Use
+<code><a href='#hikari.impl.buckets.RESTBucketManager.start'>start</a></code> and <code><a href='#hikari.impl.buckets.RESTBucketManager.close'>close</a></code> to control
+this instead.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L481-L534" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def do_gc_pass(self, expire_after: float) -&gt; None:
+    &#34;&#34;&#34;Perform a single garbage collection pass.
+
+    This will assess any routes stored in the internal mappings of this
+    object and remove any that are deemed to be inactive or dead in order
+    to save memory.
+
+    If the removed routes are used again in the future, they will be
+    re-cached automatically.
+
+    Parameters
+    ----------
+    expire_after : builtins.float
+        Time after which the last `reset_at` was hit for a bucket to\
+        remove it. Defaults to `reset_at` + 20 seconds. Higher values will
+        retain unneeded ratelimit info for longer, but may produce more
+        effective ratelimiting logic as a result.
+
+    !!! warning
+        You generally have no need to invoke this directly. Use
+        `RESTBucketManager.start` and `RESTBucketManager.close` to control
+        this instead.
+    &#34;&#34;&#34;
+    buckets_to_purge = []
+
+    now = time.monotonic()
+
+    # We have three main states that a bucket can be in:
+    # 1. active - the bucket is active and is not at risk of deallocation
+    # 2. survival - the bucket is inactive but is still fresh enough to be kept alive.
+    # 3. death - the bucket has been inactive for too long.
+    active = 0
+
+    # Discover and purge
+    bucket_pairs = self.real_hashes_to_buckets.items()
+
+    for full_hash, bucket in bucket_pairs:
+        if bucket.is_empty and bucket.reset_at + expire_after &lt; now:
+            # If it is still running a throttle and is in memory, it will remain in memory
+            # but we will not know about it.
+            buckets_to_purge.append(full_hash)
+
+        if bucket.reset_at &gt;= now:
+            active += 1
+
+    dead = len(buckets_to_purge)
+    total = len(bucket_pairs)
+    survival = total - active - dead
+
+    for full_hash in buckets_to_purge:
+        self.real_hashes_to_buckets[full_hash].close()
+        del self.real_hashes_to_buckets[full_hash]
+
+    _LOGGER.log(ux.TRACE, &#34;purged %s stale buckets, %s remain in survival, %s active&#34;, dead, survival, active)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucketManager.gc" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="gc" href="#hikari.impl.buckets.RESTBucketManager.gc" id="hikari.impl.buckets.RESTBucketManager.gc">gc</a>(
+    poll_period: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+    expire_after: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>The garbage collector loop.</p>
+<p>This is designed to run in the background and manage removing unused
+route references from the rate-limiter collection to save memory.</p>
+<p>This will run forever until <code><a href='#hikari.impl.buckets.RESTBucketManager.closed_event'>closed_event</a></code> is set.
+This will invoke <code><a href='#hikari.impl.buckets.RESTBucketManager.do_gc_pass'>do_gc_pass</a></code> periodically.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>poll_period</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The period to poll at.</dd>
+<dt><strong><code>expire_after</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Time after which the last <code>reset_at</code> was hit for a bucket to
+remove it. Higher values will retain unneeded ratelimit info for
+longer, but may produce more effective ratelimiting logic as a
+result. Using <code>0</code> will make the bucket get garbage collected as soon
+as the rate limit has reset.</dd>
+</dl>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>You generally have no need to invoke this directly. Use
+<code><a href='#hikari.impl.buckets.RESTBucketManager.start'>start</a></code> and <code><a href='#hikari.impl.buckets.RESTBucketManager.close'>close</a></code> to control
+this instead.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L445-L479" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def gc(self, poll_period: float, expire_after: float) -&gt; None:
+    &#34;&#34;&#34;The garbage collector loop.
+
+    This is designed to run in the background and manage removing unused
+    route references from the rate-limiter collection to save memory.
+
+    This will run forever until `RESTBucketManager.closed_event` is set.
+    This will invoke `RESTBucketManager.do_gc_pass` periodically.
+
+    Parameters
+    ----------
+    poll_period : builtins.float
+        The period to poll at.
+    expire_after : builtins.float
+        Time after which the last `reset_at` was hit for a bucket to
+        remove it. Higher values will retain unneeded ratelimit info for
+        longer, but may produce more effective ratelimiting logic as a
+        result. Using `0` will make the bucket get garbage collected as soon
+        as the rate limit has reset.
+
+    !!! warning
+        You generally have no need to invoke this directly. Use
+        `RESTBucketManager.start` and `RESTBucketManager.close` to control
+        this instead.
+    &#34;&#34;&#34;  # noqa: D401 - Imperative mood
+    # Prevent filling memory increasingly until we run out by removing dead buckets every 20s
+    # Allocations are somewhat cheap if we only do them every so-many seconds, after all.
+    _LOGGER.log(ux.TRACE, &#34;rate limit garbage collector started&#34;)
+    while not self.closed_event.is_set():
+        try:
+            await asyncio.wait_for(self.closed_event.wait(), timeout=poll_period)
+        except asyncio.TimeoutError:
+            _LOGGER.log(ux.TRACE, &#34;performing rate limit garbage collection pass&#34;)
+            self.do_gc_pass(expire_after)
+    self.gc_task = None</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucketManager.start" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="start" href="#hikari.impl.buckets.RESTBucketManager.start" id="hikari.impl.buckets.RESTBucketManager.start">start</a>(
+    poll_period: <a href='https://docs.python.org/3/library/functions.html#float'>float</a> = 20.0,
+    expire_after: <a href='https://docs.python.org/3/library/functions.html#float'>float</a> = 10.0,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Start this ratelimiter up.</p>
+<p>This spins up internal garbage collection logic in the background to
+keep memory usage to an optimal level as old routes and bucket hashes
+get discarded and replaced.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>poll_period</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Period to poll the garbage collector at in seconds. Defaults
+to <code>20</code> seconds.</dd>
+<dt><strong><code>expire_after</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Time after which the last <code>reset_at</code> was hit for a bucket to
+remove it. Higher values will retain unneeded ratelimit info for
+longer, but may produce more effective rate-limiting logic as a
+result. Using <code>0</code> will make the bucket get garbage collected as soon
+as the rate limit has reset. Defaults to <code>10</code> seconds.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L406-L426" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def start(self, poll_period: float = 20.0, expire_after: float = 10.0) -&gt; None:
+    &#34;&#34;&#34;Start this ratelimiter up.
+
+    This spins up internal garbage collection logic in the background to
+    keep memory usage to an optimal level as old routes and bucket hashes
+    get discarded and replaced.
+
+    Parameters
+    ----------
+    poll_period : builtins.float
+        Period to poll the garbage collector at in seconds. Defaults
+        to `20` seconds.
+    expire_after : builtins.float
+        Time after which the last `reset_at` was hit for a bucket to
+        remove it. Higher values will retain unneeded ratelimit info for
+        longer, but may produce more effective rate-limiting logic as a
+        result. Using `0` will make the bucket get garbage collected as soon
+        as the rate limit has reset. Defaults to `10` seconds.
+    &#34;&#34;&#34;
+    if not self.gc_task:
+        self.gc_task = asyncio.create_task(self.gc(poll_period, expire_after))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.buckets.RESTBucketManager.update_rate_limits" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="update_rate_limits" href="#hikari.impl.buckets.RESTBucketManager.update_rate_limits" id="hikari.impl.buckets.RESTBucketManager.update_rate_limits">update_rate_limits</a>(
+    compiled_route: <a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>routes.CompiledRoute</a>,
+    bucket_header: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    remaining_header: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    limit_header: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    reset_after: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Update the rate limits for a bucket using info from a response.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>compiled_route</code></strong> :&ensp;<code><a href='../internal/routes.html#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code></dt>
+<dd>The compiled route to get the bucket for.</dd>
+<dt><strong><code>bucket_header</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>]</code></dt>
+<dd>The <code>X-RateLimit-Bucket</code> header that was provided in the response.</dd>
+<dt><strong><code>remaining_header</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The <code>X-RateLimit-Remaining</code> header cast to an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>.</dd>
+<dt><strong><code>limit_header</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The <code>X-RateLimit-Limit</code> header cast to an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>.</dd>
+<dt><strong><code>reset_after</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The <code>X-RateLimit-Reset-After</code> header cast to a <code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/buckets.py#L571-L633" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def update_rate_limits(
+    self,
+    compiled_route: routes.CompiledRoute,
+    bucket_header: str,
+    remaining_header: int,
+    limit_header: int,
+    reset_after: float,
+) -&gt; None:
+    &#34;&#34;&#34;Update the rate limits for a bucket using info from a response.
+
+    Parameters
+    ----------
+    compiled_route : hikari.internal.routes.CompiledRoute
+        The compiled route to get the bucket for.
+    bucket_header : typing.Optional[builtins.str]
+        The `X-RateLimit-Bucket` header that was provided in the response.
+    remaining_header : builtins.int
+        The `X-RateLimit-Remaining` header cast to an `builtins.int`.
+    limit_header : builtins.int
+        The `X-RateLimit-Limit` header cast to an `builtins.int`.
+    reset_after : builtins.float
+        The `X-RateLimit-Reset-After` header cast to a `builtins.float`.
+    &#34;&#34;&#34;
+    self.routes_to_hashes[compiled_route.route] = bucket_header
+    real_bucket_hash = compiled_route.create_real_bucket_hash(bucket_header)
+
+    if bucket := self.real_hashes_to_buckets.get(real_bucket_hash):
+        _LOGGER.debug(
+            &#34;updating %s with bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+            compiled_route,
+            real_bucket_hash,
+            reset_after,
+            limit_header,
+            remaining_header,
+        )
+    else:
+        unknown_bucket_hash = _create_unknown_hash(compiled_route)
+
+        if bucket := self.real_hashes_to_buckets.pop(unknown_bucket_hash, None):
+            bucket.resolve(real_bucket_hash)
+            _LOGGER.debug(
+                &#34;remapping %s with existing bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                compiled_route,
+                unknown_bucket_hash,
+                reset_after,
+                limit_header,
+                remaining_header,
+            )
+        else:
+            _LOGGER.debug(
+                &#34;remapping %s with new bucket %s [reset-after:%ss, limit:%s, remaining:%s]&#34;,
+                compiled_route,
+                real_bucket_hash,
+                reset_after,
+                limit_header,
+                remaining_header,
+            )
+            bucket = RESTBucket(real_bucket_hash, compiled_route, self.max_rate_limit)
+
+        self.real_hashes_to_buckets[real_bucket_hash] = bucket
+
+    reset_at_monotonic = time.monotonic() + reset_after
+    bucket.update_rate_limit(remaining_header, limit_header, reset_at_monotonic)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

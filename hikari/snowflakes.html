@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.snowflakes API documentation</title>
+<meta name="description" content="Implementation of a Snowflake type.">
+<meta property="og:title" content="hikari.snowflakes module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="index.html"
+>hikari</a></li>
+<li class="breadcrumb-item active"><a href="#">snowflakes</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Implementation of a Snowflake type.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SearchableSnowflakeish -- Type hint for a snowflakeish that can be searched for in history …" href="#hikari.snowflakes.SearchableSnowflakeish"
+>SearchableSnowflakeish</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SearchableSnowflakeishOr -- Type hint for a unique object entity that can be searched for …" href="#hikari.snowflakes.SearchableSnowflakeishOr"
+>SearchableSnowflakeishOr</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="Snowflakeish -- Type hint for a value that resembles a `Snowflake` object functionally …" href="#hikari.snowflakes.Snowflakeish"
+>Snowflakeish</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SnowflakeishIterable -- Type hint representing an iterable of unique object entities." href="#hikari.snowflakes.SnowflakeishIterable"
+>SnowflakeishIterable</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SnowflakeishOr -- Type hint representing a unique object entity …" href="#hikari.snowflakes.SnowflakeishOr"
+>SnowflakeishOr</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SnowflakeishSequence -- Type hint representing a collection of unique object entities." href="#hikari.snowflakes.SnowflakeishSequence"
+>SnowflakeishSequence</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="calculate_shard_id -- Calculate the shard ID for a guild based on it's shard aware app or shard count …" href="#hikari.snowflakes.calculate_shard_id"
+>calculate_shard_id</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Snowflake -- A concrete representation of a unique ID for an entity on Discord …" href="#hikari.snowflakes.Snowflake"
+>Snowflake</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="created_at -- When the object was created." href="#hikari.snowflakes.Snowflake.created_at"
+>created_at</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_data -- Convert the pieces of info that comprise an ID into a Snowflake." href="#hikari.snowflakes.Snowflake.from_data"
+>from_data</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_datetime -- Get a snowflake object from a datetime object." href="#hikari.snowflakes.Snowflake.from_datetime"
+>from_datetime</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="increment -- Increment of Discord's system when this object was made." href="#hikari.snowflakes.Snowflake.increment"
+>increment</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="internal_process_id -- ID of the process that created this snowflake on Discord's systems." href="#hikari.snowflakes.Snowflake.internal_process_id"
+>internal_process_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="internal_worker_id -- ID of the worker that created this snowflake on Discord's systems." href="#hikari.snowflakes.Snowflake.internal_worker_id"
+>internal_worker_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="max -- Maximum value for a snowflakes." href="#hikari.snowflakes.Snowflake.max"
+>max</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="min -- Minimum value for a snowflakes." href="#hikari.snowflakes.Snowflake.min"
+>min</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Unique -- Mixin for a class that enforces uniqueness by a snowflake ID." href="#hikari.snowflakes.Unique"
+>Unique</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="created_at -- When the object was created." href="#hikari.snowflakes.Unique.created_at"
+>created_at</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="id -- Return the ID of this entity …" href="#hikari.snowflakes.Unique.id"
+>id</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L1-L248" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Implementation of a Snowflake type.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [
+    &#34;Snowflake&#34;,
+    &#34;Unique&#34;,
+    &#34;calculate_shard_id&#34;,
+    &#34;Snowflakeish&#34;,
+    &#34;SearchableSnowflakeish&#34;,
+    &#34;SnowflakeishOr&#34;,
+    &#34;SearchableSnowflakeishOr&#34;,
+    &#34;SnowflakeishIterable&#34;,
+    &#34;SnowflakeishSequence&#34;,
+]
+
+import abc
+import typing
+
+from hikari.internal import time
+
+if typing.TYPE_CHECKING:
+    import datetime
+
+    from hikari import guilds
+    from hikari import traits
+
+
+@typing.final
+class Snowflake(int):
+    &#34;&#34;&#34;A concrete representation of a unique ID for an entity on Discord.
+
+    This object can be treated as a regular `builtins.int` for most purposes.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    ___MIN___: Snowflake
+    ___MAX___: Snowflake
+
+    @property
+    def created_at(self) -&gt; datetime.datetime:
+        &#34;&#34;&#34;When the object was created.&#34;&#34;&#34;
+        epoch = self &gt;&gt; 22
+        return time.discord_epoch_to_datetime(epoch)
+
+    @property
+    def internal_worker_id(self) -&gt; int:
+        &#34;&#34;&#34;ID of the worker that created this snowflake on Discord&#39;s systems.&#34;&#34;&#34;
+        return (self &amp; 0x3E0_000) &gt;&gt; 17
+
+    @property
+    def internal_process_id(self) -&gt; int:
+        &#34;&#34;&#34;ID of the process that created this snowflake on Discord&#39;s systems.&#34;&#34;&#34;
+        return (self &amp; 0x1F_000) &gt;&gt; 12
+
+    @property
+    def increment(self) -&gt; int:
+        &#34;&#34;&#34;Increment of Discord&#39;s system when this object was made.&#34;&#34;&#34;
+        return self &amp; 0xFFF
+
+    @classmethod
+    def from_datetime(cls, timestamp: datetime.datetime) -&gt; Snowflake:
+        &#34;&#34;&#34;Get a snowflake object from a datetime object.&#34;&#34;&#34;
+        return cls.from_data(timestamp, 0, 0, 0)
+
+    @classmethod
+    def min(cls) -&gt; Snowflake:
+        &#34;&#34;&#34;Minimum value for a snowflakes.&#34;&#34;&#34;
+        try:
+            return cls.___MIN___
+
+        except AttributeError:
+            cls.___MIN___ = Snowflake(0)
+            return cls.___MIN___
+
+    @classmethod
+    def max(cls) -&gt; Snowflake:
+        &#34;&#34;&#34;Maximum value for a snowflakes.&#34;&#34;&#34;
+        try:
+            return cls.___MAX___
+
+        except AttributeError:
+            cls.___MAX___ = Snowflake((1 &lt;&lt; 63) - 1)
+            return cls.___MAX___
+
+    @classmethod
+    def from_data(cls, timestamp: datetime.datetime, worker_id: int, process_id: int, increment: int) -&gt; Snowflake:
+        &#34;&#34;&#34;Convert the pieces of info that comprise an ID into a Snowflake.&#34;&#34;&#34;
+        return cls(
+            (time.datetime_to_discord_epoch(timestamp) &lt;&lt; 22) | (worker_id &lt;&lt; 17) | (process_id &lt;&lt; 12) | increment
+        )
+
+
+class Unique(abc.ABC):
+    &#34;&#34;&#34;Mixin for a class that enforces uniqueness by a snowflake ID.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @property
+    @abc.abstractmethod
+    def id(self) -&gt; Snowflake:
+        &#34;&#34;&#34;Return the ID of this entity.
+
+        Returns
+        -------
+        Snowflake
+            The snowflake ID of this object.
+        &#34;&#34;&#34;
+
+    @property
+    def created_at(self) -&gt; datetime.datetime:
+        &#34;&#34;&#34;When the object was created.&#34;&#34;&#34;
+        return self.id.created_at
+
+    @typing.final
+    def __index__(self) -&gt; int:
+        return int(self.id)
+
+    @typing.final
+    def __int__(self) -&gt; int:
+        return int(self.id)
+
+    def __hash__(self) -&gt; int:
+        return hash(self.id)
+
+    def __eq__(self, other: typing.Any) -&gt; bool:
+        return type(self) is type(other) and self.id == other.id
+
+
+def calculate_shard_id(
+    app_or_count: typing.Union[traits.ShardAware, int], guild: SnowflakeishOr[guilds.PartialGuild]
+) -&gt; int:
+    &#34;&#34;&#34;Calculate the shard ID for a guild based on it&#39;s shard aware app or shard count.
+
+    Parameters
+    ----------
+    app_or_count : typing.Union[hikari.traits.ShardAware, builtins.int]
+        The shard aware app of the current application or the integer count of
+        the current app&#39;s shards.
+    guild : SnowflakeishOr[hikari.guilds.PartialGuild]
+        The object or ID of the guild to get the shard ID of.
+
+    Returns
+    -------
+    builtins.int
+        The zero-indexed integer ID of the shard that should cover this guild.
+    &#34;&#34;&#34;
+    shard_count = app_or_count if isinstance(app_or_count, int) else app_or_count.shard_count
+    return (int(guild) &gt;&gt; 22) % shard_count
+
+
+Snowflakeish = typing.Union[Snowflake, int]
+&#34;&#34;&#34;Type hint for a value that resembles a `Snowflake` object functionally.
+
+This is a value that is `Snowflake`-ish.
+
+A value is `Snowflake`-ish if casting it to an `int` allows it to be cast to
+a `Snowflake`.
+
+The valid types for this type hint are:
+
+- `builtins.int`
+- `Snowflake`
+&#34;&#34;&#34;
+
+SearchableSnowflakeish = typing.Union[Snowflakeish, &#34;datetime.datetime&#34;]
+&#34;&#34;&#34;Type hint for a snowflakeish that can be searched for in history.
+
+This is just a `Snowflakeish` that can alternatively be some form of
+`datetime.datetime` instance.
+
+The valid types for this type hint are:
+
+- `builtins.str` containing digits.
+- `builtins.int`
+- `Snowflake`
+- `datetime.datetime`
+&#34;&#34;&#34;
+
+T = typing.TypeVar(&#34;T&#34;, covariant=True, bound=Unique)
+
+SnowflakeishOr = typing.Union[T, Snowflakeish]
+&#34;&#34;&#34;Type hint representing a unique object entity.
+
+This is a value that is `Snowflake`-ish or a specific type covariant.
+
+If you see `SnowflakeishOr[Foo]` anywhere as a type hint, it means the value
+may be a `Foo` instance, a `Snowflake`, a `builtins.int` or a `builtins.str`
+with numeric digits only.
+
+Essentially this represents any concrete object, or ID of that object. It is
+used across Hikari&#39;s API to allow use of functions when information is only
+partially available (due to Discord inconsistencies, edge case behaviour, or
+use of intents).
+
+The valid types for this type hint are:
+
+- `buitlins.int`
+- `Snowflake`
+&#34;&#34;&#34;
+
+SearchableSnowflakeishOr = typing.Union[T, SearchableSnowflakeish]
+&#34;&#34;&#34;Type hint for a unique object entity that can be searched for.
+
+This is a variant of `SnowflakeishOr` that also allows an alternative value
+of a `datetime.datetime` to be specified.
+
+Essentially this represents any concrete object, or ID of that object. It is
+used across Hikari&#39;s API to allow use of functions when information is only
+partially available (due to Discord inconsistencies, edge case behaviour, or
+use of intents).
+
+The valid types for this type hint are:
+
+- `buitlins.int`
+- `Snowflake`
+- `datetime.datetime`
+&#34;&#34;&#34;
+
+SnowflakeishIterable = typing.Iterable[SnowflakeishOr[T]]
+&#34;&#34;&#34;Type hint representing an iterable of unique object entities.&#34;&#34;&#34;
+
+
+SnowflakeishSequence = typing.Sequence[SnowflakeishOr[T]]
+&#34;&#34;&#34;Type hint representing a collection of unique object entities.&#34;&#34;&#34;</code></pre>
+</details>
+</div>
+</div>
+<h2 id="variables-heading">Variables and Type Hints</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.snowflakes.SearchableSnowflakeish" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SearchableSnowflakeish -- Type hint for a snowflakeish that can be searched for in history …" href="#hikari.snowflakes.SearchableSnowflakeish"  >SearchableSnowflakeish</a> = typing.Union[hikari.snowflakes.Snowflake, int, ForwardRef('datetime.datetime')]</code></pre>
+</dt>
+<dd><p>Type hint for a snowflakeish that can be searched for in history.</p>
+<p>This is just a <code><a href='#hikari.snowflakes.Snowflakeish'>Snowflakeish</a></code> that can alternatively be some form of
+<code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code> instance.</p>
+<p>The valid types for this type hint are:</p>
+<ul>
+<li><code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code> containing digits.</li>
+<li><code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></li>
+<li><code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code></li>
+<li><code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></li>
+</ul></dd>
+</div>
+<div id="hikari.snowflakes.SearchableSnowflakeishOr" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SearchableSnowflakeishOr -- Type hint for a unique object entity that can be searched for …" href="#hikari.snowflakes.SearchableSnowflakeishOr"  >SearchableSnowflakeishOr</a> = typing.Union[+T, hikari.snowflakes.Snowflake, int, ForwardRef('datetime.datetime')]</code></pre>
+</dt>
+<dd><p>Type hint for a unique object entity that can be searched for.</p>
+<p>This is a variant of <code><a href='#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a></code> that also allows an alternative value
+of a <code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code> to be specified.</p>
+<p>Essentially this represents any concrete object, or ID of that object. It is
+used across Hikari's API to allow use of functions when information is only
+partially available (due to Discord inconsistencies, edge case behaviour, or
+use of intents).</p>
+<p>The valid types for this type hint are:</p>
+<ul>
+<li><code>buitlins.int</code></li>
+<li><code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code></li>
+<li><code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></li>
+</ul></dd>
+</div>
+<div id="hikari.snowflakes.Snowflakeish" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="Snowflakeish -- Type hint for a value that resembles a `Snowflake` object functionally …" href="#hikari.snowflakes.Snowflakeish"  >Snowflakeish</a> = typing.Union[hikari.snowflakes.Snowflake, int]</code></pre>
+</dt>
+<dd><p>Type hint for a value that resembles a <code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code> object functionally.</p>
+<p>This is a value that is <code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code>-ish.</p>
+<p>A value is <code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code>-ish if casting it to an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> allows it to be cast to
+a <code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code>.</p>
+<p>The valid types for this type hint are:</p>
+<ul>
+<li><code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></li>
+<li><code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code></li>
+</ul></dd>
+</div>
+<div id="hikari.snowflakes.SnowflakeishIterable" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SnowflakeishIterable -- Type hint representing an iterable of unique object entities." href="#hikari.snowflakes.SnowflakeishIterable"  >SnowflakeishIterable</a> = typing.Iterable[typing.Union[+T, hikari.snowflakes.Snowflake, int]]</code></pre>
+</dt>
+<dd><p>Type hint representing an iterable of unique object entities.</p></dd>
+</div>
+<div id="hikari.snowflakes.SnowflakeishOr" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SnowflakeishOr -- Type hint representing a unique object entity …" href="#hikari.snowflakes.SnowflakeishOr"  >SnowflakeishOr</a> = typing.Union[+T, hikari.snowflakes.Snowflake, int]</code></pre>
+</dt>
+<dd><p>Type hint representing a unique object entity.</p>
+<p>This is a value that is <code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code>-ish or a specific type covariant.</p>
+<p>If you see <code><a href='#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a>[Foo]</code> anywhere as a type hint, it means the value
+may be a <code>Foo</code> instance, a <code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code>, a <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> or a <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+with numeric digits only.</p>
+<p>Essentially this represents any concrete object, or ID of that object. It is
+used across Hikari's API to allow use of functions when information is only
+partially available (due to Discord inconsistencies, edge case behaviour, or
+use of intents).</p>
+<p>The valid types for this type hint are:</p>
+<ul>
+<li><code>buitlins.int</code></li>
+<li><code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code></li>
+</ul></dd>
+</div>
+<div id="hikari.snowflakes.SnowflakeishSequence" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="SnowflakeishSequence -- Type hint representing a collection of unique object entities." href="#hikari.snowflakes.SnowflakeishSequence"  >SnowflakeishSequence</a> = typing.Sequence[typing.Union[+T, hikari.snowflakes.Snowflake, int]]</code></pre>
+</dt>
+<dd><p>Type hint representing a collection of unique object entities.</p></dd>
+</div>
+</dl>
+</section>
+<h2 id="functions-heading">Functions</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.snowflakes.calculate_shard_id" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="calculate_shard_id" href="#hikari.snowflakes.calculate_shard_id" id="hikari.snowflakes.calculate_shard_id">calculate_shard_id</a>(
+    app_or_count: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='traits.html#hikari.traits.ShardAware'>traits.ShardAware</a>, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+    guild: <a href='#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a>[<a href='guilds.html#hikari.guilds.PartialGuild'>guilds.PartialGuild</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#int'>int</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Calculate the shard ID for a guild based on it's shard aware app or shard count.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>app_or_count</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='traits.html#hikari.traits.ShardAware'>ShardAware</a>, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>]</code></dt>
+<dd>The shard aware app of the current application or the integer count of
+the current app's shards.</dd>
+<dt><strong><code>guild</code></strong> :&ensp;<code><a href='#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a>[<a href='guilds.html#hikari.guilds.PartialGuild'>PartialGuild</a>]</code></dt>
+<dd>The object or ID of the guild to get the shard ID of.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The zero-indexed integer ID of the shard that should cover this guild.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L153-L172" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def calculate_shard_id(
+    app_or_count: typing.Union[traits.ShardAware, int], guild: SnowflakeishOr[guilds.PartialGuild]
+) -&gt; int:
+    &#34;&#34;&#34;Calculate the shard ID for a guild based on it&#39;s shard aware app or shard count.
+
+    Parameters
+    ----------
+    app_or_count : typing.Union[hikari.traits.ShardAware, builtins.int]
+        The shard aware app of the current application or the integer count of
+        the current app&#39;s shards.
+    guild : SnowflakeishOr[hikari.guilds.PartialGuild]
+        The object or ID of the guild to get the shard ID of.
+
+    Returns
+    -------
+    builtins.int
+        The zero-indexed integer ID of the shard that should cover this guild.
+    &#34;&#34;&#34;
+    shard_count = app_or_count if isinstance(app_or_count, int) else app_or_count.shard_count
+    return (int(guild) &gt;&gt; 22) % shard_count</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+</section>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.snowflakes.Snowflake" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Snowflake -- A concrete representation of a unique ID for an entity on Discord …" href="#hikari.snowflakes.Snowflake"
+>Snowflake</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.snowflakes.Snowflake" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Snowflake (...): ...</code></pre>
+<p>A concrete representation of a unique ID for an entity on Discord.</p>
+<p>This object can be treated as a regular <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> for most purposes.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L52-L114" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Snowflake(int):
+    &#34;&#34;&#34;A concrete representation of a unique ID for an entity on Discord.
+
+    This object can be treated as a regular `builtins.int` for most purposes.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    ___MIN___: Snowflake
+    ___MAX___: Snowflake
+
+    @property
+    def created_at(self) -&gt; datetime.datetime:
+        &#34;&#34;&#34;When the object was created.&#34;&#34;&#34;
+        epoch = self &gt;&gt; 22
+        return time.discord_epoch_to_datetime(epoch)
+
+    @property
+    def internal_worker_id(self) -&gt; int:
+        &#34;&#34;&#34;ID of the worker that created this snowflake on Discord&#39;s systems.&#34;&#34;&#34;
+        return (self &amp; 0x3E0_000) &gt;&gt; 17
+
+    @property
+    def internal_process_id(self) -&gt; int:
+        &#34;&#34;&#34;ID of the process that created this snowflake on Discord&#39;s systems.&#34;&#34;&#34;
+        return (self &amp; 0x1F_000) &gt;&gt; 12
+
+    @property
+    def increment(self) -&gt; int:
+        &#34;&#34;&#34;Increment of Discord&#39;s system when this object was made.&#34;&#34;&#34;
+        return self &amp; 0xFFF
+
+    @classmethod
+    def from_datetime(cls, timestamp: datetime.datetime) -&gt; Snowflake:
+        &#34;&#34;&#34;Get a snowflake object from a datetime object.&#34;&#34;&#34;
+        return cls.from_data(timestamp, 0, 0, 0)
+
+    @classmethod
+    def min(cls) -&gt; Snowflake:
+        &#34;&#34;&#34;Minimum value for a snowflakes.&#34;&#34;&#34;
+        try:
+            return cls.___MIN___
+
+        except AttributeError:
+            cls.___MIN___ = Snowflake(0)
+            return cls.___MIN___
+
+    @classmethod
+    def max(cls) -&gt; Snowflake:
+        &#34;&#34;&#34;Maximum value for a snowflakes.&#34;&#34;&#34;
+        try:
+            return cls.___MAX___
+
+        except AttributeError:
+            cls.___MAX___ = Snowflake((1 &lt;&lt; 63) - 1)
+            return cls.___MAX___
+
+    @classmethod
+    def from_data(cls, timestamp: datetime.datetime, worker_id: int, process_id: int, increment: int) -&gt; Snowflake:
+        &#34;&#34;&#34;Convert the pieces of info that comprise an ID into a Snowflake.&#34;&#34;&#34;
+        return cls(
+            (time.datetime_to_discord_epoch(timestamp) &lt;&lt; 22) | (worker_id &lt;&lt; 17) | (process_id &lt;&lt; 12) | increment
+        )</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Snowflake -- A concrete representation of a unique ID for an entity on Discord …" href="#hikari.snowflakes.Snowflake"
+>Snowflake</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="builtins.int -- int([x]) -> integer
+int(x, base=10) -> integer …" href="https://docs.python.org/3/library/functions.html#int"
+>int</a></dt>
+<dd class="nested"><p>int([x]) -&gt; integer
+int(x, base=10) -&gt; integer …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.snowflakes.Snowflake.created_at" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="created_at -- When the object was created." href="#hikari.snowflakes.Snowflake.created_at"  >created_at</a> : <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></pre>
+</dt>
+<dd><p>When the object was created.</p></dd>
+</div>
+<div id="hikari.snowflakes.Snowflake.increment" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="increment -- Increment of Discord's system when this object was made." href="#hikari.snowflakes.Snowflake.increment"  >increment</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>Increment of Discord's system when this object was made.</p></dd>
+</div>
+<div id="hikari.snowflakes.Snowflake.internal_process_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="internal_process_id -- ID of the process that created this snowflake on Discord's systems." href="#hikari.snowflakes.Snowflake.internal_process_id"  >internal_process_id</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>ID of the process that created this snowflake on Discord's systems.</p></dd>
+</div>
+<div id="hikari.snowflakes.Snowflake.internal_worker_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="internal_worker_id -- ID of the worker that created this snowflake on Discord's systems." href="#hikari.snowflakes.Snowflake.internal_worker_id"  >internal_worker_id</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>ID of the worker that created this snowflake on Discord's systems.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.snowflakes.Snowflake.from_data" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_data" href="#hikari.snowflakes.Snowflake.from_data" id="hikari.snowflakes.Snowflake.from_data">from_data</a>(
+    timestamp: <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>,
+    worker_id: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    process_id: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    increment: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+) -> <a href='#hikari.snowflakes.Snowflake'>Snowflake</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the pieces of info that comprise an ID into a Snowflake.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L109-L114" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_data(cls, timestamp: datetime.datetime, worker_id: int, process_id: int, increment: int) -&gt; Snowflake:
+    &#34;&#34;&#34;Convert the pieces of info that comprise an ID into a Snowflake.&#34;&#34;&#34;
+    return cls(
+        (time.datetime_to_discord_epoch(timestamp) &lt;&lt; 22) | (worker_id &lt;&lt; 17) | (process_id &lt;&lt; 12) | increment
+    )</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.snowflakes.Snowflake.from_datetime" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_datetime" href="#hikari.snowflakes.Snowflake.from_datetime" id="hikari.snowflakes.Snowflake.from_datetime">from_datetime</a>(
+    timestamp: <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>,
+) -> <a href='#hikari.snowflakes.Snowflake'>Snowflake</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Get a snowflake object from a datetime object.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L84-L87" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_datetime(cls, timestamp: datetime.datetime) -&gt; Snowflake:
+    &#34;&#34;&#34;Get a snowflake object from a datetime object.&#34;&#34;&#34;
+    return cls.from_data(timestamp, 0, 0, 0)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.snowflakes.Snowflake.max" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="max" href="#hikari.snowflakes.Snowflake.max" id="hikari.snowflakes.Snowflake.max">max</a>() -> <a href='#hikari.snowflakes.Snowflake'>Snowflake</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Maximum value for a snowflakes.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L99-L107" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def max(cls) -&gt; Snowflake:
+    &#34;&#34;&#34;Maximum value for a snowflakes.&#34;&#34;&#34;
+    try:
+        return cls.___MAX___
+
+    except AttributeError:
+        cls.___MAX___ = Snowflake((1 &lt;&lt; 63) - 1)
+        return cls.___MAX___</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.snowflakes.Snowflake.min" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="min" href="#hikari.snowflakes.Snowflake.min" id="hikari.snowflakes.Snowflake.min">min</a>() -> <a href='#hikari.snowflakes.Snowflake'>Snowflake</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Minimum value for a snowflakes.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L89-L97" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def min(cls) -&gt; Snowflake:
+    &#34;&#34;&#34;Minimum value for a snowflakes.&#34;&#34;&#34;
+    try:
+        return cls.___MIN___
+
+    except AttributeError:
+        cls.___MIN___ = Snowflake(0)
+        return cls.___MIN___</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.snowflakes.Unique" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Unique -- Mixin for a class that enforces uniqueness by a snowflake ID." href="#hikari.snowflakes.Unique"
+>Unique</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.snowflakes.Unique" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Unique: ...</code></pre>
+<p>Mixin for a class that enforces uniqueness by a snowflake ID.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/snowflakes.py#L117-L150" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Unique(abc.ABC):
+    &#34;&#34;&#34;Mixin for a class that enforces uniqueness by a snowflake ID.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @property
+    @abc.abstractmethod
+    def id(self) -&gt; Snowflake:
+        &#34;&#34;&#34;Return the ID of this entity.
+
+        Returns
+        -------
+        Snowflake
+            The snowflake ID of this object.
+        &#34;&#34;&#34;
+
+    @property
+    def created_at(self) -&gt; datetime.datetime:
+        &#34;&#34;&#34;When the object was created.&#34;&#34;&#34;
+        return self.id.created_at
+
+    @typing.final
+    def __index__(self) -&gt; int:
+        return int(self.id)
+
+    @typing.final
+    def __int__(self) -&gt; int:
+        return int(self.id)
+
+    def __hash__(self) -&gt; int:
+        return hash(self.id)
+
+    def __eq__(self, other: typing.Any) -&gt; bool:
+        return type(self) is type(other) and self.id == other.id</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="Team -- Represents a development team, along with all its members …" href="applications.html#hikari.applications.Team"
+>Team</a></dt>
+<dd class="nested"><p>Represents a development team, along with all its members …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="AuditLogEntry -- Represents an entry in a guild's audit log …" href="audit_logs.html#hikari.audit_logs.AuditLogEntry"
+>AuditLogEntry</a></dt>
+<dd class="nested"><p>Represents an entry in a guild's audit log …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="ChannelOverwriteEntryInfo -- Represents the extra information for overwrite related audit log entries …" href="audit_logs.html#hikari.audit_logs.ChannelOverwriteEntryInfo"
+>ChannelOverwriteEntryInfo</a></dt>
+<dd class="nested"><p>Represents the extra information for overwrite related audit log entries …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialChannel -- Channel representation for cases where further detail is not provided …" href="channels.html#hikari.channels.PartialChannel"
+>PartialChannel</a></dt>
+<dd class="nested"><p>Channel representation for cases where further detail is not provided …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PermissionOverwrite -- Represents permission overwrites for a channel or role in a channel …" href="channels.html#hikari.channels.PermissionOverwrite"
+>PermissionOverwrite</a></dt>
+<dd class="nested"><p>Represents permission overwrites for a channel or role in a channel …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="Command -- Represents an application command on Discord …" href="commands.html#hikari.commands.Command"
+>Command</a></dt>
+<dd class="nested"><p>Represents an application command on Discord …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="CustomEmoji -- Represents a custom emoji …" href="emojis.html#hikari.emojis.CustomEmoji"
+>CustomEmoji</a></dt>
+<dd class="nested"><p>Represents a custom emoji …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialApplication -- A partial representation of a Discord application …" href="guilds.html#hikari.guilds.PartialApplication"
+>PartialApplication</a></dt>
+<dd class="nested"><p>A partial representation of a Discord application …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialGuild -- Base object for any partial guild objects …" href="guilds.html#hikari.guilds.PartialGuild"
+>PartialGuild</a></dt>
+<dd class="nested"><p>Base object for any partial guild objects …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialIntegration -- A partial representation of an integration, found in audit logs …" href="guilds.html#hikari.guilds.PartialIntegration"
+>PartialIntegration</a></dt>
+<dd class="nested"><p>A partial representation of an integration, found in audit logs …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialRole -- Represents a partial guild bound Role object …" href="guilds.html#hikari.guilds.PartialRole"
+>PartialRole</a></dt>
+<dd class="nested"><p>Represents a partial guild bound Role object …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialInteraction -- The base model for all interaction models …" href="interactions/base_interactions.html#hikari.interactions.base_interactions.PartialInteraction"
+>PartialInteraction</a></dt>
+<dd class="nested"><p>The base model for all interaction models …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="Attachment -- Represents a file attached to a message …" href="messages.html#hikari.messages.Attachment"
+>Attachment</a></dt>
+<dd class="nested"><p>Represents a file attached to a message …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialMessage -- A message representation containing partially populated information …" href="messages.html#hikari.messages.PartialMessage"
+>PartialMessage</a></dt>
+<dd class="nested"><p>A message representation containing partially populated information …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialSticker -- Represents the partial stickers found attached to messages on Discord …" href="stickers.html#hikari.stickers.PartialSticker"
+>PartialSticker</a></dt>
+<dd class="nested"><p>Represents the partial stickers found attached to messages on Discord …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StickerPack -- Represents a sticker pack on Discord …" href="stickers.html#hikari.stickers.StickerPack"
+>StickerPack</a></dt>
+<dd class="nested"><p>Represents a sticker pack on Discord …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="PartialUser -- A partial interface for a user …" href="users.html#hikari.users.PartialUser"
+>PartialUser</a></dt>
+<dd class="nested"><p>A partial interface for a user …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="PartialWebhook -- Base class for all webhook implementations …" href="webhooks.html#hikari.webhooks.PartialWebhook"
+>PartialWebhook</a></dt>
+<dd class="nested"><p>Base class for all webhook implementations …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Unique -- Mixin for a class that enforces uniqueness by a snowflake ID." href="#hikari.snowflakes.Unique"
+>Unique</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.snowflakes.Unique.created_at" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="created_at -- When the object was created." href="#hikari.snowflakes.Unique.created_at"  >created_at</a> : <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></pre>
+</dt>
+<dd><p>When the object was created.</p></dd>
+</div>
+<div id="hikari.snowflakes.Unique.id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='An abstract method or property that must be overridden in a derived class.'>abstract</abbr> <abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="id -- Return the ID of this entity …" href="#hikari.snowflakes.Unique.id"  >id</a> : <a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code></pre>
+</dt>
+<dd><p>Return the ID of this entity.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The snowflake ID of this object.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

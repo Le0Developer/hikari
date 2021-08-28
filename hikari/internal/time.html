@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.internal.time API documentation</title>
+<meta name="description" content="Utility methods used for parsing timestamps and datetimes from Discord.">
+<meta property="og:title" content="hikari.internal.time module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.internal -- Package containing internal utilities used within this API." href="index.html"
+>internal</a></li>
+<li class="breadcrumb-item active"><a href="#">time</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Utility methods used for parsing timestamps and datetimes from Discord.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DISCORD_EPOCH -- Discord epoch used within snowflake identifiers …" href="#hikari.internal.time.DISCORD_EPOCH"
+>DISCORD_EPOCH</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="Intervalish -- Type hint representing a naive time period or time span …" href="#hikari.internal.time.Intervalish"
+>Intervalish</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="datetime_to_discord_epoch -- Parse a `datetime.datetime` object into an `builtins.int` `DISCORD_EPOCH` offset …" href="#hikari.internal.time.datetime_to_discord_epoch"
+>datetime_to_discord_epoch</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="discord_epoch_to_datetime -- Parse a Discord epoch into a `datetime.datetime` object …" href="#hikari.internal.time.discord_epoch_to_datetime"
+>discord_epoch_to_datetime</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="local_datetime -- Return the current date/time for the system's time zone." href="#hikari.internal.time.local_datetime"
+>local_datetime</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="monotonic -- Performance counter for benchmarking." href="#hikari.internal.time.monotonic"
+>monotonic</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="monotonic_ns -- Performance counter for benchmarking as nanoseconds." href="#hikari.internal.time.monotonic_ns"
+>monotonic_ns</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="timespan_to_int -- Cast the given timespan in seconds to an integer value …" href="#hikari.internal.time.timespan_to_int"
+>timespan_to_int</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="unix_epoch_to_datetime -- Parse a UNIX epoch to a `datetime.datetime` object …" href="#hikari.internal.time.unix_epoch_to_datetime"
+>unix_epoch_to_datetime</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="utc_datetime -- Return the current date/time for UTC (GMT+0)." href="#hikari.internal.time.utc_datetime"
+>utc_datetime</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="uuid -- Generate a unique UUID (1ns precision)." href="#hikari.internal.time.uuid"
+>uuid</a></li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L1-L224" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Utility methods used for parsing timestamps and datetimes from Discord.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [
+    &#34;DISCORD_EPOCH&#34;,
+    &#34;datetime_to_discord_epoch&#34;,
+    &#34;discord_epoch_to_datetime&#34;,
+    &#34;unix_epoch_to_datetime&#34;,
+    &#34;Intervalish&#34;,
+    &#34;timespan_to_int&#34;,
+    &#34;local_datetime&#34;,
+    &#34;utc_datetime&#34;,
+    &#34;monotonic&#34;,
+    &#34;monotonic_ns&#34;,
+    &#34;uuid&#34;,
+]
+
+import datetime
+import time
+import typing
+import uuid as uuid_
+
+Intervalish = typing.Union[int, float, datetime.timedelta]
+&#34;&#34;&#34;Type hint representing a naive time period or time span.
+
+This is a type that is like an interval of some sort.
+
+This is an alias for `typing.Union[int, float, datetime.datetime]`,
+where `builtins.int` and `builtins.float` types are interpreted as a number of seconds.
+&#34;&#34;&#34;
+
+DISCORD_EPOCH: typing.Final[int] = 1_420_070_400
+&#34;&#34;&#34;Discord epoch used within snowflake identifiers.
+
+This is defined as the number of seconds between
+`1/1/1970 00:00:00 UTC` and `1/1/2015 00:00:00 UTC`.
+
+References
+----------
+* [Discord API documentation - Snowflakes](https://discord.com/developers/docs/reference#snowflakes)
+&#34;&#34;&#34;
+
+_ISO_8601_FORMAT: typing.Final[str] = &#34;%Y-%m-%dT%H:%M:%s&#34;
+
+
+# Default to the standard lib parser, that isn&#39;t really ISO compliant but seems
+# to work for what we need.
+def slow_iso8601_datetime_string_to_datetime(datetime_str: str) -&gt; datetime.datetime:
+    &#34;&#34;&#34;Parse an ISO-8601-like datestring into a datetime.
+
+    Parameters
+    ----------
+    datetime_str : builtins.str
+        The date string to parse.
+
+    Returns
+    -------
+    datetime.datetime
+        The corresponding date time.
+    &#34;&#34;&#34;
+    if datetime_str.endswith((&#34;z&#34;, &#34;Z&#34;)):
+        # Python&#39;s parser cannot handle zulu time, it isn&#39;t a proper ISO-8601 compliant parser.
+        datetime_str = datetime_str[:-1] + &#34;+00:00&#34;
+    return datetime.datetime.fromisoformat(datetime_str)
+
+
+fast_iso8601_datetime_string_to_datetime: typing.Optional[typing.Callable[[str], datetime.datetime]]
+try:
+    # CISO8601 is around 600x faster than modules like dateutil, which is
+    # going to be noticeable on big bots where you are parsing hundreds of
+    # thousands of &#34;joined_at&#34; fields on users on startup.
+    import ciso8601
+
+    # Discord appears to actually use RFC-3339, which isn&#39;t a true ISO-8601 implementation,
+    # but somewhat of a subset with some edge cases.
+    # See https://tools.ietf.org/html/rfc3339#section-5.6
+    fast_iso8601_datetime_string_to_datetime = ciso8601.parse_rfc3339
+
+except ImportError:
+    fast_iso8601_datetime_string_to_datetime = None
+
+iso8601_datetime_string_to_datetime = (
+    fast_iso8601_datetime_string_to_datetime or slow_iso8601_datetime_string_to_datetime
+)
+
+
+def discord_epoch_to_datetime(epoch: int, /) -&gt; datetime.datetime:
+    &#34;&#34;&#34;Parse a Discord epoch into a `datetime.datetime` object.
+
+    Parameters
+    ----------
+    epoch : builtins.int
+        Number of milliseconds since `1/1/2015 00:00:00 UTC`.
+
+    Returns
+    -------
+    datetime.datetime
+        Number of seconds since `1/1/1970 00:00:00 UTC`.
+    &#34;&#34;&#34;
+    return datetime.datetime.fromtimestamp(epoch / 1_000 + DISCORD_EPOCH, datetime.timezone.utc)
+
+
+def datetime_to_discord_epoch(timestamp: datetime.datetime) -&gt; int:
+    &#34;&#34;&#34;Parse a `datetime.datetime` object into an `builtins.int` `DISCORD_EPOCH` offset.
+
+    Parameters
+    ----------
+    timestamp : datetime.datetime
+        Number of seconds since `1/1/1970 00:00:00 UTC`.
+
+    Returns
+    -------
+    builtins.int
+        Number of milliseconds since `1/1/2015 00:00:00 UTC`.
+    &#34;&#34;&#34;
+    return int((timestamp.timestamp() - DISCORD_EPOCH) * 1_000)
+
+
+def unix_epoch_to_datetime(epoch: typing.Union[int, float], /, *, is_millis: bool = True) -&gt; datetime.datetime:
+    &#34;&#34;&#34;Parse a UNIX epoch to a `datetime.datetime` object.
+
+    !!! note
+        If an epoch that&#39;s outside the range of what this system can handle,
+        this will return `datetime.datetime.max` if the timestamp is positive,
+        or `datetime.datetime.min` otherwise.
+
+    Parameters
+    ----------
+    epoch : typing.Union[builtins.int, builtins.float]
+        Number of seconds/milliseconds since `1/1/1970 00:00:00 UTC`.
+    is_millis : builtins.bool
+        `builtins.True` by default, indicates the input timestamp is measured in
+        milliseconds rather than seconds
+
+    Returns
+    -------
+    datetime.datetime
+        Number of seconds since `1/1/1970 00:00:00 UTC`.
+    &#34;&#34;&#34;
+    # Datetime seems to raise an OSError when you try to convert an out of range timestamp on Windows and a ValueError
+    # if you try on a UNIX system so we want to catch both.
+    try:
+        epoch /= (is_millis * 1_000) or 1
+        return datetime.datetime.fromtimestamp(epoch, datetime.timezone.utc)
+    except (OSError, ValueError):
+        if epoch &gt; 0:
+            return datetime.datetime.max
+        else:
+            return datetime.datetime.min
+
+
+def timespan_to_int(value: Intervalish, /) -&gt; int:
+    &#34;&#34;&#34;Cast the given timespan in seconds to an integer value.
+
+    Parameters
+    ----------
+    value : Intervalish
+        The number of seconds.
+
+    Returns
+    -------
+    builtins.int
+        The integer number of seconds. Fractions are discarded. Negative values
+        are removed.
+    &#34;&#34;&#34;
+    if isinstance(value, datetime.timedelta):
+        value = value.total_seconds()
+    return int(max(0, value))
+
+
+def local_datetime() -&gt; datetime.datetime:
+    &#34;&#34;&#34;Return the current date/time for the system&#39;s time zone.&#34;&#34;&#34;
+    return utc_datetime().astimezone()
+
+
+def utc_datetime() -&gt; datetime.datetime:
+    &#34;&#34;&#34;Return the current date/time for UTC (GMT+0).&#34;&#34;&#34;
+    return datetime.datetime.now(tz=datetime.timezone.utc)
+
+
+# time.monotonic_ns is no slower than time.monotonic, but is more accurate.
+# Also, fun fact that monotonic_ns appears to be 1µs faster on average than
+# monotonic on AARM64 architectures, but on x86, monotonic is around 1ns faster
+# than monotonic_ns. Just thought that was kind of interesting to note down.
+# (RPi 3B versus i7 6700)
+
+# time.perf_counter and time.perf_counter_ns dont have proper typehints, causing
+# pdoc to not be able to recognice them. This is just a little hack around that.
+def monotonic() -&gt; float:
+    &#34;&#34;&#34;Performance counter for benchmarking.&#34;&#34;&#34;  # noqa: D401 - Imperative mood
+    return time.perf_counter()
+
+
+def monotonic_ns() -&gt; int:
+    &#34;&#34;&#34;Performance counter for benchmarking as nanoseconds.&#34;&#34;&#34;  # noqa: D401 - Imperative mood
+    return time.perf_counter_ns()
+
+
+def uuid() -&gt; str:
+    &#34;&#34;&#34;Generate a unique UUID (1ns precision).&#34;&#34;&#34;
+    return uuid_.uuid1(None, monotonic_ns()).hex</code></pre>
+</details>
+</div>
+</div>
+<h2 id="variables-heading">Variables and Type Hints</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.time.DISCORD_EPOCH" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DISCORD_EPOCH -- Discord epoch used within snowflake identifiers …" href="#hikari.internal.time.DISCORD_EPOCH"  >DISCORD_EPOCH</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Final'>Final</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>]</code></pre>
+</dt>
+<dd><p>Discord epoch used within snowflake identifiers.</p>
+<p>This is defined as the number of seconds between
+<code>1/1/1970 00:00:00 UTC</code> and <code>1/1/2015 00:00:00 UTC</code>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://discord.com/developers/docs/reference#snowflakes">Discord API documentation - Snowflakes</a></li>
+</ul></dd>
+</div>
+<div id="hikari.internal.time.Intervalish" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="Intervalish -- Type hint representing a naive time period or time span …" href="#hikari.internal.time.Intervalish"  >Intervalish</a> = typing.Union[int, float, datetime.timedelta]</code></pre>
+</dt>
+<dd><p>Type hint representing a naive time period or time span.</p>
+<p>This is a type that is like an interval of some sort.</p>
+<p>This is an alias for <code><a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>, <a href='https://docs.python.org/3/library/functions.html#float'>float</a>, <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>]</code>,
+where <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> and <code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code> types are interpreted as a number of seconds.</p></dd>
+</div>
+</dl>
+</section>
+<h2 id="functions-heading">Functions</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.time.datetime_to_discord_epoch" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="datetime_to_discord_epoch" href="#hikari.internal.time.datetime_to_discord_epoch" id="hikari.internal.time.datetime_to_discord_epoch">datetime_to_discord_epoch</a>(
+    timestamp: <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>,
+) -> <a href='https://docs.python.org/3/library/functions.html#int'>int</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Parse a <code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code> object into an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> <code><a href='#hikari.internal.time.DISCORD_EPOCH'>DISCORD_EPOCH</a></code> offset.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>timestamp</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></dt>
+<dd>Number of seconds since <code>1/1/1970 00:00:00 UTC</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>Number of milliseconds since <code>1/1/2015 00:00:00 UTC</code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L126-L139" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def datetime_to_discord_epoch(timestamp: datetime.datetime) -&gt; int:
+    &#34;&#34;&#34;Parse a `datetime.datetime` object into an `builtins.int` `DISCORD_EPOCH` offset.
+
+    Parameters
+    ----------
+    timestamp : datetime.datetime
+        Number of seconds since `1/1/1970 00:00:00 UTC`.
+
+    Returns
+    -------
+    builtins.int
+        Number of milliseconds since `1/1/2015 00:00:00 UTC`.
+    &#34;&#34;&#34;
+    return int((timestamp.timestamp() - DISCORD_EPOCH) * 1_000)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.discord_epoch_to_datetime" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="discord_epoch_to_datetime" href="#hikari.internal.time.discord_epoch_to_datetime" id="hikari.internal.time.discord_epoch_to_datetime">discord_epoch_to_datetime</a>(
+    epoch: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    /,
+) -> <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Parse a Discord epoch into a <code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code> object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>epoch</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>Number of milliseconds since <code>1/1/2015 00:00:00 UTC</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></dt>
+<dd>Number of seconds since <code>1/1/1970 00:00:00 UTC</code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L110-L123" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def discord_epoch_to_datetime(epoch: int, /) -&gt; datetime.datetime:
+    &#34;&#34;&#34;Parse a Discord epoch into a `datetime.datetime` object.
+
+    Parameters
+    ----------
+    epoch : builtins.int
+        Number of milliseconds since `1/1/2015 00:00:00 UTC`.
+
+    Returns
+    -------
+    datetime.datetime
+        Number of seconds since `1/1/1970 00:00:00 UTC`.
+    &#34;&#34;&#34;
+    return datetime.datetime.fromtimestamp(epoch / 1_000 + DISCORD_EPOCH, datetime.timezone.utc)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.local_datetime" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="local_datetime" href="#hikari.internal.time.local_datetime" id="hikari.internal.time.local_datetime">local_datetime</a>() -> <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return the current date/time for the system's time zone.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L194-L196" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def local_datetime() -&gt; datetime.datetime:
+    &#34;&#34;&#34;Return the current date/time for the system&#39;s time zone.&#34;&#34;&#34;
+    return utc_datetime().astimezone()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.monotonic" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="monotonic" href="#hikari.internal.time.monotonic" id="hikari.internal.time.monotonic">monotonic</a>() -> <a href='https://docs.python.org/3/library/functions.html#float'>float</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Performance counter for benchmarking.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L212-L214" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def monotonic() -&gt; float:
+    &#34;&#34;&#34;Performance counter for benchmarking.&#34;&#34;&#34;  # noqa: D401 - Imperative mood
+    return time.perf_counter()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.monotonic_ns" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="monotonic_ns" href="#hikari.internal.time.monotonic_ns" id="hikari.internal.time.monotonic_ns">monotonic_ns</a>() -> <a href='https://docs.python.org/3/library/functions.html#int'>int</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Performance counter for benchmarking as nanoseconds.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L217-L219" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def monotonic_ns() -&gt; int:
+    &#34;&#34;&#34;Performance counter for benchmarking as nanoseconds.&#34;&#34;&#34;  # noqa: D401 - Imperative mood
+    return time.perf_counter_ns()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.timespan_to_int" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="timespan_to_int" href="#hikari.internal.time.timespan_to_int" id="hikari.internal.time.timespan_to_int">timespan_to_int</a>(
+    value: <a href='#hikari.internal.time.Intervalish'>Intervalish</a>,
+    /,
+) -> <a href='https://docs.python.org/3/library/functions.html#int'>int</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Cast the given timespan in seconds to an integer value.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code><a href='#hikari.internal.time.Intervalish'>Intervalish</a></code></dt>
+<dd>The number of seconds.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The integer number of seconds. Fractions are discarded. Negative values
+are removed.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L175-L191" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def timespan_to_int(value: Intervalish, /) -&gt; int:
+    &#34;&#34;&#34;Cast the given timespan in seconds to an integer value.
+
+    Parameters
+    ----------
+    value : Intervalish
+        The number of seconds.
+
+    Returns
+    -------
+    builtins.int
+        The integer number of seconds. Fractions are discarded. Negative values
+        are removed.
+    &#34;&#34;&#34;
+    if isinstance(value, datetime.timedelta):
+        value = value.total_seconds()
+    return int(max(0, value))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.unix_epoch_to_datetime" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="unix_epoch_to_datetime" href="#hikari.internal.time.unix_epoch_to_datetime" id="hikari.internal.time.unix_epoch_to_datetime">unix_epoch_to_datetime</a>(
+    epoch: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>, <a href='https://docs.python.org/3/library/functions.html#float'>float</a>],
+    /,
+    *,
+    is_millis: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a> = True,
+) -> <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Parse a UNIX epoch to a <code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code> object.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>If an epoch that's outside the range of what this system can handle,
+this will return <code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime.max'>datetime.datetime.max</a></code> if the timestamp is positive,
+or <code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime.min'>datetime.datetime.min</a></code> otherwise.</p>
+</div>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>epoch</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>, <a href='https://docs.python.org/3/library/functions.html#float'>float</a>]</code></dt>
+<dd>Number of seconds/milliseconds since <code>1/1/1970 00:00:00 UTC</code>.</dd>
+<dt><strong><code>is_millis</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> by default, indicates the input timestamp is measured in
+milliseconds rather than seconds</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a></code></dt>
+<dd>Number of seconds since <code>1/1/1970 00:00:00 UTC</code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L142-L172" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def unix_epoch_to_datetime(epoch: typing.Union[int, float], /, *, is_millis: bool = True) -&gt; datetime.datetime:
+    &#34;&#34;&#34;Parse a UNIX epoch to a `datetime.datetime` object.
+
+    !!! note
+        If an epoch that&#39;s outside the range of what this system can handle,
+        this will return `datetime.datetime.max` if the timestamp is positive,
+        or `datetime.datetime.min` otherwise.
+
+    Parameters
+    ----------
+    epoch : typing.Union[builtins.int, builtins.float]
+        Number of seconds/milliseconds since `1/1/1970 00:00:00 UTC`.
+    is_millis : builtins.bool
+        `builtins.True` by default, indicates the input timestamp is measured in
+        milliseconds rather than seconds
+
+    Returns
+    -------
+    datetime.datetime
+        Number of seconds since `1/1/1970 00:00:00 UTC`.
+    &#34;&#34;&#34;
+    # Datetime seems to raise an OSError when you try to convert an out of range timestamp on Windows and a ValueError
+    # if you try on a UNIX system so we want to catch both.
+    try:
+        epoch /= (is_millis * 1_000) or 1
+        return datetime.datetime.fromtimestamp(epoch, datetime.timezone.utc)
+    except (OSError, ValueError):
+        if epoch &gt; 0:
+            return datetime.datetime.max
+        else:
+            return datetime.datetime.min</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.utc_datetime" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="utc_datetime" href="#hikari.internal.time.utc_datetime" id="hikari.internal.time.utc_datetime">utc_datetime</a>() -> <a href='https://docs.python.org/3/library/datetime.html#datetime.datetime'>datetime.datetime</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return the current date/time for UTC (GMT+0).</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L199-L201" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def utc_datetime() -&gt; datetime.datetime:
+    &#34;&#34;&#34;Return the current date/time for UTC (GMT+0).&#34;&#34;&#34;
+    return datetime.datetime.now(tz=datetime.timezone.utc)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.time.uuid" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="uuid" href="#hikari.internal.time.uuid" id="hikari.internal.time.uuid">uuid</a>() -> <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Generate a unique UUID (1ns precision).</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/time.py#L222-L224" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def uuid() -&gt; str:
+    &#34;&#34;&#34;Generate a unique UUID (1ns precision).&#34;&#34;&#34;
+    return uuid_.uuid1(None, monotonic_ns()).hex</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

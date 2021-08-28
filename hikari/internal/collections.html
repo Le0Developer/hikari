@@ -1,0 +1,2188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.internal.collections API documentation</title>
+<meta name="description" content="Custom data structures used within Hikari's core implementation.">
+<meta property="og:title" content="hikari.internal.collections module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.internal -- Package containing internal utilities used within this API." href="index.html"
+>internal</a></li>
+<li class="breadcrumb-item active"><a href="#">collections</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Custom data structures used within Hikari's core implementation.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard variable'>var</abbr></em></small> <a title="ExtendedMapT -- Type-hint A type hint used for mapped collection objects." href="#hikari.internal.collections.ExtendedMapT"
+>ExtendedMapT</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard variable'>var</abbr></em></small> <a title="KeyT -- Type-hint A type hint used for the type of a mapping's key." href="#hikari.internal.collections.KeyT"
+>KeyT</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard variable'>var</abbr></em></small> <a title="ValueT -- Type-hint A type hint used for the type of a mapping's value." href="#hikari.internal.collections.ValueT"
+>ValueT</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="get_index_or_slice -- Get a mapping's entry at a given index as if it's a sequence of it's values …" href="#hikari.internal.collections.get_index_or_slice"
+>get_index_or_slice</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.copy"
+>copy</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.freeze"
+>freeze</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="FreezableDict -- A mapping that wraps a dict, but can also be frozen." href="#hikari.internal.collections.FreezableDict"
+>FreezableDict</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="clear -- D.clear() -> None.
+Remove all items from D." href="#hikari.internal.collections.FreezableDict.clear"
+>clear</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.FreezableDict.copy"
+>copy</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.FreezableDict.freeze"
+>freeze</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="LimitedCapacityCacheMap -- Implementation of a capacity-limited most-recently-inserted mapping …" href="#hikari.internal.collections.LimitedCapacityCacheMap"
+>LimitedCapacityCacheMap</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="clear -- D.clear() -> None.
+Remove all items from D." href="#hikari.internal.collections.LimitedCapacityCacheMap.clear"
+>clear</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.LimitedCapacityCacheMap.copy"
+>copy</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.LimitedCapacityCacheMap.freeze"
+>freeze</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="SnowflakeSet -- Set of `hikari.snowflakes.Snowflake` objects …" href="#hikari.internal.collections.SnowflakeSet"
+>SnowflakeSet</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="add -- Add a snowflake to this set." href="#hikari.internal.collections.SnowflakeSet.add"
+>add</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="add_all -- Add a collection of snowflakes to this set." href="#hikari.internal.collections.SnowflakeSet.add_all"
+>add_all</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="clear -- Clear all items from this collection." href="#hikari.internal.collections.SnowflakeSet.clear"
+>clear</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="discard -- Remove a snowflake from this set if it's present." href="#hikari.internal.collections.SnowflakeSet.discard"
+>discard</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="TimedCacheMap -- A most-recently-inserted limited mutable mapping implementation …" href="#hikari.internal.collections.TimedCacheMap"
+>TimedCacheMap</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="clear -- D.clear() -> None.
+Remove all items from D." href="#hikari.internal.collections.TimedCacheMap.clear"
+>clear</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.TimedCacheMap.copy"
+>copy</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.TimedCacheMap.freeze"
+>freeze</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L1-L464" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Custom data structures used within Hikari&#39;s core implementation.&#34;&#34;&#34;
+from __future__ import annotations
+
+__all__: typing.List[str] = [
+    &#34;ExtendedMapT&#34;,
+    &#34;KeyT&#34;,
+    &#34;ValueT&#34;,
+    &#34;SnowflakeSet&#34;,
+    &#34;ExtendedMutableMapping&#34;,
+    &#34;FreezableDict&#34;,
+    &#34;TimedCacheMap&#34;,
+    &#34;LimitedCapacityCacheMap&#34;,
+    &#34;get_index_or_slice&#34;,
+]
+
+import abc
+import array
+import bisect
+import datetime
+import itertools
+import sys
+import time
+import typing
+
+from hikari import snowflakes
+
+ExtendedMapT = typing.TypeVar(&#34;ExtendedMapT&#34;, bound=&#34;ExtendedMutableMapping[typing.Any, typing.Any]&#34;)
+&#34;&#34;&#34;Type-hint A type hint used for mapped collection objects.&#34;&#34;&#34;
+KeyT = typing.TypeVar(&#34;KeyT&#34;, bound=typing.Hashable)
+&#34;&#34;&#34;Type-hint A type hint used for the type of a mapping&#39;s key.&#34;&#34;&#34;
+ValueT = typing.TypeVar(&#34;ValueT&#34;)
+&#34;&#34;&#34;Type-hint A type hint used for the type of a mapping&#39;s value.&#34;&#34;&#34;
+
+_LONG_LONG_UNSIGNED: typing.Final[str] = sys.intern(&#34;Q&#34;)
+
+
+class ExtendedMutableMapping(typing.MutableMapping[KeyT, ValueT], abc.ABC):
+    &#34;&#34;&#34;The abstract class of mutable mappings used within Hikari.
+
+    These are mutable mappings that have a couple of extra methods to allow
+    for further optimised copy operations, as well as the ability to freeze
+    the implementation of a mapping to make it read-only.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @abc.abstractmethod
+    def copy(self: ExtendedMapT) -&gt; ExtendedMapT:
+        &#34;&#34;&#34;Return a copy of this mapped collection.
+
+        Unlike simply doing `dict(mapping)`, this may rely on internal detail
+        around how the data is being stored to allow for a more efficient copy.
+        This may look like calling `dict.copy` and wrapping the result in a
+        mapped collection.
+
+        !!! note
+            Any removal policy on this mapped collection will be copied over.
+
+        Returns
+        -------
+        MapT[KeyT, ValueT]
+            A copy of this mapped collection.
+        &#34;&#34;&#34;
+
+    @abc.abstractmethod
+    def freeze(self) -&gt; typing.MutableMapping[KeyT, ValueT]:
+        &#34;&#34;&#34;Return a frozen mapping view of the items in this mapped collection.
+
+        Unlike simply doing `dict(mapping)`, this may rely on internal detail
+        around how the data is being stored to allow for a more efficient copy.
+        This may look like calling `dict.copy`.
+
+        !!! note
+            Unlike `ExtendedMutableMapping.copy`, this should return a pure
+            mapping with no removal policy at all.
+
+        Returns
+        -------
+        typing.MutableMapping[KeyT, ValueT]
+            A frozen mapping view of the items in this mapped collection.
+        &#34;&#34;&#34;
+
+
+class FreezableDict(ExtendedMutableMapping[KeyT, ValueT]):
+    &#34;&#34;&#34;A mapping that wraps a dict, but can also be frozen.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_data&#34;,)
+
+    def __init__(self, source: typing.Optional[typing.Dict[KeyT, ValueT]] = None, /) -&gt; None:
+        self._data = source or {}
+
+    def clear(self) -&gt; None:
+        self._data.clear()
+
+    def copy(self) -&gt; FreezableDict[KeyT, ValueT]:
+        return FreezableDict(self._data.copy())
+
+    # TODO: name this something different if it is not physically frozen.
+    def freeze(self) -&gt; typing.Dict[KeyT, ValueT]:
+        return self._data.copy()
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._data[key]
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._data[key]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._data)
+
+    def __len__(self) -&gt; int:
+        return len(self._data)
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        self._data[key] = value
+
+
+class _FrozenDict(typing.MutableMapping[KeyT, ValueT]):
+    __slots__: typing.Sequence[str] = (&#34;_source&#34;,)
+
+    def __init__(self, source: typing.Dict[KeyT, typing.Tuple[float, ValueT]], /) -&gt; None:
+        self._source = source
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._source[key][1]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._source)
+
+    def __len__(self) -&gt; int:
+        return len(self._source)
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._source[key]
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        self._source[key] = (0.0, value)
+
+
+class TimedCacheMap(ExtendedMutableMapping[KeyT, ValueT]):
+    &#34;&#34;&#34;A most-recently-inserted limited mutable mapping implementation.
+
+    This will remove entries on modification as as they pass the expiry limit.
+
+    Parameters
+    ----------
+    expiry : datetime.timedelta
+        The timedelta of how long entries should be stored for before removal.
+
+    Other Parameters
+    ----------------
+    source : typing.Optional[typing.Dict[KeyT, typing.Tuple[builtins.float, ValueT]]
+        A source dictionary of keys to tuples of float timestamps and values to
+        create this from.
+    on_expire : typing.Optional[typing.Callable[[ValueT], None]]
+        A function to call each time an item is garbage collected from this
+        map. This should take one positional argument of the same type stored
+        in this mapping as the value and should return `builtins.None`.
+
+        This will always be called after the entry has been removed.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_data&#34;, &#34;_expiry&#34;, &#34;_on_expire&#34;)
+
+    def __init__(
+        self,
+        source: typing.Optional[typing.Dict[KeyT, typing.Tuple[float, ValueT]]] = None,
+        /,
+        *,
+        expiry: datetime.timedelta,
+        on_expire: typing.Optional[typing.Callable[[ValueT], None]] = None,
+    ) -&gt; None:
+        if expiry &lt;= datetime.timedelta():
+            raise ValueError(&#34;expiry time must be greater than 0 microseconds.&#34;)
+
+        self._expiry: float = expiry.total_seconds()
+        self._data = source or {}
+        self._on_expire = on_expire
+        self._garbage_collect()
+
+    def clear(self) -&gt; None:
+        self._data.clear()
+
+    def copy(self) -&gt; TimedCacheMap[KeyT, ValueT]:
+        return TimedCacheMap(
+            self._data.copy(), expiry=datetime.timedelta(seconds=self._expiry), on_expire=self._on_expire
+        )
+
+    def freeze(self) -&gt; typing.MutableMapping[KeyT, ValueT]:
+        return _FrozenDict(self._data.copy())
+
+    def _garbage_collect(self) -&gt; None:
+        current_time = time.perf_counter()
+        for key, value in tuple(self._data.items()):
+            if current_time - value[0] &lt; self._expiry:
+                break
+
+            del self._data[key]
+
+            if self._on_expire:
+                self._on_expire(value[1])
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._data[key]
+        self._garbage_collect()
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._data[key][1]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._data)
+
+    def __len__(self) -&gt; int:
+        return len(self._data)
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        #  Seeing as we rely on insertion order in _garbage_collect, we have to make sure that each item is added to
+        #  the end of the dict.
+        if key in self:
+            del self[key]
+
+        self._data[key] = (time.perf_counter(), value)
+        self._garbage_collect()
+
+
+class LimitedCapacityCacheMap(ExtendedMutableMapping[KeyT, ValueT]):
+    &#34;&#34;&#34;Implementation of a capacity-limited most-recently-inserted mapping.
+
+    This will start removing the oldest entries after it&#39;s maximum capacity is
+    reached as new entries are added.
+
+    Parameters
+    ----------
+    limit : int
+        The limit for how many objects should be stored by this mapping before
+        it starts removing the oldest entries.
+
+    Other Parameters
+    ----------------
+    source : typing.Optional[typing.Dict[KeyT, ValueT]]
+        A source dictionary of keys to values to create this from.
+    on_expire : typing.Optional[typing.Callable[[ValueT], None]]
+        A function to call each time an item is garbage collected from this
+        map. This should take one positional argument of the same type stored
+        in this mapping as the value and should return `builtins.None.
+
+        This will always be called after the entry has been removed.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_data&#34;, &#34;_limit&#34;, &#34;_on_expire&#34;)
+
+    def __init__(
+        self,
+        source: typing.Optional[typing.Dict[KeyT, ValueT]] = None,
+        /,
+        *,
+        limit: int,
+        on_expire: typing.Optional[typing.Callable[[ValueT], None]] = None,
+    ) -&gt; None:
+        self._data: typing.Dict[KeyT, ValueT] = source or {}
+        self._limit = limit
+        self._on_expire = on_expire
+        self._garbage_collect()
+
+    def clear(self) -&gt; None:
+        self._data.clear()
+
+    def copy(self) -&gt; LimitedCapacityCacheMap[KeyT, ValueT]:
+        return LimitedCapacityCacheMap(self._data.copy(), limit=self._limit, on_expire=self._on_expire)
+
+    def freeze(self) -&gt; typing.Dict[KeyT, ValueT]:
+        return self._data.copy()
+
+    def _garbage_collect(self) -&gt; None:
+        while len(self._data) &gt; self._limit:
+            value = self._data.pop(next(iter(self._data)))
+
+            if self._on_expire:
+                self._on_expire(value)
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._data[key]
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._data[key]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._data)
+
+    def __len__(self) -&gt; int:
+        return len(self._data)
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        self._data[key] = value
+        self._garbage_collect()
+
+
+# TODO: can this be immutable?
+class SnowflakeSet(typing.MutableSet[snowflakes.Snowflake]):
+    r&#34;&#34;&#34;Set of `hikari.snowflakes.Snowflake` objects.
+
+    This internally uses a sorted bisect-array of 64 bit integers to represent
+    the information. This reduces the space needed to store these objects
+    significantly down to the size of 8 bytes per item.
+
+    In contrast, a regular list would take generally 8 bytes per item just to
+    store the memory address, and then a further 28 bytes or more to physically
+    store the integral value if it does not get interned by the Python
+    implementation you are using. A regular set would consume even more
+    space, being a hashtable internally.
+
+    The detail of this implementation has the side effect that searches
+    will take $$ \mathcal{O} \left( \log n \right) $$ operations in the worst
+    case, and $$ \Omega \left (k \right) $$ in the best case. Average case
+    will be $$ \mathcal{O} \left( \log n \right) $$
+
+    Insertions and removals will take $$ \mathcal{O} \left( \log n \right) $$
+    operations in the worst case, due to `bisect` using a binary insertion sort
+    algorithm internally. Average case will be
+    $$ \mathcal{O} \left( \log n \right) $$ and best case will be
+    $$ \Omega \left\( k \right) $$
+
+    !!! warning
+        This is not thread-safe and must not be iterated across whilst being
+        concurrently modified.
+
+    Other Parameters
+    ----------------
+    *ids : builtins.int
+        The IDs to fill this table with.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_ids&#34;,)
+
+    def __init__(self, *ids: int) -&gt; None:
+        self._ids = array.array(_LONG_LONG_UNSIGNED)
+
+        if ids:
+            self.add_all(ids)
+
+    def add(self, sf: int) -&gt; None:
+        &#34;&#34;&#34;Add a snowflake to this set.&#34;&#34;&#34;
+        # Always append the first item, as we cannot compare with nothing.
+        index = bisect.bisect_left(self._ids, sf)
+        if index == len(self._ids):
+            self._ids.append(sf)
+        elif self._ids[index] != sf:
+            self._ids.insert(index, sf)
+
+    def add_all(self, sfs: typing.Iterable[int]) -&gt; None:
+        &#34;&#34;&#34;Add a collection of snowflakes to this set.&#34;&#34;&#34;
+        if not sfs:
+            return
+
+        for sf in sfs:
+            # Yes, this is repeated code, but we want insertions to be as fast
+            # as possible for caching purposes, so reduce the number of function
+            # calls as much as possible and reimplement the logic for `add`
+            # here.
+            index = bisect.bisect_left(self._ids, sf)
+            if index == len(self._ids):
+                self._ids.append(sf)
+            elif self._ids[index] != sf:
+                self._ids.insert(index, sf)
+
+    def clear(self) -&gt; None:
+        &#34;&#34;&#34;Clear all items from this collection.&#34;&#34;&#34;
+        # Arrays lack a &#34;clear&#34; method.
+        self._ids = array.array(_LONG_LONG_UNSIGNED)
+
+    def discard(self, sf: int) -&gt; None:
+        &#34;&#34;&#34;Remove a snowflake from this set if it&#39;s present.&#34;&#34;&#34;
+        if not self._ids:
+            return
+
+        index = bisect.bisect_left(self._ids, sf)
+
+        if index &lt; len(self) and self._ids[index] == sf:
+            del self._ids[index]
+
+    def __contains__(self, value: typing.Any) -&gt; bool:
+        if not isinstance(value, int):
+            return False
+
+        index = bisect.bisect_left(self._ids, value)
+
+        if index &lt; len(self._ids):
+            return self._ids[index] == value
+        return False
+
+    def __iter__(self) -&gt; typing.Iterator[snowflakes.Snowflake]:
+        return map(snowflakes.Snowflake, self._ids)
+
+    def __len__(self) -&gt; int:
+        return len(self._ids)
+
+    def __repr__(self) -&gt; str:
+        return type(self).__name__ + &#34;(&#34; + &#34;, &#34;.join(map(repr, self._ids)) + &#34;)&#34;
+
+    def __sizeof__(self) -&gt; int:
+        return super().__sizeof__() + sys.getsizeof(self._ids)
+
+    def __str__(self) -&gt; str:
+        return &#34;{&#34; + &#34;, &#34;.join(map(repr, self._ids)) + &#34;}&#34;
+
+
+def get_index_or_slice(
+    mapping: typing.Mapping[KeyT, ValueT], index_or_slice: typing.Union[int, slice]
+) -&gt; typing.Union[ValueT, typing.Sequence[ValueT]]:
+    &#34;&#34;&#34;Get a mapping&#39;s entry at a given index as if it&#39;s a sequence of it&#39;s values.
+
+    Parameters
+    ----------
+    mapping : typing.Mapping[KeyT, ValueT]
+        The mapping of entries to treat as a sequence.
+    index_or_slice : typing.Sequence[KeyT, ValueT]
+        The index to get an entry to get or slice of multiple entries to get.
+
+    Returns
+    -------
+    ValueT or typing.Sequence[ValueT]
+        The value found at the given integer index or a sequence of the values
+        found based on the given slice&#39;s rules.
+
+    Raises
+    ------
+    TypeError
+        If `index_or_slice` isn&#39;t a `builtins.slice` or `builtins.int`.
+    IndexError
+        If `index_or_slice` is an int and is outside the range of the mapping&#39;s
+        contents.
+    &#34;&#34;&#34;
+    if isinstance(index_or_slice, slice):
+        return tuple(itertools.islice(mapping.values(), index_or_slice.start, index_or_slice.stop, index_or_slice.step))
+
+    if isinstance(index_or_slice, int):
+        try:
+            return next(itertools.islice(mapping.values(), index_or_slice, None))
+        except StopIteration:
+            raise IndexError(index_or_slice) from None
+
+    raise TypeError(f&#34;sequence indices must be integers or slices, not {type(index_or_slice).__name__}&#34;)</code></pre>
+</details>
+</div>
+</div>
+<h2 id="variables-heading">Variables and Type Hints</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.collections.ExtendedMapT" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A standard variable'>var</abbr></em></small> <a title="ExtendedMapT -- Type-hint A type hint used for mapped collection objects." href="#hikari.internal.collections.ExtendedMapT"  >ExtendedMapT</a></code></pre>
+</dt>
+<dd><p>Type-hint A type hint used for mapped collection objects.</p></dd>
+</div>
+<div id="hikari.internal.collections.KeyT" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A standard variable'>var</abbr></em></small> <a title="KeyT -- Type-hint A type hint used for the type of a mapping's key." href="#hikari.internal.collections.KeyT"  >KeyT</a></code></pre>
+</dt>
+<dd><p>Type-hint A type hint used for the type of a mapping's key.</p></dd>
+</div>
+<div id="hikari.internal.collections.ValueT" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A standard variable'>var</abbr></em></small> <a title="ValueT -- Type-hint A type hint used for the type of a mapping's value." href="#hikari.internal.collections.ValueT"  >ValueT</a></code></pre>
+</dt>
+<dd><p>Type-hint A type hint used for the type of a mapping's value.</p></dd>
+</div>
+</dl>
+</section>
+<h2 id="functions-heading">Functions</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.collections.get_index_or_slice" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="get_index_or_slice" href="#hikari.internal.collections.get_index_or_slice" id="hikari.internal.collections.get_index_or_slice">get_index_or_slice</a>(
+    mapping: <a href='https://docs.python.org/3/library/typing.html#typing.Mapping'>Mapping</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>],
+    index_or_slice: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>, <a href='https://docs.python.org/3/library/functions.html#slice'>slice</a>],
+) -> Union[~<a href='#hikari.internal.collections.ValueT'>ValueT</a>, Sequence[~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]]: ...</code></pre>
+</dt>
+<dd>
+<p>Get a mapping's entry at a given index as if it's a sequence of it's values.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>mapping</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Mapping'>Mapping</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>The mapping of entries to treat as a sequence.</dd>
+<dt><strong><code>index_or_slice</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Sequence'>Sequence</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>The index to get an entry to get or slice of multiple entries to get.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.internal.collections.ValueT'>ValueT</a></code> or <code><a href='https://docs.python.org/3/library/typing.html#typing.Sequence'>Sequence</a>[<a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>The value found at the given integer index or a sequence of the values
+found based on the given slice's rules.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#TypeError'>TypeError</a></code></dt>
+<dd>If <code>index_or_slice</code> isn't a <code><a href='https://docs.python.org/3/library/functions.html#slice'>slice</a></code> or <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>.</dd>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#IndexError'>IndexError</a></code></dt>
+<dd>If <code>index_or_slice</code> is an int and is outside the range of the mapping's
+contents.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L429-L464" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def get_index_or_slice(
+    mapping: typing.Mapping[KeyT, ValueT], index_or_slice: typing.Union[int, slice]
+) -&gt; typing.Union[ValueT, typing.Sequence[ValueT]]:
+    &#34;&#34;&#34;Get a mapping&#39;s entry at a given index as if it&#39;s a sequence of it&#39;s values.
+
+    Parameters
+    ----------
+    mapping : typing.Mapping[KeyT, ValueT]
+        The mapping of entries to treat as a sequence.
+    index_or_slice : typing.Sequence[KeyT, ValueT]
+        The index to get an entry to get or slice of multiple entries to get.
+
+    Returns
+    -------
+    ValueT or typing.Sequence[ValueT]
+        The value found at the given integer index or a sequence of the values
+        found based on the given slice&#39;s rules.
+
+    Raises
+    ------
+    TypeError
+        If `index_or_slice` isn&#39;t a `builtins.slice` or `builtins.int`.
+    IndexError
+        If `index_or_slice` is an int and is outside the range of the mapping&#39;s
+        contents.
+    &#34;&#34;&#34;
+    if isinstance(index_or_slice, slice):
+        return tuple(itertools.islice(mapping.values(), index_or_slice.start, index_or_slice.stop, index_or_slice.step))
+
+    if isinstance(index_or_slice, int):
+        try:
+            return next(itertools.islice(mapping.values(), index_or_slice, None))
+        except StopIteration:
+            raise IndexError(index_or_slice) from None
+
+    raise TypeError(f&#34;sequence indices must be integers or slices, not {type(index_or_slice).__name__}&#34;)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+</section>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.collections.ExtendedMutableMapping" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.collections.ExtendedMutableMapping" class="hljs python"><abbr title='A standard Python type.'>class</abbr> ExtendedMutableMapping (
+    *args,
+    **kwds,
+): ...</code></pre>
+<p>The abstract class of mutable mappings used within Hikari.</p>
+<p>These are mutable mappings that have a couple of extra methods to allow
+for further optimised copy operations, as well as the ability to freeze
+the implementation of a mapping to make it read-only.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L59-L103" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class ExtendedMutableMapping(typing.MutableMapping[KeyT, ValueT], abc.ABC):
+    &#34;&#34;&#34;The abstract class of mutable mappings used within Hikari.
+
+    These are mutable mappings that have a couple of extra methods to allow
+    for further optimised copy operations, as well as the ability to freeze
+    the implementation of a mapping to make it read-only.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @abc.abstractmethod
+    def copy(self: ExtendedMapT) -&gt; ExtendedMapT:
+        &#34;&#34;&#34;Return a copy of this mapped collection.
+
+        Unlike simply doing `dict(mapping)`, this may rely on internal detail
+        around how the data is being stored to allow for a more efficient copy.
+        This may look like calling `dict.copy` and wrapping the result in a
+        mapped collection.
+
+        !!! note
+            Any removal policy on this mapped collection will be copied over.
+
+        Returns
+        -------
+        MapT[KeyT, ValueT]
+            A copy of this mapped collection.
+        &#34;&#34;&#34;
+
+    @abc.abstractmethod
+    def freeze(self) -&gt; typing.MutableMapping[KeyT, ValueT]:
+        &#34;&#34;&#34;Return a frozen mapping view of the items in this mapped collection.
+
+        Unlike simply doing `dict(mapping)`, this may rely on internal detail
+        around how the data is being stored to allow for a more efficient copy.
+        This may look like calling `dict.copy`.
+
+        !!! note
+            Unlike `ExtendedMutableMapping.copy`, this should return a pure
+            mapping with no removal policy at all.
+
+        Returns
+        -------
+        typing.MutableMapping[KeyT, ValueT]
+            A frozen mapping view of the items in this mapped collection.
+        &#34;&#34;&#34;</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="FreezableDict -- A mapping that wraps a dict, but can also be frozen." href="#hikari.internal.collections.FreezableDict"
+>FreezableDict</a></dt>
+<dd class="nested"><p>A mapping that wraps a dict, but can also be frozen.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="LimitedCapacityCacheMap -- Implementation of a capacity-limited most-recently-inserted mapping …" href="#hikari.internal.collections.LimitedCapacityCacheMap"
+>LimitedCapacityCacheMap</a></dt>
+<dd class="nested"><p>Implementation of a capacity-limited most-recently-inserted mapping …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="TimedCacheMap -- A most-recently-inserted limited mutable mapping implementation …" href="#hikari.internal.collections.TimedCacheMap"
+>TimedCacheMap</a></dt>
+<dd class="nested"><p>A most-recently-inserted limited mutable mapping implementation …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.MutableMapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping"
+>collections.abc.MutableMapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Mapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping"
+>collections.abc.Mapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Collection -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection"
+>collections.abc.Collection</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Sized -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sized"
+>collections.abc.Sized</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Iterable -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable"
+>collections.abc.Iterable</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Container -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container"
+>collections.abc.Container</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="typing.Generic -- Abstract base class for generic types …" href="https://docs.python.org/3/library/typing.html#typing.Generic"
+>Generic</a></dt>
+<dd class="nested"><p>Abstract base class for generic types …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.collections.ExtendedMutableMapping.copy" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="copy" href="#hikari.internal.collections.ExtendedMutableMapping.copy" id="hikari.internal.collections.ExtendedMutableMapping.copy">copy</a>(
+    self: <a href='#hikari.internal.collections.ExtendedMapT'>ExtendedMapT</a>,
+) -> ~<a href='#hikari.internal.collections.ExtendedMapT'>ExtendedMapT</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return a copy of this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code> and wrapping the result in a
+mapped collection.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Any removal policy on this mapped collection will be copied over.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>MapT[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A copy of this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L69-L85" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@abc.abstractmethod
+def copy(self: ExtendedMapT) -&gt; ExtendedMapT:
+    &#34;&#34;&#34;Return a copy of this mapped collection.
+
+    Unlike simply doing `dict(mapping)`, this may rely on internal detail
+    around how the data is being stored to allow for a more efficient copy.
+    This may look like calling `dict.copy` and wrapping the result in a
+    mapped collection.
+
+    !!! note
+        Any removal policy on this mapped collection will be copied over.
+
+    Returns
+    -------
+    MapT[KeyT, ValueT]
+        A copy of this mapped collection.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.ExtendedMutableMapping.freeze" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="freeze" href="#hikari.internal.collections.ExtendedMutableMapping.freeze" id="hikari.internal.collections.ExtendedMutableMapping.freeze">freeze</a>() -> MutableMapping[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p>Return a frozen mapping view of the items in this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code>.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Unlike <code><a href='#hikari.internal.collections.ExtendedMutableMapping.copy'>copy</a></code>, this should return a pure
+mapping with no removal policy at all.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/typing.html#typing.MutableMapping'>MutableMapping</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A frozen mapping view of the items in this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L87-L103" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@abc.abstractmethod
+def freeze(self) -&gt; typing.MutableMapping[KeyT, ValueT]:
+    &#34;&#34;&#34;Return a frozen mapping view of the items in this mapped collection.
+
+    Unlike simply doing `dict(mapping)`, this may rely on internal detail
+    around how the data is being stored to allow for a more efficient copy.
+    This may look like calling `dict.copy`.
+
+    !!! note
+        Unlike `ExtendedMutableMapping.copy`, this should return a pure
+        mapping with no removal policy at all.
+
+    Returns
+    -------
+    typing.MutableMapping[KeyT, ValueT]
+        A frozen mapping view of the items in this mapped collection.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.collections.FreezableDict" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="FreezableDict -- A mapping that wraps a dict, but can also be frozen." href="#hikari.internal.collections.FreezableDict"
+>FreezableDict</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.collections.FreezableDict" class="hljs python"><abbr title='A standard Python type.'>class</abbr> FreezableDict (
+    source: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Dict'>Dict</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]] = None,
+    /,
+): ...</code></pre>
+<p>A mapping that wraps a dict, but can also be frozen.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L106-L137" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class FreezableDict(ExtendedMutableMapping[KeyT, ValueT]):
+    &#34;&#34;&#34;A mapping that wraps a dict, but can also be frozen.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_data&#34;,)
+
+    def __init__(self, source: typing.Optional[typing.Dict[KeyT, ValueT]] = None, /) -&gt; None:
+        self._data = source or {}
+
+    def clear(self) -&gt; None:
+        self._data.clear()
+
+    def copy(self) -&gt; FreezableDict[KeyT, ValueT]:
+        return FreezableDict(self._data.copy())
+
+    # TODO: name this something different if it is not physically frozen.
+    def freeze(self) -&gt; typing.Dict[KeyT, ValueT]:
+        return self._data.copy()
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._data[key]
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._data[key]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._data)
+
+    def __len__(self) -&gt; int:
+        return len(self._data)
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        self._data[key] = value</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="FreezableDict -- A mapping that wraps a dict, but can also be frozen." href="#hikari.internal.collections.FreezableDict"
+>FreezableDict</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></dt>
+<dd class="nested"><p>The abstract class of mutable mappings used within Hikari …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.MutableMapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping"
+>collections.abc.MutableMapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Mapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping"
+>collections.abc.Mapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Collection -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection"
+>collections.abc.Collection</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Sized -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sized"
+>collections.abc.Sized</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Iterable -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable"
+>collections.abc.Iterable</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Container -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container"
+>collections.abc.Container</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="typing.Generic -- Abstract base class for generic types …" href="https://docs.python.org/3/library/typing.html#typing.Generic"
+>Generic</a></dt>
+<dd class="nested"><p>Abstract base class for generic types …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.collections.FreezableDict.clear" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="clear" href="#hikari.internal.collections.FreezableDict.clear" id="hikari.internal.collections.FreezableDict.clear">clear</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>D.clear() -&gt; None.
+Remove all items from D.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L114-L115" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def clear(self) -&gt; None:
+    self._data.clear()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.FreezableDict.copy" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="copy" href="#hikari.internal.collections.FreezableDict.copy" id="hikari.internal.collections.FreezableDict.copy">copy</a>() -> <a href='#hikari.internal.collections.FreezableDict'>FreezableDict</a>[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></code>.<code><a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.copy"
+>copy</a></code>
+</p>
+<p>Return a copy of this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code> and wrapping the result in a
+mapped collection.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Any removal policy on this mapped collection will be copied over.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>MapT[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A copy of this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L117-L118" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def copy(self) -&gt; FreezableDict[KeyT, ValueT]:
+    return FreezableDict(self._data.copy())</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.FreezableDict.freeze" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="freeze" href="#hikari.internal.collections.FreezableDict.freeze" id="hikari.internal.collections.FreezableDict.freeze">freeze</a>() -> Dict[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></code>.<code><a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.freeze"
+>freeze</a></code>
+</p>
+<p>Return a frozen mapping view of the items in this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code>.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Unlike <code><a href='#hikari.internal.collections.ExtendedMutableMapping.copy'>copy</a></code>, this should return a pure
+mapping with no removal policy at all.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/typing.html#typing.MutableMapping'>MutableMapping</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A frozen mapping view of the items in this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L121-L122" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def freeze(self) -&gt; typing.Dict[KeyT, ValueT]:
+    return self._data.copy()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.collections.LimitedCapacityCacheMap" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="LimitedCapacityCacheMap -- Implementation of a capacity-limited most-recently-inserted mapping …" href="#hikari.internal.collections.LimitedCapacityCacheMap"
+>LimitedCapacityCacheMap</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.collections.LimitedCapacityCacheMap" class="hljs python"><abbr title='A standard Python type.'>class</abbr> LimitedCapacityCacheMap (
+    source: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Dict'>Dict</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]] = None,
+    /,
+    *,
+    limit: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    on_expire: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Callable'>Callable</a>[[<a href='#hikari.internal.collections.ValueT'>ValueT</a>], <a href='https://docs.python.org/3/library/constants.html#None'>None</a>]] = None,
+): ...</code></pre>
+<p>Implementation of a capacity-limited most-recently-inserted mapping.</p>
+<p>This will start removing the oldest entries after it's maximum capacity is
+reached as new entries are added.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>limit</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The limit for how many objects should be stored by this mapping before
+it starts removing the oldest entries.</dd>
+</dl>
+<h2 id="other-parameters">Other Parameters</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Dict'>Dict</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]]</code></dt>
+<dd>A source dictionary of keys to values to create this from.</dd>
+<dt><strong><code>on_expire</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Callable'>Callable</a>[[<a href='#hikari.internal.collections.ValueT'>ValueT</a>], <a href='https://docs.python.org/3/library/constants.html#None'>None</a>]]</code></dt>
+<dd>
+<p>A function to call each time an item is garbage collected from this
+map. This should take one positional argument of the same type stored
+in this mapping as the value and should return `builtins.None.</p>
+<p>This will always be called after the entry has been removed.</p>
+</dd>
+</dl>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L248-L317" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class LimitedCapacityCacheMap(ExtendedMutableMapping[KeyT, ValueT]):
+    &#34;&#34;&#34;Implementation of a capacity-limited most-recently-inserted mapping.
+
+    This will start removing the oldest entries after it&#39;s maximum capacity is
+    reached as new entries are added.
+
+    Parameters
+    ----------
+    limit : int
+        The limit for how many objects should be stored by this mapping before
+        it starts removing the oldest entries.
+
+    Other Parameters
+    ----------------
+    source : typing.Optional[typing.Dict[KeyT, ValueT]]
+        A source dictionary of keys to values to create this from.
+    on_expire : typing.Optional[typing.Callable[[ValueT], None]]
+        A function to call each time an item is garbage collected from this
+        map. This should take one positional argument of the same type stored
+        in this mapping as the value and should return `builtins.None.
+
+        This will always be called after the entry has been removed.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_data&#34;, &#34;_limit&#34;, &#34;_on_expire&#34;)
+
+    def __init__(
+        self,
+        source: typing.Optional[typing.Dict[KeyT, ValueT]] = None,
+        /,
+        *,
+        limit: int,
+        on_expire: typing.Optional[typing.Callable[[ValueT], None]] = None,
+    ) -&gt; None:
+        self._data: typing.Dict[KeyT, ValueT] = source or {}
+        self._limit = limit
+        self._on_expire = on_expire
+        self._garbage_collect()
+
+    def clear(self) -&gt; None:
+        self._data.clear()
+
+    def copy(self) -&gt; LimitedCapacityCacheMap[KeyT, ValueT]:
+        return LimitedCapacityCacheMap(self._data.copy(), limit=self._limit, on_expire=self._on_expire)
+
+    def freeze(self) -&gt; typing.Dict[KeyT, ValueT]:
+        return self._data.copy()
+
+    def _garbage_collect(self) -&gt; None:
+        while len(self._data) &gt; self._limit:
+            value = self._data.pop(next(iter(self._data)))
+
+            if self._on_expire:
+                self._on_expire(value)
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._data[key]
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._data[key]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._data)
+
+    def __len__(self) -&gt; int:
+        return len(self._data)
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        self._data[key] = value
+        self._garbage_collect()</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="LimitedCapacityCacheMap -- Implementation of a capacity-limited most-recently-inserted mapping …" href="#hikari.internal.collections.LimitedCapacityCacheMap"
+>LimitedCapacityCacheMap</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></dt>
+<dd class="nested"><p>The abstract class of mutable mappings used within Hikari …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.MutableMapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping"
+>collections.abc.MutableMapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Mapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping"
+>collections.abc.Mapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Collection -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection"
+>collections.abc.Collection</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Sized -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sized"
+>collections.abc.Sized</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Iterable -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable"
+>collections.abc.Iterable</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Container -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container"
+>collections.abc.Container</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="typing.Generic -- Abstract base class for generic types …" href="https://docs.python.org/3/library/typing.html#typing.Generic"
+>Generic</a></dt>
+<dd class="nested"><p>Abstract base class for generic types …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.collections.LimitedCapacityCacheMap.clear" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="clear" href="#hikari.internal.collections.LimitedCapacityCacheMap.clear" id="hikari.internal.collections.LimitedCapacityCacheMap.clear">clear</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>D.clear() -&gt; None.
+Remove all items from D.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L287-L288" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def clear(self) -&gt; None:
+    self._data.clear()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.LimitedCapacityCacheMap.copy" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="copy" href="#hikari.internal.collections.LimitedCapacityCacheMap.copy" id="hikari.internal.collections.LimitedCapacityCacheMap.copy">copy</a>() -> <a href='#hikari.internal.collections.LimitedCapacityCacheMap'>LimitedCapacityCacheMap</a>[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></code>.<code><a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.copy"
+>copy</a></code>
+</p>
+<p>Return a copy of this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code> and wrapping the result in a
+mapped collection.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Any removal policy on this mapped collection will be copied over.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>MapT[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A copy of this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L290-L291" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def copy(self) -&gt; LimitedCapacityCacheMap[KeyT, ValueT]:
+    return LimitedCapacityCacheMap(self._data.copy(), limit=self._limit, on_expire=self._on_expire)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.LimitedCapacityCacheMap.freeze" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="freeze" href="#hikari.internal.collections.LimitedCapacityCacheMap.freeze" id="hikari.internal.collections.LimitedCapacityCacheMap.freeze">freeze</a>() -> Dict[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></code>.<code><a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.freeze"
+>freeze</a></code>
+</p>
+<p>Return a frozen mapping view of the items in this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code>.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Unlike <code><a href='#hikari.internal.collections.ExtendedMutableMapping.copy'>copy</a></code>, this should return a pure
+mapping with no removal policy at all.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/typing.html#typing.MutableMapping'>MutableMapping</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A frozen mapping view of the items in this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L293-L294" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def freeze(self) -&gt; typing.Dict[KeyT, ValueT]:
+    return self._data.copy()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.collections.SnowflakeSet" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="SnowflakeSet -- Set of `hikari.snowflakes.Snowflake` objects …" href="#hikari.internal.collections.SnowflakeSet"
+>SnowflakeSet</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.collections.SnowflakeSet" class="hljs python"><abbr title='A standard Python type.'>class</abbr> SnowflakeSet (
+    *ids: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+): ...</code></pre>
+<p>Set of <code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code> objects.</p>
+<p>This internally uses a sorted bisect-array of 64 bit integers to represent
+the information. This reduces the space needed to store these objects
+significantly down to the size of 8 bytes per item.</p>
+<p>In contrast, a regular list would take generally 8 bytes per item just to
+store the memory address, and then a further 28 bytes or more to physically
+store the integral value if it does not get interned by the Python
+implementation you are using. A regular set would consume even more
+space, being a hashtable internally.</p>
+<p>The detail of this implementation has the side effect that searches
+will take $$ \mathcal{O} \left( \log n \right) $$ operations in the worst
+case, and $$ \Omega \left (k \right) $$ in the best case. Average case
+will be $$ \mathcal{O} \left( \log n \right) $$</p>
+<p>Insertions and removals will take $$ \mathcal{O} \left( \log n \right) $$
+operations in the worst case, due to <code><a href='https://docs.python.org/3/library/bisect.html#module-bisect'>bisect</a></code> using a binary insertion sort
+algorithm internally. Average case will be
+$$ \mathcal{O} \left( \log n \right) $$ and best case will be
+$$ \Omega \left( k \right) $$</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This is not thread-safe and must not be iterated across whilst being
+concurrently modified.</p>
+</div>
+<h2 id="other-parameters">Other Parameters</h2>
+<dl>
+<dt><strong><code>*ids</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The IDs to fill this table with.</dd>
+</dl>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L321-L426" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class SnowflakeSet(typing.MutableSet[snowflakes.Snowflake]):
+    r&#34;&#34;&#34;Set of `hikari.snowflakes.Snowflake` objects.
+
+    This internally uses a sorted bisect-array of 64 bit integers to represent
+    the information. This reduces the space needed to store these objects
+    significantly down to the size of 8 bytes per item.
+
+    In contrast, a regular list would take generally 8 bytes per item just to
+    store the memory address, and then a further 28 bytes or more to physically
+    store the integral value if it does not get interned by the Python
+    implementation you are using. A regular set would consume even more
+    space, being a hashtable internally.
+
+    The detail of this implementation has the side effect that searches
+    will take $$ \mathcal{O} \left( \log n \right) $$ operations in the worst
+    case, and $$ \Omega \left (k \right) $$ in the best case. Average case
+    will be $$ \mathcal{O} \left( \log n \right) $$
+
+    Insertions and removals will take $$ \mathcal{O} \left( \log n \right) $$
+    operations in the worst case, due to `bisect` using a binary insertion sort
+    algorithm internally. Average case will be
+    $$ \mathcal{O} \left( \log n \right) $$ and best case will be
+    $$ \Omega \left\( k \right) $$
+
+    !!! warning
+        This is not thread-safe and must not be iterated across whilst being
+        concurrently modified.
+
+    Other Parameters
+    ----------------
+    *ids : builtins.int
+        The IDs to fill this table with.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_ids&#34;,)
+
+    def __init__(self, *ids: int) -&gt; None:
+        self._ids = array.array(_LONG_LONG_UNSIGNED)
+
+        if ids:
+            self.add_all(ids)
+
+    def add(self, sf: int) -&gt; None:
+        &#34;&#34;&#34;Add a snowflake to this set.&#34;&#34;&#34;
+        # Always append the first item, as we cannot compare with nothing.
+        index = bisect.bisect_left(self._ids, sf)
+        if index == len(self._ids):
+            self._ids.append(sf)
+        elif self._ids[index] != sf:
+            self._ids.insert(index, sf)
+
+    def add_all(self, sfs: typing.Iterable[int]) -&gt; None:
+        &#34;&#34;&#34;Add a collection of snowflakes to this set.&#34;&#34;&#34;
+        if not sfs:
+            return
+
+        for sf in sfs:
+            # Yes, this is repeated code, but we want insertions to be as fast
+            # as possible for caching purposes, so reduce the number of function
+            # calls as much as possible and reimplement the logic for `add`
+            # here.
+            index = bisect.bisect_left(self._ids, sf)
+            if index == len(self._ids):
+                self._ids.append(sf)
+            elif self._ids[index] != sf:
+                self._ids.insert(index, sf)
+
+    def clear(self) -&gt; None:
+        &#34;&#34;&#34;Clear all items from this collection.&#34;&#34;&#34;
+        # Arrays lack a &#34;clear&#34; method.
+        self._ids = array.array(_LONG_LONG_UNSIGNED)
+
+    def discard(self, sf: int) -&gt; None:
+        &#34;&#34;&#34;Remove a snowflake from this set if it&#39;s present.&#34;&#34;&#34;
+        if not self._ids:
+            return
+
+        index = bisect.bisect_left(self._ids, sf)
+
+        if index &lt; len(self) and self._ids[index] == sf:
+            del self._ids[index]
+
+    def __contains__(self, value: typing.Any) -&gt; bool:
+        if not isinstance(value, int):
+            return False
+
+        index = bisect.bisect_left(self._ids, value)
+
+        if index &lt; len(self._ids):
+            return self._ids[index] == value
+        return False
+
+    def __iter__(self) -&gt; typing.Iterator[snowflakes.Snowflake]:
+        return map(snowflakes.Snowflake, self._ids)
+
+    def __len__(self) -&gt; int:
+        return len(self._ids)
+
+    def __repr__(self) -&gt; str:
+        return type(self).__name__ + &#34;(&#34; + &#34;, &#34;.join(map(repr, self._ids)) + &#34;)&#34;
+
+    def __sizeof__(self) -&gt; int:
+        return super().__sizeof__() + sys.getsizeof(self._ids)
+
+    def __str__(self) -&gt; str:
+        return &#34;{&#34; + &#34;, &#34;.join(map(repr, self._ids)) + &#34;}&#34;</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="SnowflakeSet -- Set of `hikari.snowflakes.Snowflake` objects …" href="#hikari.internal.collections.SnowflakeSet"
+>SnowflakeSet</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.MutableSet -- A mutable set is a finite, iterable container …" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSet"
+>collections.abc.MutableSet</a></dt>
+<dd class="nested"><p>A mutable set is a finite, iterable container …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Set -- A set is a finite, iterable container …" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Set"
+>collections.abc.Set</a></dt>
+<dd class="nested"><p>A set is a finite, iterable container …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Collection -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection"
+>collections.abc.Collection</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Sized -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sized"
+>collections.abc.Sized</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Iterable -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable"
+>collections.abc.Iterable</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Container -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container"
+>collections.abc.Container</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="typing.Generic -- Abstract base class for generic types …" href="https://docs.python.org/3/library/typing.html#typing.Generic"
+>Generic</a></dt>
+<dd class="nested"><p>Abstract base class for generic types …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.collections.SnowflakeSet.add" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="add" href="#hikari.internal.collections.SnowflakeSet.add" id="hikari.internal.collections.SnowflakeSet.add">add</a>(
+    sf: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Add a snowflake to this set.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L363-L370" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def add(self, sf: int) -&gt; None:
+    &#34;&#34;&#34;Add a snowflake to this set.&#34;&#34;&#34;
+    # Always append the first item, as we cannot compare with nothing.
+    index = bisect.bisect_left(self._ids, sf)
+    if index == len(self._ids):
+        self._ids.append(sf)
+    elif self._ids[index] != sf:
+        self._ids.insert(index, sf)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.SnowflakeSet.add_all" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="add_all" href="#hikari.internal.collections.SnowflakeSet.add_all" id="hikari.internal.collections.SnowflakeSet.add_all">add_all</a>(
+    sfs: <a href='https://docs.python.org/3/library/typing.html#typing.Iterable'>Iterable</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Add a collection of snowflakes to this set.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L372-L386" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def add_all(self, sfs: typing.Iterable[int]) -&gt; None:
+    &#34;&#34;&#34;Add a collection of snowflakes to this set.&#34;&#34;&#34;
+    if not sfs:
+        return
+
+    for sf in sfs:
+        # Yes, this is repeated code, but we want insertions to be as fast
+        # as possible for caching purposes, so reduce the number of function
+        # calls as much as possible and reimplement the logic for `add`
+        # here.
+        index = bisect.bisect_left(self._ids, sf)
+        if index == len(self._ids):
+            self._ids.append(sf)
+        elif self._ids[index] != sf:
+            self._ids.insert(index, sf)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.SnowflakeSet.clear" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="clear" href="#hikari.internal.collections.SnowflakeSet.clear" id="hikari.internal.collections.SnowflakeSet.clear">clear</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Clear all items from this collection.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L388-L391" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def clear(self) -&gt; None:
+    &#34;&#34;&#34;Clear all items from this collection.&#34;&#34;&#34;
+    # Arrays lack a &#34;clear&#34; method.
+    self._ids = array.array(_LONG_LONG_UNSIGNED)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.SnowflakeSet.discard" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="discard" href="#hikari.internal.collections.SnowflakeSet.discard" id="hikari.internal.collections.SnowflakeSet.discard">discard</a>(
+    sf: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Remove a snowflake from this set if it's present.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L393-L401" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def discard(self, sf: int) -&gt; None:
+    &#34;&#34;&#34;Remove a snowflake from this set if it&#39;s present.&#34;&#34;&#34;
+    if not self._ids:
+        return
+
+    index = bisect.bisect_left(self._ids, sf)
+
+    if index &lt; len(self) and self._ids[index] == sf:
+        del self._ids[index]</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.collections.TimedCacheMap" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="TimedCacheMap -- A most-recently-inserted limited mutable mapping implementation …" href="#hikari.internal.collections.TimedCacheMap"
+>TimedCacheMap</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.collections.TimedCacheMap" class="hljs python"><abbr title='A standard Python type.'>class</abbr> TimedCacheMap (
+    source: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Dict'>Dict</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='https://docs.python.org/3/library/typing.html#typing.Tuple'>Tuple</a>[<a href='https://docs.python.org/3/library/functions.html#float'>float</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]]] = None,
+    /,
+    *,
+    expiry: <a href='https://docs.python.org/3/library/datetime.html#datetime.timedelta'>datetime.timedelta</a>,
+    on_expire: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Callable'>Callable</a>[[<a href='#hikari.internal.collections.ValueT'>ValueT</a>], <a href='https://docs.python.org/3/library/constants.html#None'>None</a>]] = None,
+): ...</code></pre>
+<p>A most-recently-inserted limited mutable mapping implementation.</p>
+<p>This will remove entries on modification as as they pass the expiry limit.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>expiry</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/datetime.html#datetime.timedelta'>datetime.timedelta</a></code></dt>
+<dd>The timedelta of how long entries should be stored for before removal.</dd>
+</dl>
+<h2 id="other-parameters">Other Parameters</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Dict'>Dict</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='https://docs.python.org/3/library/typing.html#typing.Tuple'>Tuple</a>[<a href='https://docs.python.org/3/library/functions.html#float'>float</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]]</code></dt>
+<dd>A source dictionary of keys to tuples of float timestamps and values to
+create this from.</dd>
+<dt><strong><code>on_expire</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Callable'>Callable</a>[[<a href='#hikari.internal.collections.ValueT'>ValueT</a>], <a href='https://docs.python.org/3/library/constants.html#None'>None</a>]]</code></dt>
+<dd>
+<p>A function to call each time an item is garbage collected from this
+map. This should take one positional argument of the same type stored
+in this mapping as the value and should return <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>.</p>
+<p>This will always be called after the entry has been removed.</p>
+</dd>
+</dl>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L162-L245" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class TimedCacheMap(ExtendedMutableMapping[KeyT, ValueT]):
+    &#34;&#34;&#34;A most-recently-inserted limited mutable mapping implementation.
+
+    This will remove entries on modification as as they pass the expiry limit.
+
+    Parameters
+    ----------
+    expiry : datetime.timedelta
+        The timedelta of how long entries should be stored for before removal.
+
+    Other Parameters
+    ----------------
+    source : typing.Optional[typing.Dict[KeyT, typing.Tuple[builtins.float, ValueT]]
+        A source dictionary of keys to tuples of float timestamps and values to
+        create this from.
+    on_expire : typing.Optional[typing.Callable[[ValueT], None]]
+        A function to call each time an item is garbage collected from this
+        map. This should take one positional argument of the same type stored
+        in this mapping as the value and should return `builtins.None`.
+
+        This will always be called after the entry has been removed.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_data&#34;, &#34;_expiry&#34;, &#34;_on_expire&#34;)
+
+    def __init__(
+        self,
+        source: typing.Optional[typing.Dict[KeyT, typing.Tuple[float, ValueT]]] = None,
+        /,
+        *,
+        expiry: datetime.timedelta,
+        on_expire: typing.Optional[typing.Callable[[ValueT], None]] = None,
+    ) -&gt; None:
+        if expiry &lt;= datetime.timedelta():
+            raise ValueError(&#34;expiry time must be greater than 0 microseconds.&#34;)
+
+        self._expiry: float = expiry.total_seconds()
+        self._data = source or {}
+        self._on_expire = on_expire
+        self._garbage_collect()
+
+    def clear(self) -&gt; None:
+        self._data.clear()
+
+    def copy(self) -&gt; TimedCacheMap[KeyT, ValueT]:
+        return TimedCacheMap(
+            self._data.copy(), expiry=datetime.timedelta(seconds=self._expiry), on_expire=self._on_expire
+        )
+
+    def freeze(self) -&gt; typing.MutableMapping[KeyT, ValueT]:
+        return _FrozenDict(self._data.copy())
+
+    def _garbage_collect(self) -&gt; None:
+        current_time = time.perf_counter()
+        for key, value in tuple(self._data.items()):
+            if current_time - value[0] &lt; self._expiry:
+                break
+
+            del self._data[key]
+
+            if self._on_expire:
+                self._on_expire(value[1])
+
+    def __delitem__(self, key: KeyT) -&gt; None:
+        del self._data[key]
+        self._garbage_collect()
+
+    def __getitem__(self, key: KeyT) -&gt; ValueT:
+        return self._data[key][1]
+
+    def __iter__(self) -&gt; typing.Iterator[KeyT]:
+        return iter(self._data)
+
+    def __len__(self) -&gt; int:
+        return len(self._data)
+
+    def __setitem__(self, key: KeyT, value: ValueT) -&gt; None:
+        #  Seeing as we rely on insertion order in _garbage_collect, we have to make sure that each item is added to
+        #  the end of the dict.
+        if key in self:
+            del self[key]
+
+        self._data[key] = (time.perf_counter(), value)
+        self._garbage_collect()</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="TimedCacheMap -- A most-recently-inserted limited mutable mapping implementation …" href="#hikari.internal.collections.TimedCacheMap"
+>TimedCacheMap</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></dt>
+<dd class="nested"><p>The abstract class of mutable mappings used within Hikari …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.MutableMapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping"
+>collections.abc.MutableMapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Mapping -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping"
+>collections.abc.Mapping</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Collection -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection"
+>collections.abc.Collection</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Sized -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sized"
+>collections.abc.Sized</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Iterable -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable"
+>collections.abc.Iterable</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="collections.abc.Container -- " href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container"
+>collections.abc.Container</a></dt>
+<dd class="nested"></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="typing.Generic -- Abstract base class for generic types …" href="https://docs.python.org/3/library/typing.html#typing.Generic"
+>Generic</a></dt>
+<dd class="nested"><p>Abstract base class for generic types …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.collections.TimedCacheMap.clear" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="clear" href="#hikari.internal.collections.TimedCacheMap.clear" id="hikari.internal.collections.TimedCacheMap.clear">clear</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>D.clear() -&gt; None.
+Remove all items from D.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L203-L204" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def clear(self) -&gt; None:
+    self._data.clear()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.TimedCacheMap.copy" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="copy" href="#hikari.internal.collections.TimedCacheMap.copy" id="hikari.internal.collections.TimedCacheMap.copy">copy</a>() -> <a href='#hikari.internal.collections.TimedCacheMap'>TimedCacheMap</a>[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></code>.<code><a title="copy -- Return a copy of this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.copy"
+>copy</a></code>
+</p>
+<p>Return a copy of this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code> and wrapping the result in a
+mapped collection.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Any removal policy on this mapped collection will be copied over.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>MapT[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A copy of this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L206-L209" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def copy(self) -&gt; TimedCacheMap[KeyT, ValueT]:
+    return TimedCacheMap(
+        self._data.copy(), expiry=datetime.timedelta(seconds=self._expiry), on_expire=self._on_expire
+    )</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.collections.TimedCacheMap.freeze" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="freeze" href="#hikari.internal.collections.TimedCacheMap.freeze" id="hikari.internal.collections.TimedCacheMap.freeze">freeze</a>() -> MutableMapping[~<a href='#hikari.internal.collections.KeyT'>KeyT</a>, ~<a href='#hikari.internal.collections.ValueT'>ValueT</a>]: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="ExtendedMutableMapping -- The abstract class of mutable mappings used within Hikari …" href="#hikari.internal.collections.ExtendedMutableMapping"
+>ExtendedMutableMapping</a></code>.<code><a title="freeze -- Return a frozen mapping view of the items in this mapped collection …" href="#hikari.internal.collections.ExtendedMutableMapping.freeze"
+>freeze</a></code>
+</p>
+<p>Return a frozen mapping view of the items in this mapped collection.</p>
+<p>Unlike simply doing <code><a href='https://docs.python.org/3/library/stdtypes.html#dict'>dict</a>(<a href='https://docs.python.org/3/c-api/mapping.html#mapping'>mapping</a>)</code>, this may rely on internal detail
+around how the data is being stored to allow for a more efficient copy.
+This may look like calling <code><a href='https://docs.python.org/3/library/stdtypes.html#dict.copy'>dict.copy</a></code>.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Unlike <code><a href='#hikari.internal.collections.ExtendedMutableMapping.copy'>copy</a></code>, this should return a pure
+mapping with no removal policy at all.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/typing.html#typing.MutableMapping'>MutableMapping</a>[<a href='#hikari.internal.collections.KeyT'>KeyT</a>, <a href='#hikari.internal.collections.ValueT'>ValueT</a>]</code></dt>
+<dd>A frozen mapping view of the items in this mapped collection.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/collections.py#L211-L212" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def freeze(self) -&gt; typing.MutableMapping[KeyT, ValueT]:
+    return _FrozenDict(self._data.copy())</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

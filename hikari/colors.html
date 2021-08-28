@@ -1,0 +1,2314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.colors API documentation</title>
+<meta name="description" content="Model that represents a common RGB color and provides simple conversions to other common color systems.">
+<meta property="og:title" content="hikari.colors module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="index.html"
+>hikari</a></li>
+<li class="breadcrumb-item active"><a href="#">colors</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Model that represents a common RGB color and provides simple conversions to other common color systems.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="Colorish -- Type hint representing types of value compatible with a colour type …" href="#hikari.colors.Colorish"
+>Colorish</a></li>
+</ul>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Color -- Representation of a color …" href="#hikari.colors.Color"
+>Color</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_bytes -- Convert the bytes to a `Color` …" href="#hikari.colors.Color.from_bytes"
+>from_bytes</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_hex_code -- Convert the given hexadecimal color code to a `Color` …" href="#hikari.colors.Color.from_hex_code"
+>from_hex_code</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_int -- Convert the given `typing.SupportsInt` to a `Color` …" href="#hikari.colors.Color.from_int"
+>from_int</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_rgb -- Convert the given RGB to a `Color` object …" href="#hikari.colors.Color.from_rgb"
+>from_rgb</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_rgb_float -- Convert the given RGB to a `Color` object …" href="#hikari.colors.Color.from_rgb_float"
+>from_rgb_float</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="from_tuple_string -- Convert a string in a tuple-like format to a `Color` …" href="#hikari.colors.Color.from_tuple_string"
+>from_tuple_string</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="hex_code -- Six-digit hexadecimal color code for this Color …" href="#hikari.colors.Color.hex_code"
+>hex_code</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_web_safe -- `builtins.True` if the color is web safe, `builtins.False` otherwise." href="#hikari.colors.Color.is_web_safe"
+>is_web_safe</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="of -- Convert the value to a `Color` …" href="#hikari.colors.Color.of"
+>of</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="raw_hex_code -- Raw hex code …" href="#hikari.colors.Color.raw_hex_code"
+>raw_hex_code</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="rgb -- The RGB representation of this Color …" href="#hikari.colors.Color.rgb"
+>rgb</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="rgb_float -- Return the floating-point RGB representation of this Color …" href="#hikari.colors.Color.rgb_float"
+>rgb_float</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="to_bytes -- Convert the color code to bytes …" href="#hikari.colors.Color.to_bytes"
+>to_bytes</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L1-L591" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Model that represents a common RGB color and provides simple conversions to other common color systems.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;Color&#34;, &#34;Colorish&#34;]
+
+import re
+import string
+import typing
+
+
+def _to_rgb_int(value: str, name: str) -&gt; int:
+    # Heavy validation that is user-friendly and doesn&#39;t allow exploiting overflows, etc easily.
+    #
+    # isdigit allows chars like ² according to the docs.
+    if not all(c in string.digits for c in value):
+        raise ValueError(f&#34;Expected digits only for {name} channel&#34;)
+    if not value or len(value) &gt; 3:
+        raise ValueError(f&#34;Expected 1 to 3 digits for {name} channel, got {len(value)}&#34;)
+
+    int_value = int(value)
+
+    if int_value &gt;= 256:
+        raise ValueError(f&#34;Expected {name} channel to be in the inclusive range of 0 and 255, got {value!r}&#34;)
+
+    return int_value
+
+
+_FLOAT_PATTERN: typing.Final[typing.Pattern[str]] = re.compile(r&#34;0\.\d*|\.\d+|1\.0*&#34;)
+
+
+def _to_rgb_float(value: str, name: str) -&gt; float:
+    # Floats are easier to handle, as they don&#39;t overflow, they just become `inf`.
+
+    if value.count(&#34;.&#34;) != 1:
+        raise ValueError(f&#39;Expected exactly 1 decimal point &#34;.&#34; in {name} channel&#39;)
+    if not _FLOAT_PATTERN.match(value):
+        raise ValueError(f&#34;Expected {name} channel to be a decimal in the inclusive range of 0.0 and 1.0&#34;)
+    return float(value)
+
+
+class Color(int):
+    &#34;&#34;&#34;Representation of a color.
+
+    This value is immutable.
+
+    This is a specialization of `builtins.int` which provides alternative overrides for
+    common methods and color system conversions.
+
+    This currently supports:
+
+    * RGB
+    * RGB (float)
+    * 3-digit hex codes (e.g. 0xF1A -- web safe)
+    * 6-digit hex codes (e.g. 0xFF11AA)
+    * 3-digit RGB strings (e.g. #1A2 -- web safe)
+    * 6-digit RGB hash strings (e.g. #1A2B3C)
+
+    Examples
+    --------
+    Examples of conversions to given formats include:
+
+    ```py
+    &gt;&gt;&gt; c = Color(0xFF051A)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; hex(c)
+    0xff051a
+
+    &gt;&gt;&gt; c.hex_code
+    #FF051A
+
+    &gt;&gt;&gt; str(c)
+    #FF051A
+
+    &gt;&gt;&gt; int(c)
+    16712986
+
+    &gt;&gt;&gt; c.rgb
+    (255, 5, 26)
+
+    &gt;&gt;&gt; c.rgb_float
+    (1.0, 0.0196078431372549, 0.10196078431372549)
+    ```
+
+    Alternatively, if you have an arbitrary input in one of the above formats
+    that you wish to become a color, you can use `Color.of` on the class itself
+    to automatically attempt to resolve the color:
+
+    ```py
+    &gt;&gt;&gt; Color.of(0xFF051A)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; Color.of(16712986)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.of((255, 5, 26))
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of(255, 5, 26)
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of(&#34;#1a2b3c&#34;)
+    Color(r=0x1a, g=0x2b, b=0x3c)
+
+    &gt;&gt;&gt; c = Color.of(&#34;#1AB&#34;)
+    Color(r=0x11, g=0xaa, b=0xbb)
+
+    &gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+    Color(r=0xff, g=0x5, b=0x1a)
+    ```
+
+    Examples of initialization of Color objects from given formats include:
+
+    ```py
+    &gt;&gt;&gt; c = Color(16712986)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.from_rgb(255, 5, 26)
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.from_hex_code(&#34;#1a2b3c&#34;)
+    Color(r=0x1a, g=0x2b, b=0x3c)
+
+    &gt;&gt;&gt; c = Color.from_hex_code(&#34;#1AB&#34;)
+    Color(r=0x11, g=0xaa, b=0xbb)
+
+    &gt;&gt;&gt; c = Color.from_rgb_float(1.0, 0.0196078431372549, 0.10196078431372549)
+    Color(r=0xff, g=0x5, b=0x1a)
+    ```
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    def __init__(self, raw_rgb: typing.SupportsInt) -&gt; None:
+        if not (0 &lt;= int(raw_rgb) &lt;= 0xFFFFFF):
+            raise ValueError(f&#34;raw_rgb must be in the exclusive range of 0 and {0xFF_FF_FF}&#34;)
+        # The __new__ for `builtins.int` initializes the value for us, this super-call does nothing other
+        # than keeping the linter happy.
+        super().__init__()
+
+    def __repr__(self) -&gt; str:
+        r, g, b = self.rgb
+        return f&#34;Color(r={hex(r)}, g={hex(g)}, b={hex(b)})&#34;
+
+    def __str__(self) -&gt; str:
+        return self.hex_code
+
+    @property
+    def rgb(self) -&gt; typing.Tuple[int, int, int]:
+        &#34;&#34;&#34;The RGB representation of this Color.
+
+        Represented as a tuple of R, G, B. Each value is
+        in the range [0, 0xFF].
+
+        Example
+        -------
+        `(123, 234, 47)`
+        &#34;&#34;&#34;  # noqa: D401 - Imperative mood
+        return (self &gt;&gt; 16) &amp; 0xFF, (self &gt;&gt; 8) &amp; 0xFF, self &amp; 0xFF
+
+    @property
+    def rgb_float(self) -&gt; typing.Tuple[float, float, float]:
+        &#34;&#34;&#34;Return the floating-point RGB representation of this Color.
+
+        Represented as a tuple of R, G, B. Each value is in the range [0, 1].
+
+        Example
+        -------
+        `(0.1, 0.2, 0.76)`
+        &#34;&#34;&#34;
+        r, g, b = self.rgb
+        return r / 0xFF, g / 0xFF, b / 0xFF
+
+    @property
+    def hex_code(self) -&gt; str:
+        &#34;&#34;&#34;Six-digit hexadecimal color code for this Color.
+
+        This is prepended with a `#` symbol, and will be in upper case.
+
+        Example
+        -------
+        `#1A2B3C`
+        &#34;&#34;&#34;
+        return &#34;#&#34; + self.raw_hex_code
+
+    @property
+    def raw_hex_code(self) -&gt; str:
+        &#34;&#34;&#34;Raw hex code.
+
+        Example
+        -------
+        `1A2B3C`
+        &#34;&#34;&#34;
+        components = self.rgb
+        return &#34;&#34;.join(hex(c)[2:].zfill(2) for c in components).upper()
+
+    # Ignore docstring not starting in an imperative mood
+    @property
+    def is_web_safe(self) -&gt; bool:  # noqa: D401
+        &#34;&#34;&#34;`builtins.True` if the color is web safe, `builtins.False` otherwise.&#34;&#34;&#34;
+        return not (((self &amp; 0xFF0000) % 0x110000) or ((self &amp; 0xFF00) % 0x1100) or ((self &amp; 0xFF) % 0x11))
+
+    @classmethod
+    def from_rgb(cls, red: int, green: int, blue: int, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given RGB to a `Color` object.
+
+        Each channel must be within the range [0, 255] (0x0, 0xFF).
+
+        Parameters
+        ----------
+        red : builtins.int
+            Red channel.
+        green : builtins.int
+            Green channel.
+        blue : builtins.int
+            Blue channel.
+
+        Returns
+        -------
+        Color
+            A Color object.
+
+        Raises
+        ------
+        builtins.ValueError
+            If red, green, or blue are outside the range [0x0, 0xFF].
+        &#34;&#34;&#34;
+        if not 0 &lt;= red &lt;= 0xFF:
+            raise ValueError(&#34;Expected red channel to be in the inclusive range of 0 and 255&#34;)
+        if not 0 &lt;= green &lt;= 0xFF:
+            raise ValueError(&#34;Expected green channel to be in the inclusive range of 0 and 255&#34;)
+        if not 0 &lt;= blue &lt;= 0xFF:
+            raise ValueError(&#34;Expected blue channel to be in the inclusive range of 0 and 255&#34;)
+        return cls((red &lt;&lt; 16) | (green &lt;&lt; 8) | blue)
+
+    @classmethod
+    def from_rgb_float(cls, red: float, green: float, blue: float, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given RGB to a `Color` object.
+
+        The color-space represented values have to be within the
+        range [0, 1].
+
+        Parameters
+        ----------
+        red : builtins.float
+            Red channel.
+        green : builtins.float
+            Green channel.
+        blue : builtins.float
+            Blue channel.
+
+        Returns
+        -------
+        Color
+            A Color object.
+
+        Raises
+        ------
+        builtins.ValueError
+            If red, green or blue are outside the range [0, 1].
+        &#34;&#34;&#34;
+        if not 0 &lt;= red &lt;= 1:
+            raise ValueError(&#34;Expected red channel to be in the inclusive range of 0.0 and 1.0&#34;)
+        if not 0 &lt;= green &lt;= 1:
+            raise ValueError(&#34;Expected green channel to be in the inclusive range of 0.0 and 1.0&#34;)
+        if not 0 &lt;= blue &lt;= 1:
+            raise ValueError(&#34;Expected blue channel to be in the inclusive range of 0.0 and 1.0&#34;)
+        return cls.from_rgb(int(red * 0xFF), int(green * 0xFF), int(blue * 0xFF))
+
+    @classmethod
+    def from_hex_code(cls, hex_code: str, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given hexadecimal color code to a `Color`.
+
+        The inputs may be of the following format (case insensitive):
+        `1a2`, `#1a2`, `0x1a2` (for web-safe colors), or
+        `1a2b3c`, `#1a2b3c`, `0x1a2b3c` (for regular 3-byte color-codes).
+
+        Parameters
+        ----------
+        hex_code : builtins.str
+            A hexadecimal color code to parse. This may optionally start with
+            a case insensitive `0x` or `#`.
+
+        Returns
+        -------
+        Color
+            A corresponding Color object.
+
+        Raises
+        ------
+        builtins.ValueError
+            If `hex_code` is not a hexadecimal or is a invalid length.
+        &#34;&#34;&#34;
+        if hex_code.startswith(&#34;#&#34;):
+            hex_code = hex_code[1:]
+        elif hex_code.startswith((&#34;0x&#34;, &#34;0X&#34;)):
+            hex_code = hex_code[2:]
+
+        if not all(c in string.hexdigits for c in hex_code):
+            raise ValueError(&#34;Color code must be hexadecimal&#34;)
+
+        if len(hex_code) == 3:
+            # Web-safe
+            r, g, b = (c &lt;&lt; 4 | c for c in (int(c, 16) for c in hex_code))
+            return cls.from_rgb(r, g, b)
+
+        if len(hex_code) == 6:
+            return cls.from_rgb(int(hex_code[:2], 16), int(hex_code[2:4], 16), int(hex_code[4:6], 16))
+
+        raise ValueError(&#34;Color code is invalid length. Must be 3 or 6 digits&#34;)
+
+    @classmethod
+    def from_int(cls, integer: typing.SupportsInt, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given `typing.SupportsInt` to a `Color`.
+
+        Parameters
+        ----------
+        integer : typing.SupportsInt
+            The raw color integer.
+
+        Returns
+        -------
+        Color
+            The Color object.
+        &#34;&#34;&#34;
+        return cls(integer)
+
+    @classmethod
+    def from_tuple_string(cls, tuple_str: str, /) -&gt; Color:
+        &#34;&#34;&#34;Convert a string in a tuple-like format to a `Color`.
+
+        This allows formats that are optionally enclosed by `()`, `{}`, or
+        `[]`, and contain three floats or ints, either space separated or
+        comma separated.
+
+        If comma separated, trailing and leading whitespace around each member
+        is truncated.
+
+        This is provided to allow command frontends to directly pass user
+        input for representing a given colour into this class safely.
+
+        Examples
+        --------
+        ```py
+        # Floats
+        &#34;1.0 1.0 1.0&#34;
+        &#34;(1.0 1.0 1.0)&#34;
+        &#34;[1.0 1.0 1.0]&#34;
+        &#34;{1.0 1.0 1.0}&#34;
+        &#34;1.0, 1.0, 1.0&#34;
+        &#34;(1.0, 1.0, 1.0)&#34;
+        &#34;[1.0, 1.0, 1.0]&#34;
+        &#34;{1.0, 1.0, 1.0}&#34;
+
+        # Ints
+        &#34;252 252 252&#34;
+        &#34;(252 252 252)&#34;
+        &#34;[252 252 252]&#34;
+        &#34;{252 252 252}&#34;
+        &#34;252, 252, 252&#34;
+        &#34;(252, 252, 252)&#34;
+        &#34;[252, 252, 252]&#34;
+        &#34;{252, 252, 252}&#34;
+        ```
+
+        Parameters
+        ----------
+        tuple_str : builtins.str
+            The string to parse.
+
+        Returns
+        -------
+        Color
+            The parsed colour object.
+
+        Raises
+        ------
+        ValueError
+            If an invalid format is given, or if any values exceed 1.0 for
+            floats or 255 for ints.
+        &#34;&#34;&#34;
+        if tuple_str[:: len(tuple_str) - 1] in (&#34;()&#34;, &#34;{}&#34;, &#34;&lt;&gt;&#34;, &#34;[]&#34;):
+            tuple_str = tuple_str[1:-1].strip()
+
+        try:
+            if &#34;,&#34; in tuple_str:
+                r, g, b = (bit.strip() for bit in tuple_str.split(&#34;,&#34;))
+            else:
+                r, g, b = tuple_str.split()
+        except ValueError:
+            raise ValueError(&#34;Expected three comma/space separated values&#34;) from None
+
+        if any(&#34;.&#34; in s for s in (r, g, b)):
+            return cls.from_rgb_float(_to_rgb_float(r, &#34;red&#34;), _to_rgb_float(g, &#34;green&#34;), _to_rgb_float(b, &#34;blue&#34;))
+        else:
+            return cls.from_rgb(_to_rgb_int(r, &#34;red&#34;), _to_rgb_int(g, &#34;green&#34;), _to_rgb_int(b, &#34;blue&#34;))
+
+    # Partially chose to override these as the docstrings contain typos according to Sphinx.
+    @classmethod
+    def from_bytes(
+        cls, bytes_: typing.Union[typing.Iterable[int], typing.SupportsBytes], byteorder: str, *, signed: bool = True
+    ) -&gt; Color:
+        &#34;&#34;&#34;Convert the bytes to a `Color`.
+
+        Parameters
+        ----------
+        bytes_ : typing.Iterable[builtins.int]
+            A iterable of int byte values.
+        byteorder : builtins.str
+            The endianness of the value represented by the bytes.
+            Can be `&#34;big&#34;` endian or `&#34;little&#34;` endian.
+        signed : builtins.bool
+            Whether the value is signed or unsigned.
+
+        Returns
+        -------
+        Color
+            The Color object.
+        &#34;&#34;&#34;
+        return Color(int.from_bytes(bytes_, byteorder, signed=signed))
+
+    @classmethod
+    def of(cls, value: Colorish, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the value to a `Color`.
+
+        This attempts to determine the correct data format based on the
+        information provided.
+
+        Parameters
+        ----------
+        value : Colorish
+            A color compatible values.
+
+        Examples
+        --------
+        ```py
+        &gt;&gt;&gt; Color.of(0xFF051A)
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        &gt;&gt;&gt; Color.of(16712986)
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        &gt;&gt;&gt; c = Color.of((255, 5, 26))
+        Color(r=0xff, g=0x5, b=1xa)
+
+        &gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+        Color(r=0xff, g=0x5, b=1xa)
+
+        &gt;&gt;&gt; c = Color.of(&#34;#1a2b3c&#34;)
+        Color(r=0x1a, g=0x2b, b=0x3c)
+
+        &gt;&gt;&gt; c = Color.of(&#34;#1AB&#34;)
+        Color(r=0x11, g=0xaa, b=0xbb)
+
+        &gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        &gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        # Commas and brackets are optional, whitespace is ignored, and these
+        # are compatible with all-ints between 0-255 or all-floats between
+        # 0.0 and 1.0 only.
+        &gt;&gt;&gt; c = Color.of(&#34;5, 22, 33&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        &gt;&gt;&gt; c = Color.of(&#34;(5, 22, 33)&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        &gt;&gt;&gt; c = Color.of(&#34;[5, 22, 33]&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        &gt;&gt;&gt; c = Color.of(&#34;{5, 22, 33}&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        ```
+
+        Returns
+        -------
+        Color
+            The Color object.
+        &#34;&#34;&#34;
+        if isinstance(value, cls):
+            return value
+        if isinstance(value, int):
+            return cls.from_int(value)
+        if isinstance(value, (list, tuple)):
+            if len(value) != 3:
+                raise ValueError(f&#34;Color must be an RGB triplet if set to a {type(value).__name__} type&#34;)
+
+            if any(isinstance(c, float) for c in value):
+                r, g, b = value
+                return cls.from_rgb_float(r, g, b)
+
+            if all(isinstance(c, int) for c in value):
+                r, g, b = value
+                return cls.from_rgb(r, g, b)
+
+        if isinstance(value, str):
+            if any(c in value for c in &#34;({[&lt;,. &#34;):
+                return cls.from_tuple_string(value)
+
+            is_start_hash_or_hex_literal = value.casefold().startswith((&#34;#&#34;, &#34;0x&#34;))
+            is_hex_digits = all(c in string.hexdigits for c in value) and len(value) in (3, 6)
+            if is_start_hash_or_hex_literal or is_hex_digits:
+                return cls.from_hex_code(value)
+
+        raise ValueError(f&#34;Could not transform {value!r} into a {cls.__qualname__} object&#34;)
+
+    def to_bytes(self, length: int, byteorder: str, *, signed: bool = True) -&gt; bytes:
+        &#34;&#34;&#34;Convert the color code to bytes.
+
+        Parameters
+        ----------
+        length : builtins.int
+            The number of bytes to produce. Should be around `3`, but not less.
+        byteorder : builtins.str
+            The endianness of the value represented by the bytes.
+            Can be `&#34;big&#34;` endian or `&#34;little&#34;` endian.
+        signed : builtins.bool
+            Whether the value is signed or unsigned.
+
+        Returns
+        -------
+        builtins.bytes
+            The bytes representation of the Color.
+        &#34;&#34;&#34;
+        return int(self).to_bytes(length, byteorder, signed=signed)
+
+
+Colorish = typing.Union[
+    Color,
+    typing.SupportsInt,
+    typing.Tuple[typing.SupportsInt, typing.SupportsInt, typing.SupportsInt],
+    typing.Tuple[typing.SupportsFloat, typing.SupportsFloat, typing.SupportsFloat],
+    typing.Sequence[typing.SupportsInt],
+    typing.Sequence[typing.SupportsFloat],
+    str,
+]
+&#34;&#34;&#34;Type hint representing types of value compatible with a colour type.
+
+This may be:
+
+1. `hikari.colors.Color`
+2. `hikari.colours.Colour` (an alias for `hikari.colors.Color`).
+3. A value that can be cast to an `builtins.int` (RGB hex-code).
+4. a 3-`builtins.tuple` of `builtins.int` (RGB integers in range 0 through 255).
+5. a 3-`builtins.tuple` of `builtins.int` (RGB floats in range 0 through 1).
+6. a list of `builtins.int`.
+7. a list of `builtins.float`.
+8. a `builtins.str` hex colour code.
+
+A hex colour code is expected to be in one of the following formats. Each of the
+following examples means the same thing semantically.
+
+1. (web-safe) `&#34;12F&#34;` (equivalent to `&#34;1122FF&#34;`)
+2. (web-safe) `&#34;0x12F&#34;` (equivalent to `&#34;0x1122FF&#34;`)
+3. (web-safe) `&#34;0X12F&#34;` (equivalent to `&#34;0X1122FF&#34;`)
+4. (web-safe) `&#34;#12F&#34;` (equivalent to `&#34;#1122FF&#34;`)
+5. `&#34;1122FF&#34;`
+6. `&#34;0x1122FF&#34;`
+7. `&#34;0X1122FF&#34;`
+8. `&#34;#1122FF&#34;`
+
+Web-safe colours are three hex-digits wide, `XYZ` becomes `XXYYZZ` in full-form.
+&#34;&#34;&#34;</code></pre>
+</details>
+</div>
+</div>
+<h2 id="variables-heading">Variables and Type Hints</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.colors.Colorish" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A type hint that is usable by static-type checkers like MyPy, but otherwise serves no functional purpose.'>type hint</abbr></em></small> <a title="Colorish -- Type hint representing types of value compatible with a colour type …" href="#hikari.colors.Colorish"  >Colorish</a> = typing.Union[hikari.colors.Color, typing.SupportsInt, typing.Tuple[typing.SupportsInt, typing.SupportsInt, typing.SupportsInt], typing.Tuple[typing.SupportsFloat, typing.SupportsFloat, typing.SupportsFloat], typing.Sequence[typing.SupportsInt], typing.Sequence[typing.SupportsFloat], str]</code></pre>
+</dt>
+<dd><p>Type hint representing types of value compatible with a colour type.</p>
+<p>This may be:</p>
+<ol>
+<li><code><a href='#hikari.colors.Color'>Color</a></code></li>
+<li><code><a href='colours.html'>hikari.colours.Colour</a></code> (an alias for <code><a href='#hikari.colors.Color'>Color</a></code>).</li>
+<li>A value that can be cast to an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> (RGB hex-code).</li>
+<li>a 3-<code><a href='https://docs.python.org/3/library/stdtypes.html#tuple'>tuple</a></code> of <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> (RGB integers in range 0 through 255).</li>
+<li>a 3-<code><a href='https://docs.python.org/3/library/stdtypes.html#tuple'>tuple</a></code> of <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> (RGB floats in range 0 through 1).</li>
+<li>a list of <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>.</li>
+<li>a list of <code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code>.</li>
+<li>a <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code> hex colour code.</li>
+</ol>
+<p>A hex colour code is expected to be in one of the following formats. Each of the
+following examples means the same thing semantically.</p>
+<ol>
+<li>(web-safe) <code>"12F"</code> (equivalent to <code>"1122FF"</code>)</li>
+<li>(web-safe) <code>"0x12F"</code> (equivalent to <code>"0x1122FF"</code>)</li>
+<li>(web-safe) <code>"0X12F"</code> (equivalent to <code>"0X1122FF"</code>)</li>
+<li>(web-safe) <code>"#12F"</code> (equivalent to <code>"#1122FF"</code>)</li>
+<li><code>"1122FF"</code></li>
+<li><code>"0x1122FF"</code></li>
+<li><code>"0X1122FF"</code></li>
+<li><code>"#1122FF"</code></li>
+</ol>
+<p>Web-safe colours are three hex-digits wide, <code>XYZ</code> becomes <code>XXYYZZ</code> in full-form.</p></dd>
+</div>
+</dl>
+</section>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.colors.Color" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Color -- Representation of a color …" href="#hikari.colors.Color"
+>Color</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.colors.Color" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Color (
+    raw_rgb: <a href='https://docs.python.org/3/library/typing.html#typing.SupportsInt'>SupportsInt</a>,
+): ...</code></pre>
+<p>Representation of a color.</p>
+<p>This value is immutable.</p>
+<p>This is a specialization of <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> which provides alternative overrides for
+common methods and color system conversions.</p>
+<p>This currently supports:</p>
+<ul>
+<li>RGB</li>
+<li>RGB (float)</li>
+<li>3-digit hex codes (e.g. 0xF1A &ndash; web safe)</li>
+<li>6-digit hex codes (e.g. 0xFF11AA)</li>
+<li>3-digit RGB strings (e.g. #1A2 &ndash; web safe)</li>
+<li>6-digit RGB hash strings (e.g. #1A2B3C)</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>Examples of conversions to given formats include:</p>
+<pre><code class="language-py">&gt;&gt;&gt; c = Color(0xFF051A)
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; hex(c)
+0xff051a
+
+&gt;&gt;&gt; c.hex_code
+#FF051A
+
+&gt;&gt;&gt; str(c)
+#FF051A
+
+&gt;&gt;&gt; int(c)
+16712986
+
+&gt;&gt;&gt; c.rgb
+(255, 5, 26)
+
+&gt;&gt;&gt; c.rgb_float
+(1.0, 0.0196078431372549, 0.10196078431372549)
+</code></pre>
+<p>Alternatively, if you have an arbitrary input in one of the above formats
+that you wish to become a color, you can use <code><a href='#hikari.colors.Color.of'>of</a></code> on the class itself
+to automatically attempt to resolve the color:</p>
+<pre><code class="language-py">&gt;&gt;&gt; Color.of(0xFF051A)
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; Color.of(16712986)
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; c = Color.of((255, 5, 26))
+Color(r=0xff, g=0x5, b=1xa)
+
+&gt;&gt;&gt; c = Color.of(255, 5, 26)
+Color(r=0xff, g=0x5, b=1xa)
+
+&gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+Color(r=0xff, g=0x5, b=1xa)
+
+&gt;&gt;&gt; c = Color.of(&quot;#1a2b3c&quot;)
+Color(r=0x1a, g=0x2b, b=0x3c)
+
+&gt;&gt;&gt; c = Color.of(&quot;#1AB&quot;)
+Color(r=0x11, g=0xaa, b=0xbb)
+
+&gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+Color(r=0xff, g=0x5, b=0x1a)
+</code></pre>
+<p>Examples of initialization of Color objects from given formats include:</p>
+<pre><code class="language-py">&gt;&gt;&gt; c = Color(16712986)
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; c = Color.from_rgb(255, 5, 26)
+Color(r=0xff, g=0x5, b=1xa)
+
+&gt;&gt;&gt; c = Color.from_hex_code(&quot;#1a2b3c&quot;)
+Color(r=0x1a, g=0x2b, b=0x3c)
+
+&gt;&gt;&gt; c = Color.from_hex_code(&quot;#1AB&quot;)
+Color(r=0x11, g=0xaa, b=0xbb)
+
+&gt;&gt;&gt; c = Color.from_rgb_float(1.0, 0.0196078431372549, 0.10196078431372549)
+Color(r=0xff, g=0x5, b=0x1a)
+</code></pre>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L64-L553" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Color(int):
+    &#34;&#34;&#34;Representation of a color.
+
+    This value is immutable.
+
+    This is a specialization of `builtins.int` which provides alternative overrides for
+    common methods and color system conversions.
+
+    This currently supports:
+
+    * RGB
+    * RGB (float)
+    * 3-digit hex codes (e.g. 0xF1A -- web safe)
+    * 6-digit hex codes (e.g. 0xFF11AA)
+    * 3-digit RGB strings (e.g. #1A2 -- web safe)
+    * 6-digit RGB hash strings (e.g. #1A2B3C)
+
+    Examples
+    --------
+    Examples of conversions to given formats include:
+
+    ```py
+    &gt;&gt;&gt; c = Color(0xFF051A)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; hex(c)
+    0xff051a
+
+    &gt;&gt;&gt; c.hex_code
+    #FF051A
+
+    &gt;&gt;&gt; str(c)
+    #FF051A
+
+    &gt;&gt;&gt; int(c)
+    16712986
+
+    &gt;&gt;&gt; c.rgb
+    (255, 5, 26)
+
+    &gt;&gt;&gt; c.rgb_float
+    (1.0, 0.0196078431372549, 0.10196078431372549)
+    ```
+
+    Alternatively, if you have an arbitrary input in one of the above formats
+    that you wish to become a color, you can use `Color.of` on the class itself
+    to automatically attempt to resolve the color:
+
+    ```py
+    &gt;&gt;&gt; Color.of(0xFF051A)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; Color.of(16712986)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.of((255, 5, 26))
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of(255, 5, 26)
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of(&#34;#1a2b3c&#34;)
+    Color(r=0x1a, g=0x2b, b=0x3c)
+
+    &gt;&gt;&gt; c = Color.of(&#34;#1AB&#34;)
+    Color(r=0x11, g=0xaa, b=0xbb)
+
+    &gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+    Color(r=0xff, g=0x5, b=0x1a)
+    ```
+
+    Examples of initialization of Color objects from given formats include:
+
+    ```py
+    &gt;&gt;&gt; c = Color(16712986)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.from_rgb(255, 5, 26)
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.from_hex_code(&#34;#1a2b3c&#34;)
+    Color(r=0x1a, g=0x2b, b=0x3c)
+
+    &gt;&gt;&gt; c = Color.from_hex_code(&#34;#1AB&#34;)
+    Color(r=0x11, g=0xaa, b=0xbb)
+
+    &gt;&gt;&gt; c = Color.from_rgb_float(1.0, 0.0196078431372549, 0.10196078431372549)
+    Color(r=0xff, g=0x5, b=0x1a)
+    ```
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    def __init__(self, raw_rgb: typing.SupportsInt) -&gt; None:
+        if not (0 &lt;= int(raw_rgb) &lt;= 0xFFFFFF):
+            raise ValueError(f&#34;raw_rgb must be in the exclusive range of 0 and {0xFF_FF_FF}&#34;)
+        # The __new__ for `builtins.int` initializes the value for us, this super-call does nothing other
+        # than keeping the linter happy.
+        super().__init__()
+
+    def __repr__(self) -&gt; str:
+        r, g, b = self.rgb
+        return f&#34;Color(r={hex(r)}, g={hex(g)}, b={hex(b)})&#34;
+
+    def __str__(self) -&gt; str:
+        return self.hex_code
+
+    @property
+    def rgb(self) -&gt; typing.Tuple[int, int, int]:
+        &#34;&#34;&#34;The RGB representation of this Color.
+
+        Represented as a tuple of R, G, B. Each value is
+        in the range [0, 0xFF].
+
+        Example
+        -------
+        `(123, 234, 47)`
+        &#34;&#34;&#34;  # noqa: D401 - Imperative mood
+        return (self &gt;&gt; 16) &amp; 0xFF, (self &gt;&gt; 8) &amp; 0xFF, self &amp; 0xFF
+
+    @property
+    def rgb_float(self) -&gt; typing.Tuple[float, float, float]:
+        &#34;&#34;&#34;Return the floating-point RGB representation of this Color.
+
+        Represented as a tuple of R, G, B. Each value is in the range [0, 1].
+
+        Example
+        -------
+        `(0.1, 0.2, 0.76)`
+        &#34;&#34;&#34;
+        r, g, b = self.rgb
+        return r / 0xFF, g / 0xFF, b / 0xFF
+
+    @property
+    def hex_code(self) -&gt; str:
+        &#34;&#34;&#34;Six-digit hexadecimal color code for this Color.
+
+        This is prepended with a `#` symbol, and will be in upper case.
+
+        Example
+        -------
+        `#1A2B3C`
+        &#34;&#34;&#34;
+        return &#34;#&#34; + self.raw_hex_code
+
+    @property
+    def raw_hex_code(self) -&gt; str:
+        &#34;&#34;&#34;Raw hex code.
+
+        Example
+        -------
+        `1A2B3C`
+        &#34;&#34;&#34;
+        components = self.rgb
+        return &#34;&#34;.join(hex(c)[2:].zfill(2) for c in components).upper()
+
+    # Ignore docstring not starting in an imperative mood
+    @property
+    def is_web_safe(self) -&gt; bool:  # noqa: D401
+        &#34;&#34;&#34;`builtins.True` if the color is web safe, `builtins.False` otherwise.&#34;&#34;&#34;
+        return not (((self &amp; 0xFF0000) % 0x110000) or ((self &amp; 0xFF00) % 0x1100) or ((self &amp; 0xFF) % 0x11))
+
+    @classmethod
+    def from_rgb(cls, red: int, green: int, blue: int, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given RGB to a `Color` object.
+
+        Each channel must be within the range [0, 255] (0x0, 0xFF).
+
+        Parameters
+        ----------
+        red : builtins.int
+            Red channel.
+        green : builtins.int
+            Green channel.
+        blue : builtins.int
+            Blue channel.
+
+        Returns
+        -------
+        Color
+            A Color object.
+
+        Raises
+        ------
+        builtins.ValueError
+            If red, green, or blue are outside the range [0x0, 0xFF].
+        &#34;&#34;&#34;
+        if not 0 &lt;= red &lt;= 0xFF:
+            raise ValueError(&#34;Expected red channel to be in the inclusive range of 0 and 255&#34;)
+        if not 0 &lt;= green &lt;= 0xFF:
+            raise ValueError(&#34;Expected green channel to be in the inclusive range of 0 and 255&#34;)
+        if not 0 &lt;= blue &lt;= 0xFF:
+            raise ValueError(&#34;Expected blue channel to be in the inclusive range of 0 and 255&#34;)
+        return cls((red &lt;&lt; 16) | (green &lt;&lt; 8) | blue)
+
+    @classmethod
+    def from_rgb_float(cls, red: float, green: float, blue: float, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given RGB to a `Color` object.
+
+        The color-space represented values have to be within the
+        range [0, 1].
+
+        Parameters
+        ----------
+        red : builtins.float
+            Red channel.
+        green : builtins.float
+            Green channel.
+        blue : builtins.float
+            Blue channel.
+
+        Returns
+        -------
+        Color
+            A Color object.
+
+        Raises
+        ------
+        builtins.ValueError
+            If red, green or blue are outside the range [0, 1].
+        &#34;&#34;&#34;
+        if not 0 &lt;= red &lt;= 1:
+            raise ValueError(&#34;Expected red channel to be in the inclusive range of 0.0 and 1.0&#34;)
+        if not 0 &lt;= green &lt;= 1:
+            raise ValueError(&#34;Expected green channel to be in the inclusive range of 0.0 and 1.0&#34;)
+        if not 0 &lt;= blue &lt;= 1:
+            raise ValueError(&#34;Expected blue channel to be in the inclusive range of 0.0 and 1.0&#34;)
+        return cls.from_rgb(int(red * 0xFF), int(green * 0xFF), int(blue * 0xFF))
+
+    @classmethod
+    def from_hex_code(cls, hex_code: str, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given hexadecimal color code to a `Color`.
+
+        The inputs may be of the following format (case insensitive):
+        `1a2`, `#1a2`, `0x1a2` (for web-safe colors), or
+        `1a2b3c`, `#1a2b3c`, `0x1a2b3c` (for regular 3-byte color-codes).
+
+        Parameters
+        ----------
+        hex_code : builtins.str
+            A hexadecimal color code to parse. This may optionally start with
+            a case insensitive `0x` or `#`.
+
+        Returns
+        -------
+        Color
+            A corresponding Color object.
+
+        Raises
+        ------
+        builtins.ValueError
+            If `hex_code` is not a hexadecimal or is a invalid length.
+        &#34;&#34;&#34;
+        if hex_code.startswith(&#34;#&#34;):
+            hex_code = hex_code[1:]
+        elif hex_code.startswith((&#34;0x&#34;, &#34;0X&#34;)):
+            hex_code = hex_code[2:]
+
+        if not all(c in string.hexdigits for c in hex_code):
+            raise ValueError(&#34;Color code must be hexadecimal&#34;)
+
+        if len(hex_code) == 3:
+            # Web-safe
+            r, g, b = (c &lt;&lt; 4 | c for c in (int(c, 16) for c in hex_code))
+            return cls.from_rgb(r, g, b)
+
+        if len(hex_code) == 6:
+            return cls.from_rgb(int(hex_code[:2], 16), int(hex_code[2:4], 16), int(hex_code[4:6], 16))
+
+        raise ValueError(&#34;Color code is invalid length. Must be 3 or 6 digits&#34;)
+
+    @classmethod
+    def from_int(cls, integer: typing.SupportsInt, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the given `typing.SupportsInt` to a `Color`.
+
+        Parameters
+        ----------
+        integer : typing.SupportsInt
+            The raw color integer.
+
+        Returns
+        -------
+        Color
+            The Color object.
+        &#34;&#34;&#34;
+        return cls(integer)
+
+    @classmethod
+    def from_tuple_string(cls, tuple_str: str, /) -&gt; Color:
+        &#34;&#34;&#34;Convert a string in a tuple-like format to a `Color`.
+
+        This allows formats that are optionally enclosed by `()`, `{}`, or
+        `[]`, and contain three floats or ints, either space separated or
+        comma separated.
+
+        If comma separated, trailing and leading whitespace around each member
+        is truncated.
+
+        This is provided to allow command frontends to directly pass user
+        input for representing a given colour into this class safely.
+
+        Examples
+        --------
+        ```py
+        # Floats
+        &#34;1.0 1.0 1.0&#34;
+        &#34;(1.0 1.0 1.0)&#34;
+        &#34;[1.0 1.0 1.0]&#34;
+        &#34;{1.0 1.0 1.0}&#34;
+        &#34;1.0, 1.0, 1.0&#34;
+        &#34;(1.0, 1.0, 1.0)&#34;
+        &#34;[1.0, 1.0, 1.0]&#34;
+        &#34;{1.0, 1.0, 1.0}&#34;
+
+        # Ints
+        &#34;252 252 252&#34;
+        &#34;(252 252 252)&#34;
+        &#34;[252 252 252]&#34;
+        &#34;{252 252 252}&#34;
+        &#34;252, 252, 252&#34;
+        &#34;(252, 252, 252)&#34;
+        &#34;[252, 252, 252]&#34;
+        &#34;{252, 252, 252}&#34;
+        ```
+
+        Parameters
+        ----------
+        tuple_str : builtins.str
+            The string to parse.
+
+        Returns
+        -------
+        Color
+            The parsed colour object.
+
+        Raises
+        ------
+        ValueError
+            If an invalid format is given, or if any values exceed 1.0 for
+            floats or 255 for ints.
+        &#34;&#34;&#34;
+        if tuple_str[:: len(tuple_str) - 1] in (&#34;()&#34;, &#34;{}&#34;, &#34;&lt;&gt;&#34;, &#34;[]&#34;):
+            tuple_str = tuple_str[1:-1].strip()
+
+        try:
+            if &#34;,&#34; in tuple_str:
+                r, g, b = (bit.strip() for bit in tuple_str.split(&#34;,&#34;))
+            else:
+                r, g, b = tuple_str.split()
+        except ValueError:
+            raise ValueError(&#34;Expected three comma/space separated values&#34;) from None
+
+        if any(&#34;.&#34; in s for s in (r, g, b)):
+            return cls.from_rgb_float(_to_rgb_float(r, &#34;red&#34;), _to_rgb_float(g, &#34;green&#34;), _to_rgb_float(b, &#34;blue&#34;))
+        else:
+            return cls.from_rgb(_to_rgb_int(r, &#34;red&#34;), _to_rgb_int(g, &#34;green&#34;), _to_rgb_int(b, &#34;blue&#34;))
+
+    # Partially chose to override these as the docstrings contain typos according to Sphinx.
+    @classmethod
+    def from_bytes(
+        cls, bytes_: typing.Union[typing.Iterable[int], typing.SupportsBytes], byteorder: str, *, signed: bool = True
+    ) -&gt; Color:
+        &#34;&#34;&#34;Convert the bytes to a `Color`.
+
+        Parameters
+        ----------
+        bytes_ : typing.Iterable[builtins.int]
+            A iterable of int byte values.
+        byteorder : builtins.str
+            The endianness of the value represented by the bytes.
+            Can be `&#34;big&#34;` endian or `&#34;little&#34;` endian.
+        signed : builtins.bool
+            Whether the value is signed or unsigned.
+
+        Returns
+        -------
+        Color
+            The Color object.
+        &#34;&#34;&#34;
+        return Color(int.from_bytes(bytes_, byteorder, signed=signed))
+
+    @classmethod
+    def of(cls, value: Colorish, /) -&gt; Color:
+        &#34;&#34;&#34;Convert the value to a `Color`.
+
+        This attempts to determine the correct data format based on the
+        information provided.
+
+        Parameters
+        ----------
+        value : Colorish
+            A color compatible values.
+
+        Examples
+        --------
+        ```py
+        &gt;&gt;&gt; Color.of(0xFF051A)
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        &gt;&gt;&gt; Color.of(16712986)
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        &gt;&gt;&gt; c = Color.of((255, 5, 26))
+        Color(r=0xff, g=0x5, b=1xa)
+
+        &gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+        Color(r=0xff, g=0x5, b=1xa)
+
+        &gt;&gt;&gt; c = Color.of(&#34;#1a2b3c&#34;)
+        Color(r=0x1a, g=0x2b, b=0x3c)
+
+        &gt;&gt;&gt; c = Color.of(&#34;#1AB&#34;)
+        Color(r=0x11, g=0xaa, b=0xbb)
+
+        &gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        &gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+        Color(r=0xff, g=0x5, b=0x1a)
+
+        # Commas and brackets are optional, whitespace is ignored, and these
+        # are compatible with all-ints between 0-255 or all-floats between
+        # 0.0 and 1.0 only.
+        &gt;&gt;&gt; c = Color.of(&#34;5, 22, 33&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        &gt;&gt;&gt; c = Color.of(&#34;(5, 22, 33)&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        &gt;&gt;&gt; c = Color.of(&#34;[5, 22, 33]&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        &gt;&gt;&gt; c = Color.of(&#34;{5, 22, 33}&#34;)
+        Color(r=0x5, g=0x16, b=0x21)
+        ```
+
+        Returns
+        -------
+        Color
+            The Color object.
+        &#34;&#34;&#34;
+        if isinstance(value, cls):
+            return value
+        if isinstance(value, int):
+            return cls.from_int(value)
+        if isinstance(value, (list, tuple)):
+            if len(value) != 3:
+                raise ValueError(f&#34;Color must be an RGB triplet if set to a {type(value).__name__} type&#34;)
+
+            if any(isinstance(c, float) for c in value):
+                r, g, b = value
+                return cls.from_rgb_float(r, g, b)
+
+            if all(isinstance(c, int) for c in value):
+                r, g, b = value
+                return cls.from_rgb(r, g, b)
+
+        if isinstance(value, str):
+            if any(c in value for c in &#34;({[&lt;,. &#34;):
+                return cls.from_tuple_string(value)
+
+            is_start_hash_or_hex_literal = value.casefold().startswith((&#34;#&#34;, &#34;0x&#34;))
+            is_hex_digits = all(c in string.hexdigits for c in value) and len(value) in (3, 6)
+            if is_start_hash_or_hex_literal or is_hex_digits:
+                return cls.from_hex_code(value)
+
+        raise ValueError(f&#34;Could not transform {value!r} into a {cls.__qualname__} object&#34;)
+
+    def to_bytes(self, length: int, byteorder: str, *, signed: bool = True) -&gt; bytes:
+        &#34;&#34;&#34;Convert the color code to bytes.
+
+        Parameters
+        ----------
+        length : builtins.int
+            The number of bytes to produce. Should be around `3`, but not less.
+        byteorder : builtins.str
+            The endianness of the value represented by the bytes.
+            Can be `&#34;big&#34;` endian or `&#34;little&#34;` endian.
+        signed : builtins.bool
+            Whether the value is signed or unsigned.
+
+        Returns
+        -------
+        builtins.bytes
+            The bytes representation of the Color.
+        &#34;&#34;&#34;
+        return int(self).to_bytes(length, byteorder, signed=signed)</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="Color -- Representation of a color …" href="#hikari.colors.Color"
+>Color</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="builtins.int -- int([x]) -> integer
+int(x, base=10) -> integer …" href="https://docs.python.org/3/library/functions.html#int"
+>int</a></dt>
+<dd class="nested"><p>int([x]) -&gt; integer
+int(x, base=10) -&gt; integer …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.colors.Color.hex_code" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="hex_code -- Six-digit hexadecimal color code for this Color …" href="#hikari.colors.Color.hex_code"  >hex_code</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Six-digit hexadecimal color code for this Color.</p>
+<p>This is prepended with a <code>#</code> symbol, and will be in upper case.</p>
+<h2 id="example">Example</h2>
+<p><code>#1A2B3C</code></p></dd>
+</div>
+<div id="hikari.colors.Color.is_web_safe" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_web_safe -- `builtins.True` if the color is web safe, `builtins.False` otherwise." href="#hikari.colors.Color.is_web_safe"  >is_web_safe</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if the color is web safe, <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code> otherwise.</p></dd>
+</div>
+<div id="hikari.colors.Color.raw_hex_code" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="raw_hex_code -- Raw hex code …" href="#hikari.colors.Color.raw_hex_code"  >raw_hex_code</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Raw hex code.</p>
+<h2 id="example">Example</h2>
+<p><code>1A2B3C</code></p></dd>
+</div>
+<div id="hikari.colors.Color.rgb" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="rgb -- The RGB representation of this Color …" href="#hikari.colors.Color.rgb"  >rgb</a> : Tuple[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>]</code></pre>
+</dt>
+<dd><p>The RGB representation of this Color.</p>
+<p>Represented as a tuple of R, G, B. Each value is
+in the range [0, 0xFF].</p>
+<h2 id="example">Example</h2>
+<p><code>(123, 234, 47)</code></p></dd>
+</div>
+<div id="hikari.colors.Color.rgb_float" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="rgb_float -- Return the floating-point RGB representation of this Color …" href="#hikari.colors.Color.rgb_float"  >rgb_float</a> : Tuple[<a href='https://docs.python.org/3/library/functions.html#float'>float</a>, <a href='https://docs.python.org/3/library/functions.html#float'>float</a>, <a href='https://docs.python.org/3/library/functions.html#float'>float</a>]</code></pre>
+</dt>
+<dd><p>Return the floating-point RGB representation of this Color.</p>
+<p>Represented as a tuple of R, G, B. Each value is in the range [0, 1].</p>
+<h2 id="example">Example</h2>
+<p><code>(0.1, 0.2, 0.76)</code></p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.colors.Color.to_bytes" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="to_bytes" href="#hikari.colors.Color.to_bytes" id="hikari.colors.Color.to_bytes">to_bytes</a>(
+    length: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    byteorder: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    *,
+    signed: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a> = True,
+) -> <a href='https://docs.python.org/3/library/stdtypes.html#bytes'>bytes</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the color code to bytes.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>length</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The number of bytes to produce. Should be around <code>3</code>, but not less.</dd>
+<dt><strong><code>byteorder</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The endianness of the value represented by the bytes.
+Can be <code>"big"</code> endian or <code>"little"</code> endian.</dd>
+<dt><strong><code>signed</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd>Whether the value is signed or unsigned.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/stdtypes.html#bytes'>bytes</a></code></dt>
+<dd>The bytes representation of the Color.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L535-L553" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def to_bytes(self, length: int, byteorder: str, *, signed: bool = True) -&gt; bytes:
+    &#34;&#34;&#34;Convert the color code to bytes.
+
+    Parameters
+    ----------
+    length : builtins.int
+        The number of bytes to produce. Should be around `3`, but not less.
+    byteorder : builtins.str
+        The endianness of the value represented by the bytes.
+        Can be `&#34;big&#34;` endian or `&#34;little&#34;` endian.
+    signed : builtins.bool
+        Whether the value is signed or unsigned.
+
+    Returns
+    -------
+    builtins.bytes
+        The bytes representation of the Color.
+    &#34;&#34;&#34;
+    return int(self).to_bytes(length, byteorder, signed=signed)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.from_bytes" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_bytes" href="#hikari.colors.Color.from_bytes" id="hikari.colors.Color.from_bytes">from_bytes</a>(
+    bytes_: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Iterable'>Iterable</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>], <a href='https://docs.python.org/3/library/typing.html#typing.SupportsBytes'>SupportsBytes</a>],
+    byteorder: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    *,
+    signed: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a> = True,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the bytes to a <code><a href='#hikari.colors.Color'>Color</a></code>.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>bytes_</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Iterable'>Iterable</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>]</code></dt>
+<dd>A iterable of int byte values.</dd>
+<dt><strong><code>byteorder</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The endianness of the value represented by the bytes.
+Can be <code>"big"</code> endian or <code>"little"</code> endian.</dd>
+<dt><strong><code>signed</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd>Whether the value is signed or unsigned.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>The Color object.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L428-L449" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_bytes(
+    cls, bytes_: typing.Union[typing.Iterable[int], typing.SupportsBytes], byteorder: str, *, signed: bool = True
+) -&gt; Color:
+    &#34;&#34;&#34;Convert the bytes to a `Color`.
+
+    Parameters
+    ----------
+    bytes_ : typing.Iterable[builtins.int]
+        A iterable of int byte values.
+    byteorder : builtins.str
+        The endianness of the value represented by the bytes.
+        Can be `&#34;big&#34;` endian or `&#34;little&#34;` endian.
+    signed : builtins.bool
+        Whether the value is signed or unsigned.
+
+    Returns
+    -------
+    Color
+        The Color object.
+    &#34;&#34;&#34;
+    return Color(int.from_bytes(bytes_, byteorder, signed=signed))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.from_hex_code" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_hex_code" href="#hikari.colors.Color.from_hex_code" id="hikari.colors.Color.from_hex_code">from_hex_code</a>(
+    hex_code: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    /,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the given hexadecimal color code to a <code><a href='#hikari.colors.Color'>Color</a></code>.</p>
+<p>The inputs may be of the following format (case insensitive):
+<code>1a2</code>, <code>#1a2</code>, <code>0x1a2</code> (for web-safe colors), or
+<code>1a2b3c</code>, <code>#1a2b3c</code>, <code>0x1a2b3c</code> (for regular 3-byte color-codes).</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>hex_code</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>A hexadecimal color code to parse. This may optionally start with
+a case insensitive <code>0x</code> or <code>#</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>A corresponding Color object.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code></dt>
+<dd>If <code>hex_code</code> is not a hexadecimal or is a invalid length.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L299-L339" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_hex_code(cls, hex_code: str, /) -&gt; Color:
+    &#34;&#34;&#34;Convert the given hexadecimal color code to a `Color`.
+
+    The inputs may be of the following format (case insensitive):
+    `1a2`, `#1a2`, `0x1a2` (for web-safe colors), or
+    `1a2b3c`, `#1a2b3c`, `0x1a2b3c` (for regular 3-byte color-codes).
+
+    Parameters
+    ----------
+    hex_code : builtins.str
+        A hexadecimal color code to parse. This may optionally start with
+        a case insensitive `0x` or `#`.
+
+    Returns
+    -------
+    Color
+        A corresponding Color object.
+
+    Raises
+    ------
+    builtins.ValueError
+        If `hex_code` is not a hexadecimal or is a invalid length.
+    &#34;&#34;&#34;
+    if hex_code.startswith(&#34;#&#34;):
+        hex_code = hex_code[1:]
+    elif hex_code.startswith((&#34;0x&#34;, &#34;0X&#34;)):
+        hex_code = hex_code[2:]
+
+    if not all(c in string.hexdigits for c in hex_code):
+        raise ValueError(&#34;Color code must be hexadecimal&#34;)
+
+    if len(hex_code) == 3:
+        # Web-safe
+        r, g, b = (c &lt;&lt; 4 | c for c in (int(c, 16) for c in hex_code))
+        return cls.from_rgb(r, g, b)
+
+    if len(hex_code) == 6:
+        return cls.from_rgb(int(hex_code[:2], 16), int(hex_code[2:4], 16), int(hex_code[4:6], 16))
+
+    raise ValueError(&#34;Color code is invalid length. Must be 3 or 6 digits&#34;)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.from_int" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_int" href="#hikari.colors.Color.from_int" id="hikari.colors.Color.from_int">from_int</a>(
+    integer: <a href='https://docs.python.org/3/library/typing.html#typing.SupportsInt'>SupportsInt</a>,
+    /,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the given <code><a href='https://docs.python.org/3/library/typing.html#typing.SupportsInt'>SupportsInt</a></code> to a <code><a href='#hikari.colors.Color'>Color</a></code>.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>integer</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.SupportsInt'>SupportsInt</a></code></dt>
+<dd>The raw color integer.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>The Color object.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L341-L355" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_int(cls, integer: typing.SupportsInt, /) -&gt; Color:
+    &#34;&#34;&#34;Convert the given `typing.SupportsInt` to a `Color`.
+
+    Parameters
+    ----------
+    integer : typing.SupportsInt
+        The raw color integer.
+
+    Returns
+    -------
+    Color
+        The Color object.
+    &#34;&#34;&#34;
+    return cls(integer)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.from_rgb" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_rgb" href="#hikari.colors.Color.from_rgb" id="hikari.colors.Color.from_rgb">from_rgb</a>(
+    red: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    green: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    blue: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+    /,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the given RGB to a <code><a href='#hikari.colors.Color'>Color</a></code> object.</p>
+<p>Each channel must be within the range [0, 255] (0x0, 0xFF).</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>red</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>Red channel.</dd>
+<dt><strong><code>green</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>Green channel.</dd>
+<dt><strong><code>blue</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>Blue channel.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>A Color object.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code></dt>
+<dd>If red, green, or blue are outside the range [0x0, 0xFF].</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L232-L263" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_rgb(cls, red: int, green: int, blue: int, /) -&gt; Color:
+    &#34;&#34;&#34;Convert the given RGB to a `Color` object.
+
+    Each channel must be within the range [0, 255] (0x0, 0xFF).
+
+    Parameters
+    ----------
+    red : builtins.int
+        Red channel.
+    green : builtins.int
+        Green channel.
+    blue : builtins.int
+        Blue channel.
+
+    Returns
+    -------
+    Color
+        A Color object.
+
+    Raises
+    ------
+    builtins.ValueError
+        If red, green, or blue are outside the range [0x0, 0xFF].
+    &#34;&#34;&#34;
+    if not 0 &lt;= red &lt;= 0xFF:
+        raise ValueError(&#34;Expected red channel to be in the inclusive range of 0 and 255&#34;)
+    if not 0 &lt;= green &lt;= 0xFF:
+        raise ValueError(&#34;Expected green channel to be in the inclusive range of 0 and 255&#34;)
+    if not 0 &lt;= blue &lt;= 0xFF:
+        raise ValueError(&#34;Expected blue channel to be in the inclusive range of 0 and 255&#34;)
+    return cls((red &lt;&lt; 16) | (green &lt;&lt; 8) | blue)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.from_rgb_float" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_rgb_float" href="#hikari.colors.Color.from_rgb_float" id="hikari.colors.Color.from_rgb_float">from_rgb_float</a>(
+    red: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+    green: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+    blue: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+    /,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the given RGB to a <code><a href='#hikari.colors.Color'>Color</a></code> object.</p>
+<p>The color-space represented values have to be within the
+range [0, 1].</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>red</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Red channel.</dd>
+<dt><strong><code>green</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Green channel.</dd>
+<dt><strong><code>blue</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>Blue channel.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>A Color object.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code></dt>
+<dd>If red, green or blue are outside the range [0, 1].</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L265-L297" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_rgb_float(cls, red: float, green: float, blue: float, /) -&gt; Color:
+    &#34;&#34;&#34;Convert the given RGB to a `Color` object.
+
+    The color-space represented values have to be within the
+    range [0, 1].
+
+    Parameters
+    ----------
+    red : builtins.float
+        Red channel.
+    green : builtins.float
+        Green channel.
+    blue : builtins.float
+        Blue channel.
+
+    Returns
+    -------
+    Color
+        A Color object.
+
+    Raises
+    ------
+    builtins.ValueError
+        If red, green or blue are outside the range [0, 1].
+    &#34;&#34;&#34;
+    if not 0 &lt;= red &lt;= 1:
+        raise ValueError(&#34;Expected red channel to be in the inclusive range of 0.0 and 1.0&#34;)
+    if not 0 &lt;= green &lt;= 1:
+        raise ValueError(&#34;Expected green channel to be in the inclusive range of 0.0 and 1.0&#34;)
+    if not 0 &lt;= blue &lt;= 1:
+        raise ValueError(&#34;Expected blue channel to be in the inclusive range of 0.0 and 1.0&#34;)
+    return cls.from_rgb(int(red * 0xFF), int(green * 0xFF), int(blue * 0xFF))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.from_tuple_string" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="from_tuple_string" href="#hikari.colors.Color.from_tuple_string" id="hikari.colors.Color.from_tuple_string">from_tuple_string</a>(
+    tuple_str: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    /,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert a string in a tuple-like format to a <code><a href='#hikari.colors.Color'>Color</a></code>.</p>
+<p>This allows formats that are optionally enclosed by <code>()</code>, <code>{}</code>, or
+<code>[]</code>, and contain three floats or ints, either space separated or
+comma separated.</p>
+<p>If comma separated, trailing and leading whitespace around each member
+is truncated.</p>
+<p>This is provided to allow command frontends to directly pass user
+input for representing a given colour into this class safely.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-py"># Floats
+&quot;1.0 1.0 1.0&quot;
+&quot;(1.0 1.0 1.0)&quot;
+&quot;[1.0 1.0 1.0]&quot;
+&quot;{1.0 1.0 1.0}&quot;
+&quot;1.0, 1.0, 1.0&quot;
+&quot;(1.0, 1.0, 1.0)&quot;
+&quot;[1.0, 1.0, 1.0]&quot;
+&quot;{1.0, 1.0, 1.0}&quot;
+
+# Ints
+&quot;252 252 252&quot;
+&quot;(252 252 252)&quot;
+&quot;[252 252 252]&quot;
+&quot;{252 252 252}&quot;
+&quot;252, 252, 252&quot;
+&quot;(252, 252, 252)&quot;
+&quot;[252, 252, 252]&quot;
+&quot;{252, 252, 252}&quot;
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>tuple_str</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The string to parse.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>The parsed colour object.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code></dt>
+<dd>If an invalid format is given, or if any values exceed 1.0 for
+floats or 255 for ints.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L357-L425" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def from_tuple_string(cls, tuple_str: str, /) -&gt; Color:
+    &#34;&#34;&#34;Convert a string in a tuple-like format to a `Color`.
+
+    This allows formats that are optionally enclosed by `()`, `{}`, or
+    `[]`, and contain three floats or ints, either space separated or
+    comma separated.
+
+    If comma separated, trailing and leading whitespace around each member
+    is truncated.
+
+    This is provided to allow command frontends to directly pass user
+    input for representing a given colour into this class safely.
+
+    Examples
+    --------
+    ```py
+    # Floats
+    &#34;1.0 1.0 1.0&#34;
+    &#34;(1.0 1.0 1.0)&#34;
+    &#34;[1.0 1.0 1.0]&#34;
+    &#34;{1.0 1.0 1.0}&#34;
+    &#34;1.0, 1.0, 1.0&#34;
+    &#34;(1.0, 1.0, 1.0)&#34;
+    &#34;[1.0, 1.0, 1.0]&#34;
+    &#34;{1.0, 1.0, 1.0}&#34;
+
+    # Ints
+    &#34;252 252 252&#34;
+    &#34;(252 252 252)&#34;
+    &#34;[252 252 252]&#34;
+    &#34;{252 252 252}&#34;
+    &#34;252, 252, 252&#34;
+    &#34;(252, 252, 252)&#34;
+    &#34;[252, 252, 252]&#34;
+    &#34;{252, 252, 252}&#34;
+    ```
+
+    Parameters
+    ----------
+    tuple_str : builtins.str
+        The string to parse.
+
+    Returns
+    -------
+    Color
+        The parsed colour object.
+
+    Raises
+    ------
+    ValueError
+        If an invalid format is given, or if any values exceed 1.0 for
+        floats or 255 for ints.
+    &#34;&#34;&#34;
+    if tuple_str[:: len(tuple_str) - 1] in (&#34;()&#34;, &#34;{}&#34;, &#34;&lt;&gt;&#34;, &#34;[]&#34;):
+        tuple_str = tuple_str[1:-1].strip()
+
+    try:
+        if &#34;,&#34; in tuple_str:
+            r, g, b = (bit.strip() for bit in tuple_str.split(&#34;,&#34;))
+        else:
+            r, g, b = tuple_str.split()
+    except ValueError:
+        raise ValueError(&#34;Expected three comma/space separated values&#34;) from None
+
+    if any(&#34;.&#34; in s for s in (r, g, b)):
+        return cls.from_rgb_float(_to_rgb_float(r, &#34;red&#34;), _to_rgb_float(g, &#34;green&#34;), _to_rgb_float(b, &#34;blue&#34;))
+    else:
+        return cls.from_rgb(_to_rgb_int(r, &#34;red&#34;), _to_rgb_int(g, &#34;green&#34;), _to_rgb_int(b, &#34;blue&#34;))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.colors.Color.of" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="of" href="#hikari.colors.Color.of" id="hikari.colors.Color.of">of</a>(
+    value: <a href='#hikari.colors.Colorish'>Colorish</a>,
+    /,
+) -> <a href='#hikari.colors.Color'>Color</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Convert the value to a <code><a href='#hikari.colors.Color'>Color</a></code>.</p>
+<p>This attempts to determine the correct data format based on the
+information provided.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code><a href='#hikari.colors.Colorish'>Colorish</a></code></dt>
+<dd>A color compatible values.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-py">&gt;&gt;&gt; Color.of(0xFF051A)
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; Color.of(16712986)
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; c = Color.of((255, 5, 26))
+Color(r=0xff, g=0x5, b=1xa)
+
+&gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+Color(r=0xff, g=0x5, b=1xa)
+
+&gt;&gt;&gt; c = Color.of(&quot;#1a2b3c&quot;)
+Color(r=0x1a, g=0x2b, b=0x3c)
+
+&gt;&gt;&gt; c = Color.of(&quot;#1AB&quot;)
+Color(r=0x11, g=0xaa, b=0xbb)
+
+&gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+Color(r=0xff, g=0x5, b=0x1a)
+
+&gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+Color(r=0xff, g=0x5, b=0x1a)
+
+# Commas and brackets are optional, whitespace is ignored, and these
+# are compatible with all-ints between 0-255 or all-floats between
+# 0.0 and 1.0 only.
+&gt;&gt;&gt; c = Color.of(&quot;5, 22, 33&quot;)
+Color(r=0x5, g=0x16, b=0x21)
+&gt;&gt;&gt; c = Color.of(&quot;(5, 22, 33)&quot;)
+Color(r=0x5, g=0x16, b=0x21)
+&gt;&gt;&gt; c = Color.of(&quot;[5, 22, 33]&quot;)
+Color(r=0x5, g=0x16, b=0x21)
+&gt;&gt;&gt; c = Color.of(&quot;{5, 22, 33}&quot;)
+Color(r=0x5, g=0x16, b=0x21)
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.colors.Color'>Color</a></code></dt>
+<dd>The Color object.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/colors.py#L451-L533" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@classmethod
+def of(cls, value: Colorish, /) -&gt; Color:
+    &#34;&#34;&#34;Convert the value to a `Color`.
+
+    This attempts to determine the correct data format based on the
+    information provided.
+
+    Parameters
+    ----------
+    value : Colorish
+        A color compatible values.
+
+    Examples
+    --------
+    ```py
+    &gt;&gt;&gt; Color.of(0xFF051A)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; Color.of(16712986)
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.of((255, 5, 26))
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of([0xFF, 0x5, 0x1a])
+    Color(r=0xff, g=0x5, b=1xa)
+
+    &gt;&gt;&gt; c = Color.of(&#34;#1a2b3c&#34;)
+    Color(r=0x1a, g=0x2b, b=0x3c)
+
+    &gt;&gt;&gt; c = Color.of(&#34;#1AB&#34;)
+    Color(r=0x11, g=0xaa, b=0xbb)
+
+    &gt;&gt;&gt; c = Color.of((1.0, 0.0196078431372549, 0.10196078431372549))
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    &gt;&gt;&gt; c = Color.of([1.0, 0.0196078431372549, 0.10196078431372549])
+    Color(r=0xff, g=0x5, b=0x1a)
+
+    # Commas and brackets are optional, whitespace is ignored, and these
+    # are compatible with all-ints between 0-255 or all-floats between
+    # 0.0 and 1.0 only.
+    &gt;&gt;&gt; c = Color.of(&#34;5, 22, 33&#34;)
+    Color(r=0x5, g=0x16, b=0x21)
+    &gt;&gt;&gt; c = Color.of(&#34;(5, 22, 33)&#34;)
+    Color(r=0x5, g=0x16, b=0x21)
+    &gt;&gt;&gt; c = Color.of(&#34;[5, 22, 33]&#34;)
+    Color(r=0x5, g=0x16, b=0x21)
+    &gt;&gt;&gt; c = Color.of(&#34;{5, 22, 33}&#34;)
+    Color(r=0x5, g=0x16, b=0x21)
+    ```
+
+    Returns
+    -------
+    Color
+        The Color object.
+    &#34;&#34;&#34;
+    if isinstance(value, cls):
+        return value
+    if isinstance(value, int):
+        return cls.from_int(value)
+    if isinstance(value, (list, tuple)):
+        if len(value) != 3:
+            raise ValueError(f&#34;Color must be an RGB triplet if set to a {type(value).__name__} type&#34;)
+
+        if any(isinstance(c, float) for c in value):
+            r, g, b = value
+            return cls.from_rgb_float(r, g, b)
+
+        if all(isinstance(c, int) for c in value):
+            r, g, b = value
+            return cls.from_rgb(r, g, b)
+
+    if isinstance(value, str):
+        if any(c in value for c in &#34;({[&lt;,. &#34;):
+            return cls.from_tuple_string(value)
+
+        is_start_hash_or_hex_literal = value.casefold().startswith((&#34;#&#34;, &#34;0x&#34;))
+        is_hex_digits = all(c in string.hexdigits for c in value) and len(value) in (3, 6)
+        if is_start_hash_or_hex_literal or is_hex_digits:
+            return cls.from_hex_code(value)
+
+    raise ValueError(f&#34;Could not transform {value!r} into a {cls.__qualname__} object&#34;)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

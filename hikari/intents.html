@@ -1,0 +1,1863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.intents API documentation</title>
+<meta name="description" content="Shard intents for controlling which events the application receives.">
+<meta property="og:title" content="hikari.intents module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="index.html"
+>hikari</a></li>
+<li class="breadcrumb-item active"><a href="#">intents</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Shard intents for controlling which events the application receives.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Intents -- Represents an intent on the gateway …" href="#hikari.intents.Intents"
+>Intents</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL -- All unprivileged and privileged intents …" href="#hikari.intents.Intents.ALL"
+>ALL</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_DMS -- All private message channel (non-guild bound) intents." href="#hikari.intents.Intents.ALL_DMS"
+>ALL_DMS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_GUILDS -- All unprivileged guild intents and all privileged guild intents …" href="#hikari.intents.Intents.ALL_GUILDS"
+>ALL_GUILDS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_GUILDS_PRIVILEGED -- All privileged guild intents …" href="#hikari.intents.Intents.ALL_GUILDS_PRIVILEGED"
+>ALL_GUILDS_PRIVILEGED</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_GUILDS_UNPRIVILEGED -- All unprivileged guild-related intents." href="#hikari.intents.Intents.ALL_GUILDS_UNPRIVILEGED"
+>ALL_GUILDS_UNPRIVILEGED</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_MESSAGES -- All message intents." href="#hikari.intents.Intents.ALL_MESSAGES"
+>ALL_MESSAGES</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_MESSAGE_REACTIONS -- All message reaction intents." href="#hikari.intents.Intents.ALL_MESSAGE_REACTIONS"
+>ALL_MESSAGE_REACTIONS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_MESSAGE_TYPING -- All typing indicator intents." href="#hikari.intents.Intents.ALL_MESSAGE_TYPING"
+>ALL_MESSAGE_TYPING</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_PRIVILEGED -- All privileged intents …" href="#hikari.intents.Intents.ALL_PRIVILEGED"
+>ALL_PRIVILEGED</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_UNPRIVILEGED -- All unprivileged intents." href="#hikari.intents.Intents.ALL_UNPRIVILEGED"
+>ALL_UNPRIVILEGED</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DM_MESSAGES -- Subscribes to the following events: …" href="#hikari.intents.Intents.DM_MESSAGES"
+>DM_MESSAGES</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DM_MESSAGE_REACTIONS -- Subscribes to the following events: …" href="#hikari.intents.Intents.DM_MESSAGE_REACTIONS"
+>DM_MESSAGE_REACTIONS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DM_MESSAGE_TYPING -- Subscribes to the following events …" href="#hikari.intents.Intents.DM_MESSAGE_TYPING"
+>DM_MESSAGE_TYPING</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILDS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILDS"
+>GUILDS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_BANS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_BANS"
+>GUILD_BANS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_EMOJIS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_EMOJIS"
+>GUILD_EMOJIS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_INTEGRATIONS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_INTEGRATIONS"
+>GUILD_INTEGRATIONS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_INVITES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_INVITES"
+>GUILD_INVITES</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MEMBERS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MEMBERS"
+>GUILD_MEMBERS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MESSAGES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MESSAGES"
+>GUILD_MESSAGES</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MESSAGE_REACTIONS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MESSAGE_REACTIONS"
+>GUILD_MESSAGE_REACTIONS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MESSAGE_TYPING -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MESSAGE_TYPING"
+>GUILD_MESSAGE_TYPING</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_PRESENCES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_PRESENCES"
+>GUILD_PRESENCES</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_VOICE_STATES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_VOICE_STATES"
+>GUILD_VOICE_STATES</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_WEBHOOKS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_WEBHOOKS"
+>GUILD_WEBHOOKS</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="NONE -- Represents no intents." href="#hikari.intents.Intents.NONE"
+>NONE</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="all -- Check if all of the given flags are part of this value …" href="internal/enums.html#hikari.internal.enums.Flag.all"
+>all</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="any -- Check if any of the given flags are part of this value …" href="internal/enums.html#hikari.internal.enums.Flag.any"
+>any</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="difference -- Perform a set difference with the other set …" href="internal/enums.html#hikari.internal.enums.Flag.difference"
+>difference</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="intersection -- Return a combination of flags that are set for both given values …" href="internal/enums.html#hikari.internal.enums.Flag.intersection"
+>intersection</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="invert -- Return a set of all flags not in the current set." href="internal/enums.html#hikari.internal.enums.Flag.invert"
+>invert</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_disjoint -- Return whether two sets have a intersection or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_disjoint"
+>is_disjoint</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_privileged -- Determine whether the intent requires elevated privileges …" href="#hikari.intents.Intents.is_privileged"
+>is_privileged</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_subset -- Return whether another set contains this set or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_subset"
+>is_subset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_superset -- Return whether this set contains another set or not." href="internal/enums.html#hikari.internal.enums.Flag.is_superset"
+>is_superset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="isdisjoint -- Return whether two sets have a intersection or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_disjoint"
+>isdisjoint</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="issubset -- Return whether another set contains this set or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_subset"
+>issubset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="issuperset -- Return whether this set contains another set or not." href="internal/enums.html#hikari.internal.enums.Flag.is_superset"
+>issuperset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- Return the name of the flag combination as a `builtins.str`." href="internal/enums.html#hikari.internal.enums.Flag.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="none -- Check if none of the given flags are part of this value …" href="internal/enums.html#hikari.internal.enums.Flag.none"
+>none</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="split -- Return a list of all defined atomic values for this flag …" href="internal/enums.html#hikari.internal.enums.Flag.split"
+>split</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="symmetric_difference -- Return a set with the symmetric differences of two flag sets …" href="internal/enums.html#hikari.internal.enums.Flag.symmetric_difference"
+>symmetric_difference</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="symmetricdifference -- Return a set with the symmetric differences of two flag sets …" href="internal/enums.html#hikari.internal.enums.Flag.symmetric_difference"
+>symmetricdifference</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="union -- Return a combination of all flags in this set and the other set …" href="internal/enums.html#hikari.internal.enums.Flag.union"
+>union</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="value -- Return the `builtins.int` value of the flag." href="internal/enums.html#hikari.internal.enums.Flag.value"
+>value</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/intents.py#L1-L373" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Shard intents for controlling which events the application receives.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;Intents&#34;]
+
+import typing
+
+from hikari.internal import enums
+
+
+@typing.final
+class Intents(enums.Flag):
+    &#34;&#34;&#34;Represents an intent on the gateway.
+
+    This is a bitfield representation of all the categories of event
+    that you wish to receive.
+
+    Any events not in an intent category will be fired regardless of what
+    intents you provide.
+
+    !!! info
+        Discord now places limits on certain events you can receive without
+        whitelisting your bot first. On the `Bot` tab in the developer&#39;s portal
+        for your bot, you should now have the option to enable functionality
+        for receiving these events.
+
+        If you attempt to request an intent type that you have not whitelisted
+        your bot for, you will be disconnected on startup with a `4014` closure
+        code.
+
+    !!! warning
+        If you are using the V7 Gateway, you will be REQUIRED to provide some
+        form of intent value when you connect. Failure to do so may result in
+        immediate termination of the session server-side.
+
+    This enum is an `enum.IntFlag`, which means that you can use bitwise
+    operators to join and splice multiple intents into one value.
+
+    For example, if we wish to only refer to the `GUILDS` intent, then it is
+    simply a case of accessing it normally.
+
+    ```py
+    my_intents = Intents.GUILDS
+    ```
+
+    If we wanted to have several intents grouped together, we would use the
+    bitwise-or operator to combine them (`|`). This can be done in-place
+    with the `|=` operator if needed.
+
+    ```py
+    # One or two values that fit on one line.
+    my_intents = Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES
+
+    # Several intents together. You may find it useful to format these like
+    # so to keep your code readable.
+    my_intents = (
+        Intents.GUILDS             |
+        Intents.GUILD_BANS         |
+        Intents.GUILD_EMOJIS       |
+        Intents.GUILD_INTEGRATIONS |
+        Intents.GUILD_MESSAGES     |
+        Intents.PRIVATE_MESSAGES
+    )
+    ```
+
+    To check if an intent **is present** in a given intents bitfield, you can
+    use the bitwise-and operator (`&amp;`) to check. This returns the &#34;intersection&#34;
+    or &#34;crossover&#34; between the left and right-hand side of the `&amp;`. You can then
+    use the `==` operator to check that specific values are present. You can
+    check in-place with the `&amp;=` operator if needed.
+
+    ```py
+    # Check if an intent is set:
+    if (my_intents &amp; Intents.GUILD_MESSAGES) == Intents.GUILD_MESSAGES:
+        print(&#34;Guild messages are enabled&#34;)
+
+    # Checking if ALL in a combination are set:
+    expected_intents = (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    if (my_intents &amp; expected_intents) == expected_intents:
+        print(&#34;Messages are enabled in guilds and private messages.&#34;)
+
+    # Checking if AT LEAST ONE in a combination is set:
+    expected_intents = (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    if my_intents &amp; expected_intents:
+        print(&#34;Messages are enabled in guilds or private messages.&#34;)
+    ```
+
+    Removing one or more intents from a combination can be done with the
+    bitwise-xor (`^`) operator. The `^=` operator can do this in-place.
+
+    ```py
+    # Remove GUILD_MESSAGES
+    my_intents = my_intents ^ Intents.GUILD_MESSAGES
+    # or, simplifying:
+    my_intents ^= Intents.GUILD_MESSAGES
+
+    # Remove all messages events.
+    my_intents = my_intents ^ (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    # or, simplifying
+    my_intents ^= (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    ```
+
+    What is and is not covered by intents?
+    --------------------------------------
+
+    The following unprivileged events require intents to be dispatched:
+
+    - `GUILD_CREATE`
+    - `GUILD_UPDATE`
+    - `GUILD_DELETE`
+    - `GUILD_ROLE_CREATE`
+    - `GUILD_ROLE_UPDATE`
+    - `GUILD_ROLE_DELETE`
+    - `GUILD_BAN_ADD`
+    - `GUILD_BAN_REMOVE`
+    - `GUILD_EMOJIS_UPDATE`
+    - `INTEGRATION_CREATE`
+    - `INTEGRATION_DELETE`
+    - `INTEGRATION_UPDATE`
+    - `INVITE_CREATE`
+    - `INVITE_DELETE`
+    - `CHANNEL_CREATE`
+    - `CHANNEL_UPDATE`
+    - `CHANNEL_DELETE`
+    - `CHANNEL_PINS_UPDATE (guilds only)`
+    - `MESSAGE_CREATE`
+    - `MESSAGE_UPDATE`
+    - `MESSAGE_DELETE`
+    - `MESSAGE_BULK_DELETE`
+    - `MESSAGE_REACTION_ADD`
+    - `MESSAGE_REACTION_REMOVE`
+    - `MESSAGE_REACTION_REMOVE_ALL`
+    - `MESSAGE_REACTION_REMOVE_EMOJI`
+    - `TYPING_START`
+    - `VOICE_STATE_UPDATE`
+    - `WEBHOOKS_UPDATE`
+
+    The following privileged events require intents to be dispatched:
+
+    - `GUILD_MEMBER_ADD`
+    - `GUILD_MEMBER_UPDATE`
+    - `GUILD_MEMBER_REMOVE`
+    - `PRESENCE_UPDATE`
+
+    All events not listed above will be dispatched regardless of whether
+    intents are used or not.
+    &#34;&#34;&#34;
+
+    NONE = 0
+    &#34;&#34;&#34;Represents no intents.&#34;&#34;&#34;
+
+    GUILDS = 1 &lt;&lt; 0
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_CREATE`
+    * `GUILD_UPDATE`
+    * `GUILD_DELETE`
+    * `GUILD_ROLE_CREATE`
+    * `GUILD_ROLE_UPDATE`
+    * `GUILD_ROLE_DELETE`
+    * `CHANNEL_CREATE`
+    * `CHANNEL_UPDATE`
+    * `CHANNEL_DELETE`
+    * `CHANNEL_PINS_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_MEMBERS = 1 &lt;&lt; 1
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_MEMBER_ADD`
+    * `GUILD_MEMBER_UPDATE`
+    * `GUILD_MEMBER_REMOVE`
+
+    !!! warning
+        This intent is privileged, and requires enabling/whitelisting to use.
+    &#34;&#34;&#34;
+
+    GUILD_BANS = 1 &lt;&lt; 2
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_BAN_ADD`
+    * `GUILD_BAN_REMOVE`
+    &#34;&#34;&#34;
+
+    GUILD_EMOJIS = 1 &lt;&lt; 3
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_EMOJIS_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_INTEGRATIONS = 1 &lt;&lt; 4
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `INTEGRATION_CREATE`
+    * `INTEGRATION_DELETE`
+    * `INTEGRATION_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_WEBHOOKS = 1 &lt;&lt; 5
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `WEBHOOKS_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_INVITES = 1 &lt;&lt; 6
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `INVITE_CREATE`
+    * `INVITE_DELETE`
+    &#34;&#34;&#34;
+
+    GUILD_VOICE_STATES = 1 &lt;&lt; 7
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `VOICE_STATE_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_PRESENCES = 1 &lt;&lt; 8
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `PRESENCE_UPDATE`
+
+    !!! warning
+        This intent is privileged, and requires enabling/whitelisting to use.&#34;&#34;&#34;
+
+    GUILD_MESSAGES = 1 &lt;&lt; 9
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_CREATE` (in guilds only)
+    * `MESSAGE_UPDATE` (in guilds only)
+    * `MESSAGE_DELETE` (in guilds only)
+    * `MESSAGE_BULK_DELETE` (in guilds only)
+    &#34;&#34;&#34;
+
+    GUILD_MESSAGE_REACTIONS = 1 &lt;&lt; 10
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_REACTION_ADD` (in guilds only)
+    * `MESSAGE_REACTION_REMOVE` (in guilds only)
+    * `MESSAGE_REACTION_REMOVE_ALL` (in guilds only)
+    * `MESSAGE_REACTION_REMOVE_EMOJI` (in guilds only)
+    &#34;&#34;&#34;
+
+    GUILD_MESSAGE_TYPING = 1 &lt;&lt; 11
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `TYPING_START` (in guilds only)
+    &#34;&#34;&#34;
+
+    DM_MESSAGES = 1 &lt;&lt; 12
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_CREATE` (in private message channels (non-guild bound) only)
+    * `MESSAGE_UPDATE` (in private message channels (non-guild bound) only)
+    * `MESSAGE_DELETE` (in private message channels (non-guild bound) only)
+    &#34;&#34;&#34;
+
+    DM_MESSAGE_REACTIONS = 1 &lt;&lt; 13
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_REACTION_ADD` (in private message channels (non-guild bound) only)
+    * `MESSAGE_REACTION_REMOVE` (in private message channels (non-guild bound) only)
+    * `MESSAGE_REACTION_REMOVE_ALL` (in private message channels (non-guild bound) only)
+    * `MESSAGE_REACTION_REMOVE_EMOJI` (in private message channels (non-guild bound) only)
+    &#34;&#34;&#34;
+
+    DM_MESSAGE_TYPING = 1 &lt;&lt; 14
+    &#34;&#34;&#34;Subscribes to the following events
+
+    * `TYPING_START` (in private message channels (non-guild bound) only)
+    &#34;&#34;&#34;
+
+    # Annoyingly, enums hide classmethods and staticmethods from __dir__ in
+    # EnumMeta which means if I make methods to generate these, then stuff
+    # will not be documented by pdoc. Alas, my dream of being smart with
+    # operator.or_ and functools.reduce has been destroyed.
+
+    ALL_GUILDS_UNPRIVILEGED = (
+        GUILDS
+        | GUILD_BANS
+        | GUILD_EMOJIS
+        | GUILD_INTEGRATIONS
+        | GUILD_WEBHOOKS
+        | GUILD_INVITES
+        | GUILD_VOICE_STATES
+        | GUILD_MESSAGES
+        | GUILD_MESSAGE_REACTIONS
+        | GUILD_MESSAGE_TYPING
+    )
+    &#34;&#34;&#34;All unprivileged guild-related intents.&#34;&#34;&#34;
+
+    ALL_GUILDS_PRIVILEGED = GUILD_MEMBERS | GUILD_PRESENCES
+    &#34;&#34;&#34;All privileged guild intents.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    ALL_GUILDS = ALL_GUILDS_UNPRIVILEGED | ALL_GUILDS_PRIVILEGED
+    &#34;&#34;&#34;All unprivileged guild intents and all privileged guild intents.
+
+    This combines `Intents.ALL_GUILDS_UNPRIVILEGED` and
+    `Intents.ALL_GUILDS_PRIVILEGED`.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    ALL_DMS = DM_MESSAGES | DM_MESSAGE_TYPING | DM_MESSAGE_REACTIONS
+    &#34;&#34;&#34;All private message channel (non-guild bound) intents.&#34;&#34;&#34;
+
+    ALL_MESSAGES = DM_MESSAGES | GUILD_MESSAGES
+    &#34;&#34;&#34;All message intents.&#34;&#34;&#34;
+
+    ALL_MESSAGE_REACTIONS = DM_MESSAGE_REACTIONS | GUILD_MESSAGE_REACTIONS
+    &#34;&#34;&#34;All message reaction intents.&#34;&#34;&#34;
+
+    ALL_MESSAGE_TYPING = DM_MESSAGE_TYPING | GUILD_MESSAGE_TYPING
+    &#34;&#34;&#34;All typing indicator intents.&#34;&#34;&#34;
+
+    ALL_UNPRIVILEGED = ALL_GUILDS_UNPRIVILEGED | ALL_DMS
+    &#34;&#34;&#34;All unprivileged intents.&#34;&#34;&#34;
+
+    ALL_PRIVILEGED = ALL_GUILDS_PRIVILEGED
+    &#34;&#34;&#34;All privileged intents.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    ALL = ALL_UNPRIVILEGED | ALL_PRIVILEGED
+    &#34;&#34;&#34;All unprivileged and privileged intents.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    @property
+    def is_privileged(self) -&gt; bool:
+        &#34;&#34;&#34;Determine whether the intent requires elevated privileges.
+
+        If this is `builtins.True`, you will be required to opt-in to using
+        this intent on the Discord Developer Portal before you can utilise it
+        in your application.
+        &#34;&#34;&#34;
+        return bool(self &amp; self.ALL_PRIVILEGED)</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.intents.Intents" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Intents -- Represents an intent on the gateway …" href="#hikari.intents.Intents"
+>Intents</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.intents.Intents" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Intents (
+    value: <a href='https://docs.python.org/3/library/functions.html#int'>int</a> = 0,
+): ...</code></pre>
+<p>Represents an intent on the gateway.</p>
+<p>This is a bitfield representation of all the categories of event
+that you wish to receive.</p>
+<p>Any events not in an intent category will be fired regardless of what
+intents you provide.</p>
+<div class="alert alert-primary">
+<p class="admonition-title">Info</p>
+<p>Discord now places limits on certain events you can receive without
+whitelisting your bot first. On the <code>Bot</code> tab in the developer's portal
+for your bot, you should now have the option to enable functionality
+for receiving these events.</p>
+<p>If you attempt to request an intent type that you have not whitelisted
+your bot for, you will be disconnected on startup with a <code>4014</code> closure
+code.</p>
+</div>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>If you are using the V7 Gateway, you will be REQUIRED to provide some
+form of intent value when you connect. Failure to do so may result in
+immediate termination of the session server-side.</p>
+</div>
+<p>This enum is an <code><a href='https://docs.python.org/3/library/enum.html#enum.IntFlag'>enum.IntFlag</a></code>, which means that you can use bitwise
+operators to join and splice multiple intents into one value.</p>
+<p>For example, if we wish to only refer to the <code>GUILDS</code> intent, then it is
+simply a case of accessing it normally.</p>
+<pre><code class="language-py">my_intents = Intents.GUILDS
+</code></pre>
+<p>If we wanted to have several intents grouped together, we would use the
+bitwise-or operator to combine them (<code>|</code>). This can be done in-place
+with the <code>|=</code> operator if needed.</p>
+<pre><code class="language-py"># One or two values that fit on one line.
+my_intents = Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES
+
+# Several intents together. You may find it useful to format these like
+# so to keep your code readable.
+my_intents = (
+    Intents.GUILDS             |
+    Intents.GUILD_BANS         |
+    Intents.GUILD_EMOJIS       |
+    Intents.GUILD_INTEGRATIONS |
+    Intents.GUILD_MESSAGES     |
+    Intents.PRIVATE_MESSAGES
+)
+</code></pre>
+<p>To check if an intent <strong>is present</strong> in a given intents bitfield, you can
+use the bitwise-and operator (<code>&amp;</code>) to check. This returns the "intersection"
+or "crossover" between the left and right-hand side of the <code>&amp;</code>. You can then
+use the <code>==</code> operator to check that specific values are present. You can
+check in-place with the <code>&amp;=</code> operator if needed.</p>
+<pre><code class="language-py"># Check if an intent is set:
+if (my_intents &amp; Intents.GUILD_MESSAGES) == Intents.GUILD_MESSAGES:
+    print(&quot;Guild messages are enabled&quot;)
+
+# Checking if ALL in a combination are set:
+expected_intents = (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+if (my_intents &amp; expected_intents) == expected_intents:
+    print(&quot;Messages are enabled in guilds and private messages.&quot;)
+
+# Checking if AT LEAST ONE in a combination is set:
+expected_intents = (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+if my_intents &amp; expected_intents:
+    print(&quot;Messages are enabled in guilds or private messages.&quot;)
+</code></pre>
+<p>Removing one or more intents from a combination can be done with the
+bitwise-xor (<code>^</code>) operator. The <code>^=</code> operator can do this in-place.</p>
+<pre><code class="language-py"># Remove GUILD_MESSAGES
+my_intents = my_intents ^ Intents.GUILD_MESSAGES
+# or, simplifying:
+my_intents ^= Intents.GUILD_MESSAGES
+
+# Remove all messages events.
+my_intents = my_intents ^ (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+# or, simplifying
+my_intents ^= (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+</code></pre>
+<h2 id="what-is-and-is-not-covered-by-intents">What is and is not covered by intents?</h2>
+<p>The following unprivileged events require intents to be dispatched:</p>
+<ul>
+<li><code>GUILD_CREATE</code></li>
+<li><code>GUILD_UPDATE</code></li>
+<li><code>GUILD_DELETE</code></li>
+<li><code>GUILD_ROLE_CREATE</code></li>
+<li><code>GUILD_ROLE_UPDATE</code></li>
+<li><code>GUILD_ROLE_DELETE</code></li>
+<li><code>GUILD_BAN_ADD</code></li>
+<li><code>GUILD_BAN_REMOVE</code></li>
+<li><code>GUILD_EMOJIS_UPDATE</code></li>
+<li><code>INTEGRATION_CREATE</code></li>
+<li><code>INTEGRATION_DELETE</code></li>
+<li><code>INTEGRATION_UPDATE</code></li>
+<li><code>INVITE_CREATE</code></li>
+<li><code>INVITE_DELETE</code></li>
+<li><code>CHANNEL_CREATE</code></li>
+<li><code>CHANNEL_UPDATE</code></li>
+<li><code>CHANNEL_DELETE</code></li>
+<li><code>CHANNEL_PINS_UPDATE (guilds only)</code></li>
+<li><code>MESSAGE_CREATE</code></li>
+<li><code>MESSAGE_UPDATE</code></li>
+<li><code>MESSAGE_DELETE</code></li>
+<li><code>MESSAGE_BULK_DELETE</code></li>
+<li><code>MESSAGE_REACTION_ADD</code></li>
+<li><code>MESSAGE_REACTION_REMOVE</code></li>
+<li><code>MESSAGE_REACTION_REMOVE_ALL</code></li>
+<li><code>MESSAGE_REACTION_REMOVE_EMOJI</code></li>
+<li><code>TYPING_START</code></li>
+<li><code>VOICE_STATE_UPDATE</code></li>
+<li><code>WEBHOOKS_UPDATE</code></li>
+</ul>
+<p>The following privileged events require intents to be dispatched:</p>
+<ul>
+<li><code>GUILD_MEMBER_ADD</code></li>
+<li><code>GUILD_MEMBER_UPDATE</code></li>
+<li><code>GUILD_MEMBER_REMOVE</code></li>
+<li><code>PRESENCE_UPDATE</code></li>
+</ul>
+<p>All events not listed above will be dispatched regardless of whether
+intents are used or not.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/intents.py#L35-L373" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Intents(enums.Flag):
+    &#34;&#34;&#34;Represents an intent on the gateway.
+
+    This is a bitfield representation of all the categories of event
+    that you wish to receive.
+
+    Any events not in an intent category will be fired regardless of what
+    intents you provide.
+
+    !!! info
+        Discord now places limits on certain events you can receive without
+        whitelisting your bot first. On the `Bot` tab in the developer&#39;s portal
+        for your bot, you should now have the option to enable functionality
+        for receiving these events.
+
+        If you attempt to request an intent type that you have not whitelisted
+        your bot for, you will be disconnected on startup with a `4014` closure
+        code.
+
+    !!! warning
+        If you are using the V7 Gateway, you will be REQUIRED to provide some
+        form of intent value when you connect. Failure to do so may result in
+        immediate termination of the session server-side.
+
+    This enum is an `enum.IntFlag`, which means that you can use bitwise
+    operators to join and splice multiple intents into one value.
+
+    For example, if we wish to only refer to the `GUILDS` intent, then it is
+    simply a case of accessing it normally.
+
+    ```py
+    my_intents = Intents.GUILDS
+    ```
+
+    If we wanted to have several intents grouped together, we would use the
+    bitwise-or operator to combine them (`|`). This can be done in-place
+    with the `|=` operator if needed.
+
+    ```py
+    # One or two values that fit on one line.
+    my_intents = Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES
+
+    # Several intents together. You may find it useful to format these like
+    # so to keep your code readable.
+    my_intents = (
+        Intents.GUILDS             |
+        Intents.GUILD_BANS         |
+        Intents.GUILD_EMOJIS       |
+        Intents.GUILD_INTEGRATIONS |
+        Intents.GUILD_MESSAGES     |
+        Intents.PRIVATE_MESSAGES
+    )
+    ```
+
+    To check if an intent **is present** in a given intents bitfield, you can
+    use the bitwise-and operator (`&amp;`) to check. This returns the &#34;intersection&#34;
+    or &#34;crossover&#34; between the left and right-hand side of the `&amp;`. You can then
+    use the `==` operator to check that specific values are present. You can
+    check in-place with the `&amp;=` operator if needed.
+
+    ```py
+    # Check if an intent is set:
+    if (my_intents &amp; Intents.GUILD_MESSAGES) == Intents.GUILD_MESSAGES:
+        print(&#34;Guild messages are enabled&#34;)
+
+    # Checking if ALL in a combination are set:
+    expected_intents = (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    if (my_intents &amp; expected_intents) == expected_intents:
+        print(&#34;Messages are enabled in guilds and private messages.&#34;)
+
+    # Checking if AT LEAST ONE in a combination is set:
+    expected_intents = (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    if my_intents &amp; expected_intents:
+        print(&#34;Messages are enabled in guilds or private messages.&#34;)
+    ```
+
+    Removing one or more intents from a combination can be done with the
+    bitwise-xor (`^`) operator. The `^=` operator can do this in-place.
+
+    ```py
+    # Remove GUILD_MESSAGES
+    my_intents = my_intents ^ Intents.GUILD_MESSAGES
+    # or, simplifying:
+    my_intents ^= Intents.GUILD_MESSAGES
+
+    # Remove all messages events.
+    my_intents = my_intents ^ (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    # or, simplifying
+    my_intents ^= (Intents.GUILD_MESSAGES | Intents.PRIVATE_MESSAGES)
+    ```
+
+    What is and is not covered by intents?
+    --------------------------------------
+
+    The following unprivileged events require intents to be dispatched:
+
+    - `GUILD_CREATE`
+    - `GUILD_UPDATE`
+    - `GUILD_DELETE`
+    - `GUILD_ROLE_CREATE`
+    - `GUILD_ROLE_UPDATE`
+    - `GUILD_ROLE_DELETE`
+    - `GUILD_BAN_ADD`
+    - `GUILD_BAN_REMOVE`
+    - `GUILD_EMOJIS_UPDATE`
+    - `INTEGRATION_CREATE`
+    - `INTEGRATION_DELETE`
+    - `INTEGRATION_UPDATE`
+    - `INVITE_CREATE`
+    - `INVITE_DELETE`
+    - `CHANNEL_CREATE`
+    - `CHANNEL_UPDATE`
+    - `CHANNEL_DELETE`
+    - `CHANNEL_PINS_UPDATE (guilds only)`
+    - `MESSAGE_CREATE`
+    - `MESSAGE_UPDATE`
+    - `MESSAGE_DELETE`
+    - `MESSAGE_BULK_DELETE`
+    - `MESSAGE_REACTION_ADD`
+    - `MESSAGE_REACTION_REMOVE`
+    - `MESSAGE_REACTION_REMOVE_ALL`
+    - `MESSAGE_REACTION_REMOVE_EMOJI`
+    - `TYPING_START`
+    - `VOICE_STATE_UPDATE`
+    - `WEBHOOKS_UPDATE`
+
+    The following privileged events require intents to be dispatched:
+
+    - `GUILD_MEMBER_ADD`
+    - `GUILD_MEMBER_UPDATE`
+    - `GUILD_MEMBER_REMOVE`
+    - `PRESENCE_UPDATE`
+
+    All events not listed above will be dispatched regardless of whether
+    intents are used or not.
+    &#34;&#34;&#34;
+
+    NONE = 0
+    &#34;&#34;&#34;Represents no intents.&#34;&#34;&#34;
+
+    GUILDS = 1 &lt;&lt; 0
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_CREATE`
+    * `GUILD_UPDATE`
+    * `GUILD_DELETE`
+    * `GUILD_ROLE_CREATE`
+    * `GUILD_ROLE_UPDATE`
+    * `GUILD_ROLE_DELETE`
+    * `CHANNEL_CREATE`
+    * `CHANNEL_UPDATE`
+    * `CHANNEL_DELETE`
+    * `CHANNEL_PINS_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_MEMBERS = 1 &lt;&lt; 1
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_MEMBER_ADD`
+    * `GUILD_MEMBER_UPDATE`
+    * `GUILD_MEMBER_REMOVE`
+
+    !!! warning
+        This intent is privileged, and requires enabling/whitelisting to use.
+    &#34;&#34;&#34;
+
+    GUILD_BANS = 1 &lt;&lt; 2
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_BAN_ADD`
+    * `GUILD_BAN_REMOVE`
+    &#34;&#34;&#34;
+
+    GUILD_EMOJIS = 1 &lt;&lt; 3
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `GUILD_EMOJIS_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_INTEGRATIONS = 1 &lt;&lt; 4
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `INTEGRATION_CREATE`
+    * `INTEGRATION_DELETE`
+    * `INTEGRATION_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_WEBHOOKS = 1 &lt;&lt; 5
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `WEBHOOKS_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_INVITES = 1 &lt;&lt; 6
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `INVITE_CREATE`
+    * `INVITE_DELETE`
+    &#34;&#34;&#34;
+
+    GUILD_VOICE_STATES = 1 &lt;&lt; 7
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `VOICE_STATE_UPDATE`
+    &#34;&#34;&#34;
+
+    GUILD_PRESENCES = 1 &lt;&lt; 8
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `PRESENCE_UPDATE`
+
+    !!! warning
+        This intent is privileged, and requires enabling/whitelisting to use.&#34;&#34;&#34;
+
+    GUILD_MESSAGES = 1 &lt;&lt; 9
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_CREATE` (in guilds only)
+    * `MESSAGE_UPDATE` (in guilds only)
+    * `MESSAGE_DELETE` (in guilds only)
+    * `MESSAGE_BULK_DELETE` (in guilds only)
+    &#34;&#34;&#34;
+
+    GUILD_MESSAGE_REACTIONS = 1 &lt;&lt; 10
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_REACTION_ADD` (in guilds only)
+    * `MESSAGE_REACTION_REMOVE` (in guilds only)
+    * `MESSAGE_REACTION_REMOVE_ALL` (in guilds only)
+    * `MESSAGE_REACTION_REMOVE_EMOJI` (in guilds only)
+    &#34;&#34;&#34;
+
+    GUILD_MESSAGE_TYPING = 1 &lt;&lt; 11
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `TYPING_START` (in guilds only)
+    &#34;&#34;&#34;
+
+    DM_MESSAGES = 1 &lt;&lt; 12
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_CREATE` (in private message channels (non-guild bound) only)
+    * `MESSAGE_UPDATE` (in private message channels (non-guild bound) only)
+    * `MESSAGE_DELETE` (in private message channels (non-guild bound) only)
+    &#34;&#34;&#34;
+
+    DM_MESSAGE_REACTIONS = 1 &lt;&lt; 13
+    &#34;&#34;&#34;Subscribes to the following events:
+
+    * `MESSAGE_REACTION_ADD` (in private message channels (non-guild bound) only)
+    * `MESSAGE_REACTION_REMOVE` (in private message channels (non-guild bound) only)
+    * `MESSAGE_REACTION_REMOVE_ALL` (in private message channels (non-guild bound) only)
+    * `MESSAGE_REACTION_REMOVE_EMOJI` (in private message channels (non-guild bound) only)
+    &#34;&#34;&#34;
+
+    DM_MESSAGE_TYPING = 1 &lt;&lt; 14
+    &#34;&#34;&#34;Subscribes to the following events
+
+    * `TYPING_START` (in private message channels (non-guild bound) only)
+    &#34;&#34;&#34;
+
+    # Annoyingly, enums hide classmethods and staticmethods from __dir__ in
+    # EnumMeta which means if I make methods to generate these, then stuff
+    # will not be documented by pdoc. Alas, my dream of being smart with
+    # operator.or_ and functools.reduce has been destroyed.
+
+    ALL_GUILDS_UNPRIVILEGED = (
+        GUILDS
+        | GUILD_BANS
+        | GUILD_EMOJIS
+        | GUILD_INTEGRATIONS
+        | GUILD_WEBHOOKS
+        | GUILD_INVITES
+        | GUILD_VOICE_STATES
+        | GUILD_MESSAGES
+        | GUILD_MESSAGE_REACTIONS
+        | GUILD_MESSAGE_TYPING
+    )
+    &#34;&#34;&#34;All unprivileged guild-related intents.&#34;&#34;&#34;
+
+    ALL_GUILDS_PRIVILEGED = GUILD_MEMBERS | GUILD_PRESENCES
+    &#34;&#34;&#34;All privileged guild intents.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    ALL_GUILDS = ALL_GUILDS_UNPRIVILEGED | ALL_GUILDS_PRIVILEGED
+    &#34;&#34;&#34;All unprivileged guild intents and all privileged guild intents.
+
+    This combines `Intents.ALL_GUILDS_UNPRIVILEGED` and
+    `Intents.ALL_GUILDS_PRIVILEGED`.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    ALL_DMS = DM_MESSAGES | DM_MESSAGE_TYPING | DM_MESSAGE_REACTIONS
+    &#34;&#34;&#34;All private message channel (non-guild bound) intents.&#34;&#34;&#34;
+
+    ALL_MESSAGES = DM_MESSAGES | GUILD_MESSAGES
+    &#34;&#34;&#34;All message intents.&#34;&#34;&#34;
+
+    ALL_MESSAGE_REACTIONS = DM_MESSAGE_REACTIONS | GUILD_MESSAGE_REACTIONS
+    &#34;&#34;&#34;All message reaction intents.&#34;&#34;&#34;
+
+    ALL_MESSAGE_TYPING = DM_MESSAGE_TYPING | GUILD_MESSAGE_TYPING
+    &#34;&#34;&#34;All typing indicator intents.&#34;&#34;&#34;
+
+    ALL_UNPRIVILEGED = ALL_GUILDS_UNPRIVILEGED | ALL_DMS
+    &#34;&#34;&#34;All unprivileged intents.&#34;&#34;&#34;
+
+    ALL_PRIVILEGED = ALL_GUILDS_PRIVILEGED
+    &#34;&#34;&#34;All privileged intents.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    ALL = ALL_UNPRIVILEGED | ALL_PRIVILEGED
+    &#34;&#34;&#34;All unprivileged and privileged intents.
+
+    !!! warning
+        This set of intent is privileged, and requires enabling/whitelisting to
+        use.
+    &#34;&#34;&#34;
+
+    @property
+    def is_privileged(self) -&gt; bool:
+        &#34;&#34;&#34;Determine whether the intent requires elevated privileges.
+
+        If this is `builtins.True`, you will be required to opt-in to using
+        this intent on the Discord Developer Portal before you can utilise it
+        in your application.
+        &#34;&#34;&#34;
+        return bool(self &amp; self.ALL_PRIVILEGED)</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Intents -- Represents an intent on the gateway …" href="#hikari.intents.Intents"
+>Intents</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="builtins.int -- int([x]) -> integer
+int(x, base=10) -> integer …" href="https://docs.python.org/3/library/functions.html#int"
+>int</a></dt>
+<dd class="nested"><p>int([x]) -&gt; integer
+int(x, base=10) -&gt; integer …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Flag -- Clone of Python's `enum.Flag` implementation …" href="internal/enums.html#hikari.internal.enums.Flag"
+>Flag</a></dt>
+<dd class="nested"><p>Clone of Python's <code><a href='https://docs.python.org/3/library/enum.html#enum.Flag'>enum.Flag</a></code> implementation …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.intents.Intents.is_privileged" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_privileged -- Determine whether the intent requires elevated privileges …" href="#hikari.intents.Intents.is_privileged"  >is_privileged</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Determine whether the intent requires elevated privileges.</p>
+<p>If this is <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code>, you will be required to opt-in to using
+this intent on the Discord Developer Portal before you can utilise it
+in your application.</p></dd>
+</div>
+<div id="hikari.intents.Intents.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- Return the name of the flag combination as a `builtins.str`." href="internal/enums.html#hikari.internal.enums.Flag.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Return the name of the flag combination as a <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>.</p></dd>
+</div>
+<div id="hikari.intents.Intents.value" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="value -- Return the `builtins.int` value of the flag." href="internal/enums.html#hikari.internal.enums.Flag.value"  >value</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>Return the <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> value of the flag.</p></dd>
+</div>
+<div id="hikari.intents.Intents.ALL" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL -- All unprivileged and privileged intents …" href="#hikari.intents.Intents.ALL"  >ALL</a> = 32767</code></pre>
+</dt>
+<dd><p>All unprivileged and privileged intents.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This set of intent is privileged, and requires enabling/whitelisting to
+use.</p>
+</div></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_DMS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_DMS -- All private message channel (non-guild bound) intents." href="#hikari.intents.Intents.ALL_DMS"  >ALL_DMS</a> = 28672</code></pre>
+</dt>
+<dd><p>All private message channel (non-guild bound) intents.</p></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_GUILDS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_GUILDS -- All unprivileged guild intents and all privileged guild intents …" href="#hikari.intents.Intents.ALL_GUILDS"  >ALL_GUILDS</a> = 4095</code></pre>
+</dt>
+<dd><p>All unprivileged guild intents and all privileged guild intents.</p>
+<p>This combines <code><a href='#hikari.intents.Intents.ALL_GUILDS_UNPRIVILEGED'>ALL_GUILDS_UNPRIVILEGED</a></code> and
+<code><a href='#hikari.intents.Intents.ALL_GUILDS_PRIVILEGED'>ALL_GUILDS_PRIVILEGED</a></code>.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This set of intent is privileged, and requires enabling/whitelisting to
+use.</p>
+</div></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_GUILDS_PRIVILEGED" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_GUILDS_PRIVILEGED -- All privileged guild intents …" href="#hikari.intents.Intents.ALL_GUILDS_PRIVILEGED"  >ALL_GUILDS_PRIVILEGED</a> = 258</code></pre>
+</dt>
+<dd><p>All privileged guild intents.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This set of intent is privileged, and requires enabling/whitelisting to
+use.</p>
+</div></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_GUILDS_UNPRIVILEGED" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_GUILDS_UNPRIVILEGED -- All unprivileged guild-related intents." href="#hikari.intents.Intents.ALL_GUILDS_UNPRIVILEGED"  >ALL_GUILDS_UNPRIVILEGED</a> = 3837</code></pre>
+</dt>
+<dd><p>All unprivileged guild-related intents.</p></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_MESSAGES" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_MESSAGES -- All message intents." href="#hikari.intents.Intents.ALL_MESSAGES"  >ALL_MESSAGES</a> = 4608</code></pre>
+</dt>
+<dd><p>All message intents.</p></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_MESSAGE_REACTIONS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_MESSAGE_REACTIONS -- All message reaction intents." href="#hikari.intents.Intents.ALL_MESSAGE_REACTIONS"  >ALL_MESSAGE_REACTIONS</a> = 9216</code></pre>
+</dt>
+<dd><p>All message reaction intents.</p></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_MESSAGE_TYPING" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_MESSAGE_TYPING -- All typing indicator intents." href="#hikari.intents.Intents.ALL_MESSAGE_TYPING"  >ALL_MESSAGE_TYPING</a> = 18432</code></pre>
+</dt>
+<dd><p>All typing indicator intents.</p></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_PRIVILEGED" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_PRIVILEGED -- All privileged intents …" href="#hikari.intents.Intents.ALL_PRIVILEGED"  >ALL_PRIVILEGED</a> = 258</code></pre>
+</dt>
+<dd><p>All privileged intents.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This set of intent is privileged, and requires enabling/whitelisting to
+use.</p>
+</div></dd>
+</div>
+<div id="hikari.intents.Intents.ALL_UNPRIVILEGED" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="ALL_UNPRIVILEGED -- All unprivileged intents." href="#hikari.intents.Intents.ALL_UNPRIVILEGED"  >ALL_UNPRIVILEGED</a> = 32509</code></pre>
+</dt>
+<dd><p>All unprivileged intents.</p></dd>
+</div>
+<div id="hikari.intents.Intents.DM_MESSAGES" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DM_MESSAGES -- Subscribes to the following events: …" href="#hikari.intents.Intents.DM_MESSAGES"  >DM_MESSAGES</a> = 4096</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>MESSAGE_CREATE</code> (in private message channels (non-guild bound) only)</li>
+<li><code>MESSAGE_UPDATE</code> (in private message channels (non-guild bound) only)</li>
+<li><code>MESSAGE_DELETE</code> (in private message channels (non-guild bound) only)</li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.DM_MESSAGE_REACTIONS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DM_MESSAGE_REACTIONS -- Subscribes to the following events: …" href="#hikari.intents.Intents.DM_MESSAGE_REACTIONS"  >DM_MESSAGE_REACTIONS</a> = 8192</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>MESSAGE_REACTION_ADD</code> (in private message channels (non-guild bound) only)</li>
+<li><code>MESSAGE_REACTION_REMOVE</code> (in private message channels (non-guild bound) only)</li>
+<li><code>MESSAGE_REACTION_REMOVE_ALL</code> (in private message channels (non-guild bound) only)</li>
+<li><code>MESSAGE_REACTION_REMOVE_EMOJI</code> (in private message channels (non-guild bound) only)</li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.DM_MESSAGE_TYPING" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="DM_MESSAGE_TYPING -- Subscribes to the following events …" href="#hikari.intents.Intents.DM_MESSAGE_TYPING"  >DM_MESSAGE_TYPING</a> = 16384</code></pre>
+</dt>
+<dd><p>Subscribes to the following events</p>
+<ul>
+<li><code>TYPING_START</code> (in private message channels (non-guild bound) only)</li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILDS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILDS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILDS"  >GUILDS</a> = 1</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>GUILD_CREATE</code></li>
+<li><code>GUILD_UPDATE</code></li>
+<li><code>GUILD_DELETE</code></li>
+<li><code>GUILD_ROLE_CREATE</code></li>
+<li><code>GUILD_ROLE_UPDATE</code></li>
+<li><code>GUILD_ROLE_DELETE</code></li>
+<li><code>CHANNEL_CREATE</code></li>
+<li><code>CHANNEL_UPDATE</code></li>
+<li><code>CHANNEL_DELETE</code></li>
+<li><code>CHANNEL_PINS_UPDATE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_BANS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_BANS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_BANS"  >GUILD_BANS</a> = 4</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>GUILD_BAN_ADD</code></li>
+<li><code>GUILD_BAN_REMOVE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_EMOJIS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_EMOJIS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_EMOJIS"  >GUILD_EMOJIS</a> = 8</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>GUILD_EMOJIS_UPDATE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_INTEGRATIONS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_INTEGRATIONS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_INTEGRATIONS"  >GUILD_INTEGRATIONS</a> = 16</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>INTEGRATION_CREATE</code></li>
+<li><code>INTEGRATION_DELETE</code></li>
+<li><code>INTEGRATION_UPDATE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_INVITES" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_INVITES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_INVITES"  >GUILD_INVITES</a> = 64</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>INVITE_CREATE</code></li>
+<li><code>INVITE_DELETE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_MEMBERS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MEMBERS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MEMBERS"  >GUILD_MEMBERS</a> = 2</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>GUILD_MEMBER_ADD</code></li>
+<li><code>GUILD_MEMBER_UPDATE</code></li>
+<li><code>GUILD_MEMBER_REMOVE</code></li>
+</ul>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This intent is privileged, and requires enabling/whitelisting to use.</p>
+</div></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_MESSAGES" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MESSAGES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MESSAGES"  >GUILD_MESSAGES</a> = 512</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>MESSAGE_CREATE</code> (in guilds only)</li>
+<li><code>MESSAGE_UPDATE</code> (in guilds only)</li>
+<li><code>MESSAGE_DELETE</code> (in guilds only)</li>
+<li><code>MESSAGE_BULK_DELETE</code> (in guilds only)</li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_MESSAGE_REACTIONS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MESSAGE_REACTIONS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MESSAGE_REACTIONS"  >GUILD_MESSAGE_REACTIONS</a> = 1024</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>MESSAGE_REACTION_ADD</code> (in guilds only)</li>
+<li><code>MESSAGE_REACTION_REMOVE</code> (in guilds only)</li>
+<li><code>MESSAGE_REACTION_REMOVE_ALL</code> (in guilds only)</li>
+<li><code>MESSAGE_REACTION_REMOVE_EMOJI</code> (in guilds only)</li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_MESSAGE_TYPING" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_MESSAGE_TYPING -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_MESSAGE_TYPING"  >GUILD_MESSAGE_TYPING</a> = 2048</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>TYPING_START</code> (in guilds only)</li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_PRESENCES" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_PRESENCES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_PRESENCES"  >GUILD_PRESENCES</a> = 256</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>PRESENCE_UPDATE</code></li>
+</ul>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>This intent is privileged, and requires enabling/whitelisting to use.</p>
+</div></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_VOICE_STATES" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_VOICE_STATES -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_VOICE_STATES"  >GUILD_VOICE_STATES</a> = 128</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>VOICE_STATE_UPDATE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.GUILD_WEBHOOKS" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="GUILD_WEBHOOKS -- Subscribes to the following events: …" href="#hikari.intents.Intents.GUILD_WEBHOOKS"  >GUILD_WEBHOOKS</a> = 32</code></pre>
+</dt>
+<dd><p>Subscribes to the following events:</p>
+<ul>
+<li><code>WEBHOOKS_UPDATE</code></li>
+</ul></dd>
+</div>
+<div id="hikari.intents.Intents.NONE" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A variable that should be considered to be a constant value.'>const</abbr></em></small> <a title="NONE -- Represents no intents." href="#hikari.intents.Intents.NONE"  >NONE</a> = 0</code></pre>
+</dt>
+<dd><p>Represents no intents.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.intents.Intents.all" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="all" href="internal/enums.html#hikari.internal.enums.Flag.all" id="hikari.intents.Intents.all">all</a>(
+    self: _T,
+    *flags: _T,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Check if all of the given flags are part of this value …</p>
+<strong>This function is defined explicitly at <a title="all -- Check if all of the given flags are part of this value …" href="internal/enums.html#hikari.internal.enums.Flag.all"
+>hikari.internal.enums.Flag.all</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.any" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="any" href="internal/enums.html#hikari.internal.enums.Flag.any" id="hikari.intents.Intents.any">any</a>(
+    self: _T,
+    *flags: _T,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Check if any of the given flags are part of this value …</p>
+<strong>This function is defined explicitly at <a title="any -- Check if any of the given flags are part of this value …" href="internal/enums.html#hikari.internal.enums.Flag.any"
+>hikari.internal.enums.Flag.any</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.difference" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="difference" href="internal/enums.html#hikari.internal.enums.Flag.difference" id="hikari.intents.Intents.difference">difference</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Perform a set difference with the other set …</p>
+<strong>This function is defined explicitly at <a title="difference -- Perform a set difference with the other set …" href="internal/enums.html#hikari.internal.enums.Flag.difference"
+>hikari.internal.enums.Flag.difference</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.intersection" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="intersection" href="internal/enums.html#hikari.internal.enums.Flag.intersection" id="hikari.intents.Intents.intersection">intersection</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a combination of flags that are set for both given values …</p>
+<strong>This function is defined explicitly at <a title="intersection -- Return a combination of flags that are set for both given values …" href="internal/enums.html#hikari.internal.enums.Flag.intersection"
+>hikari.internal.enums.Flag.intersection</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.invert" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="invert" href="internal/enums.html#hikari.internal.enums.Flag.invert" id="hikari.intents.Intents.invert">invert</a>(
+    self: _T,
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a set of all flags not in the current set.</p>
+<strong>This function is defined explicitly at <a title="invert -- Return a set of all flags not in the current set." href="internal/enums.html#hikari.internal.enums.Flag.invert"
+>hikari.internal.enums.Flag.invert</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.is_disjoint" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_disjoint" href="internal/enums.html#hikari.internal.enums.Flag.is_disjoint" id="hikari.intents.Intents.is_disjoint">is_disjoint</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether two sets have a intersection or not …</p>
+<strong>This function is defined explicitly at <a title="is_disjoint -- Return whether two sets have a intersection or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_disjoint"
+>hikari.internal.enums.Flag.is_disjoint</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.is_subset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_subset" href="internal/enums.html#hikari.internal.enums.Flag.is_subset" id="hikari.intents.Intents.is_subset">is_subset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether another set contains this set or not …</p>
+<strong>This function is defined explicitly at <a title="is_subset -- Return whether another set contains this set or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_subset"
+>hikari.internal.enums.Flag.is_subset</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.is_superset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_superset" href="internal/enums.html#hikari.internal.enums.Flag.is_superset" id="hikari.intents.Intents.is_superset">is_superset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether this set contains another set or not.</p>
+<strong>This function is defined explicitly at <a title="is_superset -- Return whether this set contains another set or not." href="internal/enums.html#hikari.internal.enums.Flag.is_superset"
+>hikari.internal.enums.Flag.is_superset</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.isdisjoint" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="isdisjoint" href="internal/enums.html#hikari.internal.enums.Flag.is_disjoint" id="hikari.intents.Intents.isdisjoint">isdisjoint</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether two sets have a intersection or not …</p>
+<strong>This function is defined explicitly at <a title="is_disjoint -- Return whether two sets have a intersection or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_disjoint"
+>hikari.internal.enums.Flag.is_disjoint</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.issubset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="issubset" href="internal/enums.html#hikari.internal.enums.Flag.is_subset" id="hikari.intents.Intents.issubset">issubset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether another set contains this set or not …</p>
+<strong>This function is defined explicitly at <a title="is_subset -- Return whether another set contains this set or not …" href="internal/enums.html#hikari.internal.enums.Flag.is_subset"
+>hikari.internal.enums.Flag.is_subset</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.issuperset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="issuperset" href="internal/enums.html#hikari.internal.enums.Flag.is_superset" id="hikari.intents.Intents.issuperset">issuperset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether this set contains another set or not.</p>
+<strong>This function is defined explicitly at <a title="is_superset -- Return whether this set contains another set or not." href="internal/enums.html#hikari.internal.enums.Flag.is_superset"
+>hikari.internal.enums.Flag.is_superset</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.none" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="none" href="internal/enums.html#hikari.internal.enums.Flag.none" id="hikari.intents.Intents.none">none</a>(
+    self: _T,
+    *flags: _T,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Check if none of the given flags are part of this value …</p>
+<strong>This function is defined explicitly at <a title="none -- Check if none of the given flags are part of this value …" href="internal/enums.html#hikari.internal.enums.Flag.none"
+>hikari.internal.enums.Flag.none</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.split" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="split" href="internal/enums.html#hikari.internal.enums.Flag.split" id="hikari.intents.Intents.split">split</a>(
+    self: _T,
+) -> Sequence[~_T]: ...</code></pre>
+</dt>
+<dd>
+<p>Return a list of all defined atomic values for this flag …</p>
+<strong>This function is defined explicitly at <a title="split -- Return a list of all defined atomic values for this flag …" href="internal/enums.html#hikari.internal.enums.Flag.split"
+>hikari.internal.enums.Flag.split</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.symmetric_difference" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="symmetric_difference" href="internal/enums.html#hikari.internal.enums.Flag.symmetric_difference" id="hikari.intents.Intents.symmetric_difference">symmetric_difference</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a set with the symmetric differences of two flag sets …</p>
+<strong>This function is defined explicitly at <a title="symmetric_difference -- Return a set with the symmetric differences of two flag sets …" href="internal/enums.html#hikari.internal.enums.Flag.symmetric_difference"
+>hikari.internal.enums.Flag.symmetric_difference</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.symmetricdifference" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="symmetricdifference" href="internal/enums.html#hikari.internal.enums.Flag.symmetric_difference" id="hikari.intents.Intents.symmetricdifference">symmetricdifference</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a set with the symmetric differences of two flag sets …</p>
+<strong>This function is defined explicitly at <a title="symmetric_difference -- Return a set with the symmetric differences of two flag sets …" href="internal/enums.html#hikari.internal.enums.Flag.symmetric_difference"
+>hikari.internal.enums.Flag.symmetric_difference</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.intents.Intents.union" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="union" href="internal/enums.html#hikari.internal.enums.Flag.union" id="hikari.intents.Intents.union">union</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a combination of all flags in this set and the other set …</p>
+<strong>This function is defined explicitly at <a title="union -- Return a combination of all flags in this set and the other set …" href="internal/enums.html#hikari.internal.enums.Flag.union"
+>hikari.internal.enums.Flag.union</a>. Visit that link to view the full documentation!</strong>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

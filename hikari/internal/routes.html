@@ -1,0 +1,1628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.internal.routes API documentation</title>
+<meta name="description" content="Provides the valid routes that can be used on the API and the CDN.">
+<meta property="og:title" content="hikari.internal.routes module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.internal -- Package containing internal utilities used within this API." href="index.html"
+>internal</a></li>
+<li class="breadcrumb-item active"><a href="#">routes</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Provides the valid routes that can be used on the API and the CDN.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="CDNRoute -- Route implementation for a CDN resource …" href="#hikari.internal.routes.CDNRoute"
+>CDNRoute</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="compile -- Generate a full CDN url from this endpoint …" href="#hikari.internal.routes.CDNRoute.compile"
+>compile</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="compile_to_file -- Perform the same as `compile`, but return the URL as a `files.URL`." href="#hikari.internal.routes.CDNRoute.compile_to_file"
+>compile_to_file</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="path_template -- Template string for this endpoint." href="#hikari.internal.routes.CDNRoute.path_template"
+>path_template</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="sizable -- `builtins.True` if a `size` param can be specified, or `builtins.False` otherwise." href="#hikari.internal.routes.CDNRoute.sizable"
+>sizable</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="valid_formats -- Valid file formats for this endpoint." href="#hikari.internal.routes.CDNRoute.valid_formats"
+>valid_formats</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="CompiledRoute -- A compiled representation of a route to a specific resource …" href="#hikari.internal.routes.CompiledRoute"
+>CompiledRoute</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="compiled_path -- The compiled route path to use." href="#hikari.internal.routes.CompiledRoute.compiled_path"
+>compiled_path</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="create_real_bucket_hash -- Create a full bucket hash from a given initial hash …" href="#hikari.internal.routes.CompiledRoute.create_real_bucket_hash"
+>create_real_bucket_hash</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="create_url -- Create the full URL with which you can make a request …" href="#hikari.internal.routes.CompiledRoute.create_url"
+>create_url</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="major_param_hash -- The major parameters in a bucket hash-compatible representation." href="#hikari.internal.routes.CompiledRoute.major_param_hash"
+>major_param_hash</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="method -- Return the HTTP method of this compiled route." href="#hikari.internal.routes.CompiledRoute.method"
+>method</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="route -- The route this compiled route was created from." href="#hikari.internal.routes.CompiledRoute.route"
+>route</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="Route -- A template used to create compiled routes for specific parameters …" href="#hikari.internal.routes.Route"
+>Route</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="compile -- Generate a formatted `CompiledRoute` for this route …" href="#hikari.internal.routes.Route.compile"
+>compile</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="major_params -- The optional major parameter name combination for this endpoint." href="#hikari.internal.routes.Route.major_params"
+>major_params</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="method -- The HTTP method." href="#hikari.internal.routes.Route.method"
+>method</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="path_template -- The template string used for the path." href="#hikari.internal.routes.Route.path_template"
+>path_template</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L1-L557" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Provides the valid routes that can be used on the API and the CDN.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;CompiledRoute&#34;, &#34;Route&#34;, &#34;CDNRoute&#34;]
+
+import math
+import re
+import typing
+import urllib.parse
+
+import attr
+
+from hikari import files
+from hikari.internal import attr_extensions
+from hikari.internal import data_binding
+
+HASH_SEPARATOR: typing.Final[str] = &#34;;&#34;
+PARAM_REGEX: typing.Final[typing.Pattern[str]] = re.compile(r&#34;{(\w+)}&#34;)
+MAJOR_PARAM_COMBOS: typing.Mapping[typing.FrozenSet[str], typing.Callable[[typing.Mapping[str, str]], str]] = {
+    frozenset((&#34;channel&#34;,)): lambda d: d[&#34;channel&#34;],
+    frozenset((&#34;guild&#34;,)): lambda d: d[&#34;guild&#34;],
+    frozenset((&#34;webhook&#34;, &#34;token&#34;)): lambda d: d[&#34;webhook&#34;] + &#34;:&#34; + d[&#34;token&#34;],
+}
+
+
+# This could be frozen, except attrs&#39; docs advise against this for performance
+# reasons when using slotted classes.
+@attr_extensions.with_copy
+@attr.define(hash=True, weakref_slot=False)
+@typing.final
+class CompiledRoute:
+    &#34;&#34;&#34;A compiled representation of a route to a specific resource.
+
+    This is a similar representation to what `Route` provides, except
+    `Route` is treated as a template, this is treated as an instance.
+    &#34;&#34;&#34;
+
+    major_param_hash: str = attr.field()
+    &#34;&#34;&#34;The major parameters in a bucket hash-compatible representation.&#34;&#34;&#34;
+
+    route: Route = attr.field()
+    &#34;&#34;&#34;The route this compiled route was created from.&#34;&#34;&#34;
+
+    compiled_path: str = attr.field()
+    &#34;&#34;&#34;The compiled route path to use.&#34;&#34;&#34;
+
+    @property
+    def method(self) -&gt; str:
+        &#34;&#34;&#34;Return the HTTP method of this compiled route.&#34;&#34;&#34;
+        return self.route.method
+
+    def create_url(self, base_url: str) -&gt; str:
+        &#34;&#34;&#34;Create the full URL with which you can make a request.
+
+        Parameters
+        ----------
+        base_url : builtins.str
+            The base of the URL to prepend to the compiled path.
+
+        Returns
+        -------
+        builtins.str
+            The full URL for the route.
+        &#34;&#34;&#34;
+        return base_url + self.compiled_path
+
+    def create_real_bucket_hash(self, initial_bucket_hash: str) -&gt; str:
+        &#34;&#34;&#34;Create a full bucket hash from a given initial hash.
+
+        The result of this hash will be decided by the value of the major
+        parameters passed to the route during the compilation phase.
+
+        Parameters
+        ----------
+        initial_bucket_hash : builtins.str
+            The initial bucket hash provided by Discord in the HTTP headers
+            for a given response.
+
+        Returns
+        -------
+        builtins.str
+            The input hash amalgamated with a hash code produced by the
+            major parameters in this compiled route instance.
+        &#34;&#34;&#34;
+        return initial_bucket_hash + HASH_SEPARATOR + self.major_param_hash
+
+    def __str__(self) -&gt; str:
+        return f&#34;{self.method} {self.compiled_path}&#34;
+
+
+@attr_extensions.with_copy
+@attr.define(hash=True, init=False, weakref_slot=False)
+@typing.final
+class Route:
+    &#34;&#34;&#34;A template used to create compiled routes for specific parameters.
+
+    These compiled routes are used to identify rate limit buckets. Compiled
+    routes may have a single major parameter.
+
+    Parameters
+    ----------
+    method : builtins.str
+        The HTTP method
+    path_template : builtins.str
+        The template string for the path to use.
+    &#34;&#34;&#34;
+
+    method: str = attr.field()
+    &#34;&#34;&#34;The HTTP method.&#34;&#34;&#34;
+
+    path_template: str = attr.field()
+    &#34;&#34;&#34;The template string used for the path.&#34;&#34;&#34;
+
+    major_params: typing.Optional[typing.FrozenSet[str]] = attr.field(hash=False, eq=False)
+    &#34;&#34;&#34;The optional major parameter name combination for this endpoint.&#34;&#34;&#34;
+
+    def __init__(self, method: str, path_template: str) -&gt; None:
+        self.method = method
+        self.path_template = path_template
+
+        self.major_params = None
+        match = PARAM_REGEX.findall(path_template)
+        for major_param_combo in MAJOR_PARAM_COMBOS.keys():
+            if major_param_combo.issubset(match):
+                self.major_params = major_param_combo
+                break
+
+    def compile(self, **kwargs: typing.Any) -&gt; CompiledRoute:
+        &#34;&#34;&#34;Generate a formatted `CompiledRoute` for this route.
+
+        This takes into account any URL parameters that have been passed.
+
+        Parameters
+        ----------
+        **kwargs : typing.Any
+            Any parameters to interpolate into the route path.
+
+        Returns
+        -------
+        CompiledRoute
+            The compiled route.
+        &#34;&#34;&#34;
+        data = data_binding.StringMapBuilder()
+        for k, v in kwargs.items():
+            data.put(k, v)
+
+        return CompiledRoute(
+            route=self,
+            compiled_path=self.path_template.format_map(data),
+            major_param_hash=MAJOR_PARAM_COMBOS[self.major_params](data) if self.major_params else &#34;-&#34;,
+        )
+
+    def __str__(self) -&gt; str:
+        return self.path_template
+
+
+def _cdn_valid_formats_converter(values: typing.AbstractSet[str]) -&gt; typing.FrozenSet[str]:
+    return frozenset(v.lower() for v in values)
+
+
+@attr_extensions.with_copy
+@attr.define(hash=True, weakref_slot=False)
+@typing.final
+class CDNRoute:
+    &#34;&#34;&#34;Route implementation for a CDN resource.&#34;&#34;&#34;
+
+    path_template: str = attr.field()
+    &#34;&#34;&#34;Template string for this endpoint.&#34;&#34;&#34;
+
+    valid_formats: typing.AbstractSet[str] = attr.field(
+        converter=_cdn_valid_formats_converter,
+        eq=False,
+        hash=False,
+        repr=False,
+    )
+    &#34;&#34;&#34;Valid file formats for this endpoint.&#34;&#34;&#34;
+
+    @valid_formats.validator
+    def _(self, _: attr.Attribute[typing.AbstractSet[str]], values: typing.AbstractSet[str]) -&gt; None:
+        if not values:
+            raise ValueError(f&#34;{self.path_template} must have at least one valid format set&#34;)
+
+    sizable: bool = attr.field(default=True, kw_only=True, repr=False, hash=False, eq=False)
+    &#34;&#34;&#34;`builtins.True` if a `size` param can be specified, or `builtins.False` otherwise.&#34;&#34;&#34;
+
+    def compile(
+        self,
+        base_url: str,
+        *,
+        file_format: str,
+        size: typing.Optional[int] = None,
+        **kwargs: typing.Any,
+    ) -&gt; str:
+        &#34;&#34;&#34;Generate a full CDN url from this endpoint.
+
+        Parameters
+        ----------
+        base_url : builtins.str
+            The base URL for the CDN. The generated route is concatenated onto
+            this.
+        file_format : builtins.str
+            The file format to use for the asset.
+        size : typing.Optional[builtins.int]
+            The custom size query parameter to set. If `builtins.None`,
+            it is not passed.
+        **kwargs : typing.Any
+            Parameters to interpolate into the path template.
+
+        Returns
+        -------
+        builtins.str
+            The full asset URL.
+
+        Raises
+        ------
+        builtins.TypeError
+            If a GIF is requested, but the asset is not animated;
+            if an invalid file format for the endpoint is passed; or if a `size`
+            is passed but the route is not `sizable`.
+
+        builtins.ValueError
+            If `size` is specified, but is not an integer power of `2` between
+            `16` and `4096` inclusive or is negative.
+        &#34;&#34;&#34;
+        file_format = file_format.lower()
+
+        if file_format not in self.valid_formats:
+            raise TypeError(
+                f&#34;{file_format} is not a valid format for this asset. Valid formats are: &#34;
+                + &#34;, &#34;.join(self.valid_formats)
+            )
+
+        if &#34;hash&#34; in kwargs and not kwargs[&#34;hash&#34;].startswith(&#34;a_&#34;) and file_format == GIF:
+            raise TypeError(&#34;This asset is not animated, so cannot be retrieved as a GIF&#34;)
+
+        # Make URL-safe first.
+        kwargs = {k: urllib.parse.quote(str(v)) for k, v in kwargs.items()}
+        url = base_url + self.path_template.format(**kwargs) + f&#34;.{file_format}&#34;
+
+        if size is not None:
+            if not self.sizable:
+                raise TypeError(&#34;This asset cannot be resized.&#34;)
+
+            if size &lt; 0:
+                raise ValueError(&#34;size must be positive&#34;)
+
+            size_power = math.log2(size)
+            if size_power.is_integer() and 2 &lt;= size_power &lt;= 16:
+                url += &#34;?&#34;
+                url += urllib.parse.urlencode({&#34;size&#34;: str(size)})
+            else:
+                raise ValueError(&#34;size must be an integer power of 2 between 16 and 4096 inclusive&#34;)
+
+        return url
+
+    def compile_to_file(
+        self,
+        base_url: str,
+        *,
+        file_format: str,
+        size: typing.Optional[int] = None,
+        **kwargs: typing.Any,
+    ) -&gt; files.URL:
+        &#34;&#34;&#34;Perform the same as `compile`, but return the URL as a `files.URL`.&#34;&#34;&#34;
+        return files.URL(self.compile(base_url, file_format=file_format, size=size, **kwargs))
+
+
+GET: typing.Final[str] = &#34;GET&#34;
+POST: typing.Final[str] = &#34;POST&#34;
+PATCH: typing.Final[str] = &#34;PATCH&#34;
+DELETE: typing.Final[str] = &#34;DELETE&#34;
+PUT: typing.Final[str] = &#34;PUT&#34;
+
+# Channels
+GET_CHANNEL: typing.Final[Route] = Route(GET, &#34;/channels/{channel}&#34;)
+PATCH_CHANNEL: typing.Final[Route] = Route(PATCH, &#34;/channels/{channel}&#34;)
+DELETE_CHANNEL: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}&#34;)
+
+POST_CHANNEL_FOLLOWERS: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/followers&#34;)
+
+GET_CHANNEL_INVITES: typing.Final[Route] = Route(GET, &#34;/channels/{channel}/invites&#34;)
+POST_CHANNEL_INVITES: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/invites&#34;)
+
+GET_CHANNEL_MESSAGE: typing.Final[Route] = Route(GET, &#34;/channels/{channel}/messages/{message}&#34;)
+PATCH_CHANNEL_MESSAGE: typing.Final[Route] = Route(PATCH, &#34;/channels/{channel}/messages/{message}&#34;)
+DELETE_CHANNEL_MESSAGE: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}/messages/{message}&#34;)
+
+POST_CHANNEL_CROSSPOST: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/messages/{message}/crosspost&#34;)
+
+GET_CHANNEL_MESSAGES: typing.Final[Route] = Route(GET, &#34;/channels/{channel}/messages&#34;)
+POST_CHANNEL_MESSAGES: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/messages&#34;)
+
+POST_DELETE_CHANNEL_MESSAGES_BULK: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/messages/bulk-delete&#34;)
+
+PUT_CHANNEL_PERMISSIONS: typing.Final[Route] = Route(PUT, &#34;/channels/{channel}/permissions/{overwrite}&#34;)
+DELETE_CHANNEL_PERMISSIONS: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}/permissions/{overwrite}&#34;)
+
+GET_CHANNEL_PINS: typing.Final[Route] = Route(GET, &#34;/channels/{channel}/pins&#34;)
+PUT_CHANNEL_PINS: typing.Final[Route] = Route(PUT, &#34;/channels/{channel}/pins/{message}&#34;)
+DELETE_CHANNEL_PIN: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}/pins/{message}&#34;)
+
+POST_CHANNEL_TYPING: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/typing&#34;)
+
+POST_CHANNEL_WEBHOOKS: typing.Final[Route] = Route(POST, &#34;/channels/{channel}/webhooks&#34;)
+GET_CHANNEL_WEBHOOKS: typing.Final[Route] = Route(GET, &#34;/channels/{channel}/webhooks&#34;)
+
+# Reactions
+GET_REACTIONS: typing.Final[Route] = Route(GET, &#34;/channels/{channel}/messages/{message}/reactions/{emoji}&#34;)
+DELETE_ALL_REACTIONS: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}/messages/{message}/reactions&#34;)
+DELETE_REACTION_EMOJI: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}/messages/{message}/reactions/{emoji}&#34;)
+DELETE_REACTION_USER: typing.Final[Route] = Route(
+    DELETE, &#34;/channels/{channel}/messages/{message}/reactions/{emoji}/{user}&#34;
+)
+
+# Guilds
+GET_GUILD: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}&#34;)
+POST_GUILDS: typing.Final[Route] = Route(POST, &#34;/guilds&#34;)
+PATCH_GUILD: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}&#34;)
+DELETE_GUILD: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}&#34;)
+
+GET_GUILD_AUDIT_LOGS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/audit-logs&#34;)
+
+GET_GUILD_BAN: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/bans/{user}&#34;)
+PUT_GUILD_BAN: typing.Final[Route] = Route(PUT, &#34;/guilds/{guild}/bans/{user}&#34;)
+DELETE_GUILD_BAN: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/bans/{user}&#34;)
+
+GET_GUILD_BANS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/bans&#34;)
+
+GET_GUILD_CHANNELS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/channels&#34;)
+POST_GUILD_CHANNELS: typing.Final[Route] = Route(POST, &#34;/guilds/{guild}/channels&#34;)
+PATCH_GUILD_CHANNELS: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/channels&#34;)
+
+GET_GUILD_WIDGET: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/widget&#34;)
+PATCH_GUILD_WIDGET: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/widget&#34;)
+
+GET_GUILD_WELCOME_SCREEN: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/welcome-screen&#34;)
+PATCH_GUILD_WELCOME_SCREEN: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/welcome-screen&#34;)
+
+GET_GUILD_MEMBER_VERIFICATION: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/member-verification&#34;)
+PATCH_GUILD_MEMBER_VERIFICATION: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/member-verification&#34;)
+
+GET_GUILD_EMOJI: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/emojis/{emoji}&#34;)
+PATCH_GUILD_EMOJI: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/emojis/{emoji}&#34;)
+DELETE_GUILD_EMOJI: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/emojis/{emoji}&#34;)
+
+GET_GUILD_EMOJIS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/emojis&#34;)
+POST_GUILD_EMOJIS: typing.Final[Route] = Route(POST, &#34;/guilds/{guild}/emojis&#34;)
+
+GET_GUILD_STICKER: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/stickers/{sticker}&#34;)
+PATCH_GUILD_STICKER: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/stickers/{sticker}&#34;)
+DELETE_GUILD_STICKER: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/stickers/{stickers}&#34;)
+
+GET_GUILD_STICKERS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/stickers&#34;)
+POST_GUILD_STICKERS: typing.Final[Route] = Route(POST, &#34;/guilds/{guild}/stickers&#34;)
+
+GET_GUILD_INTEGRATIONS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/integrations&#34;)
+DELETE_GUILD_INTEGRATION: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/integrations/{integration}&#34;)
+
+GET_GUILD_INVITES: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/invites&#34;)
+
+GET_GUILD_MEMBER: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/members/{user}&#34;)
+PATCH_GUILD_MEMBER: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/members/{user}&#34;)
+PUT_GUILD_MEMBER: typing.Final[Route] = Route(PUT, &#34;/guilds/{guild}/members/{user}&#34;)
+
+GET_GUILD_MEMBERS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/members&#34;)
+DELETE_GUILD_MEMBER: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/members/{user}&#34;)
+
+GET_GUILD_MEMBERS_SEARCH: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/members/search&#34;)
+
+PUT_GUILD_MEMBER_ROLE: typing.Final[Route] = Route(PUT, &#34;/guilds/{guild}/members/{user}/roles/{role}&#34;)
+DELETE_GUILD_MEMBER_ROLE: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/members/{user}/roles/{role}&#34;)
+
+GET_GUILD_PREVIEW: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/preview&#34;)
+
+GET_GUILD_PRUNE: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/prune&#34;)
+POST_GUILD_PRUNE: typing.Final[Route] = Route(POST, &#34;/guilds/{guild}/prune&#34;)
+
+PATCH_GUILD_ROLE: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/roles/{role}&#34;)
+DELETE_GUILD_ROLE: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/roles/{role}&#34;)
+
+GET_GUILD_ROLES: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/roles&#34;)
+POST_GUILD_ROLES: typing.Final[Route] = Route(POST, &#34;/guilds/{guild}/roles&#34;)
+PATCH_GUILD_ROLES: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/roles&#34;)
+
+GET_GUILD_VANITY_URL: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/vanity-url&#34;)
+
+PATCH_GUILD_VOICE_STATE: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/voice-states/{user}&#34;)
+PATCH_MY_GUILD_VOICE_STATE: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/voice-states/@me&#34;)
+
+GET_GUILD_VOICE_REGIONS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/regions&#34;)
+
+GET_GUILD_WEBHOOKS: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/webhooks&#34;)
+
+# Stickers
+GET_STICKER_PACKS: typing.Final[Route] = Route(GET, &#34;/sticker-packs&#34;)
+GET_STICKER: typing.Final[Route] = Route(GET, &#34;/stickers/{sticker}&#34;)
+
+# Templates
+DELETE_GUILD_TEMPLATE: typing.Final[Route] = Route(DELETE, &#34;/guilds/{guild}/templates/{template}&#34;)
+GET_TEMPLATE: typing.Final[Route] = Route(GET, &#34;/guilds/templates/{template}&#34;)
+GET_GUILD_TEMPLATES: typing.Final[Route] = Route(GET, &#34;/guilds/{guild}/templates&#34;)
+PATCH_GUILD_TEMPLATE: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/templates/{template}&#34;)
+POST_GUILD_TEMPLATES: typing.Final[Route] = Route(POST, &#34;/guilds/{guild}/templates&#34;)
+POST_TEMPLATE: typing.Final[Route] = Route(POST, &#34;/guilds/templates/{template}&#34;)
+PUT_GUILD_TEMPLATE: typing.Final[Route] = Route(PUT, &#34;/guilds/{guild}/templates/{template}&#34;)
+
+# Invites
+GET_INVITE: typing.Final[Route] = Route(GET, &#34;/invites/{invite_code}&#34;)
+DELETE_INVITE: typing.Final[Route] = Route(DELETE, &#34;/invites/{invite_code}&#34;)
+
+# Users
+GET_USER: typing.Final[Route] = Route(GET, &#34;/users/{user}&#34;)
+
+# @me
+POST_MY_CHANNELS: typing.Final[Route] = Route(POST, &#34;/users/@me/channels&#34;)
+GET_MY_CONNECTIONS: typing.Final[Route] = Route(GET, &#34;/users/@me/connections&#34;)  # OAuth2 only
+DELETE_MY_GUILD: typing.Final[Route] = Route(DELETE, &#34;/users/@me/guilds/{guild}&#34;)
+
+GET_MY_GUILDS: typing.Final[Route] = Route(GET, &#34;/users/@me/guilds&#34;)
+PATCH_MY_GUILD_NICKNAME: typing.Final[Route] = Route(PATCH, &#34;/guilds/{guild}/members/@me/nick&#34;)
+
+GET_MY_USER: typing.Final[Route] = Route(GET, &#34;/users/@me&#34;)
+PATCH_MY_USER: typing.Final[Route] = Route(PATCH, &#34;/users/@me&#34;)
+
+PUT_MY_REACTION: typing.Final[Route] = Route(PUT, &#34;/channels/{channel}/messages/{message}/reactions/{emoji}/@me&#34;)
+DELETE_MY_REACTION: typing.Final[Route] = Route(DELETE, &#34;/channels/{channel}/messages/{message}/reactions/{emoji}/@me&#34;)
+
+# Voice
+GET_VOICE_REGIONS: typing.Final[Route] = Route(GET, &#34;/voice/regions&#34;)
+
+# Webhooks
+GET_WEBHOOK: typing.Final[Route] = Route(GET, &#34;/webhooks/{webhook}&#34;)
+PATCH_WEBHOOK: typing.Final[Route] = Route(PATCH, &#34;/webhooks/{webhook}&#34;)
+DELETE_WEBHOOK: typing.Final[Route] = Route(DELETE, &#34;/webhooks/{webhook}&#34;)
+
+GET_WEBHOOK_WITH_TOKEN: typing.Final[Route] = Route(GET, &#34;/webhooks/{webhook}/{token}&#34;)
+PATCH_WEBHOOK_WITH_TOKEN: typing.Final[Route] = Route(PATCH, &#34;/webhooks/{webhook}/{token}&#34;)
+DELETE_WEBHOOK_WITH_TOKEN: typing.Final[Route] = Route(DELETE, &#34;/webhooks/{webhook}/{token}&#34;)
+
+POST_WEBHOOK_WITH_TOKEN: typing.Final[Route] = Route(POST, &#34;/webhooks/{webhook}/{token}&#34;)
+POST_WEBHOOK_WITH_TOKEN_GITHUB: typing.Final[Route] = Route(POST, &#34;/webhooks/{webhook}/{token}/github&#34;)
+POST_WEBHOOK_WITH_TOKEN_SLACK: typing.Final[Route] = Route(POST, &#34;/webhooks/{webhook}/{token}/slack&#34;)
+
+GET_WEBHOOK_MESSAGE: typing.Final[Route] = Route(GET, &#34;/webhooks/{webhook}/{token}/messages/{message}&#34;)
+PATCH_WEBHOOK_MESSAGE: typing.Final[Route] = Route(PATCH, &#34;/webhooks/{webhook}/{token}/messages/{message}&#34;)
+DELETE_WEBHOOK_MESSAGE: typing.Final[Route] = Route(DELETE, &#34;/webhooks/{webhook}/{token}/messages/{message}&#34;)
+
+# Applications
+GET_APPLICATION_COMMAND: typing.Final[Route] = Route(GET, &#34;/applications/{application}/commands/{command}&#34;)
+GET_APPLICATION_COMMANDS: typing.Final[Route] = Route(GET, &#34;/applications/{application}/commands&#34;)
+PATCH_APPLICATION_COMMAND: typing.Final[Route] = Route(PATCH, &#34;/applications/{application}/commands/{command}&#34;)
+POST_APPLICATION_COMMAND: typing.Final[Route] = Route(POST, &#34;/applications/{application}/commands&#34;)
+PUT_APPLICATION_COMMANDS: typing.Final[Route] = Route(PUT, &#34;/applications/{application}/commands&#34;)
+DELETE_APPLICATION_COMMAND: typing.Final[Route] = Route(DELETE, &#34;/applications/{application}/commands/{command}&#34;)
+
+GET_APPLICATION_GUILD_COMMAND: typing.Final[Route] = Route(
+    GET, &#34;/applications/{application}/guilds/{guild}/commands/{command}&#34;
+)
+GET_APPLICATION_GUILD_COMMANDS: typing.Final[Route] = Route(GET, &#34;/applications/{application}/guilds/{guild}/commands&#34;)
+PATCH_APPLICATION_GUILD_COMMAND: typing.Final[Route] = Route(
+    PATCH, &#34;/applications/{application}/guilds/{guild}/commands/{command}&#34;
+)
+POST_APPLICATION_GUILD_COMMAND: typing.Final[Route] = Route(POST, &#34;/applications/{application}/guilds/{guild}/commands&#34;)
+PUT_APPLICATION_GUILD_COMMANDS: typing.Final[Route] = Route(PUT, &#34;/applications/{application}/guilds/{guild}/commands&#34;)
+DELETE_APPLICATION_GUILD_COMMAND: typing.Final[Route] = Route(
+    DELETE, &#34;/applications/{application}/guilds/{guild}/commands/{command}&#34;
+)
+
+GET_APPLICATION_GUILD_COMMANDS_PERMISSIONS: typing.Final[Route] = Route(
+    GET, &#34;/applications/{application}/guilds/{guild}/commands/permissions&#34;
+)
+GET_APPLICATION_COMMAND_PERMISSIONS: typing.Final[Route] = Route(
+    GET, &#34;/applications/{application}/guilds/{guild}/commands/{command}/permissions&#34;
+)
+PUT_APPLICATION_COMMAND_PERMISSIONS: typing.Final[Route] = Route(
+    PUT, &#34;/applications/{application}/guilds/{guild}/commands/{command}/permissions&#34;
+)
+PUT_APPLICATION_GUILD_COMMANDS_PERMISSIONS: typing.Final[Route] = Route(
+    PUT, &#34;/applications/{application}/guilds/{guild}/commands/permissions&#34;
+)
+
+# Interactions
+# For these endpoints &#34;webhook&#34; is the application ID.
+GET_INTERACTION_RESPONSE: typing.Final[Route] = Route(GET, &#34;/webhooks/{webhook}/{token}/messages/@original&#34;)
+PATCH_INTERACTION_RESPONSE: typing.Final[Route] = Route(PATCH, &#34;/webhooks/{webhook}/{token}/messages/@original&#34;)
+POST_INTERACTION_RESPONSE: typing.Final[Route] = Route(POST, &#34;/interactions/{interaction}/{token}/callback&#34;)
+DELETE_INTERACTION_RESPONSE: typing.Final[Route] = Route(DELETE, &#34;/webhooks/{webhook}/{token}/messages/@original&#34;)
+
+# OAuth2 API
+GET_MY_APPLICATION: typing.Final[Route] = Route(GET, &#34;/oauth2/applications/@me&#34;)
+GET_MY_AUTHORIZATION: typing.Final[Route] = Route(GET, &#34;/oauth2/@me&#34;)
+
+POST_AUTHORIZE: typing.Final[Route] = Route(POST, &#34;/oauth2/authorize&#34;)
+POST_TOKEN: typing.Final[Route] = Route(POST, &#34;/oauth2/token&#34;)
+POST_TOKEN_REVOKE: typing.Final[Route] = Route(POST, &#34;/oauth2/token/revoke&#34;)
+
+# Gateway
+GET_GATEWAY: typing.Final[Route] = Route(GET, &#34;/gateway&#34;)
+GET_GATEWAY_BOT: typing.Final[Route] = Route(GET, &#34;/gateway/bot&#34;)
+
+PNG: typing.Final[str] = &#34;png&#34;
+JPEG_JPG: typing.Final[typing.Tuple[str, str]] = (&#34;jpeg&#34;, &#34;jpg&#34;)
+WEBP: typing.Final[str] = &#34;webp&#34;
+GIF: typing.Final[str] = &#34;gif&#34;
+LOTTIE: typing.Final[str] = &#34;json&#34;  # https://airbnb.io/lottie/
+
+# CDN specific endpoints. These reside on a different server.
+CDN_CUSTOM_EMOJI: typing.Final[CDNRoute] = CDNRoute(&#34;/emojis/{emoji_id}&#34;, {PNG, GIF})
+
+CDN_GUILD_ICON: typing.Final[CDNRoute] = CDNRoute(&#34;/icons/{guild_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP, GIF})
+CDN_GUILD_SPLASH: typing.Final[CDNRoute] = CDNRoute(&#34;/splashes/{guild_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP})
+CDN_GUILD_DISCOVERY_SPLASH: typing.Final[CDNRoute] = CDNRoute(
+    &#34;/discovery-splashes/{guild_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP}
+)
+CDN_GUILD_BANNER: typing.Final[CDNRoute] = CDNRoute(&#34;/banners/{guild_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP})
+
+CDN_DEFAULT_USER_AVATAR: typing.Final[CDNRoute] = CDNRoute(&#34;/embed/avatars/{discriminator}&#34;, {PNG}, sizable=False)
+CDN_USER_AVATAR: typing.Final[CDNRoute] = CDNRoute(&#34;/avatars/{user_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP, GIF})
+
+CDN_APPLICATION_ICON: typing.Final[CDNRoute] = CDNRoute(&#34;/app-icons/{application_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP})
+CDN_APPLICATION_COVER: typing.Final[CDNRoute] = CDNRoute(&#34;/app-assets/{application_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP})
+CDN_ACHIEVEMENT_ICON: typing.Final[CDNRoute] = CDNRoute(
+    &#34;/app-assets/{application_id}/achievements/{achievement_id}/icons/{hash}&#34;, {PNG, *JPEG_JPG, WEBP}
+)
+
+CDN_TEAM_ICON: typing.Final[CDNRoute] = CDNRoute(&#34;/team-icons/{team_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP})
+
+# undocumented on the Discord docs.
+CDN_CHANNEL_ICON: typing.Final[CDNRoute] = CDNRoute(&#34;/channel-icons/{channel_id}/{hash}&#34;, {PNG, *JPEG_JPG, WEBP})
+
+CDN_STICKER: typing.Final[CDNRoute] = CDNRoute(&#34;/stickers/{hash}&#34;, {PNG, LOTTIE}, sizable=False)
+CDN_STICKER_PACK_BANNER: typing.Final[CDNRoute] = CDNRoute(
+    &#34;/app-assets/710982414301790216/store/{hash}&#34;, {PNG, *JPEG_JPG, WEBP}
+)</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.routes.CDNRoute" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="CDNRoute -- Route implementation for a CDN resource …" href="#hikari.internal.routes.CDNRoute"
+>CDNRoute</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.routes.CDNRoute" class="hljs python"><abbr title='A standard Python type.'>class</abbr> CDNRoute (
+    path_template: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    valid_formats: <a href='https://docs.python.org/3/library/typing.html#typing.AbstractSet'>AbstractSet</a>[<a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>],
+    *,
+    sizable: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a> = True,
+): ...</code></pre>
+<p>Route implementation for a CDN resource.</p>
+<p>Method generated by attrs for class CDNRoute.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L187-L288" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class CDNRoute:
+    &#34;&#34;&#34;Route implementation for a CDN resource.&#34;&#34;&#34;
+
+    path_template: str = attr.field()
+    &#34;&#34;&#34;Template string for this endpoint.&#34;&#34;&#34;
+
+    valid_formats: typing.AbstractSet[str] = attr.field(
+        converter=_cdn_valid_formats_converter,
+        eq=False,
+        hash=False,
+        repr=False,
+    )
+    &#34;&#34;&#34;Valid file formats for this endpoint.&#34;&#34;&#34;
+
+    @valid_formats.validator
+    def _(self, _: attr.Attribute[typing.AbstractSet[str]], values: typing.AbstractSet[str]) -&gt; None:
+        if not values:
+            raise ValueError(f&#34;{self.path_template} must have at least one valid format set&#34;)
+
+    sizable: bool = attr.field(default=True, kw_only=True, repr=False, hash=False, eq=False)
+    &#34;&#34;&#34;`builtins.True` if a `size` param can be specified, or `builtins.False` otherwise.&#34;&#34;&#34;
+
+    def compile(
+        self,
+        base_url: str,
+        *,
+        file_format: str,
+        size: typing.Optional[int] = None,
+        **kwargs: typing.Any,
+    ) -&gt; str:
+        &#34;&#34;&#34;Generate a full CDN url from this endpoint.
+
+        Parameters
+        ----------
+        base_url : builtins.str
+            The base URL for the CDN. The generated route is concatenated onto
+            this.
+        file_format : builtins.str
+            The file format to use for the asset.
+        size : typing.Optional[builtins.int]
+            The custom size query parameter to set. If `builtins.None`,
+            it is not passed.
+        **kwargs : typing.Any
+            Parameters to interpolate into the path template.
+
+        Returns
+        -------
+        builtins.str
+            The full asset URL.
+
+        Raises
+        ------
+        builtins.TypeError
+            If a GIF is requested, but the asset is not animated;
+            if an invalid file format for the endpoint is passed; or if a `size`
+            is passed but the route is not `sizable`.
+
+        builtins.ValueError
+            If `size` is specified, but is not an integer power of `2` between
+            `16` and `4096` inclusive or is negative.
+        &#34;&#34;&#34;
+        file_format = file_format.lower()
+
+        if file_format not in self.valid_formats:
+            raise TypeError(
+                f&#34;{file_format} is not a valid format for this asset. Valid formats are: &#34;
+                + &#34;, &#34;.join(self.valid_formats)
+            )
+
+        if &#34;hash&#34; in kwargs and not kwargs[&#34;hash&#34;].startswith(&#34;a_&#34;) and file_format == GIF:
+            raise TypeError(&#34;This asset is not animated, so cannot be retrieved as a GIF&#34;)
+
+        # Make URL-safe first.
+        kwargs = {k: urllib.parse.quote(str(v)) for k, v in kwargs.items()}
+        url = base_url + self.path_template.format(**kwargs) + f&#34;.{file_format}&#34;
+
+        if size is not None:
+            if not self.sizable:
+                raise TypeError(&#34;This asset cannot be resized.&#34;)
+
+            if size &lt; 0:
+                raise ValueError(&#34;size must be positive&#34;)
+
+            size_power = math.log2(size)
+            if size_power.is_integer() and 2 &lt;= size_power &lt;= 16:
+                url += &#34;?&#34;
+                url += urllib.parse.urlencode({&#34;size&#34;: str(size)})
+            else:
+                raise ValueError(&#34;size must be an integer power of 2 between 16 and 4096 inclusive&#34;)
+
+        return url
+
+    def compile_to_file(
+        self,
+        base_url: str,
+        *,
+        file_format: str,
+        size: typing.Optional[int] = None,
+        **kwargs: typing.Any,
+    ) -&gt; files.URL:
+        &#34;&#34;&#34;Perform the same as `compile`, but return the URL as a `files.URL`.&#34;&#34;&#34;
+        return files.URL(self.compile(base_url, file_format=file_format, size=size, **kwargs))</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.internal.routes.CDNRoute.path_template" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="path_template -- Template string for this endpoint." href="#hikari.internal.routes.CDNRoute.path_template"  >path_template</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Template string for this endpoint.</p></dd>
+</div>
+<div id="hikari.internal.routes.CDNRoute.sizable" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="sizable -- `builtins.True` if a `size` param can be specified, or `builtins.False` otherwise." href="#hikari.internal.routes.CDNRoute.sizable"  >sizable</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if a <code>size</code> param can be specified, or <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code> otherwise.</p></dd>
+</div>
+<div id="hikari.internal.routes.CDNRoute.valid_formats" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="valid_formats -- Valid file formats for this endpoint." href="#hikari.internal.routes.CDNRoute.valid_formats"  >valid_formats</a> : AbstractSet[<a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>]</code></pre>
+</dt>
+<dd><p>Valid file formats for this endpoint.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.routes.CDNRoute.compile" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="compile" href="#hikari.internal.routes.CDNRoute.compile" id="hikari.internal.routes.CDNRoute.compile">compile</a>(
+    base_url: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    *,
+    file_format: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    size: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>] = None,
+    **kwargs: <a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>,
+) -> <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Generate a full CDN url from this endpoint.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>base_url</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The base URL for the CDN. The generated route is concatenated onto
+this.</dd>
+<dt><strong><code>file_format</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The file format to use for the asset.</dd>
+<dt><strong><code>size</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>]</code></dt>
+<dd>The custom size query parameter to set. If <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>,
+it is not passed.</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a></code></dt>
+<dd>Parameters to interpolate into the path template.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The full asset URL.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#TypeError'>TypeError</a></code></dt>
+<dd>If a GIF is requested, but the asset is not animated;
+if an invalid file format for the endpoint is passed; or if a <code>size</code>
+is passed but the route is not <code>sizable</code>.</dd>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code></dt>
+<dd>If <code>size</code> is specified, but is not an integer power of <code>2</code> between
+<code>16</code> and <code>4096</code> inclusive or is negative.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L209-L277" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def compile(
+    self,
+    base_url: str,
+    *,
+    file_format: str,
+    size: typing.Optional[int] = None,
+    **kwargs: typing.Any,
+) -&gt; str:
+    &#34;&#34;&#34;Generate a full CDN url from this endpoint.
+
+    Parameters
+    ----------
+    base_url : builtins.str
+        The base URL for the CDN. The generated route is concatenated onto
+        this.
+    file_format : builtins.str
+        The file format to use for the asset.
+    size : typing.Optional[builtins.int]
+        The custom size query parameter to set. If `builtins.None`,
+        it is not passed.
+    **kwargs : typing.Any
+        Parameters to interpolate into the path template.
+
+    Returns
+    -------
+    builtins.str
+        The full asset URL.
+
+    Raises
+    ------
+    builtins.TypeError
+        If a GIF is requested, but the asset is not animated;
+        if an invalid file format for the endpoint is passed; or if a `size`
+        is passed but the route is not `sizable`.
+
+    builtins.ValueError
+        If `size` is specified, but is not an integer power of `2` between
+        `16` and `4096` inclusive or is negative.
+    &#34;&#34;&#34;
+    file_format = file_format.lower()
+
+    if file_format not in self.valid_formats:
+        raise TypeError(
+            f&#34;{file_format} is not a valid format for this asset. Valid formats are: &#34;
+            + &#34;, &#34;.join(self.valid_formats)
+        )
+
+    if &#34;hash&#34; in kwargs and not kwargs[&#34;hash&#34;].startswith(&#34;a_&#34;) and file_format == GIF:
+        raise TypeError(&#34;This asset is not animated, so cannot be retrieved as a GIF&#34;)
+
+    # Make URL-safe first.
+    kwargs = {k: urllib.parse.quote(str(v)) for k, v in kwargs.items()}
+    url = base_url + self.path_template.format(**kwargs) + f&#34;.{file_format}&#34;
+
+    if size is not None:
+        if not self.sizable:
+            raise TypeError(&#34;This asset cannot be resized.&#34;)
+
+        if size &lt; 0:
+            raise ValueError(&#34;size must be positive&#34;)
+
+        size_power = math.log2(size)
+        if size_power.is_integer() and 2 &lt;= size_power &lt;= 16:
+            url += &#34;?&#34;
+            url += urllib.parse.urlencode({&#34;size&#34;: str(size)})
+        else:
+            raise ValueError(&#34;size must be an integer power of 2 between 16 and 4096 inclusive&#34;)
+
+    return url</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.routes.CDNRoute.compile_to_file" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="compile_to_file" href="#hikari.internal.routes.CDNRoute.compile_to_file" id="hikari.internal.routes.CDNRoute.compile_to_file">compile_to_file</a>(
+    base_url: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    *,
+    file_format: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    size: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/functions.html#int'>int</a>] = None,
+    **kwargs: <a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>,
+) -> <a href='../files.html#hikari.files.URL'>URL</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Perform the same as <code><a href='https://docs.python.org/3/library/functions.html#compile'>compile</a></code>, but return the URL as a <code><a href='../files.html#hikari.files.URL'>files.URL</a></code>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L279-L288" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def compile_to_file(
+    self,
+    base_url: str,
+    *,
+    file_format: str,
+    size: typing.Optional[int] = None,
+    **kwargs: typing.Any,
+) -&gt; files.URL:
+    &#34;&#34;&#34;Perform the same as `compile`, but return the URL as a `files.URL`.&#34;&#34;&#34;
+    return files.URL(self.compile(base_url, file_format=file_format, size=size, **kwargs))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.routes.CompiledRoute" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="CompiledRoute -- A compiled representation of a route to a specific resource …" href="#hikari.internal.routes.CompiledRoute"
+>CompiledRoute</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.routes.CompiledRoute" class="hljs python"><abbr title='A standard Python type.'>class</abbr> CompiledRoute (
+    major_param_hash: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    route: <a href='#hikari.internal.routes.Route'>Route</a>,
+    compiled_path: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+): ...</code></pre>
+<p>A compiled representation of a route to a specific resource.</p>
+<p>This is a similar representation to what <code><a href='#hikari.internal.routes.Route'>Route</a></code> provides, except
+<code><a href='#hikari.internal.routes.Route'>Route</a></code> is treated as a template, this is treated as an instance.</p>
+<p>Method generated by attrs for class CompiledRoute.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L54-L111" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class CompiledRoute:
+    &#34;&#34;&#34;A compiled representation of a route to a specific resource.
+
+    This is a similar representation to what `Route` provides, except
+    `Route` is treated as a template, this is treated as an instance.
+    &#34;&#34;&#34;
+
+    major_param_hash: str = attr.field()
+    &#34;&#34;&#34;The major parameters in a bucket hash-compatible representation.&#34;&#34;&#34;
+
+    route: Route = attr.field()
+    &#34;&#34;&#34;The route this compiled route was created from.&#34;&#34;&#34;
+
+    compiled_path: str = attr.field()
+    &#34;&#34;&#34;The compiled route path to use.&#34;&#34;&#34;
+
+    @property
+    def method(self) -&gt; str:
+        &#34;&#34;&#34;Return the HTTP method of this compiled route.&#34;&#34;&#34;
+        return self.route.method
+
+    def create_url(self, base_url: str) -&gt; str:
+        &#34;&#34;&#34;Create the full URL with which you can make a request.
+
+        Parameters
+        ----------
+        base_url : builtins.str
+            The base of the URL to prepend to the compiled path.
+
+        Returns
+        -------
+        builtins.str
+            The full URL for the route.
+        &#34;&#34;&#34;
+        return base_url + self.compiled_path
+
+    def create_real_bucket_hash(self, initial_bucket_hash: str) -&gt; str:
+        &#34;&#34;&#34;Create a full bucket hash from a given initial hash.
+
+        The result of this hash will be decided by the value of the major
+        parameters passed to the route during the compilation phase.
+
+        Parameters
+        ----------
+        initial_bucket_hash : builtins.str
+            The initial bucket hash provided by Discord in the HTTP headers
+            for a given response.
+
+        Returns
+        -------
+        builtins.str
+            The input hash amalgamated with a hash code produced by the
+            major parameters in this compiled route instance.
+        &#34;&#34;&#34;
+        return initial_bucket_hash + HASH_SEPARATOR + self.major_param_hash
+
+    def __str__(self) -&gt; str:
+        return f&#34;{self.method} {self.compiled_path}&#34;</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.internal.routes.CompiledRoute.compiled_path" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="compiled_path -- The compiled route path to use." href="#hikari.internal.routes.CompiledRoute.compiled_path"  >compiled_path</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The compiled route path to use.</p></dd>
+</div>
+<div id="hikari.internal.routes.CompiledRoute.major_param_hash" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="major_param_hash -- The major parameters in a bucket hash-compatible representation." href="#hikari.internal.routes.CompiledRoute.major_param_hash"  >major_param_hash</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The major parameters in a bucket hash-compatible representation.</p></dd>
+</div>
+<div id="hikari.internal.routes.CompiledRoute.method" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="method -- Return the HTTP method of this compiled route." href="#hikari.internal.routes.CompiledRoute.method"  >method</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Return the HTTP method of this compiled route.</p></dd>
+</div>
+<div id="hikari.internal.routes.CompiledRoute.route" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="route -- The route this compiled route was created from." href="#hikari.internal.routes.CompiledRoute.route"  >route</a> : <a href='#hikari.internal.routes.Route'>Route</a></code></pre>
+</dt>
+<dd><p>The route this compiled route was created from.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.routes.CompiledRoute.create_real_bucket_hash" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="create_real_bucket_hash" href="#hikari.internal.routes.CompiledRoute.create_real_bucket_hash" id="hikari.internal.routes.CompiledRoute.create_real_bucket_hash">create_real_bucket_hash</a>(
+    initial_bucket_hash: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+) -> <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Create a full bucket hash from a given initial hash.</p>
+<p>The result of this hash will be decided by the value of the major
+parameters passed to the route during the compilation phase.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>initial_bucket_hash</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The initial bucket hash provided by Discord in the HTTP headers
+for a given response.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The input hash amalgamated with a hash code produced by the
+major parameters in this compiled route instance.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L90-L108" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def create_real_bucket_hash(self, initial_bucket_hash: str) -&gt; str:
+    &#34;&#34;&#34;Create a full bucket hash from a given initial hash.
+
+    The result of this hash will be decided by the value of the major
+    parameters passed to the route during the compilation phase.
+
+    Parameters
+    ----------
+    initial_bucket_hash : builtins.str
+        The initial bucket hash provided by Discord in the HTTP headers
+        for a given response.
+
+    Returns
+    -------
+    builtins.str
+        The input hash amalgamated with a hash code produced by the
+        major parameters in this compiled route instance.
+    &#34;&#34;&#34;
+    return initial_bucket_hash + HASH_SEPARATOR + self.major_param_hash</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.routes.CompiledRoute.create_url" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="create_url" href="#hikari.internal.routes.CompiledRoute.create_url" id="hikari.internal.routes.CompiledRoute.create_url">create_url</a>(
+    base_url: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+) -> <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Create the full URL with which you can make a request.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>base_url</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The base of the URL to prepend to the compiled path.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The full URL for the route.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L75-L88" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def create_url(self, base_url: str) -&gt; str:
+    &#34;&#34;&#34;Create the full URL with which you can make a request.
+
+    Parameters
+    ----------
+    base_url : builtins.str
+        The base of the URL to prepend to the compiled path.
+
+    Returns
+    -------
+    builtins.str
+        The full URL for the route.
+    &#34;&#34;&#34;
+    return base_url + self.compiled_path</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.routes.Route" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="Route -- A template used to create compiled routes for specific parameters …" href="#hikari.internal.routes.Route"
+>Route</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.routes.Route" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Route (
+    method: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    path_template: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+): ...</code></pre>
+<p>A template used to create compiled routes for specific parameters.</p>
+<p>These compiled routes are used to identify rate limit buckets. Compiled
+routes may have a single major parameter.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>method</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The HTTP method</dd>
+<dt><strong><code>path_template</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></dt>
+<dd>The template string for the path to use.</dd>
+</dl>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L117-L177" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Route:
+    &#34;&#34;&#34;A template used to create compiled routes for specific parameters.
+
+    These compiled routes are used to identify rate limit buckets. Compiled
+    routes may have a single major parameter.
+
+    Parameters
+    ----------
+    method : builtins.str
+        The HTTP method
+    path_template : builtins.str
+        The template string for the path to use.
+    &#34;&#34;&#34;
+
+    method: str = attr.field()
+    &#34;&#34;&#34;The HTTP method.&#34;&#34;&#34;
+
+    path_template: str = attr.field()
+    &#34;&#34;&#34;The template string used for the path.&#34;&#34;&#34;
+
+    major_params: typing.Optional[typing.FrozenSet[str]] = attr.field(hash=False, eq=False)
+    &#34;&#34;&#34;The optional major parameter name combination for this endpoint.&#34;&#34;&#34;
+
+    def __init__(self, method: str, path_template: str) -&gt; None:
+        self.method = method
+        self.path_template = path_template
+
+        self.major_params = None
+        match = PARAM_REGEX.findall(path_template)
+        for major_param_combo in MAJOR_PARAM_COMBOS.keys():
+            if major_param_combo.issubset(match):
+                self.major_params = major_param_combo
+                break
+
+    def compile(self, **kwargs: typing.Any) -&gt; CompiledRoute:
+        &#34;&#34;&#34;Generate a formatted `CompiledRoute` for this route.
+
+        This takes into account any URL parameters that have been passed.
+
+        Parameters
+        ----------
+        **kwargs : typing.Any
+            Any parameters to interpolate into the route path.
+
+        Returns
+        -------
+        CompiledRoute
+            The compiled route.
+        &#34;&#34;&#34;
+        data = data_binding.StringMapBuilder()
+        for k, v in kwargs.items():
+            data.put(k, v)
+
+        return CompiledRoute(
+            route=self,
+            compiled_path=self.path_template.format_map(data),
+            major_param_hash=MAJOR_PARAM_COMBOS[self.major_params](data) if self.major_params else &#34;-&#34;,
+        )
+
+    def __str__(self) -&gt; str:
+        return self.path_template</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.internal.routes.Route.major_params" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="major_params -- The optional major parameter name combination for this endpoint." href="#hikari.internal.routes.Route.major_params"  >major_params</a> : Optional[FrozenSet[<a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>]]</code></pre>
+</dt>
+<dd><p>The optional major parameter name combination for this endpoint.</p></dd>
+</div>
+<div id="hikari.internal.routes.Route.method" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="method -- The HTTP method." href="#hikari.internal.routes.Route.method"  >method</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The HTTP method.</p></dd>
+</div>
+<div id="hikari.internal.routes.Route.path_template" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="path_template -- The template string used for the path." href="#hikari.internal.routes.Route.path_template"  >path_template</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The template string used for the path.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.routes.Route.compile" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="compile" href="#hikari.internal.routes.Route.compile" id="hikari.internal.routes.Route.compile">compile</a>(
+    **kwargs: <a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>,
+) -> <a href='#hikari.internal.routes.CompiledRoute'>CompiledRoute</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Generate a formatted <code><a href='#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code> for this route.</p>
+<p>This takes into account any URL parameters that have been passed.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a></code></dt>
+<dd>Any parameters to interpolate into the route path.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='#hikari.internal.routes.CompiledRoute'>CompiledRoute</a></code></dt>
+<dd>The compiled route.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/routes.py#L151-L174" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def compile(self, **kwargs: typing.Any) -&gt; CompiledRoute:
+    &#34;&#34;&#34;Generate a formatted `CompiledRoute` for this route.
+
+    This takes into account any URL parameters that have been passed.
+
+    Parameters
+    ----------
+    **kwargs : typing.Any
+        Any parameters to interpolate into the route path.
+
+    Returns
+    -------
+    CompiledRoute
+        The compiled route.
+    &#34;&#34;&#34;
+    data = data_binding.StringMapBuilder()
+    for k, v in kwargs.items():
+        data.put(k, v)
+
+    return CompiledRoute(
+        route=self,
+        compiled_path=self.path_template.format_map(data),
+        major_param_hash=MAJOR_PARAM_COMBOS[self.major_params](data) if self.major_params else &#34;-&#34;,
+    )</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

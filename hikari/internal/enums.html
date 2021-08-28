@@ -1,0 +1,2449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.internal.enums API documentation</title>
+<meta name="description" content="Implementation of parts of Python's `enum` protocol to be more performant.">
+<meta property="og:title" content="hikari.internal.enums module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.internal -- Package containing internal utilities used within this API." href="index.html"
+>internal</a></li>
+<li class="breadcrumb-item active"><a href="#">enums</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Implementation of parts of Python's <code><a href='https://docs.python.org/3/library/enum.html#module-enum'>enum</a></code> protocol to be more performant.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="Enum -- Clone of Python's `enum.Enum` implementation …" href="#hikari.internal.enums.Enum"
+>Enum</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- Return the name of the enum member as a `builtins.str`." href="#hikari.internal.enums.Enum.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="value -- Return the value of the enum member." href="#hikari.internal.enums.Enum.value"
+>value</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Flag -- Clone of Python's `enum.Flag` implementation …" href="#hikari.internal.enums.Flag"
+>Flag</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="all -- Check if all of the given flags are part of this value …" href="#hikari.internal.enums.Flag.all"
+>all</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="any -- Check if any of the given flags are part of this value …" href="#hikari.internal.enums.Flag.any"
+>any</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="difference -- Perform a set difference with the other set …" href="#hikari.internal.enums.Flag.difference"
+>difference</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="intersection -- Return a combination of flags that are set for both given values …" href="#hikari.internal.enums.Flag.intersection"
+>intersection</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="invert -- Return a set of all flags not in the current set." href="#hikari.internal.enums.Flag.invert"
+>invert</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_disjoint -- Return whether two sets have a intersection or not …" href="#hikari.internal.enums.Flag.is_disjoint"
+>is_disjoint</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_subset -- Return whether another set contains this set or not …" href="#hikari.internal.enums.Flag.is_subset"
+>is_subset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_superset -- Return whether this set contains another set or not." href="#hikari.internal.enums.Flag.is_superset"
+>is_superset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="isdisjoint -- Return whether two sets have a intersection or not …" href="#hikari.internal.enums.Flag.is_disjoint"
+>isdisjoint</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="issubset -- Return whether another set contains this set or not …" href="#hikari.internal.enums.Flag.is_subset"
+>issubset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="issuperset -- Return whether this set contains another set or not." href="#hikari.internal.enums.Flag.is_superset"
+>issuperset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- Return the name of the flag combination as a `builtins.str`." href="#hikari.internal.enums.Flag.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="none -- Check if none of the given flags are part of this value …" href="#hikari.internal.enums.Flag.none"
+>none</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="split -- Return a list of all defined atomic values for this flag …" href="#hikari.internal.enums.Flag.split"
+>split</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="symmetric_difference -- Return a set with the symmetric differences of two flag sets …" href="#hikari.internal.enums.Flag.symmetric_difference"
+>symmetric_difference</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="symmetricdifference -- Return a set with the symmetric differences of two flag sets …" href="#hikari.internal.enums.Flag.symmetric_difference"
+>symmetricdifference</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="union -- Return a combination of all flags in this set and the other set …" href="#hikari.internal.enums.Flag.union"
+>union</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="value -- Return the `builtins.int` value of the flag." href="#hikari.internal.enums.Flag.value"
+>value</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L1-L763" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Implementation of parts of Python&#39;s `enum` protocol to be more performant.&#34;&#34;&#34;
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;Enum&#34;, &#34;Flag&#34;]
+
+import functools
+import operator
+import sys
+import types
+import typing
+
+_T = typing.TypeVar(&#34;_T&#34;)
+_MAX_CACHED_MEMBERS: typing.Final[int] = 1 &lt;&lt; 12
+
+
+class _EnumNamespace(typing.Dict[str, typing.Any]):
+    __slots__: typing.Sequence[str] = (&#34;base&#34;, &#34;names_to_values&#34;, &#34;values_to_names&#34;)
+
+    def __init__(self, base: typing.Type[typing.Any]) -&gt; None:
+        super().__init__()
+        self.base = base
+        self.names_to_values: typing.Dict[str, typing.Any] = {}
+        self.values_to_names: typing.Dict[str, typing.Any] = {}
+        self[&#34;__doc__&#34;] = &#34;An enumeration.&#34;
+
+    def __getitem__(self, name: str) -&gt; typing.Any:
+        try:
+            return super().__getitem__(name)
+        except KeyError:
+            try:
+                return self.names_to_values[name]
+            except KeyError:
+                raise KeyError(name) from None
+
+    def __setitem__(self, name: str, value: typing.Any) -&gt; None:
+        if name == &#34;&#34; or name == &#34;mro&#34;:
+            raise TypeError(f&#34;Invalid enum member name: {name!r}&#34;)
+
+        if name.startswith(&#34;_&#34;):
+            # Dunder/sunder, so skip.
+            super().__setitem__(name, value)
+            return
+
+        if hasattr(value, &#34;__get__&#34;) or hasattr(value, &#34;__set__&#34;) or hasattr(value, &#34;__del__&#34;):
+            super().__setitem__(name, value)
+            return
+
+        if not isinstance(value, self.base):
+            raise TypeError(f&#34;Expected member {name} to be of type {self.base.__name__} but was {type(value).__name__}&#34;)
+
+        name = sys.intern(name)
+
+        if issubclass(self.base, str):
+            value = sys.intern(value)
+        else:
+            try:
+                # This will fail if unhashable.
+                hash(value)
+            except TypeError:
+                raise TypeError(f&#34;Cannot have unhashable values in this enum type ({name}: {value!r})&#34;) from None
+
+        if name in self.names_to_values:
+            raise TypeError(&#34;Cannot define same name twice&#34;)
+        if value in self.values_to_names:
+            # We must have defined some alias, so just register the name
+            self.names_to_values[name] = value
+            return
+
+        self.names_to_values[name] = value
+        self.values_to_names[value] = name
+
+
+# We refer to these from the metaclasses, but obviously this won&#39;t work
+# until these classes are created, and since they use the metaclasses as
+# a base metaclass, we have to give these values for _EnumMeta to not
+# flake out when initializing them.
+_Enum = NotImplemented
+
+
+class _EnumMeta(type):
+    def __call__(cls, value: typing.Any) -&gt; typing.Any:
+        try:
+            return cls._value_to_member_map_[value]
+        except KeyError:
+            # If we can&#39;t find the value, just return what got casted in
+            return value
+
+    def __getitem__(cls, name: str) -&gt; typing.Any:
+        return cls._name_to_member_map_[name]
+
+    def __contains__(cls, item: typing.Any) -&gt; bool:
+        return item in cls._value_to_member_map_
+
+    def __iter__(cls) -&gt; typing.Iterator[typing.Any]:
+        yield from cls._name_to_member_map_.values()
+
+    def __new__(
+        mcs: typing.Type[_T],
+        name: str,
+        bases: typing.Tuple[typing.Type[typing.Any], ...],
+        namespace: typing.Union[typing.Dict[str, typing.Any], _EnumNamespace],
+    ) -&gt; _T:
+        global _Enum
+
+        if _Enum is NotImplemented:
+            # noinspection PyRedundantParentheses
+            return (_Enum := super().__new__(mcs, name, bases, namespace))
+
+        assert isinstance(namespace, _EnumNamespace)
+
+        base, enum_type = bases
+
+        new_namespace = {
+            &#34;__objtype__&#34;: base,
+            &#34;__enumtype__&#34;: enum_type,
+            &#34;_name_to_member_map_&#34;: (name_to_member := {}),
+            &#34;_value_to_member_map_&#34;: (value_to_member := {}),
+            &#34;_member_names_&#34;: (member_names := []),
+            # Required to be immutable by enum API itself.
+            &#34;__members__&#34;: types.MappingProxyType(namespace.names_to_values),
+            **{
+                name: value
+                for name, value in Enum.__dict__.items()
+                if name not in (&#34;__class__&#34;, &#34;__module__&#34;, &#34;__doc__&#34;)
+            },
+        }
+
+        # We don&#39;t want to override the __str__ behaviour inherited from builtins.str for string based enums.
+        if issubclass(base, str):
+            new_namespace.pop(&#34;__str__&#34;, None)
+
+        # We update the name space to ensure new fields override inherited attributes and methods.
+        new_namespace.update(namespace)
+
+        cls = super().__new__(mcs, name, bases, new_namespace)
+
+        for name, value in namespace.names_to_values.items():
+            # Patching the member init call is around 100ns faster per call than
+            # using the default type.__call__ which would make us do the lookup
+            # in cls.__new__. Reason for this is that python will also always
+            # invoke cls.__init__ if we do this, so we end up with two function
+            # calls.
+            member = cls.__new__(cls, value)
+            member._name_ = name
+            member._value_ = value
+            name_to_member[name] = member
+            value_to_member[value] = member
+            member_names.append(name)
+            setattr(cls, name, member)
+
+        return cls
+
+    @classmethod
+    def __prepare__(
+        mcs, name: str, bases: typing.Tuple[typing.Type[typing.Any], ...] = ()
+    ) -&gt; typing.Union[typing.Dict[str, typing.Any], _EnumNamespace]:
+        if _Enum is NotImplemented:
+            if name != &#34;Enum&#34;:
+                raise TypeError(&#34;First instance of _EnumMeta must be Enum&#34;)
+            return _EnumNamespace(object)
+
+        try:
+            # Fails if Enum is not defined. We check this in `__new__` properly.
+            base, enum_type = bases
+
+            if isinstance(base, _EnumMeta):
+                raise TypeError(&#34;First base to an enum must be the type to combine with, not _EnumMeta&#34;)
+
+            return _EnumNamespace(base)
+        except ValueError:
+            raise TypeError(&#34;Expected exactly two base classes for an enum&#34;) from None
+
+    def __repr__(cls) -&gt; str:
+        return f&#34;&lt;enum {cls.__name__}&gt;&#34;
+
+    __str__ = __repr__
+
+
+class Enum(metaclass=_EnumMeta):
+    &#34;&#34;&#34;Clone of Python&#39;s `enum.Enum` implementation.
+
+    This is designed to be faster and more efficient than Python&#39;s
+    implementation, while retaining the majority of the external interface
+    that Python&#39;s `enum.Enum` provides.
+
+    An `Enum` is a simple class containing a discrete set of constant values
+    that can be used in place of this type. This acts as a type-safe way
+    of representing a set number of &#34;things&#34;.
+
+    !!! warning
+        Some semantics such as subtype checking and instance checking may
+        differ. It is recommended to compare these values using the
+        `==` operator rather than the `is` operator for safety reasons.
+
+    Special Members on the class
+    ----------------------------
+    * `__enumtype__` :
+        Always `Enum`.
+    * `__members__` :
+        An immutable `typing.Mapping` that maps each member name to the member
+        value.
+    * ` __objtype__` :
+        Always the first type that the enum is derived from. For example:
+
+    ```py
+    &gt;&gt;&gt; class UserType(str, Enum):
+    ...     USER = &#34;user&#34;
+    ...     PARTIAL = &#34;partial&#34;
+    ...     MEMBER = &#34;member&#34;
+    &gt;&gt;&gt; print(UserType.__objtype__)
+    &lt;class &#39;builtins.str&#39;&gt;
+    ```
+
+    Operators on the class
+    ----------------------
+    * `EnumType[&#34;FOO&#34;]` :
+        Return the member that has the name `FOO`, raising a `builtins.KeyError`
+        if it is not present.
+    * `EnumType.FOO` :
+        Return the member that has the name `FOO`, raising a
+        `builtins.AttributeError` if it is not present.
+    * `EnumType(x)` :
+        Attempt to cast `x` to the enum type by finding an existing member that
+        has the same __value__. If this fails, you should expect a
+        `builtins.ValueError` to be raised.
+
+    Operators on each enum member
+    -----------------------------
+    * `e1 == e2` : `builtins.bool`
+        Compare equality.
+    * `e1 != e2` : `builtins.bool`
+        Compare inequality.
+    * `builtins.repr(e)` : `builtins.str`
+        Get the machine readable representation of the enum member `e`.
+    * `builtins.str(e)` : `builtins.str`
+        Get the `builtins.str` name of the enum member `e`.
+
+    Special properties on each enum member
+    --------------------------------------
+    * `name` : `builtins.str`
+        The name of the member.
+    * `value` :
+        The value of the member. The type depends on the implementation type
+        of the enum you are using.
+
+    All other methods and operators on enum members are inherited from the
+    member&#39;s __value__. For example, an enum extending `builtins.int` would
+    be able to be used as an `int` type outside these overridden definitions.
+    &#34;&#34;&#34;
+
+    _name_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[str, Enum]]]
+    _value_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[int, Enum]]]
+    _member_names_: typing.Final[typing.ClassVar[typing.Sequence[str]]]
+    __members__: typing.Final[typing.ClassVar[typing.Mapping[str, Enum]]]
+    __objtype__: typing.Final[typing.ClassVar[typing.Type[typing.Any]]]
+    __enumtype__: typing.Final[typing.ClassVar[typing.Type[Enum]]]
+    _name_: typing.Final[str]
+    _value_: typing.Final[typing.Any]
+
+    @property
+    def name(self) -&gt; str:
+        &#34;&#34;&#34;Return the name of the enum member as a `builtins.str`.&#34;&#34;&#34;
+        return self._name_
+
+    @property
+    @typing.no_type_check
+    def value(self):
+        &#34;&#34;&#34;Return the value of the enum member.&#34;&#34;&#34;
+        return self._value_
+
+    def __repr__(self) -&gt; str:
+        return f&#34;&lt;{type(self).__name__}.{self._name_}: {self._value_!r}&gt;&#34;
+
+    def __str__(self) -&gt; str:
+        return self._name_
+
+
+_Flag = NotImplemented
+
+
+def _name_resolver(members: typing.Dict[int, _Flag], value: int) -&gt; typing.Generator[str, typing.Any, None]:
+    bit = 1
+    has_yielded = False
+    remaining = value
+    while bit &lt;= value:
+        if member := members.get(bit):
+            # Use ._value_ to prevent overhead of making new members each time.
+            # Also lets my testing logic for the cache size be more accurate.
+            if member._value_ &amp; remaining == member._value_:
+                remaining ^= member._value_
+                yield member.name
+                has_yielded = True
+        bit &lt;&lt;= 1
+
+    if not has_yielded:
+        yield f&#34;UNKNOWN 0x{value:x}&#34;
+    elif remaining:
+        yield hex(remaining)
+
+
+class _FlagMeta(type):
+    def __call__(cls, value: int = 0) -&gt; typing.Any:
+        # We want to handle value invariantly to avoid issues brought in by different behaviours from sub-classed ints
+        # and floats. This also ensures that .__int__ only returns an invariant int.
+        value = int(value)
+        try:
+            return cls._value_to_member_map_[value]
+        except KeyError:
+            # We only need this ability here usually, so overloading operators
+            # is an overkill and would add more overhead.
+
+            if value &lt; 0:
+                # Convert to a positive value instead.
+                return cls.__everything__ - ~value
+
+            temp_members = cls._temp_members_
+            # For huge enums, don&#39;t ever cache anything. We could consume masses of memory otherwise
+            # (e.g. Permissions)
+            try:
+                # Try to get a cached value.
+                return temp_members[value]
+            except KeyError:
+                # If we can&#39;t find the value, just return what got casted in by generating a pseudomember
+                # and caching it. We can&#39;t use weakref because int is not weak referenceable, annoyingly.
+                pseudomember = cls.__new__(cls, value)
+                pseudomember._name_ = None
+                pseudomember._value_ = value
+                temp_members[value] = pseudomember
+                if len(temp_members) &gt; _MAX_CACHED_MEMBERS:
+                    temp_members.popitem()
+
+                return pseudomember
+
+    def __getitem__(cls, name: str) -&gt; typing.Any:
+        return cls._name_to_member_map_[name]
+
+    def __iter__(cls) -&gt; typing.Iterator[typing.Any]:
+        yield from cls._name_to_member_map_.values()
+
+    @classmethod
+    def __prepare__(
+        mcs, name: str, bases: typing.Tuple[typing.Type[typing.Any], ...] = ()
+    ) -&gt; typing.Union[typing.Dict[str, typing.Any], _EnumNamespace]:
+        if _Flag is NotImplemented:
+            if name != &#34;Flag&#34;:
+                raise TypeError(&#34;First instance of _FlagMeta must be Flag&#34;)
+            return _EnumNamespace(object)
+
+        # Fails if Flag is not defined.
+        if len(bases) == 1 and bases[0] == Flag:
+            return _EnumNamespace(int)
+        raise TypeError(&#34;Cannot define another Flag base type&#34;)
+
+    @staticmethod
+    def __new__(
+        mcs: typing.Type[_T],
+        name: str,
+        bases: typing.Tuple[typing.Type[typing.Any], ...],
+        namespace: typing.Union[typing.Dict[str, typing.Any], _EnumNamespace],
+    ) -&gt; _T:
+        global _Flag
+
+        if _Flag is NotImplemented:
+            # noinspection PyRedundantParentheses
+            return (_Flag := super().__new__(mcs, name, bases, namespace))
+
+        assert isinstance(namespace, _EnumNamespace)
+        new_namespace = {
+            &#34;__objtype__&#34;: int,
+            &#34;__enumtype__&#34;: _Flag,
+            &#34;_name_to_member_map_&#34;: (name_to_member := {}),
+            &#34;_value_to_member_map_&#34;: (value_to_member := {}),
+            &#34;_powers_of_2_to_member_map_&#34;: (powers_of_2_map := {}),
+            # We can&#39;t weakref, as we inherit from int. Turns out that is significantly
+            # slower anyway, so it isn&#39;t important for now. We just manually limit
+            # the cache size.
+            # This also randomly ends up with a 0 value in it at the start
+            # during the next for loop. I cannot work out for the life of me
+            # why this happens.
+            &#34;_temp_members_&#34;: {},
+            &#34;_member_names_&#34;: (member_names := []),
+            # Required to be immutable by enum API itself.
+            &#34;__members__&#34;: types.MappingProxyType(namespace.names_to_values),
+            # This copies over all methods, including operator overloads. This
+            # has the effect of making pdoc aware of any methods or properties
+            # we defined on Flag.
+            **{
+                name: value
+                for name, value in Flag.__dict__.items()
+                if name not in (&#34;__class__&#34;, &#34;__module__&#34;, &#34;__doc__&#34;)
+            },
+        }
+        # We update the namespace to ensure new fields override inherited attributes and methods.
+        new_namespace.update(namespace)
+
+        cls = super().__new__(mcs, name, (int, *bases), new_namespace)
+
+        for name, value in namespace.names_to_values.items():
+            # Patching the member init call is around 100ns faster per call than
+            # using the default type.__call__ which would make us do the lookup
+            # in cls.__new__. Reason for this is that python will also always
+            # invoke cls.__init__ if we do this, so we end up with two function
+            # calls.
+            member = cls.__new__(cls, value)
+            member._name_ = name
+            member._value_ = value
+            name_to_member[name] = member
+            value_to_member[value] = member
+            member_names.append(name)
+            setattr(cls, name, member)
+
+            if not (value &amp; value - 1):
+                powers_of_2_map[value] = member
+
+        all_bits = functools.reduce(operator.or_, value_to_member.keys())
+        all_bits_member = cls.__new__(cls, all_bits)
+        all_bits_member._name_ = None
+        all_bits_member._value_ = all_bits
+        setattr(cls, &#34;__everything__&#34;, all_bits_member)
+
+        return cls
+
+    def __repr__(cls) -&gt; str:
+        return f&#34;&lt;enum {cls.__name__}&gt;&#34;
+
+    __str__ = __repr__
+
+
+class Flag(metaclass=_FlagMeta):
+    &#34;&#34;&#34;Clone of Python&#39;s `enum.Flag` implementation.
+
+    This is designed to be faster and more efficient than Python&#39;s
+    implementation, while retaining the majority of the external interface
+    that Python&#39;s `enum.Flag` provides.
+
+    In simple terms, an `Flag` is a set of wrapped constant `builtins.int`
+    values that can be combined in any combination to make a special value.
+    This is a more efficient way of combining things like permissions together
+    into a single integral value, and works by setting individual `1`s and `0`s
+    on the binary representation of the integer.
+
+    This implementation has extra features, in that it will actively behave
+    like a `builtins.set` as well.
+
+    !!! warning
+        Despite wrapping `builtins.int` values, conceptually this does not
+        behave as if it were a subclass of `int`.
+
+    !!! danger
+        Some semantics such as subtype checking and instance checking may
+        differ. It is recommended to compare these values using the
+        `==` operator rather than the `is` operator for safety reasons.
+
+        Especially where pseudo-members created from combinations are cached,
+        results of using of `is` may not be deterministic. This is a side
+        effect of some internal performance improvements.
+
+        Failing to observe this __will__ result in unexpected behaviour
+        occurring in your application!
+
+    Special Members on the class
+    ----------------------------
+    * `__enumtype__` :
+        Always `Flag`.
+    * `__everything__` :
+        A special member with all documented bits set.
+    * `__members__` :
+        An immutable `typing.Mapping` that maps each member name to the member
+        value.
+    * ` __objtype__` :
+        Always `builtins.int`.
+
+    Operators on the class
+    ----------------------
+    * `FlagType[&#34;FOO&#34;]` :
+        Return the member that has the name `FOO`, raising a `builtins.KeyError`
+        if it is not present.
+    * `FlagType.FOO` :
+        Return the member that has the name `FOO`, raising a
+        `builtins.AttributeError` if it is not present.
+    * `FlagType(x)` :
+        Attempt to cast `x` to the enum type by finding an existing member that
+        has the same __value__. If this fails, then a special __composite__
+        instance of the type is made. The name of this type is a combination of
+        all members that combine to make the bitwise value.
+
+    Operators on each flag member
+    -----------------------------
+    * `e1 &amp; e2` :
+        Bitwise `AND` operation. Will return a member that contains all flags
+        that are common between both oprands on the values. This also works with
+        one of the oprands being an `builtins.int`eger. You may instead use
+        the `intersection` method.
+    * `e1 | e2` :
+        Bitwise `OR` operation. Will return a member that contains all flags
+        that appear on at least one of the oprands. This also works with
+        one of the oprands being an `builtins.int`eger. You may instead use
+        the `union` method.
+    * `e1 ^ e2` :
+        Bitwise `XOR` operation. Will return a member that contains all flags
+        that only appear on at least one and at most one of the oprands.
+        This also works with one of the oprands being an `builtins.int`eger.
+        You may instead use the `symmetric_difference` method.
+    * `~e` :
+        Return the inverse of this value. This is equivalent to disabling all
+        flags that are set on this value and enabling all flags that are
+        not set on this value. Note that this will behave slightly differently
+        to inverting a pure int value. You may instead use the `invert` method.
+    * `e1 - e2` :
+        Bitwise set difference operation. Returns all flags set on `e1` that are
+        not set on `e2` as well. You may instead use the `difference`
+        method.
+    * `bool(e)` : `builtins.bool`
+        Return `builtins.True` if `e` has a non-zero value, otherwise
+        `builtins.False`.
+    * `E.A in e`: `builtins.bool`
+        `builtins.True` if `E.A` is in `e`. This is functionally equivalent
+        to `E.A &amp; e == E.A`.
+    * `iter(e)` :
+        Explode the value into a iterator of each __documented__ flag that can
+        be combined to make up the value `e`. Returns an iterator across all
+        well-defined flags that make up this value. This will only include the
+        flags explicitly defined on this `Flag` type and that are individual
+        powers of two (this means if converted to twos-compliment binary,
+        exactly one bit must be a `1`). In simple terms, this means that you
+        should not expect combination flags to be returned.
+    * `e1 == e2` : `builtins.bool`
+        Compare equality.
+    * `e1 != e2` : `builtins.bool`
+        Compare inequality.
+    * `e1 &lt; e2` : `builtins.bool`
+        Compare by ordering.
+    * `builtins.int(e)` : `builtins.int`
+        Get the integer value of this flag
+    * `builtins.repr(e)` : `builtins.str`
+        Get the machine readable representation of the flag member `e`.
+    * `builtins.str(e)` : `builtins.str`
+        Get the `builtins.str` name of the flag member `e`.
+
+    Special properties on each flag member
+    --------------------------------------
+    * `e.name` : `builtins.str`
+        The name of the member. For composite members, this will be generated.
+    * `e.value` : `builtins.int`
+        The value of the member.
+
+    Special members on each flag member
+    -----------------------------------
+    * `e.all(E.A, E.B, E.C, ...)` : `builtins.bool`
+        Returns `builtins.True` if __all__ of `E.A`, `E.B`, `E.C`, et cetera
+        make up the value of `e`.
+    * `e.any(E.A, E.B, E.C, ...)` : `builtins.bool`
+        Returns `builtins.True` if __any__ of `E.A`, `E.B`, `E.C`, et cetera
+        make up the value of `e`.
+    * `e.none(E.A, E.B, E.C, ...)` : `builtins.bool`
+        Returns `builtins.True` if __none__ of `E.A`, `E.B`, `E.C`, et cetera
+        make up the value of `e`.
+    * `e.split()` : `typing.Sequence`
+        Explode the value into a sequence of each __documented__ flag that can
+        be combined to make up the value `e`. Returns a sorted sequence of each
+        power-of-two flag that makes up the value `e`. This is equivalent to
+        `list(iter(e))`.
+
+    All other methods and operators on `Flag` members are inherited from the
+    member&#39;s __value__.
+
+    !!! note
+        Due to limitations around how this is re-implemented, this class is not
+        considered a subclass of `Enum` at runtime, even if MyPy believes this
+        is possible
+    &#34;&#34;&#34;
+
+    _name_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[str, Flag]]]
+    _value_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[int, Flag]]]
+    _powers_of_2_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[int, Flag]]]
+    _temp_members_: typing.Final[typing.ClassVar[typing.Mapping[int, Flag]]]
+    _member_names_: typing.Final[typing.ClassVar[typing.Sequence[str]]]
+    __members__: typing.Final[typing.ClassVar[typing.Mapping[str, Flag]]]
+    __objtype__: typing.Final[typing.ClassVar[typing.Type[int]]]
+    __enumtype__: typing.Final[typing.ClassVar[typing.Type[Flag]]]
+    _name_: typing.Final[str]
+    _value_: typing.Final[int]
+
+    @property
+    def name(self) -&gt; str:
+        &#34;&#34;&#34;Return the name of the flag combination as a `builtins.str`.&#34;&#34;&#34;
+        if self._name_ is None:
+            self._name_ = &#34;|&#34;.join(_name_resolver(self._value_to_member_map_, self._value_))
+        return self._name_
+
+    @property
+    def value(self) -&gt; int:
+        &#34;&#34;&#34;Return the `builtins.int` value of the flag.&#34;&#34;&#34;
+        return self._value_
+
+    def all(self: _T, *flags: _T) -&gt; bool:
+        &#34;&#34;&#34;Check if all of the given flags are part of this value.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if any of the given flags are part of this value.
+            Otherwise, return `builtins.False`.
+        &#34;&#34;&#34;
+        return all((flag &amp; self) == flag for flag in flags)
+
+    def any(self: _T, *flags: _T) -&gt; bool:
+        &#34;&#34;&#34;Check if any of the given flags are part of this value.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if any of the given flags are part of this value.
+            Otherwise, return `builtins.False`.
+        &#34;&#34;&#34;
+        return any((flag &amp; self) == flag for flag in flags)
+
+    def difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Perform a set difference with the other set.
+
+        This will return all flags in this set that are not in the other value.
+
+        Equivalent to using the subtraction `-` operator.
+        &#34;&#34;&#34;
+        return self.__class__(self &amp; ~int(other))
+
+    def intersection(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Return a combination of flags that are set for both given values.
+
+        Equivalent to using the &#34;AND&#34; `&amp;` operator.
+        &#34;&#34;&#34;
+        return self.__class__(self._value_ &amp; int(other))
+
+    def invert(self: _T) -&gt; _T:
+        &#34;&#34;&#34;Return a set of all flags not in the current set.&#34;&#34;&#34;
+        return self.__class__(self.__class__.__everything__._value_ &amp; ~self._value_)
+
+    def is_disjoint(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+        &#34;&#34;&#34;Return whether two sets have a intersection or not.
+
+        If the two sets have an intersection, then this returns
+        `builtins.False`. If no common flag values exist between them, then
+        this returns `builtins.True`.
+        &#34;&#34;&#34;
+        return not (self &amp; other)
+
+    def is_subset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+        &#34;&#34;&#34;Return whether another set contains this set or not.
+
+        Equivalent to using the &#34;in&#34; operator.
+        &#34;&#34;&#34;
+        return (self &amp; other) == other
+
+    def is_superset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+        &#34;&#34;&#34;Return whether this set contains another set or not.&#34;&#34;&#34;
+        return (self &amp; other) == self
+
+    def none(self: _T, *flags: _T) -&gt; bool:
+        &#34;&#34;&#34;Check if none of the given flags are part of this value.
+
+        !!! note
+            This is essentially the opposite of `Flag.any`.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if none of the given flags are part of this value.
+            Otherwise, return `builtins.False`.
+        &#34;&#34;&#34;
+        return not self.any(*flags)
+
+    def split(self: _T) -&gt; typing.Sequence[_T]:
+        &#34;&#34;&#34;Return a list of all defined atomic values for this flag.
+
+        Any unrecognised bits will be omitted for brevity.
+
+        The result will be a name-sorted `typing.Sequence` of each membe
+        &#34;&#34;&#34;
+        return sorted(
+            (member for member in self.__class__._powers_of_2_to_member_map_.values() if member.value &amp; self),
+            # Assumption: powers of 2 already have a cached value.
+            key=lambda m: m._name_,
+        )
+
+    def symmetric_difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Return a set with the symmetric differences of two flag sets.
+
+        Equivalent to using the &#34;XOR&#34; `^` operator.
+
+        For `a ^ b`, this can be considered the same as `(a - b) | (b - a)`.
+        &#34;&#34;&#34;
+        return self.__class__(self._value_ ^ int(other))
+
+    def union(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Return a combination of all flags in this set and the other set.
+
+        Equivalent to using the &#34;OR&#34; `~` operator.
+        &#34;&#34;&#34;
+        return self.__class__(self._value_ | int(other))
+
+    isdisjoint = is_disjoint
+    issubset = is_subset
+    issuperset = is_superset
+    # Exists since Python&#39;s `set` type is inconsistent with naming, so this
+    # will prevent tripping people up unnecessarily because we do not
+    # name inconsistently.
+
+    # This one isn&#39;t in Python&#39;s set, but the inconsistency is triggering my OCD
+    # so this is being defined anyway.
+    symmetricdifference = symmetric_difference
+
+    def __bool__(self) -&gt; bool:
+        return bool(self._value_)
+
+    def __int__(self) -&gt; int:
+        return self._value_
+
+    def __iter__(self: _T) -&gt; typing.Iterator[_T]:
+        return iter(self.split())
+
+    def __len__(self) -&gt; int:
+        return len(self.split())
+
+    def __repr__(self) -&gt; str:
+        return f&#34;&lt;{self.__class__.__name__}.{self.name}: {self.value!r}&gt;&#34;
+
+    def __rsub__(self: _T, other: typing.Union[int, _T]) -&gt; _T:
+        # This logic has to be reversed to be correct, since order matters for
+        # a subtraction operator. This also ensures `int - _T -&gt; _T` is a valid
+        # case for us.
+        return self.__class__(other) - self
+
+    def __str__(self) -&gt; str:
+        return self.name
+
+    __contains__ = is_subset
+    __rand__ = __and__ = intersection
+    __ror__ = __or__ = union
+    __sub__ = difference
+    __rxor__ = __xor__ = symmetric_difference
+    __invert__ = invert</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.enums.Enum" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="Enum -- Clone of Python's `enum.Enum` implementation …" href="#hikari.internal.enums.Enum"
+>Enum</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.enums.Enum" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Enum (
+    value: <a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>,
+): ...</code></pre>
+<p>Clone of Python's <code><a href='https://docs.python.org/3/library/enum.html#enum.Enum'>enum.Enum</a></code> implementation.</p>
+<p>This is designed to be faster and more efficient than Python's
+implementation, while retaining the majority of the external interface
+that Python's <code><a href='https://docs.python.org/3/library/enum.html#enum.Enum'>enum.Enum</a></code> provides.</p>
+<p>An <code><a href='#hikari.internal.enums.Enum'>Enum</a></code> is a simple class containing a discrete set of constant values
+that can be used in place of this type. This acts as a type-safe way
+of representing a set number of "things".</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Some semantics such as subtype checking and instance checking may
+differ. It is recommended to compare these values using the
+<code>==</code> operator rather than the <code><a href='https://docs.python.org/3/reference/expressions.html#is'>is</a></code> operator for safety reasons.</p>
+</div>
+<h2 id="special-members-on-the-class">Special Members On The Class</h2>
+<ul>
+<li><code>__enumtype__</code> :
+Always <code><a href='#hikari.internal.enums.Enum'>Enum</a></code>.</li>
+<li><code>__members__</code> :
+An immutable <code><a href='https://docs.python.org/3/library/typing.html#typing.Mapping'>Mapping</a></code> that maps each member name to the member
+value.</li>
+<li><code> __objtype__</code> :
+Always the first type that the enum is derived from. For example:</li>
+</ul>
+<pre><code class="language-py">&gt;&gt;&gt; class UserType(str, Enum):
+...     USER = &quot;user&quot;
+...     PARTIAL = &quot;partial&quot;
+...     MEMBER = &quot;member&quot;
+&gt;&gt;&gt; print(UserType.__objtype__)
+&lt;class 'builtins.str'&gt;
+</code></pre>
+<h2 id="operators-on-the-class">Operators On The Class</h2>
+<ul>
+<li><code>EnumType["FOO"]</code> :
+Return the member that has the name <code>FOO</code>, raising a <code><a href='https://docs.python.org/3/library/exceptions.html#KeyError'>KeyError</a></code>
+if it is not present.</li>
+<li><code>EnumType.FOO</code> :
+Return the member that has the name <code>FOO</code>, raising a
+<code><a href='https://docs.python.org/3/library/exceptions.html#AttributeError'>AttributeError</a></code> if it is not present.</li>
+<li><code>EnumType(x)</code> :
+Attempt to cast <code>x</code> to the enum type by finding an existing member that
+has the same <strong>value</strong>. If this fails, you should expect a
+<code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code> to be raised.</li>
+</ul>
+<h2 id="operators-on-each-enum-member">Operators On Each Enum Member</h2>
+<ul>
+<li><code>e1 == e2</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Compare equality.</li>
+<li><code>e1 != e2</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Compare inequality.</li>
+<li><code><a href='https://docs.python.org/3/library/functions.html#repr'>repr</a>(e)</code> : <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+Get the machine readable representation of the enum member <code>e</code>.</li>
+<li><code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>(e)</code> : <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+Get the <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code> name of the enum member <code>e</code>.</li>
+</ul>
+<h2 id="special-properties-on-each-enum-member">Special Properties On Each Enum Member</h2>
+<ul>
+<li><code><a href='https://docs.python.org/3/reference/introduction.html#grammar-token-name'>name</a></code> : <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+The name of the member.</li>
+<li><code>value</code> :
+The value of the member. The type depends on the implementation type
+of the enum you are using.</li>
+</ul>
+<p>All other methods and operators on enum members are inherited from the
+member's <strong>value</strong>. For example, an enum extending <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> would
+be able to be used as an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> type outside these overridden definitions.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L201-L297" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Enum(metaclass=_EnumMeta):
+    &#34;&#34;&#34;Clone of Python&#39;s `enum.Enum` implementation.
+
+    This is designed to be faster and more efficient than Python&#39;s
+    implementation, while retaining the majority of the external interface
+    that Python&#39;s `enum.Enum` provides.
+
+    An `Enum` is a simple class containing a discrete set of constant values
+    that can be used in place of this type. This acts as a type-safe way
+    of representing a set number of &#34;things&#34;.
+
+    !!! warning
+        Some semantics such as subtype checking and instance checking may
+        differ. It is recommended to compare these values using the
+        `==` operator rather than the `is` operator for safety reasons.
+
+    Special Members on the class
+    ----------------------------
+    * `__enumtype__` :
+        Always `Enum`.
+    * `__members__` :
+        An immutable `typing.Mapping` that maps each member name to the member
+        value.
+    * ` __objtype__` :
+        Always the first type that the enum is derived from. For example:
+
+    ```py
+    &gt;&gt;&gt; class UserType(str, Enum):
+    ...     USER = &#34;user&#34;
+    ...     PARTIAL = &#34;partial&#34;
+    ...     MEMBER = &#34;member&#34;
+    &gt;&gt;&gt; print(UserType.__objtype__)
+    &lt;class &#39;builtins.str&#39;&gt;
+    ```
+
+    Operators on the class
+    ----------------------
+    * `EnumType[&#34;FOO&#34;]` :
+        Return the member that has the name `FOO`, raising a `builtins.KeyError`
+        if it is not present.
+    * `EnumType.FOO` :
+        Return the member that has the name `FOO`, raising a
+        `builtins.AttributeError` if it is not present.
+    * `EnumType(x)` :
+        Attempt to cast `x` to the enum type by finding an existing member that
+        has the same __value__. If this fails, you should expect a
+        `builtins.ValueError` to be raised.
+
+    Operators on each enum member
+    -----------------------------
+    * `e1 == e2` : `builtins.bool`
+        Compare equality.
+    * `e1 != e2` : `builtins.bool`
+        Compare inequality.
+    * `builtins.repr(e)` : `builtins.str`
+        Get the machine readable representation of the enum member `e`.
+    * `builtins.str(e)` : `builtins.str`
+        Get the `builtins.str` name of the enum member `e`.
+
+    Special properties on each enum member
+    --------------------------------------
+    * `name` : `builtins.str`
+        The name of the member.
+    * `value` :
+        The value of the member. The type depends on the implementation type
+        of the enum you are using.
+
+    All other methods and operators on enum members are inherited from the
+    member&#39;s __value__. For example, an enum extending `builtins.int` would
+    be able to be used as an `int` type outside these overridden definitions.
+    &#34;&#34;&#34;
+
+    _name_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[str, Enum]]]
+    _value_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[int, Enum]]]
+    _member_names_: typing.Final[typing.ClassVar[typing.Sequence[str]]]
+    __members__: typing.Final[typing.ClassVar[typing.Mapping[str, Enum]]]
+    __objtype__: typing.Final[typing.ClassVar[typing.Type[typing.Any]]]
+    __enumtype__: typing.Final[typing.ClassVar[typing.Type[Enum]]]
+    _name_: typing.Final[str]
+    _value_: typing.Final[typing.Any]
+
+    @property
+    def name(self) -&gt; str:
+        &#34;&#34;&#34;Return the name of the enum member as a `builtins.str`.&#34;&#34;&#34;
+        return self._name_
+
+    @property
+    @typing.no_type_check
+    def value(self):
+        &#34;&#34;&#34;Return the value of the enum member.&#34;&#34;&#34;
+        return self._value_
+
+    def __repr__(self) -&gt; str:
+        return f&#34;&lt;{type(self).__name__}.{self._name_}: {self._value_!r}&gt;&#34;
+
+    def __str__(self) -&gt; str:
+        return self._name_</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GatewayCompression -- Types of gateway compression that may be supported." href="../api/shard.html#hikari.api.shard.GatewayCompression"
+>GatewayCompression</a></dt>
+<dd class="nested"><p>Types of gateway compression that may be supported.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GatewayDataFormat -- Format of inbound gateway payloads." href="../api/shard.html#hikari.api.shard.GatewayDataFormat"
+>GatewayDataFormat</a></dt>
+<dd class="nested"><p>Format of inbound gateway payloads.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="ConnectionVisibility -- Describes who can see a connection with a third party account." href="../applications.html#hikari.applications.ConnectionVisibility"
+>ConnectionVisibility</a></dt>
+<dd class="nested"><p>Describes who can see a connection with a third party account.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="OAuth2Scope -- OAuth2 Scopes that Discord allows …" href="../applications.html#hikari.applications.OAuth2Scope"
+>OAuth2Scope</a></dt>
+<dd class="nested"><p>OAuth2 Scopes that Discord allows …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="TeamMembershipState -- Represents the state of a user's team membership." href="../applications.html#hikari.applications.TeamMembershipState"
+>TeamMembershipState</a></dt>
+<dd class="nested"><p>Represents the state of a user's team membership.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="TokenType -- Token types used within Hikari clients." href="../applications.html#hikari.applications.TokenType"
+>TokenType</a></dt>
+<dd class="nested"><p>Token types used within Hikari clients.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="AuditLogChangeKey -- Commonly known and documented keys for audit log change objects …" href="../audit_logs.html#hikari.audit_logs.AuditLogChangeKey"
+>AuditLogChangeKey</a></dt>
+<dd class="nested"><p>Commonly known and documented keys for audit log change objects …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="AuditLogEventType -- The type of event that occurred." href="../audit_logs.html#hikari.audit_logs.AuditLogEventType"
+>AuditLogEventType</a></dt>
+<dd class="nested"><p>The type of event that occurred.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="ChannelType -- The known channel types that are exposed to us by the API." href="../channels.html#hikari.channels.ChannelType"
+>ChannelType</a></dt>
+<dd class="nested"><p>The known channel types that are exposed to us by the API.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="PermissionOverwriteType -- The type of entity a Permission Overwrite targets." href="../channels.html#hikari.channels.PermissionOverwriteType"
+>PermissionOverwriteType</a></dt>
+<dd class="nested"><p>The type of entity a Permission Overwrite targets.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="VideoQualityMode -- The camera quality of the voice chat." href="../channels.html#hikari.channels.VideoQualityMode"
+>VideoQualityMode</a></dt>
+<dd class="nested"><p>The camera quality of the voice chat.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="CommandPermissionType -- The type of entity a command permission targets." href="../commands.html#hikari.commands.CommandPermissionType"
+>CommandPermissionType</a></dt>
+<dd class="nested"><p>The type of entity a command permission targets.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="OptionType -- The type of a command option." href="../commands.html#hikari.commands.OptionType"
+>OptionType</a></dt>
+<dd class="nested"><p>The type of a command option.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="RESTErrorCode -- Non-exhaustive enum of error codes provided as further info on errors returned by the REST API." href="../errors.html#hikari.errors.RESTErrorCode"
+>RESTErrorCode</a></dt>
+<dd class="nested"><p>Non-exhaustive enum of error codes provided as further info on errors returned by the REST API.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="ShardCloseCode -- Reasons for a shard connection closure." href="../errors.html#hikari.errors.ShardCloseCode"
+>ShardCloseCode</a></dt>
+<dd class="nested"><p>Reasons for a shard connection closure.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildExplicitContentFilterLevel -- Represents the explicit content filter setting for a guild." href="../guilds.html#hikari.guilds.GuildExplicitContentFilterLevel"
+>GuildExplicitContentFilterLevel</a></dt>
+<dd class="nested"><p>Represents the explicit content filter setting for a guild.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildFeature -- Features that a guild can provide." href="../guilds.html#hikari.guilds.GuildFeature"
+>GuildFeature</a></dt>
+<dd class="nested"><p>Features that a guild can provide.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildMFALevel -- Represents the multi-factor authorization requirement for a guild." href="../guilds.html#hikari.guilds.GuildMFALevel"
+>GuildMFALevel</a></dt>
+<dd class="nested"><p>Represents the multi-factor authorization requirement for a guild.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildMessageNotificationsLevel -- Represents the default notification level for new messages in a guild." href="../guilds.html#hikari.guilds.GuildMessageNotificationsLevel"
+>GuildMessageNotificationsLevel</a></dt>
+<dd class="nested"><p>Represents the default notification level for new messages in a guild.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildNSFWLevel -- Represents the NSFW level of a guild." href="../guilds.html#hikari.guilds.GuildNSFWLevel"
+>GuildNSFWLevel</a></dt>
+<dd class="nested"><p>Represents the NSFW level of a guild.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildPremiumTier -- Tier for Discord Nitro boosting in a guild." href="../guilds.html#hikari.guilds.GuildPremiumTier"
+>GuildPremiumTier</a></dt>
+<dd class="nested"><p>Tier for Discord Nitro boosting in a guild.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="GuildVerificationLevel -- Represents the level of verification of a guild." href="../guilds.html#hikari.guilds.GuildVerificationLevel"
+>GuildVerificationLevel</a></dt>
+<dd class="nested"><p>Represents the level of verification of a guild.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="IntegrationExpireBehaviour -- Behavior for expiring integration subscribers." href="../guilds.html#hikari.guilds.IntegrationExpireBehaviour"
+>IntegrationExpireBehaviour</a></dt>
+<dd class="nested"><p>Behavior for expiring integration subscribers.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="IntegrationType -- The integration type." href="../guilds.html#hikari.guilds.IntegrationType"
+>IntegrationType</a></dt>
+<dd class="nested"><p>The integration type.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="InteractionType -- The type of an interaction." href="../interactions/base_interactions.html#hikari.interactions.base_interactions.InteractionType"
+>InteractionType</a></dt>
+<dd class="nested"><p>The type of an interaction.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="ResponseType -- The type of an interaction response." href="../interactions/base_interactions.html#hikari.interactions.base_interactions.ResponseType"
+>ResponseType</a></dt>
+<dd class="nested"><p>The type of an interaction response.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="TargetType -- The target of the invite." href="../invites.html#hikari.invites.TargetType"
+>TargetType</a></dt>
+<dd class="nested"><p>The target of the invite.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="MessageActivityType -- The type of a rich presence message activity." href="../messages.html#hikari.messages.MessageActivityType"
+>MessageActivityType</a></dt>
+<dd class="nested"><p>The type of a rich presence message activity.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="MessageType -- The type of a message." href="../messages.html#hikari.messages.MessageType"
+>MessageType</a></dt>
+<dd class="nested"><p>The type of a message.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="ActivityType -- The activity type." href="../presences.html#hikari.presences.ActivityType"
+>ActivityType</a></dt>
+<dd class="nested"><p>The activity type.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="Status -- The status of a member." href="../presences.html#hikari.presences.Status"
+>Status</a></dt>
+<dd class="nested"><p>The status of a member.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="StickerFormatType -- The formats types of a sticker's asset." href="../stickers.html#hikari.stickers.StickerFormatType"
+>StickerFormatType</a></dt>
+<dd class="nested"><p>The formats types of a sticker's asset.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="StickerType -- The sticker type." href="../stickers.html#hikari.stickers.StickerType"
+>StickerType</a></dt>
+<dd class="nested"><p>The sticker type.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="PremiumType -- The types of Nitro." href="../users.html#hikari.users.PremiumType"
+>PremiumType</a></dt>
+<dd class="nested"><p>The types of Nitro.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python enum type. This contains one or more discrete "constant" values.'>enum</abbr></em></small> <a title="WebhookType -- Types of webhook." href="../webhooks.html#hikari.webhooks.WebhookType"
+>WebhookType</a></dt>
+<dd class="nested"><p>Types of webhook.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.internal.enums.Enum.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- Return the name of the enum member as a `builtins.str`." href="#hikari.internal.enums.Enum.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Return the name of the enum member as a <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>.</p></dd>
+</div>
+<div id="hikari.internal.enums.Enum.value" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="value -- Return the value of the enum member." href="#hikari.internal.enums.Enum.value"  >value</a></code></pre>
+</dt>
+<dd><p>Return the value of the enum member.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.internal.enums.Flag" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Flag -- Clone of Python's `enum.Flag` implementation …" href="#hikari.internal.enums.Flag"
+>Flag</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.internal.enums.Flag" class="hljs python"><abbr title='A standard Python type.'>class</abbr> Flag (
+    value: <a href='https://docs.python.org/3/library/functions.html#int'>int</a> = 0,
+): ...</code></pre>
+<p>Clone of Python's <code><a href='https://docs.python.org/3/library/enum.html#enum.Flag'>enum.Flag</a></code> implementation.</p>
+<p>This is designed to be faster and more efficient than Python's
+implementation, while retaining the majority of the external interface
+that Python's <code><a href='https://docs.python.org/3/library/enum.html#enum.Flag'>enum.Flag</a></code> provides.</p>
+<p>In simple terms, an <code><a href='#hikari.internal.enums.Flag'>Flag</a></code> is a set of wrapped constant <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>
+values that can be combined in any combination to make a special value.
+This is a more efficient way of combining things like permissions together
+into a single integral value, and works by setting individual <code>1</code>s and <code>0</code>s
+on the binary representation of the integer.</p>
+<p>This implementation has extra features, in that it will actively behave
+like a <code><a href='https://docs.python.org/3/library/stdtypes.html#set'>set</a></code> as well.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Despite wrapping <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> values, conceptually this does not
+behave as if it were a subclass of <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>.</p>
+</div>
+<div class="alert alert-danger">
+<p class="admonition-title">Danger</p>
+<p>Some semantics such as subtype checking and instance checking may
+differ. It is recommended to compare these values using the
+<code>==</code> operator rather than the <code><a href='https://docs.python.org/3/reference/expressions.html#is'>is</a></code> operator for safety reasons.</p>
+<p>Especially where pseudo-members created from combinations are cached,
+results of using of <code><a href='https://docs.python.org/3/reference/expressions.html#is'>is</a></code> may not be deterministic. This is a side
+effect of some internal performance improvements.</p>
+<p>Failing to observe this <strong>will</strong> result in unexpected behaviour
+occurring in your application!</p>
+</div>
+<h2 id="special-members-on-the-class">Special Members On The Class</h2>
+<ul>
+<li><code>__enumtype__</code> :
+Always <code><a href='#hikari.internal.enums.Flag'>Flag</a></code>.</li>
+<li><code>__everything__</code> :
+A special member with all documented bits set.</li>
+<li><code>__members__</code> :
+An immutable <code><a href='https://docs.python.org/3/library/typing.html#typing.Mapping'>Mapping</a></code> that maps each member name to the member
+value.</li>
+<li><code> __objtype__</code> :
+Always <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>.</li>
+</ul>
+<h2 id="operators-on-the-class">Operators On The Class</h2>
+<ul>
+<li><code>FlagType["FOO"]</code> :
+Return the member that has the name <code>FOO</code>, raising a <code><a href='https://docs.python.org/3/library/exceptions.html#KeyError'>KeyError</a></code>
+if it is not present.</li>
+<li><code>FlagType.FOO</code> :
+Return the member that has the name <code>FOO</code>, raising a
+<code><a href='https://docs.python.org/3/library/exceptions.html#AttributeError'>AttributeError</a></code> if it is not present.</li>
+<li><code>FlagType(x)</code> :
+Attempt to cast <code>x</code> to the enum type by finding an existing member that
+has the same <strong>value</strong>. If this fails, then a special <strong>composite</strong>
+instance of the type is made. The name of this type is a combination of
+all members that combine to make the bitwise value.</li>
+</ul>
+<h2 id="operators-on-each-flag-member">Operators On Each Flag Member</h2>
+<ul>
+<li><code>e1 &amp; e2</code> :
+Bitwise <code>AND</code> operation. Will return a member that contains all flags
+that are common between both oprands on the values. This also works with
+one of the oprands being an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>eger. You may instead use
+the <code>intersection</code> method.</li>
+<li><code>e1 | e2</code> :
+Bitwise <code>OR</code> operation. Will return a member that contains all flags
+that appear on at least one of the oprands. This also works with
+one of the oprands being an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>eger. You may instead use
+the <code>union</code> method.</li>
+<li><code>e1 ^ e2</code> :
+Bitwise <code>XOR</code> operation. Will return a member that contains all flags
+that only appear on at least one and at most one of the oprands.
+This also works with one of the oprands being an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>eger.
+You may instead use the <code>symmetric_difference</code> method.</li>
+<li><code>~e</code> :
+Return the inverse of this value. This is equivalent to disabling all
+flags that are set on this value and enabling all flags that are
+not set on this value. Note that this will behave slightly differently
+to inverting a pure int value. You may instead use the <code>invert</code> method.</li>
+<li><code>e1 - e2</code> :
+Bitwise set difference operation. Returns all flags set on <code>e1</code> that are
+not set on <code>e2</code> as well. You may instead use the <code>difference</code>
+method.</li>
+<li><code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>(e)</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if <code>e</code> has a non-zero value, otherwise
+<code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>.</li>
+<li><code>E.A <a href='https://docs.python.org/3/reference/expressions.html#in'>in</a> e</code>: <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+<code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if <code>E.A</code> is in <code>e</code>. This is functionally equivalent
+to <code>E.A &amp; e == E.A</code>.</li>
+<li><code><a href='https://docs.python.org/3/library/functions.html#iter'>iter</a>(e)</code> :
+Explode the value into a iterator of each <strong>documented</strong> flag that can
+be combined to make up the value <code>e</code>. Returns an iterator across all
+well-defined flags that make up this value. This will only include the
+flags explicitly defined on this <code><a href='#hikari.internal.enums.Flag'>Flag</a></code> type and that are individual
+powers of two (this means if converted to twos-compliment binary,
+exactly one bit must be a <code>1</code>). In simple terms, this means that you
+should not expect combination flags to be returned.</li>
+<li><code>e1 == e2</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Compare equality.</li>
+<li><code>e1 != e2</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Compare inequality.</li>
+<li><code>e1 &lt; e2</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Compare by ordering.</li>
+<li><code><a href='https://docs.python.org/3/library/functions.html#int'>int</a>(e)</code> : <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>
+Get the integer value of this flag</li>
+<li><code><a href='https://docs.python.org/3/library/functions.html#repr'>repr</a>(e)</code> : <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+Get the machine readable representation of the flag member <code>e</code>.</li>
+<li><code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>(e)</code> : <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+Get the <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code> name of the flag member <code>e</code>.</li>
+</ul>
+<h2 id="special-properties-on-each-flag-member">Special Properties On Each Flag Member</h2>
+<ul>
+<li><code>e.name</code> : <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>
+The name of the member. For composite members, this will be generated.</li>
+<li><code>e.value</code> : <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code>
+The value of the member.</li>
+</ul>
+<h2 id="special-members-on-each-flag-member">Special Members On Each Flag Member</h2>
+<ul>
+<li><code>e.all(E.A, E.B, E.C, <a href='https://docs.python.org/3/glossary.html#term-1'>&hellip;</a>)</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Returns <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if <strong>all</strong> of <code>E.A</code>, <code>E.B</code>, <code>E.C</code>, et cetera
+make up the value of <code>e</code>.</li>
+<li><code>e.any(E.A, E.B, E.C, <a href='https://docs.python.org/3/glossary.html#term-1'>&hellip;</a>)</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Returns <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if <strong>any</strong> of <code>E.A</code>, <code>E.B</code>, <code>E.C</code>, et cetera
+make up the value of <code>e</code>.</li>
+<li><code>e.none(E.A, E.B, E.C, <a href='https://docs.python.org/3/glossary.html#term-1'>&hellip;</a>)</code> : <code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code>
+Returns <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if <strong>none</strong> of <code>E.A</code>, <code>E.B</code>, <code>E.C</code>, et cetera
+make up the value of <code>e</code>.</li>
+<li><code>e.split()</code> : <code><a href='https://docs.python.org/3/library/typing.html#typing.Sequence'>Sequence</a></code>
+Explode the value into a sequence of each <strong>documented</strong> flag that can
+be combined to make up the value <code>e</code>. Returns a sorted sequence of each
+power-of-two flag that makes up the value <code>e</code>. This is equivalent to
+<code><a href='https://docs.python.org/3/library/stdtypes.html#list'>list</a>(<a href='https://docs.python.org/3/library/functions.html#iter'>iter</a>(e))</code>.</li>
+</ul>
+<p>All other methods and operators on <code><a href='#hikari.internal.enums.Flag'>Flag</a></code> members are inherited from the
+member's <strong>value</strong>.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>Due to limitations around how this is re-implemented, this class is not
+considered a subclass of <code><a href='#hikari.internal.enums.Enum'>Enum</a></code> at runtime, even if MyPy believes this
+is possible</p>
+</div>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L451-L763" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class Flag(metaclass=_FlagMeta):
+    &#34;&#34;&#34;Clone of Python&#39;s `enum.Flag` implementation.
+
+    This is designed to be faster and more efficient than Python&#39;s
+    implementation, while retaining the majority of the external interface
+    that Python&#39;s `enum.Flag` provides.
+
+    In simple terms, an `Flag` is a set of wrapped constant `builtins.int`
+    values that can be combined in any combination to make a special value.
+    This is a more efficient way of combining things like permissions together
+    into a single integral value, and works by setting individual `1`s and `0`s
+    on the binary representation of the integer.
+
+    This implementation has extra features, in that it will actively behave
+    like a `builtins.set` as well.
+
+    !!! warning
+        Despite wrapping `builtins.int` values, conceptually this does not
+        behave as if it were a subclass of `int`.
+
+    !!! danger
+        Some semantics such as subtype checking and instance checking may
+        differ. It is recommended to compare these values using the
+        `==` operator rather than the `is` operator for safety reasons.
+
+        Especially where pseudo-members created from combinations are cached,
+        results of using of `is` may not be deterministic. This is a side
+        effect of some internal performance improvements.
+
+        Failing to observe this __will__ result in unexpected behaviour
+        occurring in your application!
+
+    Special Members on the class
+    ----------------------------
+    * `__enumtype__` :
+        Always `Flag`.
+    * `__everything__` :
+        A special member with all documented bits set.
+    * `__members__` :
+        An immutable `typing.Mapping` that maps each member name to the member
+        value.
+    * ` __objtype__` :
+        Always `builtins.int`.
+
+    Operators on the class
+    ----------------------
+    * `FlagType[&#34;FOO&#34;]` :
+        Return the member that has the name `FOO`, raising a `builtins.KeyError`
+        if it is not present.
+    * `FlagType.FOO` :
+        Return the member that has the name `FOO`, raising a
+        `builtins.AttributeError` if it is not present.
+    * `FlagType(x)` :
+        Attempt to cast `x` to the enum type by finding an existing member that
+        has the same __value__. If this fails, then a special __composite__
+        instance of the type is made. The name of this type is a combination of
+        all members that combine to make the bitwise value.
+
+    Operators on each flag member
+    -----------------------------
+    * `e1 &amp; e2` :
+        Bitwise `AND` operation. Will return a member that contains all flags
+        that are common between both oprands on the values. This also works with
+        one of the oprands being an `builtins.int`eger. You may instead use
+        the `intersection` method.
+    * `e1 | e2` :
+        Bitwise `OR` operation. Will return a member that contains all flags
+        that appear on at least one of the oprands. This also works with
+        one of the oprands being an `builtins.int`eger. You may instead use
+        the `union` method.
+    * `e1 ^ e2` :
+        Bitwise `XOR` operation. Will return a member that contains all flags
+        that only appear on at least one and at most one of the oprands.
+        This also works with one of the oprands being an `builtins.int`eger.
+        You may instead use the `symmetric_difference` method.
+    * `~e` :
+        Return the inverse of this value. This is equivalent to disabling all
+        flags that are set on this value and enabling all flags that are
+        not set on this value. Note that this will behave slightly differently
+        to inverting a pure int value. You may instead use the `invert` method.
+    * `e1 - e2` :
+        Bitwise set difference operation. Returns all flags set on `e1` that are
+        not set on `e2` as well. You may instead use the `difference`
+        method.
+    * `bool(e)` : `builtins.bool`
+        Return `builtins.True` if `e` has a non-zero value, otherwise
+        `builtins.False`.
+    * `E.A in e`: `builtins.bool`
+        `builtins.True` if `E.A` is in `e`. This is functionally equivalent
+        to `E.A &amp; e == E.A`.
+    * `iter(e)` :
+        Explode the value into a iterator of each __documented__ flag that can
+        be combined to make up the value `e`. Returns an iterator across all
+        well-defined flags that make up this value. This will only include the
+        flags explicitly defined on this `Flag` type and that are individual
+        powers of two (this means if converted to twos-compliment binary,
+        exactly one bit must be a `1`). In simple terms, this means that you
+        should not expect combination flags to be returned.
+    * `e1 == e2` : `builtins.bool`
+        Compare equality.
+    * `e1 != e2` : `builtins.bool`
+        Compare inequality.
+    * `e1 &lt; e2` : `builtins.bool`
+        Compare by ordering.
+    * `builtins.int(e)` : `builtins.int`
+        Get the integer value of this flag
+    * `builtins.repr(e)` : `builtins.str`
+        Get the machine readable representation of the flag member `e`.
+    * `builtins.str(e)` : `builtins.str`
+        Get the `builtins.str` name of the flag member `e`.
+
+    Special properties on each flag member
+    --------------------------------------
+    * `e.name` : `builtins.str`
+        The name of the member. For composite members, this will be generated.
+    * `e.value` : `builtins.int`
+        The value of the member.
+
+    Special members on each flag member
+    -----------------------------------
+    * `e.all(E.A, E.B, E.C, ...)` : `builtins.bool`
+        Returns `builtins.True` if __all__ of `E.A`, `E.B`, `E.C`, et cetera
+        make up the value of `e`.
+    * `e.any(E.A, E.B, E.C, ...)` : `builtins.bool`
+        Returns `builtins.True` if __any__ of `E.A`, `E.B`, `E.C`, et cetera
+        make up the value of `e`.
+    * `e.none(E.A, E.B, E.C, ...)` : `builtins.bool`
+        Returns `builtins.True` if __none__ of `E.A`, `E.B`, `E.C`, et cetera
+        make up the value of `e`.
+    * `e.split()` : `typing.Sequence`
+        Explode the value into a sequence of each __documented__ flag that can
+        be combined to make up the value `e`. Returns a sorted sequence of each
+        power-of-two flag that makes up the value `e`. This is equivalent to
+        `list(iter(e))`.
+
+    All other methods and operators on `Flag` members are inherited from the
+    member&#39;s __value__.
+
+    !!! note
+        Due to limitations around how this is re-implemented, this class is not
+        considered a subclass of `Enum` at runtime, even if MyPy believes this
+        is possible
+    &#34;&#34;&#34;
+
+    _name_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[str, Flag]]]
+    _value_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[int, Flag]]]
+    _powers_of_2_to_member_map_: typing.Final[typing.ClassVar[typing.Mapping[int, Flag]]]
+    _temp_members_: typing.Final[typing.ClassVar[typing.Mapping[int, Flag]]]
+    _member_names_: typing.Final[typing.ClassVar[typing.Sequence[str]]]
+    __members__: typing.Final[typing.ClassVar[typing.Mapping[str, Flag]]]
+    __objtype__: typing.Final[typing.ClassVar[typing.Type[int]]]
+    __enumtype__: typing.Final[typing.ClassVar[typing.Type[Flag]]]
+    _name_: typing.Final[str]
+    _value_: typing.Final[int]
+
+    @property
+    def name(self) -&gt; str:
+        &#34;&#34;&#34;Return the name of the flag combination as a `builtins.str`.&#34;&#34;&#34;
+        if self._name_ is None:
+            self._name_ = &#34;|&#34;.join(_name_resolver(self._value_to_member_map_, self._value_))
+        return self._name_
+
+    @property
+    def value(self) -&gt; int:
+        &#34;&#34;&#34;Return the `builtins.int` value of the flag.&#34;&#34;&#34;
+        return self._value_
+
+    def all(self: _T, *flags: _T) -&gt; bool:
+        &#34;&#34;&#34;Check if all of the given flags are part of this value.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if any of the given flags are part of this value.
+            Otherwise, return `builtins.False`.
+        &#34;&#34;&#34;
+        return all((flag &amp; self) == flag for flag in flags)
+
+    def any(self: _T, *flags: _T) -&gt; bool:
+        &#34;&#34;&#34;Check if any of the given flags are part of this value.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if any of the given flags are part of this value.
+            Otherwise, return `builtins.False`.
+        &#34;&#34;&#34;
+        return any((flag &amp; self) == flag for flag in flags)
+
+    def difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Perform a set difference with the other set.
+
+        This will return all flags in this set that are not in the other value.
+
+        Equivalent to using the subtraction `-` operator.
+        &#34;&#34;&#34;
+        return self.__class__(self &amp; ~int(other))
+
+    def intersection(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Return a combination of flags that are set for both given values.
+
+        Equivalent to using the &#34;AND&#34; `&amp;` operator.
+        &#34;&#34;&#34;
+        return self.__class__(self._value_ &amp; int(other))
+
+    def invert(self: _T) -&gt; _T:
+        &#34;&#34;&#34;Return a set of all flags not in the current set.&#34;&#34;&#34;
+        return self.__class__(self.__class__.__everything__._value_ &amp; ~self._value_)
+
+    def is_disjoint(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+        &#34;&#34;&#34;Return whether two sets have a intersection or not.
+
+        If the two sets have an intersection, then this returns
+        `builtins.False`. If no common flag values exist between them, then
+        this returns `builtins.True`.
+        &#34;&#34;&#34;
+        return not (self &amp; other)
+
+    def is_subset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+        &#34;&#34;&#34;Return whether another set contains this set or not.
+
+        Equivalent to using the &#34;in&#34; operator.
+        &#34;&#34;&#34;
+        return (self &amp; other) == other
+
+    def is_superset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+        &#34;&#34;&#34;Return whether this set contains another set or not.&#34;&#34;&#34;
+        return (self &amp; other) == self
+
+    def none(self: _T, *flags: _T) -&gt; bool:
+        &#34;&#34;&#34;Check if none of the given flags are part of this value.
+
+        !!! note
+            This is essentially the opposite of `Flag.any`.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if none of the given flags are part of this value.
+            Otherwise, return `builtins.False`.
+        &#34;&#34;&#34;
+        return not self.any(*flags)
+
+    def split(self: _T) -&gt; typing.Sequence[_T]:
+        &#34;&#34;&#34;Return a list of all defined atomic values for this flag.
+
+        Any unrecognised bits will be omitted for brevity.
+
+        The result will be a name-sorted `typing.Sequence` of each membe
+        &#34;&#34;&#34;
+        return sorted(
+            (member for member in self.__class__._powers_of_2_to_member_map_.values() if member.value &amp; self),
+            # Assumption: powers of 2 already have a cached value.
+            key=lambda m: m._name_,
+        )
+
+    def symmetric_difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Return a set with the symmetric differences of two flag sets.
+
+        Equivalent to using the &#34;XOR&#34; `^` operator.
+
+        For `a ^ b`, this can be considered the same as `(a - b) | (b - a)`.
+        &#34;&#34;&#34;
+        return self.__class__(self._value_ ^ int(other))
+
+    def union(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+        &#34;&#34;&#34;Return a combination of all flags in this set and the other set.
+
+        Equivalent to using the &#34;OR&#34; `~` operator.
+        &#34;&#34;&#34;
+        return self.__class__(self._value_ | int(other))
+
+    isdisjoint = is_disjoint
+    issubset = is_subset
+    issuperset = is_superset
+    # Exists since Python&#39;s `set` type is inconsistent with naming, so this
+    # will prevent tripping people up unnecessarily because we do not
+    # name inconsistently.
+
+    # This one isn&#39;t in Python&#39;s set, but the inconsistency is triggering my OCD
+    # so this is being defined anyway.
+    symmetricdifference = symmetric_difference
+
+    def __bool__(self) -&gt; bool:
+        return bool(self._value_)
+
+    def __int__(self) -&gt; int:
+        return self._value_
+
+    def __iter__(self: _T) -&gt; typing.Iterator[_T]:
+        return iter(self.split())
+
+    def __len__(self) -&gt; int:
+        return len(self.split())
+
+    def __repr__(self) -&gt; str:
+        return f&#34;&lt;{self.__class__.__name__}.{self.name}: {self.value!r}&gt;&#34;
+
+    def __rsub__(self: _T, other: typing.Union[int, _T]) -&gt; _T:
+        # This logic has to be reversed to be correct, since order matters for
+        # a subtraction operator. This also ensures `int - _T -&gt; _T` is a valid
+        # case for us.
+        return self.__class__(other) - self
+
+    def __str__(self) -&gt; str:
+        return self.name
+
+    __contains__ = is_subset
+    __rand__ = __and__ = intersection
+    __ror__ = __or__ = union
+    __sub__ = difference
+    __rxor__ = __xor__ = symmetric_difference
+    __invert__ = invert</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="ApplicationFlags -- The known application flag bits." href="../applications.html#hikari.applications.ApplicationFlags"
+>ApplicationFlags</a></dt>
+<dd class="nested"><p>The known application flag bits.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="CacheComponents -- Flags to control the cache components." href="../config.html#hikari.config.CacheComponents"
+>CacheComponents</a></dt>
+<dd class="nested"><p>Flags to control the cache components.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="GuildSystemChannelFlag -- Defines which features are suppressed in the system channel." href="../guilds.html#hikari.guilds.GuildSystemChannelFlag"
+>GuildSystemChannelFlag</a></dt>
+<dd class="nested"><p>Defines which features are suppressed in the system channel.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Intents -- Represents an intent on the gateway …" href="../intents.html#hikari.intents.Intents"
+>Intents</a></dt>
+<dd class="nested"><p>Represents an intent on the gateway …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="MessageFlag -- Additional flags for message options." href="../messages.html#hikari.messages.MessageFlag"
+>MessageFlag</a></dt>
+<dd class="nested"><p>Additional flags for message options.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="Permissions -- Represents the permissions available in a given channel or guild …" href="../permissions.html#hikari.permissions.Permissions"
+>Permissions</a></dt>
+<dd class="nested"><p>Represents the permissions available in a given channel or guild …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="ActivityFlag -- Flags that describe what an activity includes …" href="../presences.html#hikari.presences.ActivityFlag"
+>ActivityFlag</a></dt>
+<dd class="nested"><p>Flags that describe what an activity includes …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A Python enum type that supports combination using bitwise flags.'>enum flag</abbr></em></small> <a title="UserFlag -- The known user flags that represent account badges." href="../users.html#hikari.users.UserFlag"
+>UserFlag</a></dt>
+<dd class="nested"><p>The known user flags that represent account badges.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.internal.enums.Flag.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- Return the name of the flag combination as a `builtins.str`." href="#hikari.internal.enums.Flag.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>Return the name of the flag combination as a <code><a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code>.</p></dd>
+</div>
+<div id="hikari.internal.enums.Flag.value" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="value -- Return the `builtins.int` value of the flag." href="#hikari.internal.enums.Flag.value"  >value</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>Return the <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> value of the flag.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.internal.enums.Flag.all" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="all" href="#hikari.internal.enums.Flag.all" id="hikari.internal.enums.Flag.all">all</a>(
+    self: _T,
+    *flags: _T,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Check if all of the given flags are part of this value.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if any of the given flags are part of this value.
+Otherwise, return <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L618-L627" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def all(self: _T, *flags: _T) -&gt; bool:
+    &#34;&#34;&#34;Check if all of the given flags are part of this value.
+
+    Returns
+    -------
+    builtins.bool
+        `builtins.True` if any of the given flags are part of this value.
+        Otherwise, return `builtins.False`.
+    &#34;&#34;&#34;
+    return all((flag &amp; self) == flag for flag in flags)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.any" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="any" href="#hikari.internal.enums.Flag.any" id="hikari.internal.enums.Flag.any">any</a>(
+    self: _T,
+    *flags: _T,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Check if any of the given flags are part of this value.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if any of the given flags are part of this value.
+Otherwise, return <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L629-L638" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def any(self: _T, *flags: _T) -&gt; bool:
+    &#34;&#34;&#34;Check if any of the given flags are part of this value.
+
+    Returns
+    -------
+    builtins.bool
+        `builtins.True` if any of the given flags are part of this value.
+        Otherwise, return `builtins.False`.
+    &#34;&#34;&#34;
+    return any((flag &amp; self) == flag for flag in flags)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.difference" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="difference" href="#hikari.internal.enums.Flag.difference" id="hikari.internal.enums.Flag.difference">difference</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Perform a set difference with the other set.</p>
+<p>This will return all flags in this set that are not in the other value.</p>
+<p>Equivalent to using the subtraction <code>-</code> operator.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L640-L647" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+    &#34;&#34;&#34;Perform a set difference with the other set.
+
+    This will return all flags in this set that are not in the other value.
+
+    Equivalent to using the subtraction `-` operator.
+    &#34;&#34;&#34;
+    return self.__class__(self &amp; ~int(other))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.intersection" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="intersection" href="#hikari.internal.enums.Flag.intersection" id="hikari.internal.enums.Flag.intersection">intersection</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a combination of flags that are set for both given values.</p>
+<p>Equivalent to using the "AND" <code>&amp;</code> operator.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L649-L654" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def intersection(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+    &#34;&#34;&#34;Return a combination of flags that are set for both given values.
+
+    Equivalent to using the &#34;AND&#34; `&amp;` operator.
+    &#34;&#34;&#34;
+    return self.__class__(self._value_ &amp; int(other))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.invert" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="invert" href="#hikari.internal.enums.Flag.invert" id="hikari.internal.enums.Flag.invert">invert</a>(
+    self: _T,
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a set of all flags not in the current set.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L656-L658" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def invert(self: _T) -&gt; _T:
+    &#34;&#34;&#34;Return a set of all flags not in the current set.&#34;&#34;&#34;
+    return self.__class__(self.__class__.__everything__._value_ &amp; ~self._value_)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.is_disjoint" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_disjoint" href="#hikari.internal.enums.Flag.is_disjoint" id="hikari.internal.enums.Flag.is_disjoint">is_disjoint</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether two sets have a intersection or not.</p>
+<p>If the two sets have an intersection, then this returns
+<code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>. If no common flag values exist between them, then
+this returns <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L660-L667" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_disjoint(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+    &#34;&#34;&#34;Return whether two sets have a intersection or not.
+
+    If the two sets have an intersection, then this returns
+    `builtins.False`. If no common flag values exist between them, then
+    this returns `builtins.True`.
+    &#34;&#34;&#34;
+    return not (self &amp; other)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.is_subset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_subset" href="#hikari.internal.enums.Flag.is_subset" id="hikari.internal.enums.Flag.is_subset">is_subset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether another set contains this set or not.</p>
+<p>Equivalent to using the "in" operator.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L669-L674" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_subset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+    &#34;&#34;&#34;Return whether another set contains this set or not.
+
+    Equivalent to using the &#34;in&#34; operator.
+    &#34;&#34;&#34;
+    return (self &amp; other) == other</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.is_superset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_superset" href="#hikari.internal.enums.Flag.is_superset" id="hikari.internal.enums.Flag.is_superset">is_superset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether this set contains another set or not.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L676-L678" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_superset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+    &#34;&#34;&#34;Return whether this set contains another set or not.&#34;&#34;&#34;
+    return (self &amp; other) == self</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.isdisjoint" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="isdisjoint" href="#hikari.internal.enums.Flag.is_disjoint" id="hikari.internal.enums.Flag.isdisjoint">isdisjoint</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether two sets have a intersection or not.</p>
+<p>If the two sets have an intersection, then this returns
+<code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>. If no common flag values exist between them, then
+this returns <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L660-L667" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_disjoint(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+    &#34;&#34;&#34;Return whether two sets have a intersection or not.
+
+    If the two sets have an intersection, then this returns
+    `builtins.False`. If no common flag values exist between them, then
+    this returns `builtins.True`.
+    &#34;&#34;&#34;
+    return not (self &amp; other)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.issubset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="issubset" href="#hikari.internal.enums.Flag.is_subset" id="hikari.internal.enums.Flag.issubset">issubset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether another set contains this set or not.</p>
+<p>Equivalent to using the "in" operator.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L669-L674" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_subset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+    &#34;&#34;&#34;Return whether another set contains this set or not.
+
+    Equivalent to using the &#34;in&#34; operator.
+    &#34;&#34;&#34;
+    return (self &amp; other) == other</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.issuperset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="issuperset" href="#hikari.internal.enums.Flag.is_superset" id="hikari.internal.enums.Flag.issuperset">issuperset</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Return whether this set contains another set or not.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L676-L678" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_superset(self: _T, other: typing.Union[_T, int]) -&gt; bool:
+    &#34;&#34;&#34;Return whether this set contains another set or not.&#34;&#34;&#34;
+    return (self &amp; other) == self</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.none" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="none" href="#hikari.internal.enums.Flag.none" id="hikari.internal.enums.Flag.none">none</a>(
+    self: _T,
+    *flags: _T,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Check if none of the given flags are part of this value.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>This is essentially the opposite of <code><a href='#hikari.internal.enums.Flag.any'>any</a></code>.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if none of the given flags are part of this value.
+Otherwise, return <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L680-L692" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def none(self: _T, *flags: _T) -&gt; bool:
+    &#34;&#34;&#34;Check if none of the given flags are part of this value.
+
+    !!! note
+        This is essentially the opposite of `Flag.any`.
+
+    Returns
+    -------
+    builtins.bool
+        `builtins.True` if none of the given flags are part of this value.
+        Otherwise, return `builtins.False`.
+    &#34;&#34;&#34;
+    return not self.any(*flags)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.split" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="split" href="#hikari.internal.enums.Flag.split" id="hikari.internal.enums.Flag.split">split</a>(
+    self: _T,
+) -> Sequence[~_T]: ...</code></pre>
+</dt>
+<dd>
+<p>Return a list of all defined atomic values for this flag.</p>
+<p>Any unrecognised bits will be omitted for brevity.</p>
+<p>The result will be a name-sorted <code><a href='https://docs.python.org/3/library/typing.html#typing.Sequence'>Sequence</a></code> of each membe</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L694-L705" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def split(self: _T) -&gt; typing.Sequence[_T]:
+    &#34;&#34;&#34;Return a list of all defined atomic values for this flag.
+
+    Any unrecognised bits will be omitted for brevity.
+
+    The result will be a name-sorted `typing.Sequence` of each membe
+    &#34;&#34;&#34;
+    return sorted(
+        (member for member in self.__class__._powers_of_2_to_member_map_.values() if member.value &amp; self),
+        # Assumption: powers of 2 already have a cached value.
+        key=lambda m: m._name_,
+    )</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.symmetric_difference" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="symmetric_difference" href="#hikari.internal.enums.Flag.symmetric_difference" id="hikari.internal.enums.Flag.symmetric_difference">symmetric_difference</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a set with the symmetric differences of two flag sets.</p>
+<p>Equivalent to using the "XOR" <code>^</code> operator.</p>
+<p>For <code>a ^ b</code>, this can be considered the same as <code>(a - b) | (b - a)</code>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L707-L714" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def symmetric_difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+    &#34;&#34;&#34;Return a set with the symmetric differences of two flag sets.
+
+    Equivalent to using the &#34;XOR&#34; `^` operator.
+
+    For `a ^ b`, this can be considered the same as `(a - b) | (b - a)`.
+    &#34;&#34;&#34;
+    return self.__class__(self._value_ ^ int(other))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.symmetricdifference" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="symmetricdifference" href="#hikari.internal.enums.Flag.symmetric_difference" id="hikari.internal.enums.Flag.symmetricdifference">symmetricdifference</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a set with the symmetric differences of two flag sets.</p>
+<p>Equivalent to using the "XOR" <code>^</code> operator.</p>
+<p>For <code>a ^ b</code>, this can be considered the same as <code>(a - b) | (b - a)</code>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L707-L714" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def symmetric_difference(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+    &#34;&#34;&#34;Return a set with the symmetric differences of two flag sets.
+
+    Equivalent to using the &#34;XOR&#34; `^` operator.
+
+    For `a ^ b`, this can be considered the same as `(a - b) | (b - a)`.
+    &#34;&#34;&#34;
+    return self.__class__(self._value_ ^ int(other))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.enums.Flag.union" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="union" href="#hikari.internal.enums.Flag.union" id="hikari.internal.enums.Flag.union">union</a>(
+    self: _T,
+    other: <a href='https://docs.python.org/3/library/typing.html#typing.Union'>Union</a>[_T, <a href='https://docs.python.org/3/library/functions.html#int'>int</a>],
+) -> ~_T: ...</code></pre>
+</dt>
+<dd>
+<p>Return a combination of all flags in this set and the other set.</p>
+<p>Equivalent to using the "OR" <code>~</code> operator.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/enums.py#L716-L721" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def union(self: _T, other: typing.Union[_T, int]) -&gt; _T:
+    &#34;&#34;&#34;Return a combination of all flags in this set and the other set.
+
+    Equivalent to using the &#34;OR&#34; `~` operator.
+    &#34;&#34;&#34;
+    return self.__class__(self._value_ | int(other))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

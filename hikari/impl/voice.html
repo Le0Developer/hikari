@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.impl.voice API documentation</title>
+<meta name="description" content="Implementation of a simple voice management system.">
+<meta property="og:title" content="hikari.impl.voice module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.impl -- Basic implementations of application components …" href="index.html"
+>impl</a></li>
+<li class="breadcrumb-item active"><a href="#">voice</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Implementation of a simple voice management system.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="VoiceComponentImpl -- A standard voice component management implementation …" href="#hikari.impl.voice.VoiceComponentImpl"
+>VoiceComponentImpl</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="close -- Shut down all connections, waiting for them to terminate …" href="#hikari.impl.voice.VoiceComponentImpl.close"
+>close</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="connect_to -- Connect to a given voice channel …" href="#hikari.impl.voice.VoiceComponentImpl.connect_to"
+>connect_to</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="connections -- Return a mapping of guild-id to active voice connection." href="#hikari.impl.voice.VoiceComponentImpl.connections"
+>connections</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="disconnect -- Disconnect from a given guild …" href="#hikari.impl.voice.VoiceComponentImpl.disconnect"
+>disconnect</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="disconnect_all -- Disconnect all the active voice connections." href="#hikari.impl.voice.VoiceComponentImpl.disconnect_all"
+>disconnect_all</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_alive -- Whether this component is alive." href="#hikari.impl.voice.VoiceComponentImpl.is_alive"
+>is_alive</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="start -- Start this voice component." href="#hikari.impl.voice.VoiceComponentImpl.start"
+>start</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L1-L268" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Implementation of a simple voice management system.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;VoiceComponentImpl&#34;]
+
+import asyncio
+import logging
+import types
+import typing
+
+from hikari import errors
+from hikari import snowflakes
+from hikari.api import voice
+from hikari.events import voice_events
+from hikari.internal import ux
+
+if typing.TYPE_CHECKING:
+    from hikari import channels
+    from hikari import guilds
+    from hikari import traits
+
+    _VoiceConnectionT = typing.TypeVar(&#34;_VoiceConnectionT&#34;, bound=&#34;voice.VoiceConnection&#34;)
+
+_LOGGER: typing.Final[logging.Logger] = logging.getLogger(&#34;hikari.voice.management&#34;)
+
+
+class VoiceComponentImpl(voice.VoiceComponent):
+    &#34;&#34;&#34;A standard voice component management implementation.
+
+    This is the regular implementation you will generally use to connect to
+    voice channels with.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_app&#34;, &#34;_connections&#34;, &#34;connections&#34;, &#34;_is_alive&#34;, &#34;_is_closing&#34;)
+
+    _connections: typing.Dict[snowflakes.Snowflake, voice.VoiceConnection]
+    connections: typing.Mapping[snowflakes.Snowflake, voice.VoiceConnection]
+
+    def __init__(self, app: traits.GatewayBotAware) -&gt; None:
+        self._app = app
+        self._connections = {}
+        self.connections = types.MappingProxyType(self._connections)
+        self._is_alive = False
+        self._is_closing = False
+
+    @property
+    def is_alive(self) -&gt; bool:
+        return self._is_alive
+
+    def _check_if_alive(self) -&gt; None:
+        if not self._is_alive:
+            raise errors.ComponentStateConflictError(&#34;Component cannot be used while it&#39;s not alive&#34;)
+
+        if self._is_closing:
+            raise errors.ComponentStateConflictError(&#34;Component cannot be used while it&#39;s closing&#34;)
+
+    async def disconnect(self, guild: snowflakes.SnowflakeishOr[guilds.PartialGuild]) -&gt; None:
+        self._check_if_alive()
+        guild_id = snowflakes.Snowflake(guild)
+
+        if guild_id not in self._connections:
+            raise errors.VoiceError(&#34;This application doesn&#39;t have any active voice connection in this server&#34;)
+
+        conn = self._connections[guild_id]
+        # We rely on the assumption that _on_connection_close will be called here rather than explicitly
+        # to remove the connection from self._connections.
+        await conn.disconnect()
+
+    async def _disconnect_all(self) -&gt; None:
+        # We rely on the assumption that _on_connection_close will be called here rather than explicitly
+        # emptying self._connections.
+        await asyncio.gather(*(c.disconnect() for c in self._connections.values()))
+
+    async def disconnect_all(self) -&gt; None:
+        self._check_if_alive()
+        await self._disconnect_all()
+
+    async def close(self) -&gt; None:
+        self._check_if_alive()
+        self._is_closing = True
+        self._app.event_manager.unsubscribe(voice_events.VoiceEvent, self._on_voice_event)
+
+        if self._connections:
+            _LOGGER.info(&#34;shutting down %s active voice connection(s)&#34;, len(self._connections))
+            await self._disconnect_all()
+
+        self._is_alive = False
+        self._is_closing = False
+
+    def start(self) -&gt; None:
+        &#34;&#34;&#34;Start this voice component.&#34;&#34;&#34;
+        if self._is_alive:
+            raise errors.ComponentStateConflictError(&#34;Cannot start a voice component which is already running&#34;)
+
+        self._is_alive = True
+        self._app.event_manager.subscribe(voice_events.VoiceEvent, self._on_voice_event)
+
+    async def connect_to(
+        self,
+        guild: snowflakes.SnowflakeishOr[guilds.PartialGuild],
+        channel: snowflakes.SnowflakeishOr[channels.GuildVoiceChannel],
+        voice_connection_type: typing.Type[_VoiceConnectionT],
+        *,
+        deaf: bool = False,
+        mute: bool = False,
+        **kwargs: typing.Any,
+    ) -&gt; _VoiceConnectionT:
+        self._check_if_alive()
+        guild_id = snowflakes.Snowflake(guild)
+
+        if guild_id in self._connections:
+            raise errors.VoiceError(
+                &#34;Already in a voice channel for that guild. Disconnect before attempting to connect again&#34;
+            )
+
+        shard_id = snowflakes.calculate_shard_id(self._app, guild_id)
+        try:
+            shard = self._app.shards[shard_id]
+        except KeyError:
+            raise errors.VoiceError(
+                f&#34;Cannot connect to shard {shard_id} as it is not present in this application&#34;
+            ) from None
+
+        user = self._app.cache.get_me()
+        if not user:
+            user = await self._app.rest.fetch_my_user()
+
+        _LOGGER.log(ux.TRACE, &#34;attempting to connect to voice channel %s in %s via shard %s&#34;, channel, guild, shard_id)
+
+        await shard.update_voice_state(guild, channel, self_deaf=deaf, self_mute=mute)
+
+        _LOGGER.log(
+            ux.TRACE,
+            &#34;waiting for voice events for connecting to voice channel %s in %s via shard %s&#34;,
+            channel,
+            guild,
+            shard_id,
+        )
+
+        state_event, server_event = await asyncio.gather(
+            # Voice state update:
+            self._app.event_manager.wait_for(
+                voice_events.VoiceStateUpdateEvent,
+                timeout=None,
+                predicate=self._init_state_update_predicate(guild_id, user.id),
+            ),
+            # Server update:
+            self._app.event_manager.wait_for(
+                voice_events.VoiceServerUpdateEvent,
+                timeout=None,
+                predicate=self._init_server_update_predicate(guild_id),
+            ),
+        )
+
+        # We will never receive the first endpoint as `None`
+        assert server_event.endpoint is not None
+
+        _LOGGER.debug(
+            &#34;joined voice channel %s in guild %s via shard %s using endpoint %s. Session will be %s. &#34;
+            &#34;Delegating to voice websocket&#34;,
+            state_event.state.channel_id,
+            state_event.state.guild_id,
+            shard_id,
+            server_event.endpoint,
+            state_event.state.session_id,
+        )
+
+        try:
+            voice_connection = await voice_connection_type.initialize(
+                channel_id=snowflakes.Snowflake(channel),
+                endpoint=server_event.endpoint,
+                guild_id=guild_id,
+                on_close=self._on_connection_close,
+                owner=self,
+                session_id=state_event.state.session_id,
+                shard_id=shard_id,
+                token=server_event.token,
+                user_id=user.id,
+                **kwargs,
+            )
+        except Exception:
+            _LOGGER.debug(
+                &#34;error occurred in initialization, leaving voice channel %s in guild %s again&#34;, channel, guild
+            )
+            try:
+                await asyncio.wait_for(shard.update_voice_state(guild, None), timeout=5.0)
+            except asyncio.TimeoutError:
+                pass
+
+            raise
+
+        self._connections[guild_id] = voice_connection
+        return voice_connection
+
+    @staticmethod
+    def _init_state_update_predicate(
+        guild_id: snowflakes.Snowflake,
+        user_id: snowflakes.Snowflake,
+    ) -&gt; typing.Callable[[voice_events.VoiceStateUpdateEvent], bool]:
+        def predicate(event: voice_events.VoiceStateUpdateEvent) -&gt; bool:
+            return event.state.guild_id == guild_id and event.state.user_id == user_id
+
+        return predicate
+
+    @staticmethod
+    def _init_server_update_predicate(
+        guild_id: snowflakes.Snowflake,
+    ) -&gt; typing.Callable[[voice_events.VoiceServerUpdateEvent], bool]:
+        def predicate(event: voice_events.VoiceServerUpdateEvent) -&gt; bool:
+            return event.guild_id == guild_id
+
+        return predicate
+
+    async def _on_connection_close(self, connection: voice.VoiceConnection) -&gt; None:
+        try:
+            del self._connections[connection.guild_id]
+
+            # Leave the voice channel explicitly, otherwise we will just appear to
+            # not leave properly.
+            await self._app.shards[connection.shard_id].update_voice_state(
+                guild=connection.guild_id,
+                channel=None,
+            )
+
+            _LOGGER.debug(
+                &#34;successfully unregistered voice connection %s to guild %s and left voice channel %s&#34;,
+                connection,
+                connection.guild_id,
+                connection.channel_id,
+            )
+
+        except KeyError:
+            _LOGGER.warning(
+                &#34;ignored closure of phantom unregistered voice connection %s to guild %s. Perhaps this is a bug?&#34;,
+                connection,
+                connection.guild_id,
+            )
+
+    async def _on_voice_event(self, event: voice_events.VoiceEvent) -&gt; None:
+        if event.guild_id in self._connections:
+            connection = self._connections[event.guild_id]
+            _LOGGER.log(
+                ux.TRACE, &#34;notifying voice connection %s in guild %s of event %s&#34;, connection, event.guild_id, event
+            )
+            await connection.notify(event)</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.impl.voice.VoiceComponentImpl" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="VoiceComponentImpl -- A standard voice component management implementation …" href="#hikari.impl.voice.VoiceComponentImpl"
+>VoiceComponentImpl</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.voice.VoiceComponentImpl" class="hljs python"><abbr title='A standard Python type.'>class</abbr> VoiceComponentImpl (
+    app: <a href='../traits.html#hikari.traits.GatewayBotAware'>traits.GatewayBotAware</a>,
+): ...</code></pre>
+<p>A standard voice component management implementation.</p>
+<p>This is the regular implementation you will generally use to connect to
+voice channels with.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L50-L268" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class VoiceComponentImpl(voice.VoiceComponent):
+    &#34;&#34;&#34;A standard voice component management implementation.
+
+    This is the regular implementation you will generally use to connect to
+    voice channels with.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;_app&#34;, &#34;_connections&#34;, &#34;connections&#34;, &#34;_is_alive&#34;, &#34;_is_closing&#34;)
+
+    _connections: typing.Dict[snowflakes.Snowflake, voice.VoiceConnection]
+    connections: typing.Mapping[snowflakes.Snowflake, voice.VoiceConnection]
+
+    def __init__(self, app: traits.GatewayBotAware) -&gt; None:
+        self._app = app
+        self._connections = {}
+        self.connections = types.MappingProxyType(self._connections)
+        self._is_alive = False
+        self._is_closing = False
+
+    @property
+    def is_alive(self) -&gt; bool:
+        return self._is_alive
+
+    def _check_if_alive(self) -&gt; None:
+        if not self._is_alive:
+            raise errors.ComponentStateConflictError(&#34;Component cannot be used while it&#39;s not alive&#34;)
+
+        if self._is_closing:
+            raise errors.ComponentStateConflictError(&#34;Component cannot be used while it&#39;s closing&#34;)
+
+    async def disconnect(self, guild: snowflakes.SnowflakeishOr[guilds.PartialGuild]) -&gt; None:
+        self._check_if_alive()
+        guild_id = snowflakes.Snowflake(guild)
+
+        if guild_id not in self._connections:
+            raise errors.VoiceError(&#34;This application doesn&#39;t have any active voice connection in this server&#34;)
+
+        conn = self._connections[guild_id]
+        # We rely on the assumption that _on_connection_close will be called here rather than explicitly
+        # to remove the connection from self._connections.
+        await conn.disconnect()
+
+    async def _disconnect_all(self) -&gt; None:
+        # We rely on the assumption that _on_connection_close will be called here rather than explicitly
+        # emptying self._connections.
+        await asyncio.gather(*(c.disconnect() for c in self._connections.values()))
+
+    async def disconnect_all(self) -&gt; None:
+        self._check_if_alive()
+        await self._disconnect_all()
+
+    async def close(self) -&gt; None:
+        self._check_if_alive()
+        self._is_closing = True
+        self._app.event_manager.unsubscribe(voice_events.VoiceEvent, self._on_voice_event)
+
+        if self._connections:
+            _LOGGER.info(&#34;shutting down %s active voice connection(s)&#34;, len(self._connections))
+            await self._disconnect_all()
+
+        self._is_alive = False
+        self._is_closing = False
+
+    def start(self) -&gt; None:
+        &#34;&#34;&#34;Start this voice component.&#34;&#34;&#34;
+        if self._is_alive:
+            raise errors.ComponentStateConflictError(&#34;Cannot start a voice component which is already running&#34;)
+
+        self._is_alive = True
+        self._app.event_manager.subscribe(voice_events.VoiceEvent, self._on_voice_event)
+
+    async def connect_to(
+        self,
+        guild: snowflakes.SnowflakeishOr[guilds.PartialGuild],
+        channel: snowflakes.SnowflakeishOr[channels.GuildVoiceChannel],
+        voice_connection_type: typing.Type[_VoiceConnectionT],
+        *,
+        deaf: bool = False,
+        mute: bool = False,
+        **kwargs: typing.Any,
+    ) -&gt; _VoiceConnectionT:
+        self._check_if_alive()
+        guild_id = snowflakes.Snowflake(guild)
+
+        if guild_id in self._connections:
+            raise errors.VoiceError(
+                &#34;Already in a voice channel for that guild. Disconnect before attempting to connect again&#34;
+            )
+
+        shard_id = snowflakes.calculate_shard_id(self._app, guild_id)
+        try:
+            shard = self._app.shards[shard_id]
+        except KeyError:
+            raise errors.VoiceError(
+                f&#34;Cannot connect to shard {shard_id} as it is not present in this application&#34;
+            ) from None
+
+        user = self._app.cache.get_me()
+        if not user:
+            user = await self._app.rest.fetch_my_user()
+
+        _LOGGER.log(ux.TRACE, &#34;attempting to connect to voice channel %s in %s via shard %s&#34;, channel, guild, shard_id)
+
+        await shard.update_voice_state(guild, channel, self_deaf=deaf, self_mute=mute)
+
+        _LOGGER.log(
+            ux.TRACE,
+            &#34;waiting for voice events for connecting to voice channel %s in %s via shard %s&#34;,
+            channel,
+            guild,
+            shard_id,
+        )
+
+        state_event, server_event = await asyncio.gather(
+            # Voice state update:
+            self._app.event_manager.wait_for(
+                voice_events.VoiceStateUpdateEvent,
+                timeout=None,
+                predicate=self._init_state_update_predicate(guild_id, user.id),
+            ),
+            # Server update:
+            self._app.event_manager.wait_for(
+                voice_events.VoiceServerUpdateEvent,
+                timeout=None,
+                predicate=self._init_server_update_predicate(guild_id),
+            ),
+        )
+
+        # We will never receive the first endpoint as `None`
+        assert server_event.endpoint is not None
+
+        _LOGGER.debug(
+            &#34;joined voice channel %s in guild %s via shard %s using endpoint %s. Session will be %s. &#34;
+            &#34;Delegating to voice websocket&#34;,
+            state_event.state.channel_id,
+            state_event.state.guild_id,
+            shard_id,
+            server_event.endpoint,
+            state_event.state.session_id,
+        )
+
+        try:
+            voice_connection = await voice_connection_type.initialize(
+                channel_id=snowflakes.Snowflake(channel),
+                endpoint=server_event.endpoint,
+                guild_id=guild_id,
+                on_close=self._on_connection_close,
+                owner=self,
+                session_id=state_event.state.session_id,
+                shard_id=shard_id,
+                token=server_event.token,
+                user_id=user.id,
+                **kwargs,
+            )
+        except Exception:
+            _LOGGER.debug(
+                &#34;error occurred in initialization, leaving voice channel %s in guild %s again&#34;, channel, guild
+            )
+            try:
+                await asyncio.wait_for(shard.update_voice_state(guild, None), timeout=5.0)
+            except asyncio.TimeoutError:
+                pass
+
+            raise
+
+        self._connections[guild_id] = voice_connection
+        return voice_connection
+
+    @staticmethod
+    def _init_state_update_predicate(
+        guild_id: snowflakes.Snowflake,
+        user_id: snowflakes.Snowflake,
+    ) -&gt; typing.Callable[[voice_events.VoiceStateUpdateEvent], bool]:
+        def predicate(event: voice_events.VoiceStateUpdateEvent) -&gt; bool:
+            return event.state.guild_id == guild_id and event.state.user_id == user_id
+
+        return predicate
+
+    @staticmethod
+    def _init_server_update_predicate(
+        guild_id: snowflakes.Snowflake,
+    ) -&gt; typing.Callable[[voice_events.VoiceServerUpdateEvent], bool]:
+        def predicate(event: voice_events.VoiceServerUpdateEvent) -&gt; bool:
+            return event.guild_id == guild_id
+
+        return predicate
+
+    async def _on_connection_close(self, connection: voice.VoiceConnection) -&gt; None:
+        try:
+            del self._connections[connection.guild_id]
+
+            # Leave the voice channel explicitly, otherwise we will just appear to
+            # not leave properly.
+            await self._app.shards[connection.shard_id].update_voice_state(
+                guild=connection.guild_id,
+                channel=None,
+            )
+
+            _LOGGER.debug(
+                &#34;successfully unregistered voice connection %s to guild %s and left voice channel %s&#34;,
+                connection,
+                connection.guild_id,
+                connection.channel_id,
+            )
+
+        except KeyError:
+            _LOGGER.warning(
+                &#34;ignored closure of phantom unregistered voice connection %s to guild %s. Perhaps this is a bug?&#34;,
+                connection,
+                connection.guild_id,
+            )
+
+    async def _on_voice_event(self, event: voice_events.VoiceEvent) -&gt; None:
+        if event.guild_id in self._connections:
+            connection = self._connections[event.guild_id]
+            _LOGGER.log(
+                ux.TRACE, &#34;notifying voice connection %s in guild %s of event %s&#34;, connection, event.guild_id, event
+            )
+            await connection.notify(event)</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="VoiceComponentImpl -- A standard voice component management implementation …" href="#hikari.impl.voice.VoiceComponentImpl"
+>VoiceComponentImpl</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="VoiceComponent -- Interface for a voice system implementation." href="../api/voice.html#hikari.api.voice.VoiceComponent"
+>VoiceComponent</a></dt>
+<dd class="nested"><p>Interface for a voice system implementation.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.voice.VoiceComponentImpl.connections" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="connections -- Return a mapping of guild-id to active voice connection." href="#hikari.impl.voice.VoiceComponentImpl.connections"  >connections</a> : Mapping[<a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a>, <a href='../api/voice.html#hikari.api.voice.VoiceConnection'>VoiceConnection</a>]</code></pre>
+</dt>
+<dd><p>Return a mapping of guild-id to active voice connection.</p></dd>
+</div>
+<div id="hikari.impl.voice.VoiceComponentImpl.is_alive" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_alive -- Whether this component is alive." href="#hikari.impl.voice.VoiceComponentImpl.is_alive"  >is_alive</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Whether this component is alive.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.voice.VoiceComponentImpl.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="close" href="#hikari.impl.voice.VoiceComponentImpl.close" id="hikari.impl.voice.VoiceComponentImpl.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="VoiceComponent -- Interface for a voice system implementation." href="../api/voice.html#hikari.api.voice.VoiceComponent"
+>VoiceComponent</a></code>.<code><a title="close -- Shut down all connections, waiting for them to terminate …" href="../api/voice.html#hikari.api.voice.VoiceComponent.close"
+>close</a></code>
+</p>
+<p>Shut down all connections, waiting for them to terminate.</p>
+<p>Once this is done, unsubscribe from any events.</p>
+<p>If you simply wish to disconnect every connection, use <code>disconnect</code>
+instead.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L101-L111" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def close(self) -&gt; None:
+    self._check_if_alive()
+    self._is_closing = True
+    self._app.event_manager.unsubscribe(voice_events.VoiceEvent, self._on_voice_event)
+
+    if self._connections:
+        _LOGGER.info(&#34;shutting down %s active voice connection(s)&#34;, len(self._connections))
+        await self._disconnect_all()
+
+    self._is_alive = False
+    self._is_closing = False</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.voice.VoiceComponentImpl.connect_to" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="connect_to" href="#hikari.impl.voice.VoiceComponentImpl.connect_to" id="hikari.impl.voice.VoiceComponentImpl.connect_to">connect_to</a>(
+    guild: <a href='../snowflakes.html#hikari.snowflakes.SnowflakeishOr'>snowflakes.SnowflakeishOr</a>[<a href='../guilds.html#hikari.guilds.PartialGuild'>guilds.PartialGuild</a>],
+    channel: <a href='../snowflakes.html#hikari.snowflakes.SnowflakeishOr'>snowflakes.SnowflakeishOr</a>[<a href='../channels.html#hikari.channels.GuildVoiceChannel'>channels.GuildVoiceChannel</a>],
+    voice_connection_type: <a href='https://docs.python.org/3/library/typing.html#typing.Type'>Type</a>[_VoiceConnectionT],
+    *,
+    deaf: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a> = False,
+    mute: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a> = False,
+    **kwargs: <a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>,
+) -> _VoiceConnectionT: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="VoiceComponent -- Interface for a voice system implementation." href="../api/voice.html#hikari.api.voice.VoiceComponent"
+>VoiceComponent</a></code>.<code><a title="connect_to -- Connect to a given voice channel …" href="../api/voice.html#hikari.api.voice.VoiceComponent.connect_to"
+>connect_to</a></code>
+</p>
+<p>Connect to a given voice channel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>guild</code></strong> :&ensp;<code><a href='../snowflakes.html#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a>[<a href='../guilds.html#hikari.guilds.Guild'>Guild</a>]</code></dt>
+<dd>The guild to connect to.</dd>
+<dt><strong><code>channel</code></strong> :&ensp;<code><a href='../snowflakes.html#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a>[<a href='../channels.html#hikari.channels.GuildVoiceChannel'>GuildVoiceChannel</a>]</code></dt>
+<dd>The channel or channel ID to connect to.</dd>
+<dt><strong><code>voice_connection_type</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Type'>Type</a>[VoiceConnection]</code></dt>
+<dd>The type of voice connection to use. This should be initialized
+internally using the <code>VoiceConnection.initialize</code>
+<code><a href='https://docs.python.org/3/library/functions.html#classmethod'>classmethod</a></code>.</dd>
+<dt><strong><code>deaf</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd>Defaulting to <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>, if <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code>, the client will
+enter the voice channel deafened (thus unable to hear other users).</dd>
+<dt><strong><code>mute</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd>Defaulting to <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code>, if <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code>, the client will
+enter the voice channel muted (thus unable to send audio).</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a></code></dt>
+<dd>Any arguments to provide to the <code>VoiceConnection.initialize</code>
+method.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>VoiceConnection</code></dt>
+<dd>A voice connection implementation of some sort.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L121-L216" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def connect_to(
+    self,
+    guild: snowflakes.SnowflakeishOr[guilds.PartialGuild],
+    channel: snowflakes.SnowflakeishOr[channels.GuildVoiceChannel],
+    voice_connection_type: typing.Type[_VoiceConnectionT],
+    *,
+    deaf: bool = False,
+    mute: bool = False,
+    **kwargs: typing.Any,
+) -&gt; _VoiceConnectionT:
+    self._check_if_alive()
+    guild_id = snowflakes.Snowflake(guild)
+
+    if guild_id in self._connections:
+        raise errors.VoiceError(
+            &#34;Already in a voice channel for that guild. Disconnect before attempting to connect again&#34;
+        )
+
+    shard_id = snowflakes.calculate_shard_id(self._app, guild_id)
+    try:
+        shard = self._app.shards[shard_id]
+    except KeyError:
+        raise errors.VoiceError(
+            f&#34;Cannot connect to shard {shard_id} as it is not present in this application&#34;
+        ) from None
+
+    user = self._app.cache.get_me()
+    if not user:
+        user = await self._app.rest.fetch_my_user()
+
+    _LOGGER.log(ux.TRACE, &#34;attempting to connect to voice channel %s in %s via shard %s&#34;, channel, guild, shard_id)
+
+    await shard.update_voice_state(guild, channel, self_deaf=deaf, self_mute=mute)
+
+    _LOGGER.log(
+        ux.TRACE,
+        &#34;waiting for voice events for connecting to voice channel %s in %s via shard %s&#34;,
+        channel,
+        guild,
+        shard_id,
+    )
+
+    state_event, server_event = await asyncio.gather(
+        # Voice state update:
+        self._app.event_manager.wait_for(
+            voice_events.VoiceStateUpdateEvent,
+            timeout=None,
+            predicate=self._init_state_update_predicate(guild_id, user.id),
+        ),
+        # Server update:
+        self._app.event_manager.wait_for(
+            voice_events.VoiceServerUpdateEvent,
+            timeout=None,
+            predicate=self._init_server_update_predicate(guild_id),
+        ),
+    )
+
+    # We will never receive the first endpoint as `None`
+    assert server_event.endpoint is not None
+
+    _LOGGER.debug(
+        &#34;joined voice channel %s in guild %s via shard %s using endpoint %s. Session will be %s. &#34;
+        &#34;Delegating to voice websocket&#34;,
+        state_event.state.channel_id,
+        state_event.state.guild_id,
+        shard_id,
+        server_event.endpoint,
+        state_event.state.session_id,
+    )
+
+    try:
+        voice_connection = await voice_connection_type.initialize(
+            channel_id=snowflakes.Snowflake(channel),
+            endpoint=server_event.endpoint,
+            guild_id=guild_id,
+            on_close=self._on_connection_close,
+            owner=self,
+            session_id=state_event.state.session_id,
+            shard_id=shard_id,
+            token=server_event.token,
+            user_id=user.id,
+            **kwargs,
+        )
+    except Exception:
+        _LOGGER.debug(
+            &#34;error occurred in initialization, leaving voice channel %s in guild %s again&#34;, channel, guild
+        )
+        try:
+            await asyncio.wait_for(shard.update_voice_state(guild, None), timeout=5.0)
+        except asyncio.TimeoutError:
+            pass
+
+        raise
+
+    self._connections[guild_id] = voice_connection
+    return voice_connection</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.voice.VoiceComponentImpl.disconnect" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="disconnect" href="#hikari.impl.voice.VoiceComponentImpl.disconnect" id="hikari.impl.voice.VoiceComponentImpl.disconnect">disconnect</a>(
+    guild: <a href='../snowflakes.html#hikari.snowflakes.SnowflakeishOr'>snowflakes.SnowflakeishOr</a>[<a href='../guilds.html#hikari.guilds.PartialGuild'>guilds.PartialGuild</a>],
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="VoiceComponent -- Interface for a voice system implementation." href="../api/voice.html#hikari.api.voice.VoiceComponent"
+>VoiceComponent</a></code>.<code><a title="disconnect -- Disconnect from a given guild …" href="../api/voice.html#hikari.api.voice.VoiceComponent.disconnect"
+>disconnect</a></code>
+</p>
+<p>Disconnect from a given guild.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>guild</code></strong> :&ensp;<code><a href='../snowflakes.html#hikari.snowflakes.SnowflakeishOr'>SnowflakeishOr</a>[<a href='../guilds.html#hikari.guilds.Guild'>Guild</a>]</code></dt>
+<dd>The guild to disconnect from.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L80-L90" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def disconnect(self, guild: snowflakes.SnowflakeishOr[guilds.PartialGuild]) -&gt; None:
+    self._check_if_alive()
+    guild_id = snowflakes.Snowflake(guild)
+
+    if guild_id not in self._connections:
+        raise errors.VoiceError(&#34;This application doesn&#39;t have any active voice connection in this server&#34;)
+
+    conn = self._connections[guild_id]
+    # We rely on the assumption that _on_connection_close will be called here rather than explicitly
+    # to remove the connection from self._connections.
+    await conn.disconnect()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.voice.VoiceComponentImpl.disconnect_all" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="disconnect_all" href="#hikari.impl.voice.VoiceComponentImpl.disconnect_all" id="hikari.impl.voice.VoiceComponentImpl.disconnect_all">disconnect_all</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="VoiceComponent -- Interface for a voice system implementation." href="../api/voice.html#hikari.api.voice.VoiceComponent"
+>VoiceComponent</a></code>.<code><a title="disconnect_all -- Disconnect all the active voice connections." href="../api/voice.html#hikari.api.voice.VoiceComponent.disconnect_all"
+>disconnect_all</a></code>
+</p>
+<p>Disconnect all the active voice connections.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L97-L99" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def disconnect_all(self) -&gt; None:
+    self._check_if_alive()
+    await self._disconnect_all()</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.voice.VoiceComponentImpl.start" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="start" href="#hikari.impl.voice.VoiceComponentImpl.start" id="hikari.impl.voice.VoiceComponentImpl.start">start</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Start this voice component.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/voice.py#L113-L119" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def start(self) -&gt; None:
+    &#34;&#34;&#34;Start this voice component.&#34;&#34;&#34;
+    if self._is_alive:
+        raise errors.ComponentStateConflictError(&#34;Cannot start a voice component which is already running&#34;)
+
+    self._is_alive = True
+    self._app.event_manager.subscribe(voice_events.VoiceEvent, self._on_voice_event)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

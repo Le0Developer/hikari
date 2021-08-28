@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.events.role_events API documentation</title>
+<meta name="description" content="Events pertaining to manipulation of roles within guilds.">
+<meta property="og:title" content="hikari.events.role_events module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.events -- Events that can be fired by Hikari's gateway implementation." href="index.html"
+>events</a></li>
+<li class="breadcrumb-item active"><a href="#">role_events</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Events pertaining to manipulation of roles within guilds.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleCreateEvent -- Event fired when a role is created …" href="#hikari.events.role_events.RoleCreateEvent"
+>RoleCreateEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.role_events.RoleCreateEvent.app"
+>app</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleCreateEvent.guild_id"
+>guild_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role -- Role that was created …" href="#hikari.events.role_events.RoleCreateEvent.role"
+>role</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleCreateEvent.role_id"
+>role_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="#hikari.events.role_events.RoleCreateEvent.shard"
+>shard</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleDeleteEvent -- Event fired when a role is deleted …" href="#hikari.events.role_events.RoleDeleteEvent"
+>RoleDeleteEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.role_events.RoleDeleteEvent.app"
+>app</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleDeleteEvent.guild_id"
+>guild_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="old_role -- The old role object …" href="#hikari.events.role_events.RoleDeleteEvent.old_role"
+>old_role</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleDeleteEvent.role_id"
+>role_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="#hikari.events.role_events.RoleDeleteEvent.shard"
+>shard</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RoleEvent -- Event base for any event that involves guild roles …" href="#hikari.events.role_events.RoleEvent"
+>RoleEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="base_events.html#hikari.events.base_events.Event.app"
+>app</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleEvent.guild_id"
+>guild_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleEvent.role_id"
+>role_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="shard_events.html#hikari.events.shard_events.ShardEvent.shard"
+>shard</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleUpdateEvent -- Event fired when a role is updated …" href="#hikari.events.role_events.RoleUpdateEvent"
+>RoleUpdateEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.role_events.RoleUpdateEvent.app"
+>app</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleUpdateEvent.guild_id"
+>guild_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="old_role -- The old role object …" href="#hikari.events.role_events.RoleUpdateEvent.old_role"
+>old_role</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role -- Role that was updated …" href="#hikari.events.role_events.RoleUpdateEvent.role"
+>role</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleUpdateEvent.role_id"
+>role_id</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="#hikari.events.role_events.RoleUpdateEvent.shard"
+>shard</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/role_events.py#L1-L175" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Events pertaining to manipulation of roles within guilds.&#34;&#34;&#34;
+from __future__ import annotations
+
+__all__: typing.List[str] = [
+    &#34;RoleEvent&#34;,
+    &#34;RoleCreateEvent&#34;,
+    &#34;RoleUpdateEvent&#34;,
+    &#34;RoleDeleteEvent&#34;,
+]
+
+import abc
+import typing
+
+import attr
+
+from hikari import intents
+from hikari.events import base_events
+from hikari.events import shard_events
+from hikari.internal import attr_extensions
+
+if typing.TYPE_CHECKING:
+    from hikari import guilds
+    from hikari import snowflakes
+    from hikari import traits
+    from hikari.api import shard as gateway_shard
+
+
+@base_events.requires_intents(intents.Intents.GUILDS)
+class RoleEvent(shard_events.ShardEvent, abc.ABC):
+    &#34;&#34;&#34;Event base for any event that involves guild roles.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @property
+    @abc.abstractmethod
+    def guild_id(self) -&gt; snowflakes.Snowflake:
+        &#34;&#34;&#34;ID of the guild that this event relates to.
+
+        Returns
+        -------
+        hikari.snowflakes.Snowflake
+            The ID of the guild that relates to this event.
+        &#34;&#34;&#34;
+
+    @property
+    @abc.abstractmethod
+    def role_id(self) -&gt; snowflakes.Snowflake:
+        &#34;&#34;&#34;ID of the role that this event relates to.
+
+        Returns
+        -------
+        hikari.snowflakes.Snowflake
+            The ID of the role that relates to this event.
+        &#34;&#34;&#34;
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+@base_events.requires_intents(intents.Intents.GUILDS)
+class RoleCreateEvent(RoleEvent):
+    &#34;&#34;&#34;Event fired when a role is created.&#34;&#34;&#34;
+
+    shard: gateway_shard.GatewayShard = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from ShardEvent&gt;&gt;.
+
+    role: guilds.Role = attr.field()
+    &#34;&#34;&#34;Role that was created.
+
+    Returns
+    -------
+    hikari.guilds.Role
+        The created role.
+    &#34;&#34;&#34;
+
+    @property
+    def app(self) -&gt; traits.RESTAware:
+        # &lt;&lt;inherited docstring from Event&gt;&gt;.
+        return self.role.app
+
+    @property
+    def guild_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.guild_id
+
+    @property
+    def role_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.id
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+@base_events.requires_intents(intents.Intents.GUILDS)
+class RoleUpdateEvent(RoleEvent):
+    &#34;&#34;&#34;Event fired when a role is updated.&#34;&#34;&#34;
+
+    shard: gateway_shard.GatewayShard = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from ShardEvent&gt;&gt;.
+
+    old_role: typing.Optional[guilds.Role] = attr.field()
+    &#34;&#34;&#34;The old role object.
+
+    This will be `builtins.None` if the role missing from the cache.
+    &#34;&#34;&#34;
+
+    role: guilds.Role = attr.field()
+    &#34;&#34;&#34;Role that was updated.
+
+    Returns
+    -------
+    hikari.guilds.Role
+        The created role.
+    &#34;&#34;&#34;
+
+    @property
+    def app(self) -&gt; traits.RESTAware:
+        # &lt;&lt;inherited docstring from Event&gt;&gt;.
+        return self.role.app
+
+    @property
+    def guild_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.guild_id
+
+    @property
+    def role_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.id
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+@base_events.requires_intents(intents.Intents.GUILDS)
+class RoleDeleteEvent(RoleEvent):
+    &#34;&#34;&#34;Event fired when a role is deleted.&#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.
+
+    shard: gateway_shard.GatewayShard = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from ShardEvent&gt;&gt;.
+
+    guild_id: snowflakes.Snowflake = attr.field()
+    # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+
+    role_id: snowflakes.Snowflake = attr.field()
+    # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+
+    old_role: typing.Optional[guilds.Role] = attr.field()
+    &#34;&#34;&#34;The old role object.
+
+    This will be `builtins.None` if the role was missing from the cache.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.events.role_events.RoleCreateEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleCreateEvent -- Event fired when a role is created …" href="#hikari.events.role_events.RoleCreateEvent"
+>RoleCreateEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.role_events.RoleCreateEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> RoleCreateEvent (
+    *,
+    shard: <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a>,
+    role: <a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a>,
+): ...</code></pre>
+<p>Event fired when a role is created.</p>
+<p>This requires one of the following combinations of intents in order to be dispatched:</p>
+<ul>
+<li><code><a href='../intents.html#hikari.intents.Intents.GUILDS'>GUILDS</a></code></li>
+</ul>
+<p>Method generated by attrs for class RoleCreateEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/role_events.py#L82-L110" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class RoleCreateEvent(RoleEvent):
+    &#34;&#34;&#34;Event fired when a role is created.&#34;&#34;&#34;
+
+    shard: gateway_shard.GatewayShard = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from ShardEvent&gt;&gt;.
+
+    role: guilds.Role = attr.field()
+    &#34;&#34;&#34;Role that was created.
+
+    Returns
+    -------
+    hikari.guilds.Role
+        The created role.
+    &#34;&#34;&#34;
+
+    @property
+    def app(self) -&gt; traits.RESTAware:
+        # &lt;&lt;inherited docstring from Event&gt;&gt;.
+        return self.role.app
+
+    @property
+    def guild_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.guild_id
+
+    @property
+    def role_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.id</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleCreateEvent -- Event fired when a role is created …" href="#hikari.events.role_events.RoleCreateEvent"
+>RoleCreateEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="RoleEvent -- Event base for any event that involves guild roles …" href="#hikari.events.role_events.RoleEvent"
+>RoleEvent</a></dt>
+<dd class="nested"><p>Event base for any event that involves guild roles …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ShardEvent -- Base class for any event that was shard-specific." href="shard_events.html#hikari.events.shard_events.ShardEvent"
+>ShardEvent</a></dt>
+<dd class="nested"><p>Base class for any event that was shard-specific.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.role_events.RoleCreateEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.role_events.RoleCreateEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleCreateEvent.guild_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleCreateEvent.guild_id"  >guild_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the guild that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the guild that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleCreateEvent.role" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role -- Role that was created …" href="#hikari.events.role_events.RoleCreateEvent.role"  >role</a> : <a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a></code></pre>
+</dt>
+<dd><p>Role that was created.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../guilds.html#hikari.guilds.Role'>Role</a></code></dt>
+<dd>The created role.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleCreateEvent.role_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleCreateEvent.role_id"  >role_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the role that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the role that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleCreateEvent.shard" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="#hikari.events.role_events.RoleCreateEvent.shard"  >shard</a> : <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a></code></pre>
+</dt>
+<dd><p>Shard that received this event.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../api/shard.html#hikari.api.shard.GatewayShard'>GatewayShard</a></code></dt>
+<dd>The shard that triggered the event.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.events.role_events.RoleDeleteEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleDeleteEvent -- Event fired when a role is deleted …" href="#hikari.events.role_events.RoleDeleteEvent"
+>RoleDeleteEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.role_events.RoleDeleteEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> RoleDeleteEvent (
+    *,
+    app: <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a>,
+    shard: <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a>,
+    guild_id: <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a>,
+    role_id: <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a>,
+    old_role: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a>],
+): ...</code></pre>
+<p>Event fired when a role is deleted.</p>
+<p>This requires one of the following combinations of intents in order to be dispatched:</p>
+<ul>
+<li><code><a href='../intents.html#hikari.intents.Intents.GUILDS'>GUILDS</a></code></li>
+</ul>
+<p>Method generated by attrs for class RoleDeleteEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/role_events.py#L156-L175" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class RoleDeleteEvent(RoleEvent):
+    &#34;&#34;&#34;Event fired when a role is deleted.&#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.
+
+    shard: gateway_shard.GatewayShard = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from ShardEvent&gt;&gt;.
+
+    guild_id: snowflakes.Snowflake = attr.field()
+    # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+
+    role_id: snowflakes.Snowflake = attr.field()
+    # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+
+    old_role: typing.Optional[guilds.Role] = attr.field()
+    &#34;&#34;&#34;The old role object.
+
+    This will be `builtins.None` if the role was missing from the cache.
+    &#34;&#34;&#34;</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleDeleteEvent -- Event fired when a role is deleted …" href="#hikari.events.role_events.RoleDeleteEvent"
+>RoleDeleteEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="RoleEvent -- Event base for any event that involves guild roles …" href="#hikari.events.role_events.RoleEvent"
+>RoleEvent</a></dt>
+<dd class="nested"><p>Event base for any event that involves guild roles …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ShardEvent -- Base class for any event that was shard-specific." href="shard_events.html#hikari.events.shard_events.ShardEvent"
+>ShardEvent</a></dt>
+<dd class="nested"><p>Base class for any event that was shard-specific.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.role_events.RoleDeleteEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.role_events.RoleDeleteEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleDeleteEvent.guild_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleDeleteEvent.guild_id"  >guild_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the guild that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the guild that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleDeleteEvent.old_role" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="old_role -- The old role object …" href="#hikari.events.role_events.RoleDeleteEvent.old_role"  >old_role</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a>]</code></pre>
+</dt>
+<dd><p>The old role object.</p>
+<p>This will be <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code> if the role was missing from the cache.</p></dd>
+</div>
+<div id="hikari.events.role_events.RoleDeleteEvent.role_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleDeleteEvent.role_id"  >role_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the role that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the role that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleDeleteEvent.shard" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="#hikari.events.role_events.RoleDeleteEvent.shard"  >shard</a> : <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a></code></pre>
+</dt>
+<dd><p>Shard that received this event.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../api/shard.html#hikari.api.shard.GatewayShard'>GatewayShard</a></code></dt>
+<dd>The shard that triggered the event.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.events.role_events.RoleEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RoleEvent -- Event base for any event that involves guild roles …" href="#hikari.events.role_events.RoleEvent"
+>RoleEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.role_events.RoleEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> RoleEvent: ...</code></pre>
+<p>Event base for any event that involves guild roles.</p>
+<p>This requires one of the following combinations of intents in order to be dispatched:</p>
+<ul>
+<li><code><a href='../intents.html#hikari.intents.Intents.GUILDS'>GUILDS</a></code></li>
+</ul>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/role_events.py#L51-L76" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class RoleEvent(shard_events.ShardEvent, abc.ABC):
+    &#34;&#34;&#34;Event base for any event that involves guild roles.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @property
+    @abc.abstractmethod
+    def guild_id(self) -&gt; snowflakes.Snowflake:
+        &#34;&#34;&#34;ID of the guild that this event relates to.
+
+        Returns
+        -------
+        hikari.snowflakes.Snowflake
+            The ID of the guild that relates to this event.
+        &#34;&#34;&#34;
+
+    @property
+    @abc.abstractmethod
+    def role_id(self) -&gt; snowflakes.Snowflake:
+        &#34;&#34;&#34;ID of the role that this event relates to.
+
+        Returns
+        -------
+        hikari.snowflakes.Snowflake
+            The ID of the role that relates to this event.
+        &#34;&#34;&#34;</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleCreateEvent -- Event fired when a role is created …" href="#hikari.events.role_events.RoleCreateEvent"
+>RoleCreateEvent</a></dt>
+<dd class="nested"><p>Event fired when a role is created …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleDeleteEvent -- Event fired when a role is deleted …" href="#hikari.events.role_events.RoleDeleteEvent"
+>RoleDeleteEvent</a></dt>
+<dd class="nested"><p>Event fired when a role is deleted …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleUpdateEvent -- Event fired when a role is updated …" href="#hikari.events.role_events.RoleUpdateEvent"
+>RoleUpdateEvent</a></dt>
+<dd class="nested"><p>Event fired when a role is updated …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="RoleEvent -- Event base for any event that involves guild roles …" href="#hikari.events.role_events.RoleEvent"
+>RoleEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ShardEvent -- Base class for any event that was shard-specific." href="shard_events.html#hikari.events.shard_events.ShardEvent"
+>ShardEvent</a></dt>
+<dd class="nested"><p>Base class for any event that was shard-specific.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.role_events.RoleEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='An abstract method or property that must be overridden in a derived class.'>abstract</abbr> <abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="base_events.html#hikari.events.base_events.Event.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleEvent.guild_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='An abstract method or property that must be overridden in a derived class.'>abstract</abbr> <abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleEvent.guild_id"  >guild_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the guild that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the guild that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleEvent.role_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='An abstract method or property that must be overridden in a derived class.'>abstract</abbr> <abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleEvent.role_id"  >role_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the role that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the role that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleEvent.shard" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='An abstract method or property that must be overridden in a derived class.'>abstract</abbr> <abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="shard_events.html#hikari.events.shard_events.ShardEvent.shard"  >shard</a> : <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a></code></pre>
+</dt>
+<dd><p>Shard that received this event.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../api/shard.html#hikari.api.shard.GatewayShard'>GatewayShard</a></code></dt>
+<dd>The shard that triggered the event.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.events.role_events.RoleUpdateEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleUpdateEvent -- Event fired when a role is updated …" href="#hikari.events.role_events.RoleUpdateEvent"
+>RoleUpdateEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.role_events.RoleUpdateEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> RoleUpdateEvent (
+    *,
+    shard: <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a>,
+    old_role: <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a>],
+    role: <a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a>,
+): ...</code></pre>
+<p>Event fired when a role is updated.</p>
+<p>This requires one of the following combinations of intents in order to be dispatched:</p>
+<ul>
+<li><code><a href='../intents.html#hikari.intents.Intents.GUILDS'>GUILDS</a></code></li>
+</ul>
+<p>Method generated by attrs for class RoleUpdateEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/role_events.py#L116-L150" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class RoleUpdateEvent(RoleEvent):
+    &#34;&#34;&#34;Event fired when a role is updated.&#34;&#34;&#34;
+
+    shard: gateway_shard.GatewayShard = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from ShardEvent&gt;&gt;.
+
+    old_role: typing.Optional[guilds.Role] = attr.field()
+    &#34;&#34;&#34;The old role object.
+
+    This will be `builtins.None` if the role missing from the cache.
+    &#34;&#34;&#34;
+
+    role: guilds.Role = attr.field()
+    &#34;&#34;&#34;Role that was updated.
+
+    Returns
+    -------
+    hikari.guilds.Role
+        The created role.
+    &#34;&#34;&#34;
+
+    @property
+    def app(self) -&gt; traits.RESTAware:
+        # &lt;&lt;inherited docstring from Event&gt;&gt;.
+        return self.role.app
+
+    @property
+    def guild_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.guild_id
+
+    @property
+    def role_id(self) -&gt; snowflakes.Snowflake:
+        # &lt;&lt;inherited docstring from RoleEvent&gt;&gt;.
+        return self.role.id</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="RoleUpdateEvent -- Event fired when a role is updated …" href="#hikari.events.role_events.RoleUpdateEvent"
+>RoleUpdateEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="RoleEvent -- Event base for any event that involves guild roles …" href="#hikari.events.role_events.RoleEvent"
+>RoleEvent</a></dt>
+<dd class="nested"><p>Event base for any event that involves guild roles …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="ShardEvent -- Base class for any event that was shard-specific." href="shard_events.html#hikari.events.shard_events.ShardEvent"
+>ShardEvent</a></dt>
+<dd class="nested"><p>Base class for any event that was shard-specific.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.role_events.RoleUpdateEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.role_events.RoleUpdateEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleUpdateEvent.guild_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="guild_id -- ID of the guild that this event relates to …" href="#hikari.events.role_events.RoleUpdateEvent.guild_id"  >guild_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the guild that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the guild that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleUpdateEvent.old_role" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="old_role -- The old role object …" href="#hikari.events.role_events.RoleUpdateEvent.old_role"  >old_role</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a>]</code></pre>
+</dt>
+<dd><p>The old role object.</p>
+<p>This will be <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code> if the role missing from the cache.</p></dd>
+</div>
+<div id="hikari.events.role_events.RoleUpdateEvent.role" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role -- Role that was updated …" href="#hikari.events.role_events.RoleUpdateEvent.role"  >role</a> : <a href='../guilds.html#hikari.guilds.Role'>guilds.Role</a></code></pre>
+</dt>
+<dd><p>Role that was updated.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../guilds.html#hikari.guilds.Role'>Role</a></code></dt>
+<dd>The created role.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleUpdateEvent.role_id" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="role_id -- ID of the role that this event relates to …" href="#hikari.events.role_events.RoleUpdateEvent.role_id"  >role_id</a> : <a href='../snowflakes.html#hikari.snowflakes.Snowflake'>snowflakes.Snowflake</a></code></pre>
+</dt>
+<dd><p>ID of the role that this event relates to.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../snowflakes.html#hikari.snowflakes.Snowflake'>Snowflake</a></code></dt>
+<dd>The ID of the role that relates to this event.</dd>
+</dl></dd>
+</div>
+<div id="hikari.events.role_events.RoleUpdateEvent.shard" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="shard -- Shard that received this event …" href="#hikari.events.role_events.RoleUpdateEvent.shard"  >shard</a> : <a href='../api/shard.html#hikari.api.shard.GatewayShard'>gateway_shard.GatewayShard</a></code></pre>
+</dt>
+<dd><p>Shard that received this event.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../api/shard.html#hikari.api.shard.GatewayShard'>GatewayShard</a></code></dt>
+<dd>The shard that triggered the event.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

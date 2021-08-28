@@ -1,0 +1,2440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.impl.rate_limits API documentation</title>
+<meta name="description" content="Basic lazy ratelimit systems for asyncio …">
+<meta property="og:title" content="hikari.impl.rate_limits module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.impl -- Basic implementations of application components …" href="index.html"
+>impl</a></li>
+<li class="breadcrumb-item active"><a href="#">rate_limits</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Basic lazy ratelimit systems for asyncio.</p>
+<p>See <code><a href='buckets.html'>hikari.impl.buckets</a></code> for HTTP-specific rate-limiting logic.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="acquire -- Acquire permission to perform a task that needs to have rate limit management enforced …" href="#hikari.impl.rate_limits.BaseRateLimiter.acquire"
+>acquire</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="close -- Close the rate limiter, cancelling any internal tasks that are executing." href="#hikari.impl.rate_limits.BaseRateLimiter.close"
+>close</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="acquire -- Acquire time on this rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter.acquire"
+>acquire</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="close -- Close the rate limiter, and shut down any pending tasks …" href="#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="#hikari.impl.rate_limits.BurstRateLimiter.is_empty"
+>is_empty</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="#hikari.impl.rate_limits.BurstRateLimiter.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="#hikari.impl.rate_limits.BurstRateLimiter.queue"
+>queue</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="#hikari.impl.rate_limits.BurstRateLimiter.throttle_task"
+>throttle_task</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExponentialBackOff -- Implementation of an asyncio-compatible exponential back-off algorithm with random jitter …" href="#hikari.impl.rate_limits.ExponentialBackOff"
+>ExponentialBackOff</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="base -- The base to use. Defaults to 2.0." href="#hikari.impl.rate_limits.ExponentialBackOff.base"
+>base</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="increment -- The current increment." href="#hikari.impl.rate_limits.ExponentialBackOff.increment"
+>increment</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="jitter_multiplier -- The multiplier for the random jitter …" href="#hikari.impl.rate_limits.ExponentialBackOff.jitter_multiplier"
+>jitter_multiplier</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="maximum -- This is the max value the backoff can be in a single iteration before an
+`asyncio.TimeoutError` is raised." href="#hikari.impl.rate_limits.ExponentialBackOff.maximum"
+>maximum</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="reset -- Reset the exponential back-off." href="#hikari.impl.rate_limits.ExponentialBackOff.reset"
+>reset</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ManualRateLimiter -- Rate limit handler for the global HTTP rate limit …" href="#hikari.impl.rate_limits.ManualRateLimiter"
+>ManualRateLimiter</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="acquire -- Acquire time on this rate limiter …" href="#hikari.impl.rate_limits.ManualRateLimiter.acquire"
+>acquire</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="close -- Close the rate limiter, and shut down any pending tasks …" href="#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="#hikari.impl.rate_limits.BurstRateLimiter.is_empty"
+>is_empty</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="#hikari.impl.rate_limits.ManualRateLimiter.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="#hikari.impl.rate_limits.ManualRateLimiter.queue"
+>queue</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="throttle -- Perform the throttling rate limiter logic …" href="#hikari.impl.rate_limits.ManualRateLimiter.throttle"
+>throttle</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="#hikari.impl.rate_limits.ManualRateLimiter.throttle_task"
+>throttle_task</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="unlock_later -- Sleeps for a while, then removes the lock …" href="#hikari.impl.rate_limits.ManualRateLimiter.unlock_later"
+>unlock_later</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="acquire -- Acquire time on this rate limiter …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.acquire"
+>acquire</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="close -- Close the rate limiter, and shut down any pending tasks …" href="#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="drip -- Decrements the remaining counter." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.drip"
+>drip</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="get_time_until_reset -- Determine how long until the current rate limit is reset …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset"
+>get_time_until_reset</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="#hikari.impl.rate_limits.BurstRateLimiter.is_empty"
+>is_empty</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="is_rate_limited -- Determine if we are under a rate limit at the given time …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited"
+>is_rate_limited</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="limit -- The maximum number of `WindowedBurstRateLimiter.acquire`'s allowed in
+this time window." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.limit"
+>limit</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.name"
+>name</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="period -- How long the window lasts for from the start in seconds." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.period"
+>period</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.queue"
+>queue</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="remaining -- The number of `WindowedBurstRateLimiter.acquire`'s left in this window
+before you will get rate limited." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.remaining"
+>remaining</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="reset_at -- The `time.monotonic_timestamp` that the limit window ends at." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.reset_at"
+>reset_at</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="throttle -- Perform the throttling rate limiter logic …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle"
+>throttle</a>
+</li>
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle_task"
+>throttle_task</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L1-L515" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Basic lazy ratelimit systems for asyncio.
+
+See `hikari.impl.buckets` for HTTP-specific rate-limiting logic.
+&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [
+    &#34;BaseRateLimiter&#34;,
+    &#34;BurstRateLimiter&#34;,
+    &#34;ManualRateLimiter&#34;,
+    &#34;WindowedBurstRateLimiter&#34;,
+    &#34;ExponentialBackOff&#34;,
+]
+
+import abc
+import asyncio
+import logging
+import math
+import random
+import typing
+
+from hikari.internal import time
+
+if typing.TYPE_CHECKING:
+    import types
+
+_LOGGER: typing.Final[logging.Logger] = logging.getLogger(&#34;hikari.ratelimits&#34;)
+
+
+class BaseRateLimiter(abc.ABC):
+    &#34;&#34;&#34;Base for any asyncio-based rate limiter being used.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @abc.abstractmethod
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire permission to perform a task that needs to have rate limit management enforced.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+
+    @abc.abstractmethod
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;Close the rate limiter, cancelling any internal tasks that are executing.&#34;&#34;&#34;
+
+    def __enter__(self) -&gt; BaseRateLimiter:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: typing.Optional[typing.Type[Exception]],
+        exc_val: typing.Optional[Exception],
+        exc_tb: typing.Optional[types.TracebackType],
+    ) -&gt; None:
+        self.close()
+
+
+class BurstRateLimiter(BaseRateLimiter, abc.ABC):
+    &#34;&#34;&#34;Base implementation for a burst-based rate limiter.
+
+    This provides an internal queue and throttling placeholder, as well as
+    complete logic for safely aborting any pending tasks when being shut down.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;name&#34;, &#34;throttle_task&#34;, &#34;queue&#34;, &#34;_closed&#34;)
+
+    name: str
+    &#34;&#34;&#34;The name of the rate limiter.&#34;&#34;&#34;
+
+    throttle_task: typing.Optional[asyncio.Task[typing.Any]]
+    &#34;&#34;&#34;The throttling task, or `builtins.None` if it is not running.&#34;&#34;&#34;
+
+    queue: typing.List[asyncio.Future[typing.Any]]
+    &#34;&#34;&#34;The queue of any futures under a rate limit.&#34;&#34;&#34;
+
+    def __init__(self, name: str) -&gt; None:
+        self.name = name
+        self.throttle_task = None
+        self.queue = []
+        self._closed = False
+
+    @abc.abstractmethod
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;Close the rate limiter, and shut down any pending tasks.
+
+        Once this is invoked, you should not reuse this object.
+        &#34;&#34;&#34;
+        if self._closed:
+            return
+
+        if self.throttle_task is not None:
+            self.throttle_task.cancel()
+            self.throttle_task = None
+
+        failed_tasks = 0
+        while self.queue:
+            failed_tasks += 1
+            future = self.queue.pop(0)
+            # Make the future complete with an exception
+            future.cancel()
+
+        if failed_tasks:
+            _LOGGER.debug(&#34;%s rate limiter closed with %s pending tasks!&#34;, self.name, failed_tasks)
+        else:
+            _LOGGER.debug(&#34;%s rate limiter closed&#34;, self.name)
+        self._closed = True
+
+    @property
+    def is_empty(self) -&gt; bool:
+        &#34;&#34;&#34;Return `builtins.True` if no futures are on the queue being rate limited.&#34;&#34;&#34;
+        return len(self.queue) == 0
+
+
+@typing.final
+class ManualRateLimiter(BurstRateLimiter):
+    &#34;&#34;&#34;Rate limit handler for the global HTTP rate limit.
+
+    This is a non-preemptive rate limiting algorithm that will always return
+    completed futures until `ManualRateLimiter.throttle` is invoked. Once this
+    is invoked, any subsequent calls to `ManualRateLimiter.acquire` will return
+    incomplete futures that will be enqueued to an internal queue. A task will
+    be spun up to wait for a period of time given to the
+    `ManualRateLimiter.throttle`. Once that has passed, the lock will begin to
+    re-consume incomplete futures on the queue, completing them.
+
+    Triggering a throttle when it is already set will cancel the current
+    throttle task that is sleeping and replace it.
+
+    This is used to enforce the global HTTP rate limit that will occur
+    &#34;randomly&#34; during HTTP API interaction.
+
+    Expect random occurrences.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    def __init__(self) -&gt; None:
+        super().__init__(&#34;global&#34;)
+
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+        loop = asyncio.get_running_loop()
+        future = loop.create_future()
+
+        if self.throttle_task is not None:
+            self.queue.append(future)
+        else:
+            future.set_result(None)
+
+        await future
+
+    def throttle(self, retry_after: float) -&gt; None:
+        &#34;&#34;&#34;Perform the throttling rate limiter logic.
+
+        Iterates repeatedly while the queue is not empty, adhering to any
+        rate limits that occur in the mean time.
+
+        Parameters
+        ----------
+        retry_after : builtins.float
+            How long to sleep for before unlocking and releasing any futures
+            in the queue.
+
+        !!! note
+            This will invoke `ManualRateLimiter.unlock_later` as a scheduled
+            task in the future (it will not await it to finish).
+
+            When the `ManualRateLimiter.unlock_later` coroutine function
+            completes, it should be expected to set the `throttle_task` to
+            `builtins.None`. This means you can check if throttling is occurring
+            by checking if `throttle_task` is not `builtins.None`.
+
+            If this is invoked while another throttle is in progress, that one
+            is cancelled and a new one is started. This enables new rate limits
+            to override existing ones.
+        &#34;&#34;&#34;
+        if self.throttle_task is not None:
+            self.throttle_task.cancel()
+
+        loop = asyncio.get_running_loop()
+        self.throttle_task = loop.create_task(self.unlock_later(retry_after))
+
+    async def unlock_later(self, retry_after: float) -&gt; None:
+        &#34;&#34;&#34;Sleeps for a while, then removes the lock.
+
+        Parameters
+        ----------
+        retry_after : builtins.float
+            How long to sleep for before unlocking and releasing any futures
+            in the queue.
+
+        !!! note
+            You should not need to invoke this directly. Call
+            `ManualRateLimiter.throttle` instead.
+
+            When the `ManualRateLimiter.unlock_later` coroutine function
+            completes, it should be expected to set the `throttle_task` to
+            `builtins.None`. This means you can check if throttling is occurring
+            by checking if `throttle_task` is not `builtins.None`.
+        &#34;&#34;&#34;
+        _LOGGER.warning(&#34;you are being globally rate limited for %ss&#34;, retry_after)
+        await asyncio.sleep(retry_after)
+        while self.queue:
+            next_future = self.queue.pop(0)
+            next_future.set_result(None)
+        self.throttle_task = None
+
+
+class WindowedBurstRateLimiter(BurstRateLimiter):
+    &#34;&#34;&#34;Windowed burst rate limiter.
+
+    Rate limiter for rate limits that last fixed periods of time with a
+    fixed number of times it can be used in that time frame.
+
+    To use this, you should call WindowedBurstRateLimiter.aquire` and await the
+    result immediately before performing your rate-limited task.
+
+    If the rate limit has been hit, acquiring time will return an incomplete
+    future that is placed on the internal queue. A throttle task is then spun up
+    if not already running that will be expected to provide some implementation
+    of backing off and sleeping for a given period of time until the limit has
+    passed, and then proceed to consume futures from the queue while adhering
+    to those rate limits.
+
+    If the throttle task is already running, the acquired future will always be
+    incomplete and enqueued regardless of whether the rate limit is actively
+    reached or not.
+
+    Acquiring a future from this limiter when no throttling task is running and
+    when the rate limit is not reached will always result in the task invoking
+    a drip and a completed future being returned.
+
+    Dripping is left to the implementation of this class, but will be expected
+    to provide some mechanism for updating the internal statistics to represent
+    that a unit has been placed into the bucket.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;reset_at&#34;, &#34;remaining&#34;, &#34;limit&#34;, &#34;period&#34;)
+
+    reset_at: float
+    &#34;&#34;&#34;The `time.monotonic_timestamp` that the limit window ends at.&#34;&#34;&#34;
+
+    remaining: int
+    &#34;&#34;&#34;The number of `WindowedBurstRateLimiter.acquire`&#39;s left in this window
+    before you will get rate limited.
+    &#34;&#34;&#34;
+
+    period: float
+    &#34;&#34;&#34;How long the window lasts for from the start in seconds.&#34;&#34;&#34;
+
+    limit: int
+    &#34;&#34;&#34;The maximum number of `WindowedBurstRateLimiter.acquire`&#39;s allowed in
+    this time window.
+    &#34;&#34;&#34;
+
+    def __init__(self, name: str, period: float, limit: int) -&gt; None:
+        super().__init__(name)
+        self.reset_at = 0.0
+        self.remaining = 0
+        self.limit = limit
+        self.period = period
+
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+        loop = asyncio.get_running_loop()
+        future = loop.create_future()
+
+        # If we are rate limited, delegate invoking this to the throttler and spin it up
+        # if it hasn&#39;t started. Likewise, if the throttle task is still running, we should
+        # delegate releasing the future to the throttler task so that we still process
+        # first-come-first-serve
+        if self.throttle_task is not None or self.is_rate_limited(time.monotonic()):
+            self.queue.append(future)
+            if self.throttle_task is None:
+                self.throttle_task = loop.create_task(self.throttle())
+        else:
+            self.drip()
+            future.set_result(None)
+
+        await future
+
+    def get_time_until_reset(self, now: float) -&gt; float:
+        &#34;&#34;&#34;Determine how long until the current rate limit is reset.
+
+        Parameters
+        ----------
+        now : builtins.float
+            The monotonic `time.monotonic_timestamp` timestamp.
+
+        !!! warning
+            Invoking this method will update the internal state if we were
+            previously rate limited, but at the given time are no longer under
+            that limit. This makes it imperative that you only pass the current
+            timestamp to this function, and not past or future timestamps. The
+            effects of doing the latter are undefined behaviour.
+
+        Returns
+        -------
+        builtins.float
+            The time left to sleep before the rate limit is reset. If no rate limit
+            is in effect, then this will return `0.0` instead.
+        &#34;&#34;&#34;
+        if not self.is_rate_limited(now):
+            return 0.0
+        return self.reset_at - now
+
+    def is_rate_limited(self, now: float) -&gt; bool:
+        &#34;&#34;&#34;Determine if we are under a rate limit at the given time.
+
+        Parameters
+        ----------
+        now : builtins.float
+            The monotonic `time.monotonic_timestamp` timestamp.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if we are being rate limited, or `builtins.False` if
+            we are not.
+
+        !!! warning
+            Invoking this method will update the internal state if we were
+            previously rate limited, but at the given time are no longer under
+            that limit. This makes it imperative that you only pass the current
+            timestamp to this function, and not past or future timestamps. The
+            effects of doing the latter are undefined behaviour.
+        &#34;&#34;&#34;
+        if self.reset_at &lt;= now:
+            self.remaining = self.limit
+            self.reset_at = now + self.period
+            return False
+
+        return self.remaining &lt;= 0
+
+    def drip(self) -&gt; None:
+        &#34;&#34;&#34;Decrements the remaining counter.&#34;&#34;&#34;
+        self.remaining -= 1
+
+    async def throttle(self) -&gt; None:
+        &#34;&#34;&#34;Perform the throttling rate limiter logic.
+
+        Iterates repeatedly while the queue is not empty, adhering to any
+        rate limits that occur in the mean time.
+
+        !!! note
+            You should usually not need to invoke this directly, but if you do,
+            ensure to call it using `asyncio.create_task`, and store the
+            task immediately in `throttle_task`.
+
+            When this coroutine function completes, it will set the
+            `throttle_task` to `builtins.None`. This means you can check if throttling
+            is occurring by checking if `throttle_task` is not `builtins.None`.
+        &#34;&#34;&#34;
+        _LOGGER.debug(
+            &#34;you are being rate limited on bucket %s, backing off for %ss&#34;,
+            self.name,
+            self.get_time_until_reset(time.monotonic()),
+        )
+
+        while self.queue:
+            sleep_for = self.get_time_until_reset(time.monotonic())
+            await asyncio.sleep(sleep_for)
+
+            while self.remaining &gt; 0 and self.queue:
+                self.drip()
+                self.queue.pop(0).set_result(None)
+
+        self.throttle_task = None
+
+
+@typing.final
+class ExponentialBackOff:
+    r&#34;&#34;&#34;Implementation of an asyncio-compatible exponential back-off algorithm with random jitter.
+
+    .. math::
+
+        t_{backoff} = b^{i} +  m \cdot \mathrm{rand}()
+
+    Such that \(t_{backoff}\) is the backoff time, \(b\) is the base,
+    \(i\) is the increment that increases by 1 for each invocation, and
+    \(m\) is the jitter multiplier. \(\mathrm{rand}()\) returns a value in
+    the range \([0,1]\).
+
+    Parameters
+    ----------
+    base : builtins.float
+        The base to use. Defaults to `2.0`.
+    maximum : builtins.float
+        The max value the backoff can be in a single iteration. Anything above
+        this will be capped to this base value plus random jitter.
+    jitter_multiplier : builtins.float
+        The multiplier for the random jitter. Defaults to `1.0`.
+        Set to `0` to disable jitter.
+    initial_increment : builtins.int
+        The initial increment to start at. Defaults to `0`.
+
+    Raises
+    ------
+    ValueError
+        If an `builtins.int` that&#39;s too big to be represented as a
+        `builtins.float` or a non-finite value is passed in place of a field
+        that&#39;s annotated as `builtins.float`.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;base&#34;, &#34;increment&#34;, &#34;maximum&#34;, &#34;jitter_multiplier&#34;)
+
+    base: typing.Final[float]
+    &#34;&#34;&#34;The base to use. Defaults to 2.0.&#34;&#34;&#34;
+
+    increment: int
+    &#34;&#34;&#34;The current increment.&#34;&#34;&#34;
+
+    maximum: float
+    &#34;&#34;&#34;This is the max value the backoff can be in a single iteration before an
+    `asyncio.TimeoutError` is raised.
+    &#34;&#34;&#34;
+
+    jitter_multiplier: typing.Final[float]
+    &#34;&#34;&#34;The multiplier for the random jitter.
+
+    This defaults to `1.0`. Set to `0.0` to disable jitter.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        base: float = 2.0,
+        maximum: float = 64.0,
+        jitter_multiplier: float = 1.0,
+        initial_increment: int = 0,
+    ) -&gt; None:
+        # https://mypy.readthedocs.io/en/stable/duck_type_compatibility.html
+        # Mypy makes the assumption that ints will always be compatible with floats, this isn&#39;t the case and could lead
+        # to some edge cases that we&#39;d be better off catching earlier on by ensuring these values are actually valid
+        # (most notably floats have a system based maximum size whereas integers theoretically don&#39;t with implicit
+        # conversion to a float raising an error if an integer that&#39;s too big to be a float is handled).
+        try:
+            self.base = float(base)
+            self.maximum = float(maximum)
+            self.jitter_multiplier = float(jitter_multiplier)
+        except OverflowError:
+            raise ValueError(&#34;int too large to be represented as a float&#34;) from None
+
+        if not math.isfinite(self.base):
+            raise ValueError(&#34;base must be a finite number&#34;) from None
+
+        if not math.isfinite(self.maximum):
+            raise ValueError(&#34;maximum must be a finite number&#34;) from None
+
+        if not math.isfinite(self.jitter_multiplier):
+            raise ValueError(&#34;jitter_multiplier must be a finite number&#34;) from None
+
+        self.increment = initial_increment
+
+    def __next__(self) -&gt; float:
+        &#34;&#34;&#34;Get the next back off to sleep by.&#34;&#34;&#34;
+        try:
+            value = self.base ** self.increment
+
+            if value &gt;= self.maximum:
+                value = self.maximum
+            else:
+                # This should only be incremented after we verify we haven&#39;t hit the maximum value.
+                self.increment += 1
+        except OverflowError:
+            # If this happened then we can be sure that we&#39;ve passed maximum.
+            value = self.maximum
+
+        return value + random.random() * self.jitter_multiplier  # nosec  # noqa S311 rng for cryptography
+
+    def __iter__(self) -&gt; ExponentialBackOff:
+        &#34;&#34;&#34;Return this object, as it is an iterator.&#34;&#34;&#34;
+        return self
+
+    def reset(self) -&gt; None:
+        &#34;&#34;&#34;Reset the exponential back-off.&#34;&#34;&#34;
+        self.increment = 0</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.impl.rate_limits.BaseRateLimiter" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.rate_limits.BaseRateLimiter" class="hljs python"><abbr title='A standard Python type.'>class</abbr> BaseRateLimiter: ...</code></pre>
+<p>Base for any asyncio-based rate limiter being used.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L53-L79" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class BaseRateLimiter(abc.ABC):
+    &#34;&#34;&#34;Base for any asyncio-based rate limiter being used.&#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    @abc.abstractmethod
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire permission to perform a task that needs to have rate limit management enforced.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+
+    @abc.abstractmethod
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;Close the rate limiter, cancelling any internal tasks that are executing.&#34;&#34;&#34;
+
+    def __enter__(self) -&gt; BaseRateLimiter:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: typing.Optional[typing.Type[Exception]],
+        exc_val: typing.Optional[Exception],
+        exc_tb: typing.Optional[types.TracebackType],
+    ) -&gt; None:
+        self.close()</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></dt>
+<dd class="nested"><p>Base implementation for a burst-based rate limiter …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.rate_limits.BaseRateLimiter.acquire" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="acquire" href="#hikari.impl.rate_limits.BaseRateLimiter.acquire" id="hikari.impl.rate_limits.BaseRateLimiter.acquire">acquire</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Acquire permission to perform a task that needs to have rate limit management enforced.</p>
+<p>Calling this function will cause it to block until you are not longer
+being rate limited.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L58-L64" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@abc.abstractmethod
+async def acquire(self) -&gt; None:
+    &#34;&#34;&#34;Acquire permission to perform a task that needs to have rate limit management enforced.
+
+    Calling this function will cause it to block until you are not longer
+    being rate limited.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.BaseRateLimiter.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="close" href="#hikari.impl.rate_limits.BaseRateLimiter.close" id="hikari.impl.rate_limits.BaseRateLimiter.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Close the rate limiter, cancelling any internal tasks that are executing.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L66-L68" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@abc.abstractmethod
+def close(self) -&gt; None:
+    &#34;&#34;&#34;Close the rate limiter, cancelling any internal tasks that are executing.&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.impl.rate_limits.BurstRateLimiter" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.rate_limits.BurstRateLimiter" class="hljs python"><abbr title='A standard Python type.'>class</abbr> BurstRateLimiter (
+    name: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+): ...</code></pre>
+<p>Base implementation for a burst-based rate limiter.</p>
+<p>This provides an internal queue and throttling placeholder, as well as
+complete logic for safely aborting any pending tasks when being shut down.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L82-L142" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class BurstRateLimiter(BaseRateLimiter, abc.ABC):
+    &#34;&#34;&#34;Base implementation for a burst-based rate limiter.
+
+    This provides an internal queue and throttling placeholder, as well as
+    complete logic for safely aborting any pending tasks when being shut down.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;name&#34;, &#34;throttle_task&#34;, &#34;queue&#34;, &#34;_closed&#34;)
+
+    name: str
+    &#34;&#34;&#34;The name of the rate limiter.&#34;&#34;&#34;
+
+    throttle_task: typing.Optional[asyncio.Task[typing.Any]]
+    &#34;&#34;&#34;The throttling task, or `builtins.None` if it is not running.&#34;&#34;&#34;
+
+    queue: typing.List[asyncio.Future[typing.Any]]
+    &#34;&#34;&#34;The queue of any futures under a rate limit.&#34;&#34;&#34;
+
+    def __init__(self, name: str) -&gt; None:
+        self.name = name
+        self.throttle_task = None
+        self.queue = []
+        self._closed = False
+
+    @abc.abstractmethod
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;Close the rate limiter, and shut down any pending tasks.
+
+        Once this is invoked, you should not reuse this object.
+        &#34;&#34;&#34;
+        if self._closed:
+            return
+
+        if self.throttle_task is not None:
+            self.throttle_task.cancel()
+            self.throttle_task = None
+
+        failed_tasks = 0
+        while self.queue:
+            failed_tasks += 1
+            future = self.queue.pop(0)
+            # Make the future complete with an exception
+            future.cancel()
+
+        if failed_tasks:
+            _LOGGER.debug(&#34;%s rate limiter closed with %s pending tasks!&#34;, self.name, failed_tasks)
+        else:
+            _LOGGER.debug(&#34;%s rate limiter closed&#34;, self.name)
+        self._closed = True
+
+    @property
+    def is_empty(self) -&gt; bool:
+        &#34;&#34;&#34;Return `builtins.True` if no futures are on the queue being rate limited.&#34;&#34;&#34;
+        return len(self.queue) == 0</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ManualRateLimiter -- Rate limit handler for the global HTTP rate limit …" href="#hikari.impl.rate_limits.ManualRateLimiter"
+>ManualRateLimiter</a></dt>
+<dd class="nested"><p>Rate limit handler for the global HTTP rate limit …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></dt>
+<dd class="nested"><p>Windowed burst rate limiter …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a></dt>
+<dd class="nested"><p>Base for any asyncio-based rate limiter being used.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.rate_limits.BurstRateLimiter.is_empty" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="#hikari.impl.rate_limits.BurstRateLimiter.is_empty"  >is_empty</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if no futures are on the queue being rate limited.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.BurstRateLimiter.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="#hikari.impl.rate_limits.BurstRateLimiter.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The name of the rate limiter.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.BurstRateLimiter.queue" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="#hikari.impl.rate_limits.BurstRateLimiter.queue"  >queue</a> : <a href='https://docs.python.org/3/library/typing.html#typing.List'>List</a>[<a href='https://docs.python.org/3/library/asyncio-future.html#asyncio.Future'>Future</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The queue of any futures under a rate limit.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.BurstRateLimiter.throttle_task" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="#hikari.impl.rate_limits.BurstRateLimiter.throttle_task"  >throttle_task</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.Task'>Task</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The throttling task, or <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code> if it is not running.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.rate_limits.BurstRateLimiter.acquire" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="acquire" href="#hikari.impl.rate_limits.BurstRateLimiter.acquire" id="hikari.impl.rate_limits.BurstRateLimiter.acquire">acquire</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Acquire time on this rate limiter.</p>
+<p>Calling this function will cause it to block until you are not longer
+being rate limited.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L106-L112" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">@abc.abstractmethod
+async def acquire(self) -&gt; None:
+    &#34;&#34;&#34;Acquire time on this rate limiter.
+
+    Calling this function will cause it to block until you are not longer
+    being rate limited.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.BurstRateLimiter.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="close" href="#hikari.impl.rate_limits.BurstRateLimiter.close" id="hikari.impl.rate_limits.BurstRateLimiter.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Close the rate limiter, and shut down any pending tasks.</p>
+<p>Once this is invoked, you should not reuse this object.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L114-L137" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def close(self) -&gt; None:
+    &#34;&#34;&#34;Close the rate limiter, and shut down any pending tasks.
+
+    Once this is invoked, you should not reuse this object.
+    &#34;&#34;&#34;
+    if self._closed:
+        return
+
+    if self.throttle_task is not None:
+        self.throttle_task.cancel()
+        self.throttle_task = None
+
+    failed_tasks = 0
+    while self.queue:
+        failed_tasks += 1
+        future = self.queue.pop(0)
+        # Make the future complete with an exception
+        future.cancel()
+
+    if failed_tasks:
+        _LOGGER.debug(&#34;%s rate limiter closed with %s pending tasks!&#34;, self.name, failed_tasks)
+    else:
+        _LOGGER.debug(&#34;%s rate limiter closed&#34;, self.name)
+    self._closed = True</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.impl.rate_limits.ExponentialBackOff" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ExponentialBackOff -- Implementation of an asyncio-compatible exponential back-off algorithm with random jitter …" href="#hikari.impl.rate_limits.ExponentialBackOff"
+>ExponentialBackOff</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.rate_limits.ExponentialBackOff" class="hljs python"><abbr title='A standard Python type.'>class</abbr> ExponentialBackOff (
+    base: <a href='https://docs.python.org/3/library/functions.html#float'>float</a> = 2.0,
+    maximum: <a href='https://docs.python.org/3/library/functions.html#float'>float</a> = 64.0,
+    jitter_multiplier: <a href='https://docs.python.org/3/library/functions.html#float'>float</a> = 1.0,
+    initial_increment: <a href='https://docs.python.org/3/library/functions.html#int'>int</a> = 0,
+): ...</code></pre>
+<p>Implementation of an asyncio-compatible exponential back-off algorithm with random jitter.</p>
+<p>[ t_{backoff} = b^{i} +
+m \cdot \mathrm{rand}() ]
+Such that (t_{backoff}) is the backoff time, (b) is the base,
+(i) is the increment that increases by 1 for each invocation, and
+(m) is the jitter multiplier. (\mathrm{rand}()) returns a value in
+the range ([0,1]).</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>base</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The base to use. Defaults to <code>2.0</code>.</dd>
+<dt><strong><code>maximum</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The max value the backoff can be in a single iteration. Anything above
+this will be capped to this base value plus random jitter.</dd>
+<dt><strong><code>jitter_multiplier</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The multiplier for the random jitter. Defaults to <code>1.0</code>.
+Set to <code>0</code> to disable jitter.</dd>
+<dt><strong><code>initial_increment</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></dt>
+<dd>The initial increment to start at. Defaults to <code>0</code>.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/exceptions.html#ValueError'>ValueError</a></code></dt>
+<dd>If an <code><a href='https://docs.python.org/3/library/functions.html#int'>int</a></code> that's too big to be represented as a
+<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code> or a non-finite value is passed in place of a field
+that's annotated as <code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code>.</dd>
+</dl>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L411-L515" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class ExponentialBackOff:
+    r&#34;&#34;&#34;Implementation of an asyncio-compatible exponential back-off algorithm with random jitter.
+
+    .. math::
+
+        t_{backoff} = b^{i} +  m \cdot \mathrm{rand}()
+
+    Such that \(t_{backoff}\) is the backoff time, \(b\) is the base,
+    \(i\) is the increment that increases by 1 for each invocation, and
+    \(m\) is the jitter multiplier. \(\mathrm{rand}()\) returns a value in
+    the range \([0,1]\).
+
+    Parameters
+    ----------
+    base : builtins.float
+        The base to use. Defaults to `2.0`.
+    maximum : builtins.float
+        The max value the backoff can be in a single iteration. Anything above
+        this will be capped to this base value plus random jitter.
+    jitter_multiplier : builtins.float
+        The multiplier for the random jitter. Defaults to `1.0`.
+        Set to `0` to disable jitter.
+    initial_increment : builtins.int
+        The initial increment to start at. Defaults to `0`.
+
+    Raises
+    ------
+    ValueError
+        If an `builtins.int` that&#39;s too big to be represented as a
+        `builtins.float` or a non-finite value is passed in place of a field
+        that&#39;s annotated as `builtins.float`.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;base&#34;, &#34;increment&#34;, &#34;maximum&#34;, &#34;jitter_multiplier&#34;)
+
+    base: typing.Final[float]
+    &#34;&#34;&#34;The base to use. Defaults to 2.0.&#34;&#34;&#34;
+
+    increment: int
+    &#34;&#34;&#34;The current increment.&#34;&#34;&#34;
+
+    maximum: float
+    &#34;&#34;&#34;This is the max value the backoff can be in a single iteration before an
+    `asyncio.TimeoutError` is raised.
+    &#34;&#34;&#34;
+
+    jitter_multiplier: typing.Final[float]
+    &#34;&#34;&#34;The multiplier for the random jitter.
+
+    This defaults to `1.0`. Set to `0.0` to disable jitter.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        base: float = 2.0,
+        maximum: float = 64.0,
+        jitter_multiplier: float = 1.0,
+        initial_increment: int = 0,
+    ) -&gt; None:
+        # https://mypy.readthedocs.io/en/stable/duck_type_compatibility.html
+        # Mypy makes the assumption that ints will always be compatible with floats, this isn&#39;t the case and could lead
+        # to some edge cases that we&#39;d be better off catching earlier on by ensuring these values are actually valid
+        # (most notably floats have a system based maximum size whereas integers theoretically don&#39;t with implicit
+        # conversion to a float raising an error if an integer that&#39;s too big to be a float is handled).
+        try:
+            self.base = float(base)
+            self.maximum = float(maximum)
+            self.jitter_multiplier = float(jitter_multiplier)
+        except OverflowError:
+            raise ValueError(&#34;int too large to be represented as a float&#34;) from None
+
+        if not math.isfinite(self.base):
+            raise ValueError(&#34;base must be a finite number&#34;) from None
+
+        if not math.isfinite(self.maximum):
+            raise ValueError(&#34;maximum must be a finite number&#34;) from None
+
+        if not math.isfinite(self.jitter_multiplier):
+            raise ValueError(&#34;jitter_multiplier must be a finite number&#34;) from None
+
+        self.increment = initial_increment
+
+    def __next__(self) -&gt; float:
+        &#34;&#34;&#34;Get the next back off to sleep by.&#34;&#34;&#34;
+        try:
+            value = self.base ** self.increment
+
+            if value &gt;= self.maximum:
+                value = self.maximum
+            else:
+                # This should only be incremented after we verify we haven&#39;t hit the maximum value.
+                self.increment += 1
+        except OverflowError:
+            # If this happened then we can be sure that we&#39;ve passed maximum.
+            value = self.maximum
+
+        return value + random.random() * self.jitter_multiplier  # nosec  # noqa S311 rng for cryptography
+
+    def __iter__(self) -&gt; ExponentialBackOff:
+        &#34;&#34;&#34;Return this object, as it is an iterator.&#34;&#34;&#34;
+        return self
+
+    def reset(self) -&gt; None:
+        &#34;&#34;&#34;Reset the exponential back-off.&#34;&#34;&#34;
+        self.increment = 0</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.rate_limits.ExponentialBackOff.base" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="base -- The base to use. Defaults to 2.0." href="#hikari.impl.rate_limits.ExponentialBackOff.base"  >base</a> : Final[<a href='https://docs.python.org/3/library/functions.html#float'>float</a>]</code></pre>
+</dt>
+<dd><p>The base to use. Defaults to 2.0.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.ExponentialBackOff.increment" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="increment -- The current increment." href="#hikari.impl.rate_limits.ExponentialBackOff.increment"  >increment</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>The current increment.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.ExponentialBackOff.jitter_multiplier" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="jitter_multiplier -- The multiplier for the random jitter …" href="#hikari.impl.rate_limits.ExponentialBackOff.jitter_multiplier"  >jitter_multiplier</a> : Final[<a href='https://docs.python.org/3/library/functions.html#float'>float</a>]</code></pre>
+</dt>
+<dd><p>The multiplier for the random jitter.</p>
+<p>This defaults to <code>1.0</code>. Set to <code>0.0</code> to disable jitter.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.ExponentialBackOff.maximum" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="maximum -- This is the max value the backoff can be in a single iteration before an
+`asyncio.TimeoutError` is raised." href="#hikari.impl.rate_limits.ExponentialBackOff.maximum"  >maximum</a> : <a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></pre>
+</dt>
+<dd><p>This is the max value the backoff can be in a single iteration before an
+<code><a href='https://docs.python.org/3/library/asyncio-exceptions.html#asyncio.TimeoutError'>TimeoutError</a></code> is raised.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.rate_limits.ExponentialBackOff.reset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="reset" href="#hikari.impl.rate_limits.ExponentialBackOff.reset" id="hikari.impl.rate_limits.ExponentialBackOff.reset">reset</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Reset the exponential back-off.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L513-L515" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def reset(self) -&gt; None:
+    &#34;&#34;&#34;Reset the exponential back-off.&#34;&#34;&#34;
+    self.increment = 0</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ManualRateLimiter -- Rate limit handler for the global HTTP rate limit …" href="#hikari.impl.rate_limits.ManualRateLimiter"
+>ManualRateLimiter</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.rate_limits.ManualRateLimiter" class="hljs python"><abbr title='A standard Python type.'>class</abbr> ManualRateLimiter: ...</code></pre>
+<p>Rate limit handler for the global HTTP rate limit.</p>
+<p>This is a non-preemptive rate limiting algorithm that will always return
+completed futures until <code><a href='#hikari.impl.rate_limits.ManualRateLimiter.throttle'>throttle</a></code> is invoked. Once this
+is invoked, any subsequent calls to <code><a href='#hikari.impl.rate_limits.ManualRateLimiter.acquire'>acquire</a></code> will return
+incomplete futures that will be enqueued to an internal queue. A task will
+be spun up to wait for a period of time given to the
+<code><a href='#hikari.impl.rate_limits.ManualRateLimiter.throttle'>throttle</a></code>. Once that has passed, the lock will begin to
+re-consume incomplete futures on the queue, completing them.</p>
+<p>Triggering a throttle when it is already set will cancel the current
+throttle task that is sleeping and replace it.</p>
+<p>This is used to enforce the global HTTP rate limit that will occur
+"randomly" during HTTP API interaction.</p>
+<p>Expect random occurrences.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L146-L241" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class ManualRateLimiter(BurstRateLimiter):
+    &#34;&#34;&#34;Rate limit handler for the global HTTP rate limit.
+
+    This is a non-preemptive rate limiting algorithm that will always return
+    completed futures until `ManualRateLimiter.throttle` is invoked. Once this
+    is invoked, any subsequent calls to `ManualRateLimiter.acquire` will return
+    incomplete futures that will be enqueued to an internal queue. A task will
+    be spun up to wait for a period of time given to the
+    `ManualRateLimiter.throttle`. Once that has passed, the lock will begin to
+    re-consume incomplete futures on the queue, completing them.
+
+    Triggering a throttle when it is already set will cancel the current
+    throttle task that is sleeping and replace it.
+
+    This is used to enforce the global HTTP rate limit that will occur
+    &#34;randomly&#34; during HTTP API interaction.
+
+    Expect random occurrences.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = ()
+
+    def __init__(self) -&gt; None:
+        super().__init__(&#34;global&#34;)
+
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+        loop = asyncio.get_running_loop()
+        future = loop.create_future()
+
+        if self.throttle_task is not None:
+            self.queue.append(future)
+        else:
+            future.set_result(None)
+
+        await future
+
+    def throttle(self, retry_after: float) -&gt; None:
+        &#34;&#34;&#34;Perform the throttling rate limiter logic.
+
+        Iterates repeatedly while the queue is not empty, adhering to any
+        rate limits that occur in the mean time.
+
+        Parameters
+        ----------
+        retry_after : builtins.float
+            How long to sleep for before unlocking and releasing any futures
+            in the queue.
+
+        !!! note
+            This will invoke `ManualRateLimiter.unlock_later` as a scheduled
+            task in the future (it will not await it to finish).
+
+            When the `ManualRateLimiter.unlock_later` coroutine function
+            completes, it should be expected to set the `throttle_task` to
+            `builtins.None`. This means you can check if throttling is occurring
+            by checking if `throttle_task` is not `builtins.None`.
+
+            If this is invoked while another throttle is in progress, that one
+            is cancelled and a new one is started. This enables new rate limits
+            to override existing ones.
+        &#34;&#34;&#34;
+        if self.throttle_task is not None:
+            self.throttle_task.cancel()
+
+        loop = asyncio.get_running_loop()
+        self.throttle_task = loop.create_task(self.unlock_later(retry_after))
+
+    async def unlock_later(self, retry_after: float) -&gt; None:
+        &#34;&#34;&#34;Sleeps for a while, then removes the lock.
+
+        Parameters
+        ----------
+        retry_after : builtins.float
+            How long to sleep for before unlocking and releasing any futures
+            in the queue.
+
+        !!! note
+            You should not need to invoke this directly. Call
+            `ManualRateLimiter.throttle` instead.
+
+            When the `ManualRateLimiter.unlock_later` coroutine function
+            completes, it should be expected to set the `throttle_task` to
+            `builtins.None`. This means you can check if throttling is occurring
+            by checking if `throttle_task` is not `builtins.None`.
+        &#34;&#34;&#34;
+        _LOGGER.warning(&#34;you are being globally rate limited for %ss&#34;, retry_after)
+        await asyncio.sleep(retry_after)
+        while self.queue:
+            next_future = self.queue.pop(0)
+            next_future.set_result(None)
+        self.throttle_task = None</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="ManualRateLimiter -- Rate limit handler for the global HTTP rate limit …" href="#hikari.impl.rate_limits.ManualRateLimiter"
+>ManualRateLimiter</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></dt>
+<dd class="nested"><p>Base implementation for a burst-based rate limiter …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a></dt>
+<dd class="nested"><p>Base for any asyncio-based rate limiter being used.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.is_empty" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="#hikari.impl.rate_limits.BurstRateLimiter.is_empty"  >is_empty</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if no futures are on the queue being rate limited.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="#hikari.impl.rate_limits.ManualRateLimiter.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The name of the rate limiter.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.queue" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="#hikari.impl.rate_limits.ManualRateLimiter.queue"  >queue</a> : <a href='https://docs.python.org/3/library/typing.html#typing.List'>List</a>[<a href='https://docs.python.org/3/library/asyncio-future.html#asyncio.Future'>Future</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The queue of any futures under a rate limit.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.throttle_task" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="#hikari.impl.rate_limits.ManualRateLimiter.throttle_task"  >throttle_task</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.Task'>Task</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The throttling task, or <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code> if it is not running.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.acquire" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="acquire" href="#hikari.impl.rate_limits.ManualRateLimiter.acquire" id="hikari.impl.rate_limits.ManualRateLimiter.acquire">acquire</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></code>.<code><a title="acquire -- Acquire time on this rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter.acquire"
+>acquire</a></code>
+</p>
+<p>Acquire time on this rate limiter.</p>
+<p>Calling this function will cause it to block until you are not longer
+being rate limited.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L171-L185" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def acquire(self) -&gt; None:
+    &#34;&#34;&#34;Acquire time on this rate limiter.
+
+    Calling this function will cause it to block until you are not longer
+    being rate limited.
+    &#34;&#34;&#34;
+    loop = asyncio.get_running_loop()
+    future = loop.create_future()
+
+    if self.throttle_task is not None:
+        self.queue.append(future)
+    else:
+        future.set_result(None)
+
+    await future</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="close" href="#hikari.impl.rate_limits.BurstRateLimiter.close" id="hikari.impl.rate_limits.ManualRateLimiter.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></code>.<code><a title="close -- Close the rate limiter, and shut down any pending tasks …" href="#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a></code>
+</p>
+<p>Close the rate limiter, and shut down any pending tasks.</p>
+<p>Once this is invoked, you should not reuse this object.</p>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.throttle" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="throttle" href="#hikari.impl.rate_limits.ManualRateLimiter.throttle" id="hikari.impl.rate_limits.ManualRateLimiter.throttle">throttle</a>(
+    retry_after: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Perform the throttling rate limiter logic.</p>
+<p>Iterates repeatedly while the queue is not empty, adhering to any
+rate limits that occur in the mean time.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>retry_after</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>How long to sleep for before unlocking and releasing any futures
+in the queue.</dd>
+</dl>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>This will invoke <code><a href='#hikari.impl.rate_limits.ManualRateLimiter.unlock_later'>unlock_later</a></code> as a scheduled
+task in the future (it will not await it to finish).</p>
+<p>When the <code><a href='#hikari.impl.rate_limits.ManualRateLimiter.unlock_later'>unlock_later</a></code> coroutine function
+completes, it should be expected to set the <code>throttle_task</code> to
+<code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>. This means you can check if throttling is occurring
+by checking if <code>throttle_task</code> is not <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>.</p>
+<p>If this is invoked while another throttle is in progress, that one
+is cancelled and a new one is started. This enables new rate limits
+to override existing ones.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L187-L216" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def throttle(self, retry_after: float) -&gt; None:
+    &#34;&#34;&#34;Perform the throttling rate limiter logic.
+
+    Iterates repeatedly while the queue is not empty, adhering to any
+    rate limits that occur in the mean time.
+
+    Parameters
+    ----------
+    retry_after : builtins.float
+        How long to sleep for before unlocking and releasing any futures
+        in the queue.
+
+    !!! note
+        This will invoke `ManualRateLimiter.unlock_later` as a scheduled
+        task in the future (it will not await it to finish).
+
+        When the `ManualRateLimiter.unlock_later` coroutine function
+        completes, it should be expected to set the `throttle_task` to
+        `builtins.None`. This means you can check if throttling is occurring
+        by checking if `throttle_task` is not `builtins.None`.
+
+        If this is invoked while another throttle is in progress, that one
+        is cancelled and a new one is started. This enables new rate limits
+        to override existing ones.
+    &#34;&#34;&#34;
+    if self.throttle_task is not None:
+        self.throttle_task.cancel()
+
+    loop = asyncio.get_running_loop()
+    self.throttle_task = loop.create_task(self.unlock_later(retry_after))</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.ManualRateLimiter.unlock_later" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="unlock_later" href="#hikari.impl.rate_limits.ManualRateLimiter.unlock_later" id="hikari.impl.rate_limits.ManualRateLimiter.unlock_later">unlock_later</a>(
+    retry_after: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Sleeps for a while, then removes the lock.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>retry_after</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>How long to sleep for before unlocking and releasing any futures
+in the queue.</dd>
+</dl>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>You should not need to invoke this directly. Call
+<code><a href='#hikari.impl.rate_limits.ManualRateLimiter.throttle'>throttle</a></code> instead.</p>
+<p>When the <code><a href='#hikari.impl.rate_limits.ManualRateLimiter.unlock_later'>unlock_later</a></code> coroutine function
+completes, it should be expected to set the <code>throttle_task</code> to
+<code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>. This means you can check if throttling is occurring
+by checking if <code>throttle_task</code> is not <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L218-L241" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def unlock_later(self, retry_after: float) -&gt; None:
+    &#34;&#34;&#34;Sleeps for a while, then removes the lock.
+
+    Parameters
+    ----------
+    retry_after : builtins.float
+        How long to sleep for before unlocking and releasing any futures
+        in the queue.
+
+    !!! note
+        You should not need to invoke this directly. Call
+        `ManualRateLimiter.throttle` instead.
+
+        When the `ManualRateLimiter.unlock_later` coroutine function
+        completes, it should be expected to set the `throttle_task` to
+        `builtins.None`. This means you can check if throttling is occurring
+        by checking if `throttle_task` is not `builtins.None`.
+    &#34;&#34;&#34;
+    _LOGGER.warning(&#34;you are being globally rate limited for %ss&#34;, retry_after)
+    await asyncio.sleep(retry_after)
+    while self.queue:
+        next_future = self.queue.pop(0)
+        next_future.set_result(None)
+    self.throttle_task = None</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.impl.rate_limits.WindowedBurstRateLimiter" class="hljs python"><abbr title='A standard Python type.'>class</abbr> WindowedBurstRateLimiter (
+    name: <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a>,
+    period: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+    limit: <a href='https://docs.python.org/3/library/functions.html#int'>int</a>,
+): ...</code></pre>
+<p>Windowed burst rate limiter.</p>
+<p>Rate limiter for rate limits that last fixed periods of time with a
+fixed number of times it can be used in that time frame.</p>
+<p>To use this, you should call WindowedBurstRateLimiter.aquire` and await the
+result immediately before performing your rate-limited task.</p>
+<p>If the rate limit has been hit, acquiring time will return an incomplete
+future that is placed on the internal queue. A throttle task is then spun up
+if not already running that will be expected to provide some implementation
+of backing off and sleeping for a given period of time until the limit has
+passed, and then proceed to consume futures from the queue while adhering
+to those rate limits.</p>
+<p>If the throttle task is already running, the acquired future will always be
+incomplete and enqueued regardless of whether the rate limit is actively
+reached or not.</p>
+<p>Acquiring a future from this limiter when no throttling task is running and
+when the rate limit is not reached will always result in the task invoking
+a drip and a completed future being returned.</p>
+<p>Dripping is left to the implementation of this class, but will be expected
+to provide some mechanism for updating the internal statistics to represent
+that a unit has been placed into the bucket.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L244-L407" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class WindowedBurstRateLimiter(BurstRateLimiter):
+    &#34;&#34;&#34;Windowed burst rate limiter.
+
+    Rate limiter for rate limits that last fixed periods of time with a
+    fixed number of times it can be used in that time frame.
+
+    To use this, you should call WindowedBurstRateLimiter.aquire` and await the
+    result immediately before performing your rate-limited task.
+
+    If the rate limit has been hit, acquiring time will return an incomplete
+    future that is placed on the internal queue. A throttle task is then spun up
+    if not already running that will be expected to provide some implementation
+    of backing off and sleeping for a given period of time until the limit has
+    passed, and then proceed to consume futures from the queue while adhering
+    to those rate limits.
+
+    If the throttle task is already running, the acquired future will always be
+    incomplete and enqueued regardless of whether the rate limit is actively
+    reached or not.
+
+    Acquiring a future from this limiter when no throttling task is running and
+    when the rate limit is not reached will always result in the task invoking
+    a drip and a completed future being returned.
+
+    Dripping is left to the implementation of this class, but will be expected
+    to provide some mechanism for updating the internal statistics to represent
+    that a unit has been placed into the bucket.
+    &#34;&#34;&#34;
+
+    __slots__: typing.Sequence[str] = (&#34;reset_at&#34;, &#34;remaining&#34;, &#34;limit&#34;, &#34;period&#34;)
+
+    reset_at: float
+    &#34;&#34;&#34;The `time.monotonic_timestamp` that the limit window ends at.&#34;&#34;&#34;
+
+    remaining: int
+    &#34;&#34;&#34;The number of `WindowedBurstRateLimiter.acquire`&#39;s left in this window
+    before you will get rate limited.
+    &#34;&#34;&#34;
+
+    period: float
+    &#34;&#34;&#34;How long the window lasts for from the start in seconds.&#34;&#34;&#34;
+
+    limit: int
+    &#34;&#34;&#34;The maximum number of `WindowedBurstRateLimiter.acquire`&#39;s allowed in
+    this time window.
+    &#34;&#34;&#34;
+
+    def __init__(self, name: str, period: float, limit: int) -&gt; None:
+        super().__init__(name)
+        self.reset_at = 0.0
+        self.remaining = 0
+        self.limit = limit
+        self.period = period
+
+    async def acquire(self) -&gt; None:
+        &#34;&#34;&#34;Acquire time on this rate limiter.
+
+        Calling this function will cause it to block until you are not longer
+        being rate limited.
+        &#34;&#34;&#34;
+        loop = asyncio.get_running_loop()
+        future = loop.create_future()
+
+        # If we are rate limited, delegate invoking this to the throttler and spin it up
+        # if it hasn&#39;t started. Likewise, if the throttle task is still running, we should
+        # delegate releasing the future to the throttler task so that we still process
+        # first-come-first-serve
+        if self.throttle_task is not None or self.is_rate_limited(time.monotonic()):
+            self.queue.append(future)
+            if self.throttle_task is None:
+                self.throttle_task = loop.create_task(self.throttle())
+        else:
+            self.drip()
+            future.set_result(None)
+
+        await future
+
+    def get_time_until_reset(self, now: float) -&gt; float:
+        &#34;&#34;&#34;Determine how long until the current rate limit is reset.
+
+        Parameters
+        ----------
+        now : builtins.float
+            The monotonic `time.monotonic_timestamp` timestamp.
+
+        !!! warning
+            Invoking this method will update the internal state if we were
+            previously rate limited, but at the given time are no longer under
+            that limit. This makes it imperative that you only pass the current
+            timestamp to this function, and not past or future timestamps. The
+            effects of doing the latter are undefined behaviour.
+
+        Returns
+        -------
+        builtins.float
+            The time left to sleep before the rate limit is reset. If no rate limit
+            is in effect, then this will return `0.0` instead.
+        &#34;&#34;&#34;
+        if not self.is_rate_limited(now):
+            return 0.0
+        return self.reset_at - now
+
+    def is_rate_limited(self, now: float) -&gt; bool:
+        &#34;&#34;&#34;Determine if we are under a rate limit at the given time.
+
+        Parameters
+        ----------
+        now : builtins.float
+            The monotonic `time.monotonic_timestamp` timestamp.
+
+        Returns
+        -------
+        builtins.bool
+            `builtins.True` if we are being rate limited, or `builtins.False` if
+            we are not.
+
+        !!! warning
+            Invoking this method will update the internal state if we were
+            previously rate limited, but at the given time are no longer under
+            that limit. This makes it imperative that you only pass the current
+            timestamp to this function, and not past or future timestamps. The
+            effects of doing the latter are undefined behaviour.
+        &#34;&#34;&#34;
+        if self.reset_at &lt;= now:
+            self.remaining = self.limit
+            self.reset_at = now + self.period
+            return False
+
+        return self.remaining &lt;= 0
+
+    def drip(self) -&gt; None:
+        &#34;&#34;&#34;Decrements the remaining counter.&#34;&#34;&#34;
+        self.remaining -= 1
+
+    async def throttle(self) -&gt; None:
+        &#34;&#34;&#34;Perform the throttling rate limiter logic.
+
+        Iterates repeatedly while the queue is not empty, adhering to any
+        rate limits that occur in the mean time.
+
+        !!! note
+            You should usually not need to invoke this directly, but if you do,
+            ensure to call it using `asyncio.create_task`, and store the
+            task immediately in `throttle_task`.
+
+            When this coroutine function completes, it will set the
+            `throttle_task` to `builtins.None`. This means you can check if throttling
+            is occurring by checking if `throttle_task` is not `builtins.None`.
+        &#34;&#34;&#34;
+        _LOGGER.debug(
+            &#34;you are being rate limited on bucket %s, backing off for %ss&#34;,
+            self.name,
+            self.get_time_until_reset(time.monotonic()),
+        )
+
+        while self.queue:
+            sleep_for = self.get_time_until_reset(time.monotonic())
+            await asyncio.sleep(sleep_for)
+
+            while self.remaining &gt; 0 and self.queue:
+                self.drip()
+                self.queue.pop(0).set_result(None)
+
+        self.throttle_task = None</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Subclasses</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="RESTBucket -- Represents a rate limit for an HTTP endpoint …" href="buckets.html#hikari.impl.buckets.RESTBucket"
+>RESTBucket</a></dt>
+<dd class="nested"><p>Represents a rate limit for an HTTP endpoint …</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type.'>class</abbr></em></small> <a title="WindowedBurstRateLimiter -- Windowed burst rate limiter …" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter"
+>WindowedBurstRateLimiter</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></dt>
+<dd class="nested"><p>Base implementation for a burst-based rate limiter …</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="BaseRateLimiter -- Base for any asyncio-based rate limiter being used." href="#hikari.impl.rate_limits.BaseRateLimiter"
+>BaseRateLimiter</a></dt>
+<dd class="nested"><p>Base for any asyncio-based rate limiter being used.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.is_empty" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="is_empty -- Return `builtins.True` if no futures are on the queue being rate limited." href="#hikari.impl.rate_limits.BurstRateLimiter.is_empty"  >is_empty</a> : <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></pre>
+</dt>
+<dd><p>Return <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if no futures are on the queue being rate limited.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.limit" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="limit -- The maximum number of `WindowedBurstRateLimiter.acquire`'s allowed in
+this time window." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.limit"  >limit</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>The maximum number of <code><a href='#hikari.impl.rate_limits.WindowedBurstRateLimiter.acquire'>acquire</a></code>'s allowed in
+this time window.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.name" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="name -- The name of the rate limiter." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.name"  >name</a> : <a href='https://docs.python.org/3/library/stdtypes.html#str'>str</a></code></pre>
+</dt>
+<dd><p>The name of the rate limiter.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.period" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="period -- How long the window lasts for from the start in seconds." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.period"  >period</a> : <a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></pre>
+</dt>
+<dd><p>How long the window lasts for from the start in seconds.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.queue" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="queue -- The queue of any futures under a rate limit." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.queue"  >queue</a> : <a href='https://docs.python.org/3/library/typing.html#typing.List'>List</a>[<a href='https://docs.python.org/3/library/asyncio-future.html#asyncio.Future'>Future</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The queue of any futures under a rate limit.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.remaining" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="remaining -- The number of `WindowedBurstRateLimiter.acquire`'s left in this window
+before you will get rate limited." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.remaining"  >remaining</a> : <a href='https://docs.python.org/3/library/functions.html#int'>int</a></code></pre>
+</dt>
+<dd><p>The number of <code><a href='#hikari.impl.rate_limits.WindowedBurstRateLimiter.acquire'>acquire</a></code>'s left in this window
+before you will get rate limited.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.reset_at" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="reset_at -- The `time.monotonic_timestamp` that the limit window ends at." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.reset_at"  >reset_at</a> : <a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></pre>
+</dt>
+<dd><p>The <code>time.monotonic_timestamp</code> that the limit window ends at.</p></dd>
+</div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle_task" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="throttle_task -- The throttling task, or `builtins.None` if it is not running." href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle_task"  >throttle_task</a> : <a href='https://docs.python.org/3/library/typing.html#typing.Optional'>Optional</a>[<a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.Task'>Task</a>[<a href='https://docs.python.org/3/library/typing.html#typing.Any'>Any</a>]]</code></pre>
+</dt>
+<dd><p>The throttling task, or <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code> if it is not running.</p></dd>
+</div>
+</dl>
+<div class="sep"></div>
+<h5>Methods</h5>
+<dl>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.acquire" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="acquire" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.acquire" id="hikari.impl.rate_limits.WindowedBurstRateLimiter.acquire">acquire</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></code>.<code><a title="acquire -- Acquire time on this rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter.acquire"
+>acquire</a></code>
+</p>
+<p>Acquire time on this rate limiter.</p>
+<p>Calling this function will cause it to block until you are not longer
+being rate limited.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L298-L319" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def acquire(self) -&gt; None:
+    &#34;&#34;&#34;Acquire time on this rate limiter.
+
+    Calling this function will cause it to block until you are not longer
+    being rate limited.
+    &#34;&#34;&#34;
+    loop = asyncio.get_running_loop()
+    future = loop.create_future()
+
+    # If we are rate limited, delegate invoking this to the throttler and spin it up
+    # if it hasn&#39;t started. Likewise, if the throttle task is still running, we should
+    # delegate releasing the future to the throttler task so that we still process
+    # first-come-first-serve
+    if self.throttle_task is not None or self.is_rate_limited(time.monotonic()):
+        self.queue.append(future)
+        if self.throttle_task is None:
+            self.throttle_task = loop.create_task(self.throttle())
+    else:
+        self.drip()
+        future.set_result(None)
+
+    await future</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.close" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="close" href="#hikari.impl.rate_limits.BurstRateLimiter.close" id="hikari.impl.rate_limits.WindowedBurstRateLimiter.close">close</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p class="inheritance">
+<em><small>Inherited from:</small></em>
+<code><a title="BurstRateLimiter -- Base implementation for a burst-based rate limiter …" href="#hikari.impl.rate_limits.BurstRateLimiter"
+>BurstRateLimiter</a></code>.<code><a title="close -- Close the rate limiter, and shut down any pending tasks …" href="#hikari.impl.rate_limits.BurstRateLimiter.close"
+>close</a></code>
+</p>
+<p>Close the rate limiter, and shut down any pending tasks.</p>
+<p>Once this is invoked, you should not reuse this object.</p>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.drip" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="drip" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.drip" id="hikari.impl.rate_limits.WindowedBurstRateLimiter.drip">drip</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Decrements the remaining counter.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L374-L376" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def drip(self) -&gt; None:
+    &#34;&#34;&#34;Decrements the remaining counter.&#34;&#34;&#34;
+    self.remaining -= 1</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="get_time_until_reset" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset" id="hikari.impl.rate_limits.WindowedBurstRateLimiter.get_time_until_reset">get_time_until_reset</a>(
+    now: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/functions.html#float'>float</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Determine how long until the current rate limit is reset.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>now</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The monotonic <code>time.monotonic_timestamp</code> timestamp.</dd>
+</dl>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Invoking this method will update the internal state if we were
+previously rate limited, but at the given time are no longer under
+that limit. This makes it imperative that you only pass the current
+timestamp to this function, and not past or future timestamps. The
+effects of doing the latter are undefined behaviour.</p>
+</div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The time left to sleep before the rate limit is reset. If no rate limit
+is in effect, then this will return <code>0.0</code> instead.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L321-L344" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def get_time_until_reset(self, now: float) -&gt; float:
+    &#34;&#34;&#34;Determine how long until the current rate limit is reset.
+
+    Parameters
+    ----------
+    now : builtins.float
+        The monotonic `time.monotonic_timestamp` timestamp.
+
+    !!! warning
+        Invoking this method will update the internal state if we were
+        previously rate limited, but at the given time are no longer under
+        that limit. This makes it imperative that you only pass the current
+        timestamp to this function, and not past or future timestamps. The
+        effects of doing the latter are undefined behaviour.
+
+    Returns
+    -------
+    builtins.float
+        The time left to sleep before the rate limit is reset. If no rate limit
+        is in effect, then this will return `0.0` instead.
+    &#34;&#34;&#34;
+    if not self.is_rate_limited(now):
+        return 0.0
+    return self.reset_at - now</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="is_rate_limited" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited" id="hikari.impl.rate_limits.WindowedBurstRateLimiter.is_rate_limited">is_rate_limited</a>(
+    now: <a href='https://docs.python.org/3/library/functions.html#float'>float</a>,
+) -> <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Determine if we are under a rate limit at the given time.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>now</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#float'>float</a></code></dt>
+<dd>The monotonic <code>time.monotonic_timestamp</code> timestamp.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> if we are being rate limited, or <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code> if
+we are not.</dd>
+</dl>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Invoking this method will update the internal state if we were
+previously rate limited, but at the given time are no longer under
+that limit. This makes it imperative that you only pass the current
+timestamp to this function, and not past or future timestamps. The
+effects of doing the latter are undefined behaviour.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L346-L372" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def is_rate_limited(self, now: float) -&gt; bool:
+    &#34;&#34;&#34;Determine if we are under a rate limit at the given time.
+
+    Parameters
+    ----------
+    now : builtins.float
+        The monotonic `time.monotonic_timestamp` timestamp.
+
+    Returns
+    -------
+    builtins.bool
+        `builtins.True` if we are being rate limited, or `builtins.False` if
+        we are not.
+
+    !!! warning
+        Invoking this method will update the internal state if we were
+        previously rate limited, but at the given time are no longer under
+        that limit. This makes it imperative that you only pass the current
+        timestamp to this function, and not past or future timestamps. The
+        effects of doing the latter are undefined behaviour.
+    &#34;&#34;&#34;
+    if self.reset_at &lt;= now:
+        self.remaining = self.limit
+        self.reset_at = now + self.period
+        return False
+
+    return self.remaining &lt;= 0</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="throttle" href="#hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle" id="hikari.impl.rate_limits.WindowedBurstRateLimiter.throttle">throttle</a>() -> <a href='https://docs.python.org/3/library/constants.html#None'>None</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Perform the throttling rate limiter logic.</p>
+<p>Iterates repeatedly while the queue is not empty, adhering to any
+rate limits that occur in the mean time.</p>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>You should usually not need to invoke this directly, but if you do,
+ensure to call it using <code><a href='https://docs.python.org/3/library/asyncio-task.html#asyncio.create_task'>create_task</a></code>, and store the
+task immediately in <code>throttle_task</code>.</p>
+<p>When this coroutine function completes, it will set the
+<code>throttle_task</code> to <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>. This means you can check if throttling
+is occurring by checking if <code>throttle_task</code> is not <code><a href='https://docs.python.org/3/library/constants.html#None'>None</a></code>.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/impl/rate_limits.py#L378-L407" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def throttle(self) -&gt; None:
+    &#34;&#34;&#34;Perform the throttling rate limiter logic.
+
+    Iterates repeatedly while the queue is not empty, adhering to any
+    rate limits that occur in the mean time.
+
+    !!! note
+        You should usually not need to invoke this directly, but if you do,
+        ensure to call it using `asyncio.create_task`, and store the
+        task immediately in `throttle_task`.
+
+        When this coroutine function completes, it will set the
+        `throttle_task` to `builtins.None`. This means you can check if throttling
+        is occurring by checking if `throttle_task` is not `builtins.None`.
+    &#34;&#34;&#34;
+    _LOGGER.debug(
+        &#34;you are being rate limited on bucket %s, backing off for %ss&#34;,
+        self.name,
+        self.get_time_until_reset(time.monotonic()),
+    )
+
+    while self.queue:
+        sleep_for = self.get_time_until_reset(time.monotonic())
+        await asyncio.sleep(sleep_for)
+
+        while self.remaining &gt; 0 and self.queue:
+            self.drip()
+            self.queue.pop(0).set_result(None)
+
+    self.throttle_task = None</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

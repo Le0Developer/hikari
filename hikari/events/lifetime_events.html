@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.events.lifetime_events API documentation</title>
+<meta name="description" content="Events that are bound to the lifetime of an application …">
+<meta property="og:title" content="hikari.events.lifetime_events module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.events -- Events that can be fired by Hikari's gateway implementation." href="index.html"
+>events</a></li>
+<li class="breadcrumb-item active"><a href="#">lifetime_events</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>Events that are bound to the lifetime of an application.</p>
+<p>These are types of hooks that can be invoked on startup or shutdown, which can
+be used to initialize other resources, fetch information, and perform checks.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StartedEvent -- Event that is triggered after the application has started …" href="#hikari.events.lifetime_events.StartedEvent"
+>StartedEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StartedEvent.app"
+>app</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StartingEvent -- Event that is triggered before the application connects to discord …" href="#hikari.events.lifetime_events.StartingEvent"
+>StartingEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StartingEvent.app"
+>app</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StoppedEvent -- Event that is triggered once the application has disconnected …" href="#hikari.events.lifetime_events.StoppedEvent"
+>StoppedEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StoppedEvent.app"
+>app</a>
+</li>
+<br />
+</ul>
+</li>
+<li class="monospaced text-truncate">
+<small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StoppingEvent -- Event that is triggered as soon as the application is requested to close …" href="#hikari.events.lifetime_events.StoppingEvent"
+>StoppingEvent</a>
+<ul class="list-unstyled nested text-truncate">
+<li class="text-truncate monospaced">
+<small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StoppingEvent.app"
+>app</a>
+</li>
+<br />
+</ul>
+</li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/lifetime_events.py#L1-L130" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;Events that are bound to the lifetime of an application.
+
+These are types of hooks that can be invoked on startup or shutdown, which can
+be used to initialize other resources, fetch information, and perform checks.
+&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;StartingEvent&#34;, &#34;StartedEvent&#34;, &#34;StoppingEvent&#34;, &#34;StoppedEvent&#34;]
+
+import typing
+
+import attr
+
+from hikari.events import base_events
+from hikari.internal import attr_extensions
+
+if typing.TYPE_CHECKING:
+    from hikari import traits
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+class StartingEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered before the application connects to discord.
+
+    This will only fire once per `bot.run` / `bot.start`, so is suitable for
+    opening database connections and other resources that need to be
+    initialized within a coroutine function.
+
+    !!! warning
+        The application will not proceed to connect to Discord until all event
+        handlers for this event have completed/terminated. This prevents the
+        risk of race conditions occurring (e.g. allowing message events
+        to try to access a database that has not yet connected fully).
+
+    If you want to do something _after_ the application has initialized, you
+    should consider using `StartedEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+class StartedEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered after the application has started.
+
+    This will only fire once per `bot.run` / `bot.start`, so is suitable for
+    opening database connections and other resources that need to be
+    initialized within a coroutine function.
+
+    If you want to do something _before_ the application connects, you should
+    consider using `StartingEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+class StoppingEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered as soon as the application is requested to close.
+
+    This will fire before the connection is physically disconnected.
+
+    This will only fire once per `bot.close`, so is suitable for
+    closing database connections and other resources that need to be
+    closed within a coroutine function.
+
+    !!! warning
+        The application will not proceed to disconnect from Discord until all
+        event handlers for this event have completed/terminated. This
+        prevents the risk of race conditions occurring from code that relies
+        on a connection still being available to complete.
+
+    If you want to do something _after_ the disconnection has occurred, you
+    should consider using `StoppedEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.
+
+
+@attr_extensions.with_copy
+@attr.define(kw_only=True, weakref_slot=False)
+class StoppedEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered once the application has disconnected.
+
+    This will only fire once per `bot.close`, so is suitable for
+    closing database connections and other resources that need to be
+    closed within a coroutine function.
+
+    !!! warning
+        The application will not proceed to leave the `bot.run` call until all
+        event handlers for this event have completed/terminated. This
+        prevents the risk of race conditions occurring where a script may
+        terminate the process before a callback can occur.
+
+    If you want to do something when the application is preparing to shut down,
+    but _before_ any connection to discord is closed, you should consider using
+    `StoppingEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.</code></pre>
+</details>
+</div>
+</div>
+<h2 id="class-heading">Classes</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.events.lifetime_events.StartedEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StartedEvent -- Event that is triggered after the application has started …" href="#hikari.events.lifetime_events.StartedEvent"
+>StartedEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.lifetime_events.StartedEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> StartedEvent (
+    *,
+    app: <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a>,
+): ...</code></pre>
+<p>Event that is triggered after the application has started.</p>
+<p>This will only fire once per <code>bot.run</code> / <code>bot.start</code>, so is suitable for
+opening database connections and other resources that need to be
+initialized within a coroutine function.</p>
+<p>If you want to do something <em>before</em> the application connects, you should
+consider using <code><a href='#hikari.events.lifetime_events.StartingEvent'>StartingEvent</a></code> instead.</p>
+<p>Method generated by attrs for class StartedEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/lifetime_events.py#L69-L81" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class StartedEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered after the application has started.
+
+    This will only fire once per `bot.run` / `bot.start`, so is suitable for
+    opening database connections and other resources that need to be
+    initialized within a coroutine function.
+
+    If you want to do something _before_ the application connects, you should
+    consider using `StartingEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StartedEvent -- Event that is triggered after the application has started …" href="#hikari.events.lifetime_events.StartedEvent"
+>StartedEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.lifetime_events.StartedEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StartedEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.events.lifetime_events.StartingEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StartingEvent -- Event that is triggered before the application connects to discord …" href="#hikari.events.lifetime_events.StartingEvent"
+>StartingEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.lifetime_events.StartingEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> StartingEvent (
+    *,
+    app: <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a>,
+): ...</code></pre>
+<p>Event that is triggered before the application connects to discord.</p>
+<p>This will only fire once per <code>bot.run</code> / <code>bot.start</code>, so is suitable for
+opening database connections and other resources that need to be
+initialized within a coroutine function.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>The application will not proceed to connect to Discord until all event
+handlers for this event have completed/terminated. This prevents the
+risk of race conditions occurring (e.g. allowing message events
+to try to access a database that has not yet connected fully).</p>
+</div>
+<p>If you want to do something <em>after</em> the application has initialized, you
+should consider using <code><a href='#hikari.events.lifetime_events.StartedEvent'>StartedEvent</a></code> instead.</p>
+<p>Method generated by attrs for class StartingEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/lifetime_events.py#L46-L64" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class StartingEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered before the application connects to discord.
+
+    This will only fire once per `bot.run` / `bot.start`, so is suitable for
+    opening database connections and other resources that need to be
+    initialized within a coroutine function.
+
+    !!! warning
+        The application will not proceed to connect to Discord until all event
+        handlers for this event have completed/terminated. This prevents the
+        risk of race conditions occurring (e.g. allowing message events
+        to try to access a database that has not yet connected fully).
+
+    If you want to do something _after_ the application has initialized, you
+    should consider using `StartedEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StartingEvent -- Event that is triggered before the application connects to discord …" href="#hikari.events.lifetime_events.StartingEvent"
+>StartingEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.lifetime_events.StartingEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StartingEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.events.lifetime_events.StoppedEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StoppedEvent -- Event that is triggered once the application has disconnected …" href="#hikari.events.lifetime_events.StoppedEvent"
+>StoppedEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.lifetime_events.StoppedEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> StoppedEvent (
+    *,
+    app: <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a>,
+): ...</code></pre>
+<p>Event that is triggered once the application has disconnected.</p>
+<p>This will only fire once per <code>bot.close</code>, so is suitable for
+closing database connections and other resources that need to be
+closed within a coroutine function.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>The application will not proceed to leave the <code>bot.run</code> call until all
+event handlers for this event have completed/terminated. This
+prevents the risk of race conditions occurring where a script may
+terminate the process before a callback can occur.</p>
+</div>
+<p>If you want to do something when the application is preparing to shut down,
+but <em>before</em> any connection to discord is closed, you should consider using
+<code><a href='#hikari.events.lifetime_events.StoppingEvent'>StoppingEvent</a></code> instead.</p>
+<p>Method generated by attrs for class StoppedEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/lifetime_events.py#L111-L130" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class StoppedEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered once the application has disconnected.
+
+    This will only fire once per `bot.close`, so is suitable for
+    closing database connections and other resources that need to be
+    closed within a coroutine function.
+
+    !!! warning
+        The application will not proceed to leave the `bot.run` call until all
+        event handlers for this event have completed/terminated. This
+        prevents the risk of race conditions occurring where a script may
+        terminate the process before a callback can occur.
+
+    If you want to do something when the application is preparing to shut down,
+    but _before_ any connection to discord is closed, you should consider using
+    `StoppingEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StoppedEvent -- Event that is triggered once the application has disconnected …" href="#hikari.events.lifetime_events.StoppedEvent"
+>StoppedEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.lifetime_events.StoppedEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StoppedEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+<div id="hikari.events.lifetime_events.StoppingEvent" class="anchor">
+<dt>
+<h4><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StoppingEvent -- Event that is triggered as soon as the application is requested to close …" href="#hikari.events.lifetime_events.StoppingEvent"
+>StoppingEvent</a></h4>
+</dt>
+<dd>
+<pre><code id="hikari.events.lifetime_events.StoppingEvent" class="hljs python"><abbr title='A standard Python type.'>class</abbr> StoppingEvent (
+    *,
+    app: <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a>,
+): ...</code></pre>
+<p>Event that is triggered as soon as the application is requested to close.</p>
+<p>This will fire before the connection is physically disconnected.</p>
+<p>This will only fire once per <code>bot.close</code>, so is suitable for
+closing database connections and other resources that need to be
+closed within a coroutine function.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>The application will not proceed to disconnect from Discord until all
+event handlers for this event have completed/terminated. This
+prevents the risk of race conditions occurring from code that relies
+on a connection still being available to complete.</p>
+</div>
+<p>If you want to do something <em>after</em> the disconnection has occurred, you
+should consider using <code><a href='#hikari.events.lifetime_events.StoppedEvent'>StoppedEvent</a></code> instead.</p>
+<p>Method generated by attrs for class StoppingEvent.</p>
+<div class="sep"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/events/lifetime_events.py#L86-L106" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">class StoppingEvent(base_events.Event):
+    &#34;&#34;&#34;Event that is triggered as soon as the application is requested to close.
+
+    This will fire before the connection is physically disconnected.
+
+    This will only fire once per `bot.close`, so is suitable for
+    closing database connections and other resources that need to be
+    closed within a coroutine function.
+
+    !!! warning
+        The application will not proceed to disconnect from Discord until all
+        event handlers for this event have completed/terminated. This
+        prevents the risk of race conditions occurring from code that relies
+        on a connection still being available to complete.
+
+    If you want to do something _after_ the disconnection has occurred, you
+    should consider using `StoppedEvent` instead.
+    &#34;&#34;&#34;
+
+    app: traits.RESTAware = attr.field(metadata={attr_extensions.SKIP_DEEP_COPY: True})
+    # &lt;&lt;inherited docstring from Event&gt;&gt;.</code></pre>
+</details>
+<div class="sep"></div>
+<h5>Method resolution order</h5>
+<dl>
+<dt class="nested"><small class='text-muted'><em><abbr title='A standard Python type that represents some form of information or entity.'>dataclass</abbr></em></small> <a title="StoppingEvent -- Event that is triggered as soon as the application is requested to close …" href="#hikari.events.lifetime_events.StoppingEvent"
+>StoppingEvent</a></dt>
+<dd class="nested"><em class="text-muted">That's this class!</em></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='An abstract base class which may have abstract methods and abstract properties.'>abstract</abbr> <abbr title='A standard Python type.'>class</abbr></em></small> <a title="Event -- Base event type that all Hikari events should subclass." href="base_events.html#hikari.events.base_events.Event"
+>Event</a></dt>
+<dd class="nested"><p>Base event type that all Hikari events should subclass.</p></dd>
+<dt class="nested"><small class='text-muted'><em><abbr title='Anything that is external to this library.'>extern</abbr> class</em></small> <a title="abc.ABC -- Helper class that provides a standard way to create an ABC using
+inheritance." href="https://docs.python.org/3/library/abc.html#abc.ABC"
+>abc.ABC</a></dt>
+<dd class="nested"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></dd>
+</dl>
+<div class="sep"></div>
+<h5>Variables and properties</h5>
+<dl>
+<div id="hikari.events.lifetime_events.StoppingEvent.app" class="anchor">
+<dt>
+<pre><code class="python"><small class='text-muted'><em><abbr title='A descriptor on an object that behaves like a synthetic attribute/variable.'>property</abbr></em></small> <a title="app -- App instance for this application …" href="#hikari.events.lifetime_events.StoppingEvent.app"  >app</a> : <a href='../traits.html#hikari.traits.RESTAware'>traits.RESTAware</a></code></pre>
+</dt>
+<dd><p>App instance for this application.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='../traits.html#hikari.traits.RESTAware'>RESTAware</a></code></dt>
+<dd>The REST-aware app trait.</dd>
+</dl></dd>
+</div>
+</dl>
+<div class="sep"></div>
+</dd>
+</div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

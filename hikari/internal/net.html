@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>hikari.internal.net API documentation</title>
+<meta name="description" content="General bits and pieces that are reused between components.">
+<meta property="og:title" content="hikari.internal.net module list">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hikari-py.github.io/hikari/logo.png">
+<meta property="og:description" content="A Discord Bot framework for modern Python and asyncio built on good intentions">
+<meta property="theme-color" content="#ff029a">
+<link rel="shortcut icon" type="image/png" href="../../logo.png">
+<!--<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<style>
+img#logo {
+border-radius: 15px;
+width: 30px;
+height: 30px;
+margin-right: 0.5em;
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+small.smaller {
+font-size: 0.50em;
+}
+html {
+height: 100%;
+scroll-behavior: smooth;
+scrollbar-color: #202324 #454a4d;
+}
+body {
+background-color: #181A1B;
+color: #C9C5C0;
+height: fit-content;
+}
+h1 {
+margin-top: 3rem;
+}
+h2 {
+margin-top: 1.75rem;
+margin-bottom: 1em;
+}
+h3 {
+margin-top: 1.25rem;
+}
+h4 {
+margin-top: 1rem;
+}
+.nav-section {
+margin-top: 2em;
+}
+.monospaced {
+font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a.sidebar-nav-pill,
+a.sidebar-nav-pill:active,
+a.sidebar-nav-pill:hover {
+color: #BDB7AF;
+}
+.module-source > details > pre {
+display: block;
+overflow-x: auto;
+overflow-y: auto;
+max-height: 600px;
+font-size: 0.8em;
+}
+a {
+color: #DE4F91;
+}
+a:hover {
+color: #64B1F2;
+}
+.container > li {
+margin-left: 1em;
+margin-top: 2.5em;
+}
+.jumbotron {
+background-color: #232627;
+}
+.breadcrumb-item.inactive > a {
+color: #d264d0 !important;
+}
+.breadcrumb-item.active > a {
+color: #de4f91 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+content: ".";
+}
+.module-breadcrumb {
+padding-left: 0 !important;
+background-color: #232627;
+}
+ul.nested {
+margin-left: 1em;
+}
+h2#parameters::after {
+margin-left: 2em;
+}
+.anchor:target {
+background-color: var(--dark);
+}
+@media screen and (max-width: 990px) {
+.anchor:target {
+margin-left: -2em;
+padding-left: 2em;
+}
+}
+@media screen and (min-width: 990px) {
+.anchor:target {
+border-radius: 0.5em; !important
+margin-right: -2em;
+padding-right: 2em;
+margin-top: -1em;
+padding-top: 1em;
+}
+}
+dt {
+margin-left: 2em;
+}
+dd {
+margin-left: 4em;
+}
+dl.no-nest > dt {
+margin-left: 0em;
+}
+dl.no-nest > dd {
+margin-left: 2em;
+}
+dl.root {
+margin-bottom: 2em;
+}
+.definition {
+display: block;
+margin-bottom: 8em !important;
+}
+.definition .row {
+display: block;
+margin-bottom: 4em !important;
+}
+.definition h2 {
+font-size: 1em;
+font-weight: bolder;
+}
+.sep {
+height: 2em;
+}
+code {
+color: #DB61D9;
+}
+code .active {
+color: #e83e8c;
+}
+code a {
+color: #E94A93;
+}
+a.dotted:hover, abbr:hover {
+text-decoration: underline #9E9689 dotted !important;
+}
+a.dotted, abbr {
+text-decoration: none !important;
+}
+.gsc-search-box, .gsc-search-box-tools, .gsc-control-cse {
+background: none !important;
+border: none !important;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+color: var(--success) !important;
+border-color: var(--success) !important;
+background: none !important;
+padding: 6px 32px !important;
+font-size: inherit !important;
+}
+.gsc-search-button-v2 > svg {
+fill: var(--success) !important;
+}
+.gsc-input-box {
+border-radius: 3px;
+}
+.gsc-control-cse {
+width: 300px !important;
+margin-top: 0 !important;
+}
+.gsc-control-cse .gsc-control-cse-en {
+margin-top: 0 !important;
+}
+.bg-dark {
+background-color: #2C2F31 !important;
+}
+.text-muted {
+color: #9E9689 !important;
+}
+.alert-primary {
+color: #7CC3FF;
+background-color: #262A2B;
+border-color: #003B7B;
+}
+.alert-secondary {
+color: #C2BCB4;
+background-color: #282B2C;
+border-color: #3B4042;
+}
+.alert-success {
+color: #99E6AB;
+background-color: #1A3E29;
+border-color: #255A32;
+}
+.alert-info {
+color: #8EE3F1;
+background-color: #143B43;
+border-color: #1E5961;
+}
+.alert-warning {
+color: #FBD770;
+background-color: #513E00;
+border-color: #7B5C00;
+}
+.alert-danger {
+color: rgb(225, 134, 143);
+background-color: rgb(67, 12, 17);
+border-color: rgb(104, 18, 27);
+}
+mark {
+background-color: #333333;
+border-radius: 0.1em;
+color: #DB61D9;
+}
+</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+</head>
+<body>
+<nav id="main-nav" class="navbar navbar-dark navbar-expand-lg bg-dark">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"/>
+</button>
+<a class="navbar-brand" href="https://github.com/hikari-py/hikari"><img class="d-inline-block align-top" src="../../logo.png" id="logo" alt="hikari logo" loading="lazy"/>Hikari <small class="smaller">2.0.0.dev101</small></a>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="../../hikari/index.html">Documentation</a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/hikari-py/hikari">GitHub</a></li>
+<li class="nav-item"><a class="nav-link" href="https://pypi.org/project/hikari">PyPI</a></li>
+<li class="nav-item"><a class="nav-link" href="https://discord.gg/Jx4cNGG">Discord Server</a></li>
+</ul>
+<form class="form-inline" action="../../hikari/search.html">
+<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="lunr-search" name="q"/>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&gt;</button>
+</form>
+</div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-4"><code>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb module-breadcrumb">
+<li class="breadcrumb-item inactive"><a title="hikari -- A sane Python framework for writing modern Discord bots …" href="../index.html"
+>hikari</a></li>
+<li class="breadcrumb-item inactive"><a title="hikari.internal -- Package containing internal utilities used within this API." href="index.html"
+>internal</a></li>
+<li class="breadcrumb-item active"><a href="#">net</a></li>
+</ol>
+</nav>
+</code></h1>
+<p class="lead"><p>General bits and pieces that are reused between components.</p></p>
+</div>
+</div>
+<div class="container-xl">
+<div class="row">
+<div class="d-md-none d-lg-block col-lg-5 col-xl-4">
+<!--<nav class="nav" id="content-nav">-->
+<h3>This module</h3>
+<ul class="list-unstyled text-truncate">
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A standard Python function.'>def</abbr></em></small> <a title="create_client_session -- Generate a client session using the given settings …" href="#hikari.internal.net.create_client_session"
+>create_client_session</a></li>
+<li class="text-truncate monospaced"><small class='text-muted'><em><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr></em></small> <a title="generate_error_response -- Given an erroneous HTTP response, return a corresponding exception." href="#hikari.internal.net.generate_error_response"
+>generate_error_response</a></li>
+</ul>
+<!--</nav>-->
+</div>
+<div class="col-xs-12 col-lg-7 col-xl-8">
+<div class="row">
+<div class="col module-source">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/net.py#L1-L170" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# cython: language_level=3
+# Copyright (c) 2020 Nekokatt
+# Copyright (c) 2021 davfsa
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &#34;Software&#34;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+&#34;&#34;&#34;General bits and pieces that are reused between components.&#34;&#34;&#34;
+
+from __future__ import annotations
+
+__all__: typing.List[str] = [&#34;generate_error_response&#34;, &#34;create_client_session&#34;]
+
+import http
+import typing
+
+import aiohttp
+
+from hikari import errors
+
+if typing.TYPE_CHECKING:
+    from hikari import config
+    from hikari.internal import data_binding
+
+
+async def generate_error_response(response: aiohttp.ClientResponse) -&gt; errors.HTTPError:
+    &#34;&#34;&#34;Given an erroneous HTTP response, return a corresponding exception.&#34;&#34;&#34;
+    real_url = str(response.real_url)
+    raw_body = await response.read()
+
+    # Little hack to stop mypy from complaining when using `*args`
+    args: typing.List[typing.Any] = [real_url, response.headers, raw_body]
+    try:
+        json_body = await response.json()
+        args.append(json_body.get(&#34;message&#34;, &#34;&#34;))
+        args.append(errors.RESTErrorCode(json_body.get(&#34;code&#34;, 0)))
+        raw_error_array: typing.Optional[data_binding.JSONObject] = json_body.get(&#34;errors&#34;)
+    except aiohttp.ContentTypeError:
+        raw_error_array = None
+
+    if response.status == http.HTTPStatus.BAD_REQUEST:
+        return errors.BadRequestError(*args, errors=raw_error_array)
+    if response.status == http.HTTPStatus.UNAUTHORIZED:
+        return errors.UnauthorizedError(*args)
+    if response.status == http.HTTPStatus.FORBIDDEN:
+        return errors.ForbiddenError(*args)
+    if response.status == http.HTTPStatus.NOT_FOUND:
+        return errors.NotFoundError(*args)
+
+    status = http.HTTPStatus(response.status)
+
+    if 400 &lt;= status &lt; 500:
+        return errors.ClientHTTPResponseError(real_url, status, response.headers, raw_body)
+    elif 500 &lt;= status &lt; 600:
+        return errors.InternalServerError(real_url, status, response.headers, raw_body)
+    else:
+        return errors.HTTPResponseError(real_url, status, response.headers, raw_body)
+
+
+def create_tcp_connector(
+    http_settings: config.HTTPSettings,
+    *,
+    dns_cache: typing.Union[bool, int] = True,
+    limit: int = 100,
+) -&gt; aiohttp.TCPConnector:
+    &#34;&#34;&#34;Create a TCP connector and return it.
+
+    Parameters
+    ----------
+    http_settings : config.HTTPSettings
+        HTTP settings to use for the connector.
+
+    Optional Parameters
+    -------------------
+    dns_cache: typing.Union[builtins.None, builtins.bool, int]
+        If `builtins.True`, DNS caching is used with a default TTL of 10 seconds.
+        If `builtins.False`, DNS caching is disabled. If an `builtins.int` is
+        given, then DNS caching is enabled with an explicit TTL set. If
+        `builtins.None`, the cache will be enabled and never invalidate.
+    limit : builtins.int
+        Number of connections to allow in the pool at a maximum.
+
+    Returns
+    -------
+    aiohttp.TCPConnector
+        TCP connector to use.
+    &#34;&#34;&#34;
+    return aiohttp.TCPConnector(
+        enable_cleanup_closed=http_settings.enable_cleanup_closed,
+        force_close=http_settings.force_close_transports,
+        limit=limit,
+        ssl=http_settings.ssl,
+        ttl_dns_cache=dns_cache if not isinstance(dns_cache, bool) else 10,
+        use_dns_cache=dns_cache is not False,
+    )
+
+
+def create_client_session(
+    connector: aiohttp.BaseConnector,
+    connector_owner: bool,
+    http_settings: config.HTTPSettings,
+    raise_for_status: bool,
+    trust_env: bool,
+    ws_response_cls: typing.Type[aiohttp.ClientWebSocketResponse] = aiohttp.ClientWebSocketResponse,
+) -&gt; aiohttp.ClientSession:
+    &#34;&#34;&#34;Generate a client session using the given settings.
+
+    !!! warning
+        You must invoke this from within a running event loop.
+
+    !!! note
+        If you pass an explicit connector, then the connection
+        that is created will not own the connector. You will be
+        expected to manually close it __after__ the returned
+        client session is closed to prevent leaking resources.
+
+    Parameters
+    ----------
+    connector : aiohttp.BaseConnector
+        The connector to use.
+    connector_owner : builtins.bool
+        If `builtins.True`, then the client session will close the
+        connector on shutdown. Otherwise, you must do it manually.
+    http_settings : hikari.config.HTTPSettings
+        HTTP settings to use.
+    raise_for_status : builtins.bool
+        `builtins.True` to default to throwing exceptions if a request
+        fails, or `builtins.False` to default to not.
+    trust_env : builtins.bool
+        `builtins.True` to trust anything in environment variables
+        and the `netrc` file, `builtins.False` to ignore it.
+    ws_response_cls : typing.Type[aiohttp.ClientWebSocketResponse]
+        The websocket response class to use.
+
+        Defaults to `aiohttp.ClientWebSocketResponse`.
+
+    Returns
+    -------
+    aiohttp.ClientSession
+        The client session to use.
+    &#34;&#34;&#34;
+    return aiohttp.ClientSession(
+        connector=connector,
+        connector_owner=connector_owner,
+        raise_for_status=raise_for_status,
+        timeout=aiohttp.ClientTimeout(
+            connect=http_settings.timeouts.acquire_and_connect,
+            sock_connect=http_settings.timeouts.request_socket_connect,
+            sock_read=http_settings.timeouts.request_socket_read,
+            total=http_settings.timeouts.total,
+        ),
+        trust_env=trust_env,
+        version=aiohttp.HttpVersion11,
+        ws_response_class=ws_response_cls,
+    )</code></pre>
+</details>
+</div>
+</div>
+<h2 id="functions-heading">Functions</h2>
+<section class="definition">
+<dl class="no-nest root">
+<div id="hikari.internal.net.create_client_session" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A standard Python function.'>def</abbr> <a title="create_client_session" href="#hikari.internal.net.create_client_session" id="hikari.internal.net.create_client_session">create_client_session</a>(
+    connector: <a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BaseConnector'>aiohttp.BaseConnector</a>,
+    connector_owner: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>,
+    http_settings: <a href='../config.html#hikari.config.HTTPSettings'>config.HTTPSettings</a>,
+    raise_for_status: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>,
+    trust_env: <a href='https://docs.python.org/3/library/functions.html#bool'>bool</a>,
+    ws_response_cls: <a href='https://docs.python.org/3/library/typing.html#typing.Type'>Type</a>[<a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientWebSocketResponse'>aiohttp.ClientWebSocketResponse</a>] = aiohttp.client_ws.ClientWebSocketResponse,
+) -> <a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientSession'>aiohttp.ClientSession</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Generate a client session using the given settings.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>You must invoke this from within a running event loop.</p>
+</div>
+<div class="alert alert-success">
+<p class="admonition-title">Note</p>
+<p>If you pass an explicit connector, then the connection
+that is created will not own the connector. You will be
+expected to manually close it <strong>after</strong> the returned
+client session is closed to prevent leaking resources.</p>
+</div>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>connector</code></strong> :&ensp;<code><a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BaseConnector'>aiohttp.BaseConnector</a></code></dt>
+<dd>The connector to use.</dd>
+<dt><strong><code>connector_owner</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd>If <code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code>, then the client session will close the
+connector on shutdown. Otherwise, you must do it manually.</dd>
+<dt><strong><code>http_settings</code></strong> :&ensp;<code><a href='../config.html#hikari.config.HTTPSettings'>HTTPSettings</a></code></dt>
+<dd>HTTP settings to use.</dd>
+<dt><strong><code>raise_for_status</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> to default to throwing exceptions if a request
+fails, or <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code> to default to not.</dd>
+<dt><strong><code>trust_env</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/functions.html#bool'>bool</a></code></dt>
+<dd><code><a href='https://docs.python.org/3/library/constants.html#True'>True</a></code> to trust anything in environment variables
+and the <code><a href='https://docs.python.org/3/library/netrc.html#module-netrc'>netrc</a></code> file, <code><a href='https://docs.python.org/3/library/constants.html#False'>False</a></code> to ignore it.</dd>
+<dt><strong><code>ws_response_cls</code></strong> :&ensp;<code><a href='https://docs.python.org/3/library/typing.html#typing.Type'>Type</a>[<a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientWebSocketResponse'>aiohttp.ClientWebSocketResponse</a>]</code></dt>
+<dd>
+<p>The websocket response class to use.</p>
+<p>Defaults to <code><a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientWebSocketResponse'>aiohttp.ClientWebSocketResponse</a></code>.</p>
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientSession'>aiohttp.ClientSession</a></code></dt>
+<dd>The client session to use.</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/net.py#L113-L170" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">def create_client_session(
+    connector: aiohttp.BaseConnector,
+    connector_owner: bool,
+    http_settings: config.HTTPSettings,
+    raise_for_status: bool,
+    trust_env: bool,
+    ws_response_cls: typing.Type[aiohttp.ClientWebSocketResponse] = aiohttp.ClientWebSocketResponse,
+) -&gt; aiohttp.ClientSession:
+    &#34;&#34;&#34;Generate a client session using the given settings.
+
+    !!! warning
+        You must invoke this from within a running event loop.
+
+    !!! note
+        If you pass an explicit connector, then the connection
+        that is created will not own the connector. You will be
+        expected to manually close it __after__ the returned
+        client session is closed to prevent leaking resources.
+
+    Parameters
+    ----------
+    connector : aiohttp.BaseConnector
+        The connector to use.
+    connector_owner : builtins.bool
+        If `builtins.True`, then the client session will close the
+        connector on shutdown. Otherwise, you must do it manually.
+    http_settings : hikari.config.HTTPSettings
+        HTTP settings to use.
+    raise_for_status : builtins.bool
+        `builtins.True` to default to throwing exceptions if a request
+        fails, or `builtins.False` to default to not.
+    trust_env : builtins.bool
+        `builtins.True` to trust anything in environment variables
+        and the `netrc` file, `builtins.False` to ignore it.
+    ws_response_cls : typing.Type[aiohttp.ClientWebSocketResponse]
+        The websocket response class to use.
+
+        Defaults to `aiohttp.ClientWebSocketResponse`.
+
+    Returns
+    -------
+    aiohttp.ClientSession
+        The client session to use.
+    &#34;&#34;&#34;
+    return aiohttp.ClientSession(
+        connector=connector,
+        connector_owner=connector_owner,
+        raise_for_status=raise_for_status,
+        timeout=aiohttp.ClientTimeout(
+            connect=http_settings.timeouts.acquire_and_connect,
+            sock_connect=http_settings.timeouts.request_socket_connect,
+            sock_read=http_settings.timeouts.request_socket_read,
+            total=http_settings.timeouts.total,
+        ),
+        trust_env=trust_env,
+        version=aiohttp.HttpVersion11,
+        ws_response_class=ws_response_cls,
+    )</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+<div id="hikari.internal.net.generate_error_response" class="anchor">
+<dt>
+<pre><code class="hljs python"><abbr title='A function that returns a coroutine and must be awaited.'>async def</abbr> <a title="generate_error_response" href="#hikari.internal.net.generate_error_response" id="hikari.internal.net.generate_error_response">generate_error_response</a>(
+    response: <a href='https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientResponse'>aiohttp.ClientResponse</a>,
+) -> <a href='../errors.html#hikari.errors.HTTPError'>HTTPError</a>: ...</code></pre>
+</dt>
+<dd>
+<p>Given an erroneous HTTP response, return a corresponding exception.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<br />
+<a href="https://github.com/hikari-py/hikari/blob/9a93c10fcf7589ddddbbabede88d02a3925fa48d/hikari/internal/net.py#L41-L72" class="git-link dotted">Browse git</a>
+</summary>
+<pre><code class="python">async def generate_error_response(response: aiohttp.ClientResponse) -&gt; errors.HTTPError:
+    &#34;&#34;&#34;Given an erroneous HTTP response, return a corresponding exception.&#34;&#34;&#34;
+    real_url = str(response.real_url)
+    raw_body = await response.read()
+
+    # Little hack to stop mypy from complaining when using `*args`
+    args: typing.List[typing.Any] = [real_url, response.headers, raw_body]
+    try:
+        json_body = await response.json()
+        args.append(json_body.get(&#34;message&#34;, &#34;&#34;))
+        args.append(errors.RESTErrorCode(json_body.get(&#34;code&#34;, 0)))
+        raw_error_array: typing.Optional[data_binding.JSONObject] = json_body.get(&#34;errors&#34;)
+    except aiohttp.ContentTypeError:
+        raw_error_array = None
+
+    if response.status == http.HTTPStatus.BAD_REQUEST:
+        return errors.BadRequestError(*args, errors=raw_error_array)
+    if response.status == http.HTTPStatus.UNAUTHORIZED:
+        return errors.UnauthorizedError(*args)
+    if response.status == http.HTTPStatus.FORBIDDEN:
+        return errors.ForbiddenError(*args)
+    if response.status == http.HTTPStatus.NOT_FOUND:
+        return errors.NotFoundError(*args)
+
+    status = http.HTTPStatus(response.status)
+
+    if 400 &lt;= status &lt; 500:
+        return errors.ClientHTTPResponseError(real_url, status, response.headers, raw_body)
+    elif 500 &lt;= status &lt; 600:
+        return errors.InternalServerError(real_url, status, response.headers, raw_body)
+    else:
+        return errors.HTTPResponseError(real_url, status, response.headers, raw_body)</code></pre>
+</details>
+</dd>
+</div>
+<div class="sep"></div>
+</dl>
+</section>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
